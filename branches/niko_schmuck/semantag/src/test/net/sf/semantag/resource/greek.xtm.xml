@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<topicMap id="greekie" xmlns="http://www.topicmaps.org/xtm/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<!-- Klasse aller Topics, die eine Klasse ausdruecken. Gibt es wahrscheinlich ein PSI -->
+<topic id="class">
+	<baseName>
+		<baseNameString>Klasse</baseNameString>
+	</baseName>
+</topic>
+
+
+<topic id="class_mediatype">
+	<instanceOf><topicRef xlink:href="#class"/></instanceOf>
+	<baseName>
+		<baseNameString>Medientypen</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="class_kurztext">
+	<instanceOf><topicRef xlink:href="#class_mediatype"/></instanceOf>
+	<baseName>
+		<baseNameString>Kurzer Text</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="class_bild">
+	<instanceOf><topicRef xlink:href="#class_mediatype"/></instanceOf>
+	<baseName>
+		<baseNameString>Bild</baseNameString>
+	</baseName>
+</topic>
+
+<!--.....................................
+	FIGURTYPEN
+.........................................-->
+<!-- Klasse Figur-->
+<topic id="class_figur">
+	<instanceOf><topicRef xlink:href="#class"/></instanceOf>
+	<baseName>
+		<baseNameString>Figur</baseNameString>
+	</baseName>
+</topic>
+
+<!-- Klasse Mensch-->
+<topic id="class_mensch">
+	<instanceOf><topicRef xlink:href="#class_figur"/></instanceOf>
+	<baseName>
+		<baseNameString>Mensch</baseNameString>
+	</baseName>
+</topic>
+
+<!-- Klasse Gott-->
+<topic id="class_gott">
+	<instanceOf><topicRef xlink:href="#class_figur"/></instanceOf>
+	<baseName>
+		<baseNameString>Gott</baseNameString>
+	</baseName>
+</topic>
+
+<!-- Klasse Titan-->
+<topic id="class_titan">
+	<instanceOf><topicRef xlink:href="#class_figur"/></instanceOf>
+	<baseName>
+		<baseNameString>Titan</baseNameString>
+	</baseName>
+</topic>
+
+
+
+<topic id="class_rang">
+	<instanceOf><topicRef xlink:href="#class"/></instanceOf>
+	<baseName>
+		<baseNameString>Titel</baseNameString>
+	</baseName>
+</topic>
+
+
+<!-- Klasse aller Assoziationen, die eine familiaere Bindung ausdruecken. -->
+<topic id="class_at_familiaer">
+	<baseName>
+		<baseNameString>Familiaere Bindung</baseNameString>
+	</baseName>
+</topic>
+
+<!-- Wichtige Assoziationen-->
+<topic id="at_geschwister">
+	<instanceOf><topicRef xlink:href="#class_at_familiaer"/></instanceOf>
+	<baseName>
+		<baseNameString>Geschwister</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="at_eltern">
+	<instanceOf><topicRef xlink:href="#class_at_familiaer"/></instanceOf>
+	<baseName>
+		<baseNameString>Familie</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="at_herrschaft">
+	<instanceOf><topicRef xlink:href="#class_at_familiaer"/></instanceOf>
+	<baseName>
+		<baseNameString>Herrschaft</baseNameString>
+	</baseName>
+</topic>
+
+
+<topic id="role_Vater">
+	<baseName>
+		<baseNameString>Vater</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="role_Mutter">
+	<baseName>
+		<baseNameString>Mutter</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="role_Bruder">
+	<baseName>
+		<baseNameString>Bruder</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="role_Sohn">
+	<baseName>
+		<baseNameString>Sohn</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="role_Schwester">
+	<baseName>
+		<baseNameString>Schwester</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="role_Tochter">
+	<baseName>
+		<baseNameString>Tochter</baseNameString>
+	</baseName>
+</topic>
+
+<!--.....................................
+	KONKRETE PERSONEN UND GOETTER
+.........................................-->
+<topic id="Atlas">
+	<instanceOf><topicRef xlink:href="#class_titan"/></instanceOf>
+	<baseName>
+		<baseNameString>Atlas</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="Helena">
+	<instanceOf><topicRef xlink:href="#class_mensch"/></instanceOf>
+	<baseName>
+		<baseNameString>Helena</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="Alkmene">
+	<instanceOf><topicRef xlink:href="#class_mensch"/></instanceOf>
+	<baseName>
+		<baseNameString>Alkmene</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="Herkules">
+	<instanceOf><topicRef xlink:href="#class_mensch"/></instanceOf>
+	<baseName>
+		<baseNameString>Herkules</baseNameString>
+	</baseName>
+</topic>
+
+
+<topic id="Kastor">
+	<instanceOf><topicRef xlink:href="#class_mensch"/></instanceOf>
+	<baseName>
+		<baseNameString>Kastor</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="Pollux">
+	<instanceOf><topicRef xlink:href="#class_mensch"/></instanceOf>
+	<baseName>
+		<baseNameString>Pollux</baseNameString>
+	</baseName>
+	<occurrence><resourceRef xlink:href="http://www.encyclopedia.com/articles/02406.html"/></occurrence>
+</topic>
+
+<topic id="Leda">
+	<instanceOf><topicRef xlink:href="#class_mensch"/></instanceOf>
+	<baseName>
+		<baseNameString>Leda</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="Zeus">
+	<instanceOf><topicRef xlink:href="#class_gott"/></instanceOf>
+	<baseName>
+		<baseNameString>Zeus (Basename)</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="Hermes">
+	<instanceOf><topicRef xlink:href="#class_gott"/></instanceOf>
+	<baseName>
+		<baseNameString>Hermes</baseNameString>
+		<variant>
+		<variantName><resourceData>Bote der Goetter</resourceData></variantName>
+		</variant>
+	</baseName>
+	<occurrence>
+		<instanceOf><topicRef xlink:href="#class_kurztext"/></instanceOf>
+	 	<resourceRef xlink:href="http://www.knol.de/inhalt/inhalt_id=1557/kategorie_id=846/inhalt_typ=artikel"/>
+	</occurrence>
+	<occurrence><resourceRef xlink:href="http://www.technosophie.de/WWTechno/Techsoph/Lex/hermes.htm"/></occurrence>
+</topic>
+<topic id="Maia">
+	<instanceOf><topicRef xlink:href="#class_gott"/></instanceOf>
+	<baseName>
+		<baseNameString>Maia</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="Tyndareus">
+	<instanceOf><topicRef xlink:href="#class_mensch"/></instanceOf>
+	<baseName>
+		<baseNameString>Tyndareus</baseNameString>
+	</baseName>
+</topic>
+
+
+
+<topic id="klytaemnestra">
+	<instanceOf><topicRef xlink:href="#class_mensch"/></instanceOf>
+	<baseName>
+		<baseNameString>Klytämnestra</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="agamemnon">
+	<instanceOf><topicRef xlink:href="#class_mensch"/></instanceOf>
+	<baseName>
+		<baseNameString>Agamemnon</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="iphigenie">
+	<instanceOf><topicRef xlink:href="#class_mensch"/></instanceOf>
+	<baseName>
+		<baseNameString>Iphigenie</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="elektra">
+	<instanceOf><topicRef xlink:href="#class_mensch"/></instanceOf>
+	<baseName>
+		<baseNameString>Elektra</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="orest">
+	<instanceOf><topicRef xlink:href="#class_mensch"/></instanceOf>
+	<baseName>
+		<baseNameString>Orest</baseNameString>
+	</baseName>
+</topic>
+
+
+<topic id="koenig">
+	<instanceOf><topicRef xlink:href="#class_rang"/></instanceOf>
+	<baseName>
+		<baseNameString>Koenig</baseNameString>
+	</baseName>
+</topic>
+
+
+<topic id="class_reich">
+	<baseName>
+		<baseNameString>Reich</baseNameString>
+	</baseName>
+</topic>
+<topic id="class_stadt">
+	<baseName>
+		<baseNameString>Stadt</baseNameString>
+	</baseName>
+</topic>
+
+<topic id="sparta">
+	<instanceOf><topicRef xlink:href="#class_stadt"/></instanceOf>
+	<baseName>
+		<baseNameString>Sparta</baseNameString>
+	</baseName>
+</topic>
+
+<association id="as00001">
+	<instanceOf><topicRef xlink:href="#at_geschwister"/></instanceOf>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Bruder"/></roleSpec>
+		<topicRef xlink:href="#Kastor"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Bruder"/></roleSpec>
+		<topicRef xlink:href="#Pollux"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Schwester"/></roleSpec>
+		<topicRef xlink:href="#Helena"/>
+	</member>
+</association>
+
+<association id="as00002">
+	<instanceOf><topicRef xlink:href="#at_eltern"/></instanceOf>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Vater"/></roleSpec>
+		<subjectIndicatorRef xlink:href="#asZeus-als-Schwan"/>
+		<topicRef xlink:href="#Zeus"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Sohn"/></roleSpec>
+		<topicRef xlink:href="#Pollux"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Mutter"/></roleSpec>
+		<topicRef xlink:href="#Leda"/>
+	</member>
+</association>
+
+<association id="as00002a">
+	<instanceOf><topicRef xlink:href="#at_eltern"/></instanceOf>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Vater"/></roleSpec>
+		<topicRef xlink:href="#Tyndareus"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Sohn"/></roleSpec>
+		<topicRef xlink:href="#Kastor"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Mutter"/></roleSpec>
+		<topicRef xlink:href="#Leda"/>
+	</member>
+</association>
+
+<association id="as00002b">
+	<instanceOf><topicRef xlink:href="#at_eltern"/></instanceOf>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Vater"/></roleSpec>
+		<topicRef xlink:href="#Zeus"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Sohn"/></roleSpec>
+		<topicRef xlink:href="#Hermes"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Mutter"/></roleSpec>
+		<topicRef xlink:href="#Maia"/>
+	</member>
+</association>
+
+<association id="as00002c">
+	<instanceOf><topicRef xlink:href="#at_eltern"/></instanceOf>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Vater"/></roleSpec>
+		<topicRef xlink:href="#Atlas"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Tochter"/></roleSpec>
+		<topicRef xlink:href="#Maia"/>
+	</member>
+</association>
+
+<association id="as00002d">
+	<instanceOf><topicRef xlink:href="#at_eltern"/></instanceOf>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Vater"/></roleSpec>
+		<topicRef xlink:href="#Zeus"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Sohn"/></roleSpec>
+		<topicRef xlink:href="#Herkules"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Mutter"/></roleSpec>
+		<topicRef xlink:href="#Alkmene"/>
+	</member>
+</association>
+
+<association id="as00002e">
+	<instanceOf><topicRef xlink:href="#at_eltern"/></instanceOf>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Vater"/></roleSpec>
+		<topicRef xlink:href="#agamemnon"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Mutter"/></roleSpec>
+		<topicRef xlink:href="#klytaemnestra"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Sohn"/></roleSpec>
+		<topicRef xlink:href="#Orest"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Tochter"/></roleSpec>
+		<topicRef xlink:href="#Elektra"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#role_Tochter"/></roleSpec>
+		<topicRef xlink:href="#Iphigenie"/>
+	</member>
+</association>
+
+
+<association id="as00003">
+	<instanceOf><topicRef xlink:href="#at_herrschaft"/></instanceOf>
+	<member>
+		<roleSpec><topicRef xlink:href="#class_rang"/></roleSpec>
+		<topicRef xlink:href="#koenig"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#class_reich"/></roleSpec>
+		<topicRef xlink:href="#sparta"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#class_mensch"/></roleSpec>
+		<topicRef xlink:href="#Tyndareus"/>
+	</member>
+</association>
+
+<association id="asZeus-als-Schwan">
+	<instanceOf><topicRef xlink:href="#at_maskierung"/></instanceOf>
+	<member>
+		<roleSpec><topicRef xlink:href="#maskierter"/></roleSpec>
+		<topicRef xlink:href="#Zeus"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#maske"/></roleSpec>
+		<topicRef xlink:href="#schwan"/>
+	</member>
+</association>
+
+<association id="hermes-erfindet-Leier">
+	<member>
+		<roleSpec><topicRef xlink:href="#erfinder"/></roleSpec>
+		<topicRef xlink:href="#Hermes"/>
+	</member>
+	<member>
+		<roleSpec><topicRef xlink:href="#erfindung"/></roleSpec>
+		<topicRef xlink:href="#lyra"/>
+	</member>
+</association>
+
+<topic id="zeusalsschwan">
+	<subjectIdentity>
+		<subjectIndicatorRef xlink:href="#asZeus-als-Schwan"/>
+	</subjectIdentity>
+	<baseName><baseNameString>Zeus als Schwan</baseNameString></baseName>
+</topic>
+
+<topic id="maskierter">
+	<baseName><baseNameString>Maskierter</baseNameString></baseName>
+</topic>
+
+
+<topic id="at_maskierung">
+	<baseName><baseNameString>Maskierung</baseNameString></baseName>
+</topic>
+
+<topic id="maske">
+	<baseName><baseNameString>Maske</baseNameString></baseName>
+</topic>
+
+
+<topic id="schwan">
+	<baseName><baseNameString>Schwan</baseNameString></baseName>
+</topic>
+
+<topic id="lyra">
+	<baseName><baseNameString>Leier</baseNameString></baseName>
+</topic>
+
+<topic id="erfindung">
+	<baseName><baseNameString>Erfindung</baseNameString></baseName>
+</topic>
+
+<topic id="erfinder">
+	<baseName><baseNameString>Erfinder</baseNameString></baseName>
+</topic>
+
+</topicMap>

@@ -1,0 +1,82 @@
+/**
+  Topicmap about John and his family
+  The intention of this topicmap is
+  to provide testcases for panckoucke abstractors
+*/  
+/* ***************************
+  TYPES
+ *****************************/
+/* topic types */
+
+[tt-person          = "Person"]
+[tt-owner          = "Owner"]
+[tt-father          = "Father"]
+[tt-mother          = "Mother"]
+[tt-children        = "Children"]
+[tt-car             = "Car"]
+[tt-estate          = "Estate"]
+[tt-team          = "Team"]
+[tt-teammember        = "Teammember"]
+[tt-website          = "Website"]
+[tt-webmaster        = "Webmaster"]
+[tt-singer          = "Singer"]
+[tt-song          = "Song"]
+
+
+
+/* association types */
+
+[at-person-owns-car           = "Owns car"]
+[at-person-owns-estate        = "Owns estate"]
+[at-family                    = "Family"]
+[at-tennis-mixed-double       = "Mixed-Double"]
+[at-webmaster                 = "Maintains website"]
+[at-person-sings              = "Singing a song"]
+        
+/* occurrence types */
+[ot-song-beginning            = "Beginning of a song"]
+[ot-songtext                  = "Songtext"]
+[ot-notes                     = "Notes"]
+        
+/* ***************************
+  TOPICS
+ *****************************/
+[john : tt-person      = "John"]
+[nina : tt-person      = "Nina"]
+[martin : tt-person      = "Martin"]
+[melvin : tt-person      = "Melvin"]
+[sarah : tt-person      = "Sarah"]
+[robert : tt-person      = "Robert"]
+[rainald : tt-person    = "Rainald"]
+[ann : tt-person      = "Ann"]
+
+[vw-golf: tt-car      ="VW Golf"]
+[fiat-panda: tt-car      ="Fiat Panda" @"http://www.fiatpanda.it/"]
+
+[town-house:tt-estate    ="Town House"]
+[team-john-ann:tt-team    ="Mixed-Double (John, Ann)"]
+[johns_site:tt-website    ="John's website" %"http://www.about_john.org"]
+
+[derMondistaufgegangen:tt-song ="Der Mond ist aufgegangen"]
+
+/* ***************************
+  ASSOCIATION
+ *****************************/
+at-family(john:tt-father, nina:tt-mother, martin:tt-children, melvin:tt-children)
+at-family(john:tt-father, sarah:tt-mother, robert:tt-children)
+
+at-person-owns-car(john:tt-owner, vw-golf:tt-car)
+at-person-owns-car(john:tt-owner, fiat-panda:tt-car)
+at-person-owns-estate(john:tt-owner, town-house:tt-estate)
+
+at-tennis-mixed-double(john:tt-teammember, ann:tt-teammember, team-john-ann:tt-team)
+at-webmaster(john:tt-webmaster, johns_site:tt-website)
+
+at-person-sings(john:tt-singer, derMondistaufgegangen:tt-song)
+
+/* ***************************
+  OCCURRENCES
+ *****************************/
+{derMondistaufgegangen, ot-song-beginning, [[Der Mond ist aufgegangen, die gold'nen Sternlein prangen]]} /german
+{derMondistaufgegangen, ot-songtext, "http://ingeb.org/Lieder/DerMondi.html"} /german
+{derMondistaufgegangen, ot-notes, "http://ingeb.org/images/DerMondi.GIF"} 

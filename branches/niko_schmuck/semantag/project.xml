@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project>
+  <pomVersion>3</pomVersion>
+  <id>semantag</id>
+  <name>SemanTag</name>
+  <currentVersion>0.1</currentVersion>
+  <inceptionYear>2004</inceptionYear>
+  <package>sf.net.semantag</package>
+  <shortDescription>Topic Map and RDF generation with jelly, jena and tm4j.</shortDescription>
+  
+  <dependencies>
+    <dependency>
+      <groupId>tm4j</groupId>
+      <artifactId>tm4j</artifactId>
+      <!-- we have no project.xml for tm4j, so no further dependencies 
+           can be resolved at this point -->
+      <version>0.9.6</version>
+      <url>http://tm4j.org/</url>
+    </dependency>
+    <dependency>
+      <groupId>tm4j</groupId>
+      <artifactId>tm4j-tologx</artifactId>
+      <version>0.9.6</version>
+    </dependency>
+    <dependency>
+      <groupId>tm4j</groupId>
+      <artifactId>mango</artifactId>
+      <jar>mango.jar</jar>
+    </dependency>
+    <dependency>
+      <groupId>tm4j</groupId>
+      <artifactId>resolver</artifactId>
+      <jar>resolver.jar</jar>
+    </dependency>
+    <dependency>
+      <groupId>jena</groupId>
+      <artifactId>jena</artifactId>
+      <version>2.1</version>
+      <url>http://jena.sourceforge.net/</url>
+    </dependency>    
+    <dependency>
+      <groupId>xerces</groupId>
+      <artifactId>xercesImpl</artifactId>
+      <version>2.6.2</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-jelly</groupId>
+      <artifactId>commons-jelly</artifactId>
+      <version>SNAPSHOT</version>
+      <url>http://jakarta.apache.org/commons/jelly.html</url>
+    </dependency>
+    <dependency>
+      <groupId>commons-jexl</groupId>
+      <artifactId>commons-jexl</artifactId>
+      <version>1.0-beta-1</version>
+      <url>http://jakarta.apache.org/commons/jexl.html</url>
+    </dependency>
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.6</version>
+      <url>http://jakarta.apache.org/commons/beanutils.html</url>
+    </dependency>
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>3.0</version>
+      <url>http://jakarta.apache.org/commons/collections.html</url>
+    </dependency>    
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.0.3</version>
+      <url>http://jakarta.apache.org/commons/logging.html</url>
+    </dependency>
+    <dependency>
+      <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+      <version>1.4</version>
+      <url>http://dom4j.sourceforge.net/</url>
+    </dependency>
+    <dependency>
+      <groupId>antlr</groupId>
+      <artifactId>antlr</artifactId>
+      <version>2.7.2</version>
+      <url>http://www.antlr.org/</url>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>src/java</sourceDirectory>
+    <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+  </build>
+
+</project>

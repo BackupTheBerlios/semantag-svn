@@ -1,0 +1,15 @@
+
+/* This ontology for the Kings and Queens example is very primitive,  */
+/* and only used to ease generation.                                  */
+
+/* topic types */
+[tt-woman  = "Woman"]
+[tt-man	   = "Man"]
+
+/* association types */
+[at-child-of = "child of"]
+
+/* association role types */
+[art-father = "Father"]
+[art-mother = "Mother"]
+[art-child  = "Child"]

@@ -1,0 +1,18 @@
+<j:jelly xmlns:j="jelly:core"  xmlns:sql="jelly:sql">
+
+     <sql:setDataSource 
+          url="jdbc:hsqldb:." 
+          driver="org.hsqldb.jdbcDriver" 
+          user="sa"
+          password="" />
+
+     <sql:query var="results">
+          SELECT TITLE, HREF FROM BOOKMARK
+     </sql:query>
+
+     <j:forEach items="${results.rowsByIndex}" var="row">
+         title: ${row[0]}
+	 href:  ${row[1]}
+     </j:forEach>                  
+
+</j:jelly>

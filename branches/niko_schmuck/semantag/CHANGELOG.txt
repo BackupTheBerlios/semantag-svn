@@ -1,0 +1,35 @@
+
+Niko (24-Aug-2004):
+
+- Refactored package structure to separate tests into own substructure
+  under src/test, this allows easily to distinguish between production
+  and test code
+
+- Clean-Up before first time importing to new CVS repository at SF.net
+
+August 2004
+
+cf: reorganized packing from 
+     org.tm4j.jelly.*
+    to 
+     org.semantag.*
+    
+cf: reorganized thirdparty-libs in subfolders
+    and rewrote jelly.sh to add subfolders to
+    the classpath
+
+cf: upgraded to tm4j-0.9.6
+
+cf: added first RDF-Tags, using Jena 2.1
+
+cf: updated to commons-jelly-beta-1.0.4
+    refactored all our tags, since the signature
+    of the doTag()-Method changed
+    
+cf: added CSV-Tags
+
+
+Mai/June 2004
+
+Niko: Initial Idea and Setup of basic topicmap tags
+      under the original project name jelly4tm

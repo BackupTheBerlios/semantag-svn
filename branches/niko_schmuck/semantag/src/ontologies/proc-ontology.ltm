@@ -1,0 +1,195 @@
+/* ============================================================== */
+/* Ontology for ecommerce processes Topic Map                     */
+/* $Id: proc-ontology.ltm,v 1.1 2004/08/24 00:12:29 niko_schmuck Exp $    */
+/* ============================================================== */
+
+#TOPICMAP processes-tm
+
+
+/* ---- Using reification for TM metadata ---- */
+
+[topicmap-topic = "Pyramid Processes"
+ @"#processes-tm"]
+
+{topicmap-topic, description, [[This is a topic map with information
+about pipelets contained in Otto's eCommerce Platform
+(Pyramid). It has been authored using semantag
+scripts by Niko Schmuck.]]}
+ 
+{topicmap-topic, version, [[$Revision: 1.1 $]]}
+{topicmap-topic, date, [[$Date: 2004/08/24 00:12:29 $]]}
+
+ 
+/* ===== GENERAL PSIS ===== */
+                                                                                                                        
+[subclass-of : hierarchical-relation-type
+             = "Subclass of"
+             = "Superclass of" / superclass
+ @"http://www.topicmaps.org/xtm/1.0/core.xtm#superclass-subclass"]
+
+[superclass : superordinate-role-type
+            = "Superclass"
+ @"http://www.topicmaps.org/xtm/1.0/core.xtm#superclass"]
+
+[subclass : subordinate-role-type
+          = "Subclass"
+ @"http://www.topicmaps.org/xtm/1.0/core.xtm#subclass"]
+
+[sort = "Sort name"
+ @"http://www.topicmaps.org/xtm/1.0/core.xtm#sort"]
+
+
+/* ---- topic types ---- */
+
+[pipeline = "Pipeline"]
+[pipelet = "Pipelet"]
+[pipelet-property = "Pipelet Property"]
+[pipelet-group = "Pipelet Group"]    
+[property-class = "Java Class"]
+/* @"http://www.nava.de/topicmaps/process-tm#property-class"] */
+
+/* --- Hierarchy PSIs --- */
+                                                                                                                        
+[hierarchical-relation-type = "Hierarchical relation type"
+ @"http://www.techquila.com/psi/hierarchy/#hierarchical-relation-type"]
+                                                                                                                        
+[superordinate-role-type = "Superordinate role type"
+ @"http://www.techquila.com/psi/hierarchy/#superordinate-role-type"]
+                                                                                                                        
+[subordinate-role-type = "Subordinate role type"
+ @"http://www.techquila.com/psi/hierarchy/#subordinate-role-type"]
+                                                                                                                        
+/* ---- association types ---- */
+
+[part-of : hierarchical-relation-type
+         = "Part of"
+         = "Consists of" / container]
+
+
+[is-of-class = "Instance of class"
+             = "Used for typing of" / property-class]
+
+[has-property = "Has property"] /* abstract */
+
+[has-config-property : has-property = "Has config property"
+                                    = "Used as config property in" / pipelet-property]
+
+[has-dictionary-in-property : has-property = "Has dictionary-in property"
+                                           = "Used as dictionary-in property in" / pipelet-property]
+
+[has-dictionary-out-property   : has-property = "Has dictionary-out property"
+                                              = "Used as dictionary-out property in" / pipelet-property]
+
+[has-session-in-property : has-property = "Has session-in property"
+                                        = "Used as session-in property in" / pipelet-property]
+
+[has-session-out-property   : has-property = "Has session-out property"
+                                           = "Used as session-out property in" / pipelet-property]
+
+/* --- association roles --- */
+
+[container : superordinate-role-type
+           = "Container" @"http://psi.ontopia.net/i18n/#container"]
+[containee : subordinate-role-type
+           = "Containee" @"http://psi.ontopia.net/i18n/#containee"]
+
+
+/* --- occurrence types --- */
+
+[version = "Version"]
+[date    = "Date"]
+
+[description   = "Description"
+ @"http://psi.ontopia.net/xtm/occurrence-type/description"
+ @"http://purl.org/dc/elements/1.1/description"]
+
+[pipelet-fqcn = "Fully-qualified Classname"]    
+[pipelet-displayName = "Display name"]    
+[pipelet-errCon = "Error Connector"]    
+[pipelet-txMode = "Transaction Mode"]    
+
+[property-fqcn = "Fully-qualified Classname"]    
+
+
+
+/* === MATTER OF CHANGE === */
+/* Use scripts/pipeletPropClasses2ltm.xsl to generate property classes */
+
+    /* ================================================================================ */
+    /* Unique property classes occurring in pipelet descriptors */
+    /* Total number of properties: 160 */
+    /* ================================================================================ */
+  
+    
+      /* Number of times occurring: 79 */
+      [java-lang-String : property-class = 
+       "java.lang.String"]
+    
+      /* Number of times occurring: 1 */
+      [de-otto-pyramid-advice-capi-Advice : property-class = 
+       "de.otto.pyramid.advice.capi.Advice"]
+    
+      /* Number of times occurring: 1 */
+      [de-otto-pyramid-catalog-capi-article-Article : property-class = 
+       "de.otto.pyramid.catalog.capi.article.Article"]
+    
+      /* Number of times occurring: 7 */
+      [java-util-Iterator : property-class = 
+       "java.util.Iterator"]
+    
+      /* Number of times occurring: 20 */
+      [com-intershop-beehive-core-capi-domain-Domain : property-class = 
+       "com.intershop.beehive.core.capi.domain.Domain"]
+    
+      /* Number of times occurring: 2 */
+      [com-intershop-beehive-bts-capi-orderprocess-basket-Basket : property-class = 
+       "com.intershop.beehive.bts.capi.orderprocess.basket.Basket"]
+    
+      /* Number of times occurring: 4 */
+      [com-intershop-beehive-core-capi-request-Session : property-class = 
+       "com.intershop.beehive.core.capi.request.Session"]
+    
+      /* Number of times occurring: 1 */
+      [com-intershop-beehive-foundation-quantity-Money : property-class = 
+       "com.intershop.beehive.foundation.quantity.Money"]
+    
+      /* Number of times occurring: 10 */
+      [de-otto-pyramid-backend-hostcom-capi-DCustomer : property-class = 
+       "de.otto.pyramid.backend.hostcom.capi.DCustomer"]
+    
+      /* Number of times occurring: 5 */
+      [de-otto-pyramid-backend-hostcom-capi-account-DCreditItemDetailSummary : property-class = 
+       "de.otto.pyramid.backend.hostcom.capi.account.DCreditItemDetailSummary"]
+    
+      /* Number of times occurring: 9 */
+      [de-otto-pyramid-backend-hostcom-capi-account-DSummary : property-class = 
+       "de.otto.pyramid.backend.hostcom.capi.account.DSummary"]
+    
+      /* Number of times occurring: 3 */
+      [de-otto-pyramid-backend-hostcom-capi-account-DEntrySummary : property-class = 
+       "de.otto.pyramid.backend.hostcom.capi.account.DEntrySummary"]
+    
+      /* Number of times occurring: 3 */
+      [de-otto-pyramid-backend-hostcom-capi-account-DInvoiceDetailSummary : property-class = 
+       "de.otto.pyramid.backend.hostcom.capi.account.DInvoiceDetailSummary"]
+    
+      /* Number of times occurring: 2 */
+      [java-lang-String__ : property-class = 
+       "java.lang.String[]"]
+    
+      /* Number of times occurring: 5 */
+      [de-otto-pyramid-backend-hostcom-capi-account-DTodaysOrdersSummary : property-class = 
+       "de.otto.pyramid.backend.hostcom.capi.account.DTodaysOrdersSummary"]
+    
+      /* Number of times occurring: 2 */
+      [java-util-Hashtable : property-class = 
+       "java.util.Hashtable"]
+    
+      /* Number of times occurring: 5 */
+      [de-otto-pyramid-backend-hostcom-capi-DVacantDeliverySummary : property-class = 
+       "de.otto.pyramid.backend.hostcom.capi.DVacantDeliverySummary"]
+    
+      /* Number of times occurring: 1 */
+      [com-intershop-beehive-xcs-capi-product-Product : property-class = 
+       "com.intershop.beehive.xcs.capi.product.Product"]
+    
