@@ -1,4 +1,4 @@
-//$Id: LabelTag.java,v 1.1 2004/11/29 06:19:49 c_froehlich Exp $
+//$Id: LabelTag.java,v 1.2 2004/11/29 06:38:13 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -6,11 +6,12 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.tm4j.topicmap.TopicMapObject;
 import org.xml.sax.SAXException;
 
 /**
- * A tag that returns a label for a topic map object
+ * A tag that returns a label for an object.
+ * This tag is usually used to get a label for a topic map object
+ * or a locator
  * 
  * @author cf
  */
@@ -20,13 +21,13 @@ public class LabelTag extends BaseTMTag {
     private static final Log log = LogFactory.getLog(LabelTag.class);
 
     /**
-     * The topicMapObject for which the label will be returned.
+     * The object for which the label will be returned.
      */
     private Object tmo;
 
 
     /**
-     * Prints the label for a topicmap object
+     * Prints the label for an object
      */
     public void doTag(XMLOutput output) throws MissingAttributeException,
             JellyTagException {
@@ -34,11 +35,11 @@ public class LabelTag extends BaseTMTag {
         if (log.isDebugEnabled())
             log.debug("Print label for " + tmo);
 
-        // assert that a topic map object is provided
+        // assert that an object is provided
         validate();
 
         // get the label
-        String label = NameUtil.labelFor((TopicMapObject)tmo);
+        String label = NameUtil.labelFor(tmo);
         
         // print it
         try {
@@ -57,7 +58,7 @@ public class LabelTag extends BaseTMTag {
 
     
     /**
-     * ensures that a topicmap object is set
+     * ensures that an object is set
      */
     protected void validate() throws JellyTagException {
         if (tmo == null) {
@@ -66,18 +67,13 @@ public class LabelTag extends BaseTMTag {
             throw new JellyTagException(msg);
 
         }
-        else if (! (tmo instanceof TopicMapObject)){
-            String msg = "The label-tag requires that the tmo-attribute specifies a topic map object.";
-            msg += "Currently it specifies an object of class "+tmo.getClass()+ "( "+tmo+" )";
-            throw new JellyTagException(msg);
-            
-        }
     }
 
     
     /**
-     * @param tmo
-     *            the topic map object for which a label shall be returned
+     * @param tmo the object for which a label shall be returned.
+     * This is usually an object of type TopicMapObject or of type Locator.
+     * Nevertheless its possible to pass any object.
      */
     public void setTmo(Object tmo) {
         this.tmo = tmo;
@@ -85,7 +81,7 @@ public class LabelTag extends BaseTMTag {
 
     
     /**
-     * @return the topic map object for which a label shall be returned
+     * @return the object for which a label shall be returned
      */
     public Object getTmo() {
         return tmo;

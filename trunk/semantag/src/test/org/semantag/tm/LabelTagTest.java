@@ -1,7 +1,9 @@
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.XMLOutput;
 import org.semantag.TestData;
+import org.tm4j.net.Locator;
 import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMap;
 
@@ -16,6 +18,10 @@ public class LabelTagTest extends TMTagTestBase {
 
     LabelTag labelTag;
 
+    // String that is used by the XMLOutput-Mock
+    // to store the data that was written
+    String writtenToOutputMock;
+    
     /*
      * @see TestCase#setUp()
      */
@@ -43,9 +49,25 @@ public class LabelTagTest extends TMTagTestBase {
     /*
      * test the label printing
      */
-    public void testDoTagXMLOutput() {
+    public void testDoTagXMLOutput() throws Exception{
         
+        Topic john = tm.getTopicByID("john");
+        labelTag.setTmo(john);
+        labelTag.doTag(getOutputMock());
+        assertEquals("John", writtenToOutputMock);
+        
+        String sand =" Sand";
+        labelTag.setTmo(sand);
+        labelTag.doTag(getOutputMock());
+        assertEquals(sand, writtenToOutputMock);
+
+        Locator l = (Locator)john.getSourceLocators().iterator().next();
+        labelTag.setTmo(l);
+        labelTag.doTag(getOutputMock());
+        assertEquals(l.getAddress(), writtenToOutputMock);
+
     }
+    
 
     
     
@@ -65,11 +87,38 @@ public class LabelTagTest extends TMTagTestBase {
            
         }
 
-        // validating an instance that has
+        // validate that an instance that has
         // a topic map object set should pass
         labelTag.setTmo(tm.getTopicByID("john"));
         labelTag.validate();
         
         
+        // validate that getting a label 
+        // for a locator succeeds
+        Topic john = tm.getTopicByID("john");
+        Locator l = (Locator)john.getSourceLocators().iterator().next();
+        labelTag.setTmo(l);
+        labelTag.validate();
+        
+        // validate that getting a label for an
+        // arbitrary object succeeds
+        labelTag.setTmo("hi");
+        labelTag.validate();
+        
+        
+    }
+    
+    
+    
+    private XMLOutput getOutputMock(){
+        
+        return new XMLOutput(){
+            
+            public void write(String arg){
+                writtenToOutputMock = arg;
+            }
+            
+           
+        };
     }
 }

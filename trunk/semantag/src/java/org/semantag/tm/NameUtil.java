@@ -53,20 +53,20 @@ public final class NameUtil {
    * @param o
    * @return
    */
-  public static String labelForObject(Object o) {
+  public static String labelFor(Object o) {
     if (o instanceof TopicMapObject) {
         return NameUtil.labelFor((TopicMapObject) o);
     } else if (o instanceof Collection && (o != null)) {
         Collection c = (Collection) o;
 
         if (c.size() == 1) {
-            return labelForObject(c.iterator().next());
+            return labelFor(c.iterator().next());
         } else {
             Iterator it = c.iterator();
             String label = "";
 
             while (it.hasNext()) {
-                label += labelForObject(it.next());
+                label += labelFor(it.next());
 
                 if (it.hasNext()) {
                     label += ", ";
