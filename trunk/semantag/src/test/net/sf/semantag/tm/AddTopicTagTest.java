@@ -53,6 +53,9 @@ public class AddTopicTagTest extends BaseTMTagTest {
         // assert that the topic is retrievable
         // via the topic context api
         assertEquals(t, att.getTopic());
+        
+        // assert that the body was called
+        assertTrue(scriptWasCalled);
 
     }
 
