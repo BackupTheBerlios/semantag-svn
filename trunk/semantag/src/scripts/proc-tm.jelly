@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+
+<!-- 
+     Jelly script for generating a topic map 
+     describing the pipelets used in ecommerce processes
+     from an aggregated pipelet descriptor XML file.
+     
+     $Id: proc-tm.jelly,v 1.1 2004/08/24 00:12:31 niko_schmuck Exp $ 
+
+	 TODO:
+	 - create hyperlinks from fqcn to corresponding API page 
+
+ -->
+
+<j:jelly trim="true" xmlns:j="jelly:core" xmlns:x="jelly:xml"
+         xmlns:tm="jelly:net.sf.semantag.tag.tm.TopicMapTagLibrary">
+
+  <tm:init baselocator="http://www.nava.de/topicmaps/pipelets"/>
+  
+  <tm:merge filename="ontologies/proc-ontology.ltm"/>
+  
+  <x:parse var="doc" xml="../data/pipelets-sample.xml" />
+  
+  <!-- Internal counter for the pipelet index -->        
+  <j:set var="curId" value="1"/>
+  
+  <!-- Loop over all pipelets -->
+  <x:forEach var="pipelet" select="$doc/document/pipelet">
+    <x:set var="name" select="normalize-space(string(DPipelet/pipeletName))"/>
+    <x:set var="fqcn" select="normalize-space(string(DPipelet/pipeletClass))"/>
+    <x:set var="errCon" select="normalize-space(string(DPipelet/errorConnector))"/>
+    <x:set var="txMode" select="normalize-space(string(DPipelet/transactionMode))"/>
+    Pipelet: ${name}
+    <x:set var="pipeletDescription" 
+           select="DDescriptionContainer/descriptions/DDescription[@dbo.type='com.intershop.beehive.core.rapi.pipeline.DPipeletDesc']"/>
+    <x:set var="desc"  select="string($pipeletDescription/description)"/>
+    <x:set var="group" select="normalize-space(string($pipeletDescription/group))"/>
+    <x:set var="dispName" select="normalize-space(string($pipeletDescription/displayName))"/>
+
+    <!-- Create instance for pipelet topic -->
+    <tm:addTopic id="p-${curId}">
+      <tm:addInstanceOf type="pipelet"/>
+      <tm:addBasename name="${name}" id="bn-${curId}"/>
+      <tm:addOccurrence type="description" data="${desc}"/>
+      <tm:addOccurrence type="pipelet-fqcn" data="${fqcn}"/>
+      <tm:addOccurrence type="pipelet-displayName" data="${dispName}"/>
+      <tm:addOccurrence type="pipelet-errCon" data="${errCon}"/>
+      <tm:addOccurrence type="pipelet-txMode" data="${txMode}"/>
+    </tm:addTopic>
+
+    <!-- Create pipelet group (only if it does not exist yet) -->
+    <tm:addTopic id="pgrp-${group}">
+      <tm:addInstanceOf type="pipelet-group"/>
+      <tm:addBasename name="Group ${group}"/>
+    </tm:addTopic>
+    
+    <!-- Create association to pipelet group -->
+    <tm:addAssociation>
+      <tm:addInstanceOf type="part-of"/>
+      <tm:addMember player="p-${curId}" role="containee"/>
+      <tm:addMember player="pgrp-${group}" role="container"/>
+    </tm:addAssociation>
+    
+    
+    <!-- Loop over all pipelet properties -->
+    <x:forEach select="DPipelet/properties/DPipeletProperty">
+      <x:set var="prop_id" select="string(@id)"/>
+      <x:set var="key" select="normalize-space(string(key))"/>
+      <x:set var="propclass" select="string(propertyClass)"/>
+      <x:set var="prop_group" select="normalize-space(string(group))"/>
+      <x:set var="prop_input" select="normalize-space(string(input))"/>
+      <x:set var="prop_output" select="normalize-space(string(output))"/>
+      
+      <x:set var="propDescription" 
+             select="$pipelet/DDescriptionContainer/descriptions/DDescription[@id=$prop_id]"/>
+      <x:set var="propDesc"
+             select="string($propDescription/description)"/>
+
+      <!-- First create topic for this property --> 
+      <tm:addTopic id="prop-${key}">
+	    <tm:addInstanceOf type="pipelet-property"/>
+	    <tm:addBasename name="${key}" id="bn-prop-${key}"/>
+	  </tm:addTopic>
+
+      <!-- Each pipelet may describe a property with different words, therefore use scope. -->
+	  <tm:addOccurrence topic="prop-${key}" type="description" data="${propDesc}" scope="p-${curId}"/>
+
+      <!-- Create association from property to corresponding pipelet -->
+      <tm:addAssociation id="prop-${key}-${prop_group}-p-${curId}">
+        <tm:addInstanceOf type="has-${prop_group}-property"/>
+        <tm:addMember player="prop-${key}" role="pipelet-property"/>
+        <tm:addMember player="p-${curId}" role="pipelet"/>
+      </tm:addAssociation>
+
+      <!-- Create association from property to its class -->
+      <tm:addAssociation id="prop-${key}-class">
+        <tm:addInstanceOf type="is-of-class"/>
+        <tm:addMember player="prop-${key}" role="pipelet-property"/>
+        <tm:addMember player="${propclass}" role="property-class"/>
+      </tm:addAssociation>
+      
+    </x:forEach>
+    
+    <j:set var="curId" value="${curId + 1}"/>       
+  </x:forEach>
+  
+  Created ${curId} topics for pipelet definitions.
+    
+  <tm:save filename="generated/proc-tm.xtm"/>
+  
+</j:jelly>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<!-- 
+     Jelly script for generating a topic map 
+     out of the kings-and-queens sample XML file.
+     
+     $Id: kaq-tm.jelly,v 1.1 2004/08/24 00:12:29 niko_schmuck Exp $ 
+ -->
+
+<j:jelly trim="true" xmlns:j="jelly:core" xmlns:x="jelly:xml"
+         xmlns:tm="jelly:net.sf.semantag.tag.tm.TopicMapTagLibrary">
+
+  <!-- Generate new topicmap with given base locator -->
+  <tm:init baselocator="http://www.nava.de/topicmaps/kaq"/>
+  
+  <!-- Merge in this topicmap a basic ontology -->
+  <tm:merge filename="ontologies/kaq-ontology.ltm"/>
+
+  <!-- Parse in document -->  
+  <x:parse var="doc" xml="../data/kaq.xml" />
+    
+  <!-- Loop over all persons -->
+  <x:forEach var="person" select="$doc/kaq/persons/person">
+    <x:set var="person_id" select="string(@id)"/>
+    <x:set var="person_name" select="string(name)"/>
+    <x:set var="gender" select="string(gender)"/>
+    Person ${person_id} (${person_name})
+    <!-- Create instance of person -->
+    <tm:addTopic id="${person_id}">
+      <tm:addInstanceOf type="tt-${gender}"/>
+      <tm:addBasename name="${person_name}"/>
+    </tm:addTopic>
+  </x:forEach>
+
+  <!-- Loop over all parent-child relationships -->
+  <x:forEach var="person" select="$doc/kaq/parents/person">
+    <x:set var="person_id" select="string(@id)"/>
+    <x:set var="father_id" select="string(@father)"/>
+    <x:set var="mother_id" select="string(@mother)"/>
+    <!-- Create parent-child association -->
+    <tm:addAssociation>
+      <tm:addInstanceOf type="at-child-of"/>
+      <tm:addMember player="${person_id}" role="art-child"/>
+      <tm:addMember player="${father_id}" role="art-father"/>
+      <tm:addMember player="${mother_id}" role="art-mother"/>
+    </tm:addAssociation>
+  </x:forEach>
+      
+  <tm:save filename="generated/kaq-tm.xtm"/>
+  
+</j:jelly>
