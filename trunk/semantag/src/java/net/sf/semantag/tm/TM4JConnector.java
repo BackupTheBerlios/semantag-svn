@@ -133,13 +133,21 @@ public class TM4JConnector {
      *             as a wrapper around the various exceptions that may by thrown
      *             while an occurrence is created
      */
-    protected Occurrence createOccurrence(final Topic t, String id,
+    protected Occurrence createOccurrence(final Topic t, final String data, final String address, 
+            String id,
             String sourceLocator) throws JellyTagException {
 
         // define a creator that creates an Occurrence
         TMOCreator c = new TMOCreator() {
             public TopicMapObject create(String id) throws Exception {
-                return t.createOccurrence(id);
+                Occurrence occ = t.createOccurrence(id);
+                if(data != null){
+                    occ.setData(data);
+                }
+                else {
+                    occ.setDataLocator(createLocator(address, t));
+                }
+                return occ;
             }
         };
 

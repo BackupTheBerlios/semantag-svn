@@ -1,6 +1,6 @@
 package net.sf.semantag.tm;
 
-import org.tm4j.topicmap.Association;
+import org.apache.commons.jelly.MissingAttributeException;
 import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.Topic;
 
@@ -12,7 +12,8 @@ import org.tm4j.topicmap.Topic;
 public class UseOccurrenceTagTest extends UseTagTestBase {
     private UseOccurrenceTag tag;
 
-    
+    // used to make a unique id for adding occurrences
+    static int addCount = 0;
     
     /**
      * @throws Exception
@@ -157,9 +158,44 @@ public class UseOccurrenceTagTest extends UseTagTestBase {
 
     // test resolvement failure
     // with mode ADD
-    public void testNonExistanceIDWithADD() throws Exception {
-
-        String id = "occ_does_not_exist";
+    public void testADDWithData() throws Exception {
+        String data ="Some words about Helen of Troy";
+        doAdd(data, null);
+    }
+    
+    // test resolvement failure
+    // with mode ADD
+    public void testADDWithResource() throws Exception {
+        String adress ="http://semantag.org/occ";
+        doAdd(null, adress);
+    }
+    
+    // test resolvement failure
+    // with mode ADD
+    public void testADDWithDataAndResource() throws Exception {
+        String data ="Some words about Helen of Troy";
+        String adress ="http://semantag.org/occ";
+        doAdd(data, adress);
+    }
+    
+    // test resolvement failure
+    // with mode ADD
+    public void testADDWithNeitherDataNorResource() throws Exception {
+        try{
+            doAdd(null, null);
+            fail("Adding occurrence without data or resource should throw an exception");
+        }catch(MissingAttributeException e){
+            assertEquals("'data' or 'resource'", e.getMissingAttribute());
+        }
+    }
+    
+    
+    public void doAdd(String data, String resource)
+    throws Exception{
+        
+        addCount ++;
+        String id = "occ_does_not_exist"+addCount;
+        
         tag.setId(id);
         tag.setNonexistant(BaseUseTag.NE_ADD);
         setScriptForTagBody(tag);
@@ -176,6 +212,10 @@ public class UseOccurrenceTagTest extends UseTagTestBase {
         Topic helena = utt.getTopic();
         int co = helena.getOccurrences().size();
 
+        // set data & resource
+        tag.setData(data);
+        tag.setResource(resource);
+        
         // resolving
         // this should lead to the creation
         // of a new occurrence in topic Helena
@@ -185,5 +225,8 @@ public class UseOccurrenceTagTest extends UseTagTestBase {
         Occurrence bn = tag.getOccurrence();
         assertEquals(bn.getParent(), helena);
 
+        // assert data or resource if data was not specified
+        if(data != null) assertEquals(data,bn.getData());
+        else assertEquals(resource, bn.getDataLocator().getAddress());
     }
 }

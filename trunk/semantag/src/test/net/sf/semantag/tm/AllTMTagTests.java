@@ -14,6 +14,9 @@ public class AllTMTagTests {
 
     //$JUnit-BEGIN$
     suite.addTestSuite(AddAssociationTagTest.class);
+    suite.addTestSuite(AddBasenameTagTest.class);
+    suite.addTestSuite(AddInstanceOfTagTest.class);
+    suite.addTestSuite(AddOccurrenceTagTest.class);
     suite.addTestSuite(AddTopicTagTest.class);
     suite.addTestSuite(BaseUseTagTest.class);
     suite.addTestSuite(InitTopicMapTagTest.class);

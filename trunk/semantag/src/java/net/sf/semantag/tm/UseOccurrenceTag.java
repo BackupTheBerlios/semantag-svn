@@ -1,4 +1,4 @@
-// $Id: UseOccurrenceTag.java,v 1.5 2004/09/15 10:56:24 c_froehlich Exp $
+// $Id: UseOccurrenceTag.java,v 1.6 2004/09/15 13:07:54 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -6,7 +6,6 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.tm4j.topicmap.Association;
 import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.TopicMapObject;
 
@@ -41,6 +40,21 @@ public class UseOccurrenceTag extends BaseUseTag implements ContextOccurrence
     // occurrence to which this tag refers to
     private Occurrence occurrence;
 
+    /**
+     * If this tag leads to the creation of an occurrence this
+     * String is used as the data of the occurrence created.
+     * Ignored otherwise
+     */
+    private String data;
+
+    /**
+     * If this tag leads to the creation of an occurrence this
+     * String is used as the address of the dataLocator 
+     * of the occurrence created.
+     * Ignored otherwise
+     */
+    private String resource;
+
 
     
     /**
@@ -63,6 +77,28 @@ public class UseOccurrenceTag extends BaseUseTag implements ContextOccurrence
 
     }
 
+    /**
+     * validates that either <code>data</code> or <code>resource</code> is
+     * specified.
+     */
+    private void validateForCreation() throws JellyTagException {
+        if (data == null && resource == null) {
+            String msg = "The creation of an Occurrence requires either the attribute ";
+            msg += "'data' set to some data or the attribute 'resource' set to the ";
+            msg += "address of a resource.";
+            log.error(msg);
+            throw new MissingAttributeException("'data' or 'resource'");
+        }
+        
+        if(data != null && resource != null){
+            if(log.isDebugEnabled()){
+                String msg = "Both attributes 'data' and 'resource' are specified. ";
+                msg +="'Resource' will be ignored.";
+                log.debug(msg);
+            }
+        }
+    }
+
     
     public void doTag(XMLOutput output) throws MissingAttributeException,
             JellyTagException {
@@ -75,14 +111,15 @@ public class UseOccurrenceTag extends BaseUseTag implements ContextOccurrence
             getOccurrence();
 
         if (occurrence== null) {
-            // failed to retrieve association
+            // failed to retrieve occurrence
             if (shallFailOnNonexistant())
                 throw new JellyTagException("Failed to identify occurrence");
 
-            else if (shallAddOnNonexistant())
-                occurrence = tmEngine.createOccurrence(getTopicFromContext(null), getId(),
+            else if (shallAddOnNonexistant()){
+                validateForCreation();
+                occurrence = tmEngine.createOccurrence(getTopicFromContext(null), data, resource, getId(),
                         getSourceLocator());
-
+            }
             else
                 // ignore body
                 return;
@@ -104,5 +141,39 @@ public class UseOccurrenceTag extends BaseUseTag implements ContextOccurrence
      */
     public void setOccurrence(Occurrence occurrence) {
         this.occurrence = occurrence;
+    }
+
+    
+    /**
+     * sets the data that is used for 
+     * a new occurrence
+     * 
+     * @param data
+     */
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    /**
+     * @return the data for the new occurrence
+     */
+    public String getData() {
+        return data;
+    }
+
+    /**
+     * sets the address of the resource for the new occurrence
+     * 
+     * @param data
+     */
+    public String getResource() {
+        return resource;
+    }
+
+    /**
+     * @return the address of the resource for the new occurrence
+     */
+    public void setResource(String resource) {
+        this.resource = resource;
     }
 }
