@@ -1,4 +1,4 @@
-// $Id: AddTopicTag.java,v 1.6 2004/09/14 15:11:01 c_froehlich Exp $
+// $Id: AddTopicTag.java,v 1.7 2004/09/14 15:51:00 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -27,8 +27,8 @@ public class AddTopicTag extends BaseTMTag implements ContextTopic,
     // The topic that was added by a call to doTag(...)
     private Topic topic = null;
 
-    // The name of a variable that is bound to a topicmap
-    private String tmVar = null;
+    // The topicmap to which the topic will be added
+    private TopicMap tm = null;
 
     /**
      * @return the topic, that was created by this tag.
@@ -47,7 +47,15 @@ public class AddTopicTag extends BaseTMTag implements ContextTopic,
             log.debug("Adding topic (ID "+getId()+" / SL: "+getSourceLocator()+")");
         
         // get map from context
-        TopicMap tm = getTopicMapFromContext(tmVar);
+        if (tm == null) {
+            tm = getTopicMapFromContext(null);
+            if (tm == null) {
+                // if tm is still null, this tag must fail
+                String msg = "Unable to determine the topicmap to which ";
+                msg += "a new topic could be added.";
+                throw new JellyTagException(msg);
+            }
+        }
         
         // create topic
         topic = tmEngine.createTopic(tm, getId(), getSourceLocator());
@@ -62,19 +70,18 @@ public class AddTopicTag extends BaseTMTag implements ContextTopic,
 
     
     /**
-     * @return the name of the variable that is used
-     * to lookup the topicmap, to which the new tag will be 
-     * added
+     * @return the name of the variable that is used to lookup the topicmap, to
+     *         which the new tag will be added
      */
-    public String getTmVar() {
-        return tmVar;
+    public TopicMap getTopicmap() {
+        return tm;
     }
 
     /**
-     * sets the name of the variable that holds the topicmap, 
-     * to which the new tag will be added
+     * sets the name of the variable that holds the topicmap, to which the new
+     * tag will be added
      */
-    public void setTmVar(String tmVar) {
-        this.tmVar = tmVar;
+    public void setTopicmap(TopicMap tm) {
+        this.tm = tm;
     }
 }

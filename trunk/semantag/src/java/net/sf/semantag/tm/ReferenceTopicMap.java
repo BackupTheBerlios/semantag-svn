@@ -1,5 +1,7 @@
 package net.sf.semantag.tm;
 
+import org.tm4j.topicmap.TopicMap;
+
 /**
  * This interface contains common semantics
  * to reference a topicMap.
@@ -10,16 +12,16 @@ package net.sf.semantag.tm;
 public interface ReferenceTopicMap {
 
     /**
-     * @return the name of a variable to which a topicmap is bound
+     * @return the topicmap
      */
-    public String getTmVar();
+    public TopicMap getTopicmap();
 
     /**
-     * sets the name of a variable to which a topicmap is bound
+     * sets the topicmap
      * 
      * @param topic
      */
-    public void setTmVar(String varname);
+    public void setTopicmap(TopicMap tm);
 
 
 }

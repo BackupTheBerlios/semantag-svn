@@ -27,7 +27,7 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar, 
     protected TMOResolver tmoResolver;
 
     // the name of a variable that holds a topicmap
-    private String tmVar;
+    private TopicMap tm;
 
     
     /**
@@ -51,7 +51,8 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar, 
     public TopicMapObject resolve()
         throws JellyTagException
     {
-        TopicMap tm = getTopicMapFromContext(tmVar);
+        if(tm == null)
+            tm = getTopicMapFromContext(null);
         TopicMapObject o = tmoResolver.getTopicMapObject(tm, context);
         return o;
     }
@@ -91,11 +92,18 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar, 
         }
     }
         
-    
+    /**
+     * returns the topicmap that is the context topicmap
+     * for the current tag
+     * @return
+     * @throws JellyTagException
+     */
     protected TopicMap getTopicMapFromContext()
         throws JellyTagException
     {
-        return getTopicMapFromContext(tmVar);
+        if(tm == null)
+            tm = getTopicMapFromContext(null);
+        return tm;
     }
     
     public String getId() {
@@ -111,8 +119,8 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar, 
      * @return the name of the variable that hold
      * the topicmap to which this tag refers to
      */
-    public String getTmVar() {
-        return tmVar;
+    public TopicMap getTopicmap() {
+        return tm;
     }
 
 
@@ -130,8 +138,8 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar, 
      * sets the name of the variable, that holds
      * the topicmap to which this tag refers to.
      */
-    public void setTmVar(String tmVar) {
-        this.tmVar = tmVar;
+    public void setTopicmap(TopicMap tm) {
+        this.tm = tm;
     }
 
 }

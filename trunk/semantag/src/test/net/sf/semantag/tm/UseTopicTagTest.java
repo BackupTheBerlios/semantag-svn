@@ -182,8 +182,7 @@ public class UseTopicTagTest extends TMTagTestBase {
         assertNull(utt.getTopic());
         
         // now set the topicmap via the tmvar-property
-        utt.setTmVar("TOPICMAP");
-        ctx.setVariable("TOPICMAP",tm2);
+        utt.setTopicmap(tm2);
         assertEquals("Helena",utt.getTopic().getID());
         
         
@@ -262,9 +261,7 @@ public class UseTopicTagTest extends TMTagTestBase {
 
         // set a script for the body of the tag
         setScriptForTagBody(utt);
-        String tmvar = "TOPICMAP";
-        utt.setTmVar(tmvar);
-        ctx.setVariable(tmvar, tm2);
+        utt.setTopicmap(tm2);
         
         // store topic counts for each map
         int co2 = tm2.getTopicCount();

@@ -63,7 +63,7 @@ public abstract class UseTagTestBase extends TMTagTestBase {
         assertNull(tag.getSourceLocator());
         assertNull(tag.getId());
         assertNull(tag.getVar());
-        assertNull(tag.getTmVar());
+        assertNull(tag.getTopicmap());
 
     }
 
@@ -169,9 +169,7 @@ public abstract class UseTagTestBase extends TMTagTestBase {
     public void checkResolveByIDInMap(String id, TopicMap tm) throws Exception {
 
         // store topicmap in context
-        String varName = "TM2";
-        ctx.setVariable(varName, tm);
-        getTag().setTmVar(varName);
+        getTag().setTopicmap(tm);
 
         // set id
         getTag().setId(id);

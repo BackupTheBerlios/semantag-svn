@@ -112,8 +112,7 @@ public class AddAssociationTagTest extends TMTagTestBase {
         aat.setId(newid);
 
         // set tm to process on
-        aat.setTmVar("TOPICMAP");
-        ctx.setVariable("TOPICMAP", tm2);
+        aat.setTopicmap(tm2);
         
         // add a dummy body
         setScriptForTagBody(aat);

@@ -1,8 +1,11 @@
 package net.sf.semantag.tm;
 
+import net.sf.semantag.TestData;
+
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
+import org.tm4j.topicmap.TopicMap;
 
 import junit.framework.TestCase;
 
@@ -11,7 +14,7 @@ import junit.framework.TestCase;
  * @author cf
  * @version 0.1, created on 09.09.2004
  */
-public class BaseUseTagTest extends TestCase {
+public class BaseUseTagTest extends TMTagTestBase {
 
     BaseUseTag but ;
     
@@ -26,27 +29,31 @@ public class BaseUseTagTest extends TestCase {
         };
     }
     
-    // checks proper storage of id and sourceLocator-Attributes
-    public void testStoreProperties() {
+    // checks proper storage of attributes
+    // that are located in class BaseUseTag
+    public void testStoreProperties() 
+    throws Exception{
+       
         String varValue = "aVarname";
         String idValue = "v";
         String slValue = "sl";
-        String tmVar = "aVarForTheTM";
+        TopicMap tm = getTopicMapFromResource(TestData.TM_JOHN_LTM,
+                TestData.TM_JOHN_BASELOCATOR);
         
         assertNull(but.getFromVar());
         assertNull(but.getId());
         assertNull(but.getSourceLocator());
-        assertNull(but.getTmVar());
+        assertNull(but.getTopicmap());
         
         but.setFromVar(varValue);
         but.setId(idValue);
         but.setSourceLocator(slValue);
-        but.setTmVar(tmVar);
+        but.setTopicmap(tm);
         
         assertEquals(varValue, but.getFromVar());
         assertEquals(idValue, but.getId());
         assertEquals(slValue, but.getSourceLocator());
-        assertEquals(tmVar, but.getTmVar());
+        assertEquals(tm, but.getTopicmap());
     }
 
 

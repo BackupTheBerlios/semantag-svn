@@ -111,8 +111,7 @@ public class AddTopicTagTest extends TMTagTestBase {
         att.setId(newid);
 
         // set tm to process on
-        att.setTmVar("TOPICMAP");
-        ctx.setVariable("TOPICMAP", tm2);
+        att.setTopicmap(tm2);
         
         // add a dummy body
         setScriptForTagBody(att);
