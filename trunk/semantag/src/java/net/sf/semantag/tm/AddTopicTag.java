@@ -1,4 +1,4 @@
-// $Id: AddTopicTag.java,v 1.4 2004/09/07 05:04:53 c_froehlich Exp $
+// $Id: AddTopicTag.java,v 1.5 2004/09/07 15:07:06 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -43,8 +43,13 @@ public class AddTopicTag extends BaseTMTag implements ContextTopic,
     public void doTag(XMLOutput output) throws MissingAttributeException,
             JellyTagException {
 
+        if(log.isDebugEnabled())
+            log.debug("Adding topic (ID "+getId()+" / SL: "+getSourceLocator()+")");
+        
+        // get map from context
         TopicMap tm = getTopicMapFromContext(tmVar);
         
+        // create topic
         topic = CreatorUtil.createTopic(tm, getId(), getSourceLocator());
         
         // set variable
