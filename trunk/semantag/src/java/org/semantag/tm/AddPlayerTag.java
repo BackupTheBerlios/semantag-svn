@@ -1,4 +1,4 @@
-// $Id: AddPlayerTag.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+// $Id: AddPlayerTag.java,v 1.2 2004/11/29 16:11:04 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -10,11 +10,25 @@ import org.tm4j.topicmap.Member;
 import org.tm4j.topicmap.Topic;
 
 /**
- * Tag to add a topic as a player to a Member.
+ * Creates a player.
+ * 
+ * The player is either created for the member that is 
+ * explicitly specified by the <code>member</code> 
+ * attribute. If no member is explicitly specified, the 
+ * new player is created for the current context member.
+ * 
+ * The <code>id-</code> and/or the <code>sourceLocator-</code> attributes allow you to specify an 
+ * id / a sourceLocator 
+ * for the new player. If the underlying tm-engine detects a conflict 
+ * (i.e. duplicate id/ * sourceLocator) the execution of the tag will fail.
+ * 
+ * To specify the topic that will act as the playing topic, you use one of the 
+ * various topic resolving attributes.
  * 
  * @author Niko Schmuck
  * @author cf
  */
+
 public class AddPlayerTag extends BaseTopicReferenceTag {
     
     /** The Log to which logging calls will be made. */
@@ -25,6 +39,19 @@ public class AddPlayerTag extends BaseTopicReferenceTag {
      * The Member to which the player is added..
      */
     private Member member;
+
+    /**
+     * determines the member 
+     * to which this player will be added
+     */
+    private void assertContext() throws JellyTagException{
+        if(getMember() == null){
+                String msg = "AddPlayer must be either the children of a tag";
+                msg += "that exports a member to the context for its successors. ";
+                msg += "Or a member must be specified explicitly via the member attribute.";
+                   throw new JellyTagException(msg);
+        }
+    }
 
 
     /**
@@ -39,11 +66,6 @@ public class AddPlayerTag extends BaseTopicReferenceTag {
             throw new MissingAttributeException(msg);
         }
 
-        if (getMember() == null) {
-            String msg = "AddPlayer requires attribute 'member' set to a Member";
-            throw new MissingAttributeException(msg);
-
-        }
 
     }
 
@@ -62,7 +84,7 @@ public class AddPlayerTag extends BaseTopicReferenceTag {
     }
 
     /**
-     * Adds a type to the parent specified
+     * Add a player
      */
     public void doTag(XMLOutput output) throws MissingAttributeException,
             JellyTagException {
@@ -70,9 +92,13 @@ public class AddPlayerTag extends BaseTopicReferenceTag {
         if(log.isDebugEnabled())
             log.debug("Add Player (Player "+getTopic()+" / Member: "+getMember()+")");
 
+        // get Member
+        assertContext();
+
+        // validation
         validate();
 
-        tmEngine.addPlayer(getMember(), getTopic());
+        tmEngine.addPlayer(member, getTopic());
     }
 
     /**
@@ -86,22 +112,22 @@ public class AddPlayerTag extends BaseTopicReferenceTag {
     }
 
     /**
-     * sets the theme that will be added to the set of
-     * themes that constitutes the scope of the scopedObject
+     * The topic that will be used as the playing topic. 
+     * Specifying this property is exactly the same 
+     * as specifying the <code>topic</code> property.
      */
-    public void setPlayer(Topic theme) {
+    public void setPlayer(Topic topic) {
         // calls the BaseClass. This method only exists for
         // the purpose of a meaningful attributename
-        super.setTopic(theme);
+        super.setTopic(topic);
     }
     
     
     /**
-     * set the Member to whoom the
-     * player will be added
+     * The Member to which the new player will be added
      * @param mem
      */
-    public void setScopedObject(Member mem) {
+    public void setMember(Member mem) {
         this.member = mem;
     }
 }

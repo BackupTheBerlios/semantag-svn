@@ -1,4 +1,4 @@
-// $Id: AddBasenameTag.java,v 1.1 2004/10/26 19:49:48 niko_schmuck Exp $
+// $Id: AddBasenameTag.java,v 1.2 2004/11/29 16:11:04 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -10,9 +10,17 @@ import org.tm4j.topicmap.BaseName;
 import org.tm4j.topicmap.Topic;
 
 /**
- * Creates a base name for a given topic. If the attribute 'name' is not
- * specified the body of this element will be used as concrete data for the
- * name.
+ * Creates a basename.
+ * 
+ * The basename is either created for the topic that is specified by the <code>topic</code>
+ * attribute or for the current context topic.
+ * 
+ * The <code>id-</code> and/or the <code>sourceLocator-</code> attributes allow you to specify an 
+ * id / a sourceLocator 
+ * for the new basename. If the underlying tm-engine detects a conflict 
+ * (i.e. duplicate id/ * sourceLocator) the execution of the tag will fail.
+ * 
+ * The name of the basename is specified via the <code>name</code> attribute.
  * 
  * @author Niko Schmuck
  * @author cf
@@ -89,20 +97,20 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName {
         }
     }
     
-    protected void validate(){
-        /*
-         * There is nothing to do here.
-         * Player and role are allowed to be 
-         * null and the existance of the target association
-         * is handled by assertAssociation(), 
-         *
-         */
-        
+    /**
+     * ensures that a name is provided
+     */
+    protected void validate() throws JellyTagException {
+        if (name == null || name.length() == 0) {
+            String msg = "You must provide the basename-tag with a name (via the 'name'-attribute)";
+            throw new JellyTagException(msg);
+
+        }
     }
 
+
     /**
-     * sets the name that will be the name of the new basename if this tag
-     * generates one
+     * The namedata of the new basename
      * 
      * @param name
      */
@@ -115,8 +123,8 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName {
     }
 
     /**
-     * Sets the topic to which this
-     * basename shall be added to
+     * The topic to which this 
+     * basename will be added
      * 
      * @param topicVar
      */

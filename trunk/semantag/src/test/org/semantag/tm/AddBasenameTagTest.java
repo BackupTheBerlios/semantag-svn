@@ -112,8 +112,30 @@ public class AddBasenameTagTest extends TMTagTestBase {
 
     }
     
+    /**
+     * adding a basename without a name should fail
+     *
+     */
+    public void testEmptyName(){
+        // addTopic
+        try {
+            doAddBareBasename(null ,null, null, john, true, null);
+            fail("Expected Exception for creating a basename without a name");
+        } catch (Exception e) {
+            // expected
+        }
+       
+        // addTopic
+        try {
+            doAddBareBasename(null ,null, "", john, true, null);
+            fail("Expected Exception for creating a basename with an empty name");
+        } catch (Exception e) {
+            // expected
+        }
+    }
     
     /**
+     * Helper for the testcases
      * Adds a basename with the given attributes.
      * Tests various properties
      * @param id
@@ -134,7 +156,13 @@ public class AddBasenameTagTest extends TMTagTestBase {
         if(name == null) name ="Name for new Basename"+addCount;
 
         String varName = "BASENAME";
-        
+        doAddBareBasename(id, sl, name, parent, parentIsExplicit, varName);
+    }
+    
+    private void doAddBareBasename(String id, String sl, String name, 
+            Topic parent, boolean parentIsExplicit, String varName)
+        throws Exception
+    {
         // set id and sourcelocator
         abt.setId(id);
         abt.setSourceLocator(sl);
@@ -187,7 +215,8 @@ public class AddBasenameTagTest extends TMTagTestBase {
         
         // assert that the basename is retrievable
         // via the context variable
-        assertEquals(bn, ctx.getVariable(varName));
+        if(varName != null)
+            assertEquals(bn, ctx.getVariable(varName));
         
         // assert that the body was called
         assertTrue(scriptWasCalled);

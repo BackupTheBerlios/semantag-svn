@@ -1,4 +1,4 @@
-//$Id: AddSubjectIndicatorTag.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+//$Id: AddSubjectIndicatorTag.java,v 1.2 2004/11/29 16:11:04 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -9,9 +9,20 @@ import org.apache.commons.logging.LogFactory;
 import org.tm4j.topicmap.Topic;
 
 /**
- * Creates a subject indicator for a given topic.
- *
+ * Creates a subject indicator.
+ * 
+ * The subject indicator is either created for the topic that is 
+ * explicitly specified by the <code>topic</code> 
+ * attribute. If no topic is explicitly specified, the 
+ * subject indicator is created for the current context topic.
+ * 
+ * The <code>id-</code> and/or the <code>sourceLocator-</code> attributes are ignored
+ * 
+ * To specify the locator that indicates the subject, you use the <code>locator</code>
+ * attribute.
+ * 
  * @author Niko Schmuck
+ * @author cf
  */
 public class AddSubjectIndicatorTag extends BaseTMTag {
 
@@ -29,6 +40,7 @@ public class AddSubjectIndicatorTag extends BaseTMTag {
   private Topic topic;
   
   /**
+   * The address of the locator that indicates the subject
    * @param locator the adress of the locator of this subjectIndicator
    */
   public void setLocator(String locator) {
@@ -52,10 +64,14 @@ public class AddSubjectIndicatorTag extends BaseTMTag {
       if(log.isDebugEnabled())
           log.debug("Add SubjectIndicator (Locator-Adress: "+locator);
 
-      // assert that a topic to add the subject indicator 
-      // to is accessible
-      validateContext();
       
+      // get topic from context
+      assertContext();
+      
+      // validate
+      validate();
+      
+
       // add the subject indicator
       tmEngine.addSubjectIndicator(topic, locator);
       
@@ -64,7 +80,7 @@ public class AddSubjectIndicatorTag extends BaseTMTag {
   /**
    * determines the Topic to which the new subjectIndicator will be added
    */
-  protected void validateContext() throws JellyTagException{
+  protected void assertContext() throws JellyTagException{
       if(topic == null){
           topic = getTopicFromContext();
           if(topic == null){
@@ -77,5 +93,16 @@ public class AddSubjectIndicatorTag extends BaseTMTag {
       }
   }
   
+  /**
+   * ensures that a locator adress is provided
+   */
+  protected void validate() throws JellyTagException {
+      if (locator == null || locator.length() == 0) {
+          String msg = "You must provide the subjectIndicator-tag with a locator adress (via the 'locator'-attribute)";
+          throw new JellyTagException(msg);
+
+      }
+  }
+
   
 }

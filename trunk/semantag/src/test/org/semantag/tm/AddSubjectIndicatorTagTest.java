@@ -97,9 +97,10 @@ public class AddSubjectIndicatorTagTest extends TMTagTestBase {
 
         try{
             doAddSubjectIndicator("", john, true);
+            fail("Exception expected");
         }
         catch(JellyTagException ex){
-            String expected = "Unable to create a Locator for adress: ";
+            String expected = "You must provide the subjectIndicator-tag";
             assertTrue(ex.getReason().startsWith(expected));
         }
     }

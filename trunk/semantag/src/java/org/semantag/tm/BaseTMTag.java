@@ -104,6 +104,10 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
         return id;
     }
 
+    /**
+     * The id of this TopicMapObject
+     * @param var
+     */
     public void setId(String id) {
         this.id = normalizeID(id);
     }
@@ -112,6 +116,10 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
         return sourceLocator;
     }
 
+    /**
+     * The address of a source locator of this TopicMapObject
+     * @param var
+     */
     public void setSourceLocator(String sourceLocator) {
         this.sourceLocator = sourceLocator;
     }
@@ -120,6 +128,10 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
         return var;
     }
 
+    /**
+     * The name of a variable that stores this TopicMapObject
+     * @param var
+     */
     public void setVar(String var) {
         this.var = var;
     }

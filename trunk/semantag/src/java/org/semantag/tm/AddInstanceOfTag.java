@@ -1,4 +1,4 @@
-// $Id: AddInstanceOfTag.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+// $Id: AddInstanceOfTag.java,v 1.2 2004/11/29 16:11:04 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -10,18 +10,37 @@ import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMapObject;
 
 /**
- * Tag for typing a topic or an association.
+ * Sets the type of an instance. 
+ * 
+ * The instance may be topic, an association or an occurrence.
+ * If the instance is a topic, the type will be added to the set of types of this topic. 
+ * If the instance is either an association or an occurrence the type will be set as
+ * the single type of this instance.
+ * 
+ * 
+ * The instance that will be typed is either set
+ * explicitly with the <code>instance</code> attribute.
+ * If no instance is explicitly specified, the closest typeable object
+ * will be fetched from the context. This is done by descending the xml-tree down to
+ * the root until a tag is encountered that specify either a topic, an association
+ * or an occurrence.
+ * 
+ * The <code>id-</code> and/or the <code>sourceLocator-</code> attributes are ignored
+ * 
+ * To specify the topic that will act as the type, you use either the <code>type</code>
+ * attribute or one of the various topic resolving attributes.
  * 
  * @author Niko Schmuck
  * @author cf
  */
+
 public class AddInstanceOfTag extends BaseTopicReferenceTag {
     /** The Log to which logging calls will be made. */
     private static final Log log = LogFactory.getLog(AddInstanceOfTag.class);
 
 
     /**
-     * The TopicMapObject that shall be marked as being an 
+     * The TopicMapObject that shall be set to be an 
      * instance of the given type.
      */
     private TopicMapObject instance;
@@ -92,7 +111,7 @@ public class AddInstanceOfTag extends BaseTopicReferenceTag {
     }
 
     /**
-     * set the type that the instance shall be an instance of
+     * The type of the instance
      */
     public void setType(Topic type) {
         // calls the BaseClass. This method only exists for
@@ -102,7 +121,7 @@ public class AddInstanceOfTag extends BaseTopicReferenceTag {
     
     
     /**
-     * set the TopicMapObject which shall become an instance
+     * The Topic, Association or Occurrence which will become an instance
      * of the type specified by the <code>type</code>-property
      * @param instance
      */

@@ -1,4 +1,4 @@
-// $Id: AddMemberTag.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+// $Id: AddMemberTag.java,v 1.2 2004/11/29 16:11:04 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -11,12 +11,28 @@ import org.tm4j.topicmap.Member;
 import org.tm4j.topicmap.Topic;
 
 /**
- * This tag creates a new member for a specified association.
- * Does not support child elements currently.
- *
+ * Creates a member.
+ * 
+ * The member is either created for the association that is 
+ * explicitly specified by the <code>association</code> 
+ * attribute. If no association is explicitly specified, the 
+ * member is  created for the current context association.
+ * 
+ * The <code>id-</code> and/or the <code>sourceLocator-</code> attributes allow you to specify an 
+ * id / a sourceLocator 
+ * for the new member. If the underlying tm-engine detects a conflict 
+ * (i.e. duplicate id/ * sourceLocator) the execution of the tag will fail.
+ * 
+ * The first player of the member is specified via the <code>player</code> attribute. 
+ * Additional player may be specified by enclosed <code>addPlayer</code>-tags.
+ * 
+ * The role type of the new member is specified via the <code>role</code> attribute.
+ * 
  * @author Niko Schmuck
+ * @author cf
  */
 public class AddMemberTag extends BaseTMTag implements ContextMember {
+    
   /** The Log to which logging calls will be made. */
   private static final Log log = LogFactory.getLog(AddMemberTag.class);
   
@@ -60,7 +76,7 @@ public class AddMemberTag extends BaseTMTag implements ContextMember {
 
 
       // get Parent
-      assertAssociation();
+      assertContext();
       
       // validation
       validate();
@@ -80,7 +96,7 @@ public class AddMemberTag extends BaseTMTag implements ContextMember {
   /**
    * sets the Association to which the new member will be added
    */
-  private void assertAssociation() throws JellyTagException{
+  private void assertContext() throws JellyTagException{
       if(association == null){
           association = getAssociationFromContext();
           if(association == null){
@@ -106,7 +122,7 @@ public class AddMemberTag extends BaseTMTag implements ContextMember {
   
   
   /**
-   * sets the Association to which the new member will be added
+   * The Association to which the new member will be added
    */
   public void setAssociation(Association association) {
       this.association = association;
@@ -120,7 +136,7 @@ public class AddMemberTag extends BaseTMTag implements ContextMember {
   }
   
   /**
-   * sets the initial player of the new member
+   * The initial player of the new member
    */
   public void setPlayer(Topic player) {
       this.player = player;
@@ -134,7 +150,7 @@ public class AddMemberTag extends BaseTMTag implements ContextMember {
   }
 
   /**
-   * sets the roleSpec of the new member
+   * The roleSpec of the new member
    */
   public void setRole(Topic role) {
       this.role = role;

@@ -1,4 +1,4 @@
-// $Id: AddOccurrenceTag.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+// $Id: AddOccurrenceTag.java,v 1.2 2004/11/29 16:11:04 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -10,11 +10,27 @@ import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.Topic;
 
 /**
- * Jelly tag creating a new occurrence for the given topic.
+ * Creates an occurrence.
+ * 
+ * The occurrence is either created for the topic that is 
+ * explicitly specified by the <code>topic</code> 
+ * attribute. If no topic is explicitly specified, the 
+ * occurrence is  created for the current context topic.
+ * 
+ * The <code>id-</code> and/or the <code>sourceLocator-</code> attributes allow you to specify an 
+ * id / a sourceLocator 
+ * for the new occurrence. If the underlying tm-engine detects a conflict 
+ * (i.e. duplicate id/ * sourceLocator) the execution of the tag will fail.
+ * 
+ * To specify an external resource to which this occurrence shall point, the 
+ * <code>resource</code> attribute is used. For an occurrence with internal data, the 
+ * <code>data</code> attribute is used. If both attributes are specified, <code>data</code> 
+ * will have precedence.
  * 
  * @author Niko Schmuck
  * @author cf
  */
+
 public class AddOccurrenceTag extends BaseTMTag implements ContextOccurrence{
 
     /** The Log to which logging calls will be made. */
@@ -48,17 +64,28 @@ public class AddOccurrenceTag extends BaseTMTag implements ContextOccurrence{
     }
 
     /**
+     * determines the topic 
+     * to which this occurrence will be added
+     */
+    private void assertContext() throws JellyTagException{
+        if(parent == null){
+            parent = getTopicFromContext();
+            if(parent == null){
+                String msg = "AddOccurrence must be either the children of an object ";
+                msg += "that exports a topic to the context for its successors ";
+                msg += "or a variable containig a topic must be specified via the topic-Attribute.";
+                    throw new JellyTagException(msg);
+
+            }
+        }
+    }
+
+    /**
      * validates that either <code>data</code> or <code>resource</code> is
      * specified .
      */
-    private void validate(Topic t) throws JellyTagException, MissingAttributeException {
+    private void validate() throws JellyTagException, MissingAttributeException {
 
-        if (t == null) {
-            String msg = "AddOccurrence must be either the children of an object ";
-            msg += "that exports a topic to the context for its successors ";
-            msg += "or a variable containig a topic must be specified via the topic-Attribute.";
-            throw new JellyTagException(msg);
-        }
 
         if (data == null && resource == null) {
             String msg = "The creation of an Occurrence requires either the attribute ";
@@ -84,15 +111,13 @@ public class AddOccurrenceTag extends BaseTMTag implements ContextOccurrence{
             JellyTagException {
 
         // get Parent
-        Topic t = parent;
-        if (t == null)
-            t = getTopicFromContext();
+        assertContext();
 
         // validation
-        validate(t);
+        validate();
         
         // create occurrence
-        occurrence = tmEngine.createOccurrence(t, data, resource, getId(),
+        occurrence = tmEngine.createOccurrence(parent, data, resource, getId(),
                 getSourceLocator());
 
         // set variable
@@ -103,7 +128,7 @@ public class AddOccurrenceTag extends BaseTMTag implements ContextOccurrence{
     }
 
     /**
-     * sets the data for the new occurrence
+     * The inline data for the new occurrence
      * 
      * @param data
      */
@@ -119,7 +144,7 @@ public class AddOccurrenceTag extends BaseTMTag implements ContextOccurrence{
     }
 
     /**
-     * sets the address of the resource for the new occurrence
+     * The address of the external resource for the new occurrence
      * 
      * @param data
      */
@@ -135,7 +160,7 @@ public class AddOccurrenceTag extends BaseTMTag implements ContextOccurrence{
     }
 
     /**
-     * Sets the topic to which the occurrence shall be added to
+     * The topic to which the new occurrence will be added
      * 
      * @param aTopic
      */

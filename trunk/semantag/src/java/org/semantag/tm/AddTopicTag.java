@@ -1,4 +1,4 @@
-// $Id: AddTopicTag.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+// $Id: AddTopicTag.java,v 1.2 2004/11/29 16:11:04 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -17,6 +17,22 @@ import org.tm4j.topicmap.TopicMap;
  *          that a topic with the given id exists is now optional - added
  *          var-property. if specified the topic with the given id is stored
  *          under that name in the jelly context
+ */
+/**
+ * Creates a topic.
+ * 
+ * The topic is either created in the topicmap that is 
+ * explicitly specified by the <code>topicmap</code> 
+ * attribute. If no topicmap is explicitly specified, the 
+ * new topic is created in the current context topicmap.
+ * 
+ * The <code>id-</code> and/or the <code>sourceLocator-</code> attributes allow you to specify an 
+ * id / a sourceLocator 
+ * for the new topic. If the underlying tm-engine detects a conflict 
+ * (i.e. duplicate id/ * sourceLocator) the execution of the tag will fail.
+ * 
+ * @author Niko Schmuck
+ * @author cf
  */
 public class AddTopicTag extends BaseTMTag implements ContextTopic,
         ReferenceTopicMap {
@@ -47,15 +63,10 @@ public class AddTopicTag extends BaseTMTag implements ContextTopic,
             log.debug("Adding topic (ID "+getId()+" / SL: "+getSourceLocator()+")");
         
         // get map from context
-        if (tm == null) {
-            tm = getTopicMapFromContext(null);
-            if (tm == null) {
-                // if tm is still null, this tag must fail
-                String msg = "Unable to determine the topicmap to which ";
-                msg += "a new topic could be added.";
-                throw new JellyTagException(msg);
-            }
-        }
+        assertContext();
+        
+        // validate
+        validate();
         
         // create topic
         topic = tmEngine.createTopic(tm, getId(), getSourceLocator());
@@ -69,17 +80,42 @@ public class AddTopicTag extends BaseTMTag implements ContextTopic,
     }
 
     
+
     /**
-     * @return the name of the variable that is used to lookup the topicmap, to
-     *         which the new tag will be added
+     * determines the topicmap 
+     * to which this topic will be added
+     */
+    private void assertContext() throws JellyTagException{
+        if (tm == null) {
+            tm = getTopicMapFromContext(null);
+            if (tm == null) {
+                // if tm is still null, this tag must fail
+                String msg = "Unable to determine the topicmap to which ";
+                msg += "a new topic could be added.";
+                throw new JellyTagException(msg);
+            }
+        }
+    }
+
+
+    /**
+     * nothing to validate here.
+     */
+    private void validate() throws MissingAttributeException, JellyTagException {
+
+    }
+
+    
+    /**
+     * @return the topicmap, to which the new topic will be added. 
+     * This method returns null if no topicmap was explicitly set.
      */
     public TopicMap getTopicmap() {
         return tm;
     }
 
     /**
-     * sets the name of the variable that holds the topicmap, to which the new
-     * tag will be added
+     * The topicmap, to which the new association will be added
      */
     public void setTopicmap(TopicMap tm) {
         this.tm = tm;

@@ -1,4 +1,4 @@
-// $Id: AddAssociationTag.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+// $Id: AddAssociationTag.java,v 1.2 2004/11/29 16:11:03 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -10,8 +10,15 @@ import org.tm4j.topicmap.Association;
 import org.tm4j.topicmap.TopicMap;
 
 /**
- * Creates an association within the context's topic map under the specified ID.
- * If no ID was explicitly given the ID will be auto-generated.
+ * Creates an association.
+ * 
+ * The association is either created in the topicmap that is specified by the <code>topicmap</code>
+ * attribute or in the current context topicmap.
+ * 
+ * The <code>id</code> and/or the <code>sourceLocator</code>- attributes allow you to specify an 
+ * id / a sourceLocator
+ * for the new association. If the underlying tm-engine detects a conflict (i.e. duplicate id /
+ * sourceLocator) the execution of the tag will fail.
  * 
  * @author Niko Schmuck
  * @author cf
@@ -70,19 +77,20 @@ public class AddAssociationTag extends BaseTMTag implements ContextAssociation,
     }
 
     /**
-     * @return the name of the variable that is used to lookup the topicmap, to
-     *         which the new tag will be added
+     * @return the topicmap, to which the new association will be added. 
+     * This method returns null if no topicmap was explicitly set.
      */
     public TopicMap getTopicmap() {
         return tm;
     }
 
     /**
-     * sets the name of the variable that holds the topicmap, to which the new
-     * tag will be added
+     * The topicmap, to which the new association will be added
      */
     public void setTopicmap(TopicMap tm) {
         this.tm = tm;
     }
+    
+    
 }
 
