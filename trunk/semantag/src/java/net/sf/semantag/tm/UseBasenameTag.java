@@ -1,4 +1,4 @@
-// $Id: UseBasenameTag.java,v 1.7 2004/09/16 14:02:59 c_froehlich Exp $
+// $Id: UseBasenameTag.java,v 1.8 2004/09/22 10:17:01 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -7,7 +7,6 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.tm4j.topicmap.BaseName;
-import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMapObject;
 
 /**
@@ -35,11 +34,6 @@ public class UseBasenameTag extends BaseUseTag implements ContextBaseName {
     // name data that is used, if this tag leads to the creation
     // of a basename. ignored otherwise
     private String name;
-
-    // the name of a variable that is bound to a topic that
-    // shall be used as a scoping theme.
-    // Ignored, if this tag does not lead to the creation of a basename
-    private String scopingTopicVar;
 
     // basename to which this tag refers to
     private BaseName basename;
@@ -83,15 +77,15 @@ public class UseBasenameTag extends BaseUseTag implements ContextBaseName {
 
             else if (shallAddOnNonexistant()){
 
-                // set scope if specified
-                Topic theme = getTopicFromVariable(scopingTopicVar);
 
                 basename = tmEngine.createBasename(
-                        getTopicFromContext(null), name, getId(), getSourceLocator());
+                        getTopicFromContext(), name, getId(), getSourceLocator());
             }
-            else
-                // ignore body
+            else {
+                // set var, ignore body
+                storeObject(null);
                 return;
+            }
         }
 
         // set variable
@@ -118,15 +112,7 @@ public class UseBasenameTag extends BaseUseTag implements ContextBaseName {
         this.name = name;
     }
     
-    /**
-     * sets the name of a variable that is bound to 
-     * the topic that shall be used as the scoping
-     * topic for this basename
-     * @param scopingTopicId
-     */
-    public void setScope(String scopingTopicVar) {
-      this.scopingTopicVar = scopingTopicVar;
-    }
+   
 
     /**
      * sets the basename that this tag shall use

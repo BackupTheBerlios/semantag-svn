@@ -169,4 +169,46 @@ public class UseBaseNameTagTest extends UseTagTestBase {
         // assert the name
         assertEquals(name, bn.getData());
     }
+    
+    
+
+    // tests that a resolved item is bound to 
+    // the variable specified by the var-property
+    // tests secondly that a variable is reset to 
+    // null, if the item could not be found
+    // by a succeding tag
+    public void testBoundToVariable()
+        throws Exception
+    {
+        String varname ="ITEM";
+        String id = "name_of_elektra";
+        BaseName basename = (BaseName) tm.getObjectByID(id);
+        // resolver shall resolve by id
+        tag.setBaseName(basename);
+
+        // resolved topic shall be stored in
+        // the variable named TOPIC
+        tag.setVar(varname);
+        
+        // resolve
+        setScriptForTagBody(tag);
+        tag.doTag(null);
+        
+        // the item should be stored in the variable
+        assertEquals(basename, ctx.getVariable(varname));
+        
+        // make a new tag, bound to the same variable 
+        // set resolvement to non existant topic
+        tag = new UseBasenameTag();
+        tag.setContext(ctx);
+        tag.setVar(varname);
+        tag.setId("nonexistantntifd");
+
+        // resolve
+        tag.doTag(null);
+
+        // the variable should be resetted
+        assertNull(ctx.getVariable(varname));
+        
+    }
 }

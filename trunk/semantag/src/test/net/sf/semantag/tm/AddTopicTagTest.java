@@ -47,6 +47,7 @@ public class AddTopicTagTest extends TMTagTestBase {
         // assert that there is a topic with the
         // id and the sourceLocator specified
         Topic t = tm.getTopicByID(newid);
+       
         assertEquals(sl, ((Locator) t.getSourceLocators().iterator().next())
                 .getAddress());
 

@@ -1,4 +1,4 @@
-// $Id: TologTag.java,v 1.3 2004/09/21 13:54:17 c_froehlich Exp $
+// $Id: TologTag.java,v 1.4 2004/09/22 10:17:01 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -65,7 +65,8 @@ public class TologTag extends BaseTMTag {
 
     try {
       results = qE.execute(query);
-      log.info("result set returned with " + results.getNumRows() + " rows.");
+      if(log.isDebugEnabled())
+          log.info("result set returned with " + results.getNumRows() + " rows.");
       context.setVariable(getVar(), new TologResultSetWrapper(results));
     } catch (TologParserException e1) {
       String s = "Caught " + e1.getClass() + " - " + e1.getStackTrace();

@@ -76,6 +76,7 @@ public class UseTopicTagTest extends TMTagTestBase {
         assertFalse(scriptWasCalled);
     }
 
+  
     
     // test setting a topic directly
     public void testSetTopic() 
@@ -270,6 +271,8 @@ public class UseTopicTagTest extends TMTagTestBase {
 
     // tests that a resolved topic is bound to 
     // the variable specified by the var-property
+    // tests secondly that a variable is reset to 
+    // null, if the topic could not ne found
     public void testTopicIsBoundToVariable()
         throws Exception
     {
@@ -287,6 +290,21 @@ public class UseTopicTagTest extends TMTagTestBase {
         
         // the topic should be stored in the variable
         assertEquals(john, ctx.getVariable("TOPIC"));
+        
+        // make a new tag, bound to the same variable 
+        // set resolvement to non existant topic
+        utt = new UseTopicTag();
+        utt.setContext(ctx);
+        utt.setVar("TOPIC");
+        utt.setTopicID("nojohn");
+
+        // resolve
+        utt.doTag(null);
+
+        // the variable should be resetted
+        assertNull(ctx.getVariable("TOPIC"));
+        
+        
     }
     
     // tests that a created topic is bound to 

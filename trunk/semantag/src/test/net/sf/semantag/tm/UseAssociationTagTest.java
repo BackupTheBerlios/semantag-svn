@@ -174,4 +174,44 @@ public class UseAssociationTagTest extends UseTagTestBase {
         assertEquals(bn.getParent(), tm);
 
     }
+    
+    // tests that a resolved item is bound to 
+    // the variable specified by the var-property
+    // tests secondly that a variable is reset to 
+    // null, if the item could not be found
+    // by a succeding tag
+    public void testBoundToVariable()
+        throws Exception
+    {
+        String varname ="ITEM";
+        String id = "as00003";
+        Association assoc = (Association) tm.getObjectByID(id);
+        // resolver shall resolve by id
+        tag.setAssociation(assoc);
+
+        // resolved topic shall be stored in
+        // the variable named TOPIC
+        tag.setVar(varname);
+        
+        // resolve
+        setScriptForTagBody(tag);
+        tag.doTag(null);
+        
+        // the item should be stored in the variable
+        assertEquals(assoc, ctx.getVariable(varname));
+        
+        // make a new tag, bound to the same variable 
+        // set resolvement to non existant topic
+        tag = new UseAssociationTag();
+        tag.setContext(ctx);
+        tag.setVar(varname);
+        tag.setId("nonexistantntifd");
+
+        // resolve
+        tag.doTag(null);
+
+        // the variable should be resetted
+        assertNull(ctx.getVariable(varname));
+        
+    }
 }

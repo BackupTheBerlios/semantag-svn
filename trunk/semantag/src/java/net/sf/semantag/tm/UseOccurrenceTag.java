@@ -1,4 +1,4 @@
-// $Id: UseOccurrenceTag.java,v 1.6 2004/09/15 13:07:54 c_froehlich Exp $
+// $Id: UseOccurrenceTag.java,v 1.7 2004/09/22 10:17:01 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -117,12 +117,14 @@ public class UseOccurrenceTag extends BaseUseTag implements ContextOccurrence
 
             else if (shallAddOnNonexistant()){
                 validateForCreation();
-                occurrence = tmEngine.createOccurrence(getTopicFromContext(null), data, resource, getId(),
+                occurrence = tmEngine.createOccurrence(getTopicFromContext(), data, resource, getId(),
                         getSourceLocator());
             }
-            else
-                // ignore body
+            else {
+                // set var, ignore body
+                storeObject(null);
                 return;
+            }
         }
 
         // set variable

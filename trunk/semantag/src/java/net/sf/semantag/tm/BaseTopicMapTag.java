@@ -1,4 +1,4 @@
-// $Id: BaseTopicMapTag.java,v 1.2 2004/09/09 19:32:22 c_froehlich Exp $
+// $Id: BaseTopicMapTag.java,v 1.3 2004/09/22 10:17:01 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -92,7 +92,10 @@ public abstract class BaseTopicMapTag extends BaseTMTag implements ContextTopicM
     try {
       TopicMapProviderFactory tmpf = (TopicMapProviderFactory) providerFactoryClass.newInstance();
 
+      //System.getProperties().put(TopicMapProvider.OPT_STATIC_MERGE, Boolean.TRUE);
+      
       tm_provider = tmpf.newTopicMapProvider(System.getProperties());
+      
     } catch (Exception e) {
       throw new RuntimeException("Could not initialise topic map provider: " +
                                  e.toString());

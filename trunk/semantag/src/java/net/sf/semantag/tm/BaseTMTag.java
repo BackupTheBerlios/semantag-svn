@@ -93,7 +93,11 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
      * @param o
      */
     protected void storeObject(Object o){
-        if(var != null) context.setVariable(var, o);
+        if(var != null) {
+           if(o != null) context.setVariable(var, o);
+           else context.removeVariable(var);
+
+        }
     }
     
     public String getId() {
@@ -269,6 +273,22 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
         return factory.createLocator("URI", adress);
       } catch (LocatorFactoryException e) {
         throw new JellyTagException(e);
+      }
+    }
+    
+    /**
+     * Checks whether data has some non-whitespace
+     * characters in it
+     * @param data
+     * @return true if data is not null and if it
+     * contains at least one character that
+     * is not whitespace, false otherwise
+     */
+    protected boolean isSpecified(String data) {
+      if ((data == null) || (data.length() == 0) || (data.trim().length() == 0)) {
+        return false;
+      } else {
+        return true;
       }
     }
 }

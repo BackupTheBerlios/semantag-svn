@@ -178,4 +178,45 @@ public class UseMemberTagTest extends UseTagTestBase {
         assertEquals(leda, bn.getPlayers().iterator().next());
 
     }
+    
+
+    // tests that a resolved item is bound to 
+    // the variable specified by the var-property
+    // tests secondly that a variable is reset to 
+    // null, if the item could not be found
+    // by a succeding tag
+    public void testBoundToVariable()
+        throws Exception
+    {
+        String varname ="ITEM";
+        String id = "mem3";
+        Member member = (Member) tm.getObjectByID(id);
+        // resolver shall resolve by id
+        tag.setMember(member);
+
+        // resolved topic shall be stored in
+        // the variable named TOPIC
+        tag.setVar(varname);
+        
+        // resolve
+        setScriptForTagBody(tag);
+        tag.doTag(null);
+        
+        // the item should be stored in the variable
+        assertEquals(member, ctx.getVariable(varname));
+        
+        // make a new tag, bound to the same variable 
+        // set resolvement to non existant topic
+        tag = new UseMemberTag();
+        tag.setContext(ctx);
+        tag.setVar(varname);
+        tag.setId("nonexistantntifd");
+
+        // resolve
+        tag.doTag(null);
+
+        // the variable should be resetted
+        assertNull(ctx.getVariable(varname));
+        
+    }
 }

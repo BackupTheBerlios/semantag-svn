@@ -1,4 +1,4 @@
-// $Id: UseMemberTag.java,v 1.6 2004/09/16 14:02:59 c_froehlich Exp $
+// $Id: UseMemberTag.java,v 1.7 2004/09/22 10:17:01 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -97,9 +97,11 @@ public class UseMemberTag extends BaseUseTag implements ContextMember
                 member= tmEngine.createMember(getAssociationFromContext(), getId(),
                         getSourceLocator(), role, player);
 
-            else
-                // ignore body
+            else {
+                // set var, ignore body
+                storeObject(null);
                 return;
+            }
         }
 
         // set variable

@@ -1,4 +1,4 @@
-// $Id: UseTopicTag.java,v 1.10 2004/09/15 10:56:24 c_froehlich Exp $
+// $Id: UseTopicTag.java,v 1.11 2004/09/22 10:17:01 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -72,9 +72,11 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
                 topic = tmEngine.createTopic(getTopicMapFromContext(), getId(),
                         getSourceLocator());
 
-            else
-                // ignore body
+            else {
+                // set var, ignore body
+                storeObject(null);
                 return;
+            }
         }
 
         // set variable
