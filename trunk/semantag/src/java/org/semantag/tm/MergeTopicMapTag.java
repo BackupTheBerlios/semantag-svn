@@ -1,4 +1,4 @@
-// $Id: MergeTopicMapTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: MergeTopicMapTag.java,v 1.3 2004/12/09 21:19:58 c_froehlich Exp $
 package org.semantag.tm;
 
 import java.io.File;
@@ -11,10 +11,10 @@ import org.apache.commons.logging.LogFactory;
 import org.tm4j.topicmap.TopicMap;
 
 /**
- * Class providing a merge-in tag to the existing topic map in context.
- * Requires that a topic map has been initialised already. This tag does not
- * support child elements.
- *
+ * Merges a topicmap from the filesystem with the current topic map
+ * in context
+ * 
+ * 
  * @jelly
  *  name="mergeTopicMap"
  * 
@@ -28,33 +28,51 @@ public class MergeTopicMapTag extends BaseTMTag {
   // in the current context topic map
   private String filename;
 
-  // The name of a variable that holds the
-  // topicmap into which the other topicmap 
+  // The topicmap into which the other topicmap 
   // shall be merged in
-  private String tmVar;
+  private TopicMap topicmap;
   
   
 
   public void doTag(XMLOutput output)
              throws MissingAttributeException, JellyTagException {
 
-      TopicMap tm = getTopicMapFromContext(tmVar);
-      if(tm == null) throw new JellyTagException("There is no topicmap in context to merge with");
-      
+      if(topicmap == null){
+          topicmap = getTopicMapFromContext(null);
+          if(topicmap == null) throw new JellyTagException("There is no topicmap in context to merge with");
+      }
       File f = new File(filename);
 
       log.debug("Merging in topic map from file " + f.getAbsolutePath());
     
-      tmEngine.mergeTopicMap(tm, f);
+      tmEngine.mergeTopicMap(topicmap, f);
   }
 
  
-  public String getTmVar() {
-      return tmVar;
+
+  /**
+   * Sets the topicmap to which this tag refers to.
+   * 
+   * @jelly
+   *  required="no"
+   *  default="The topicmap currently in context"
+   */
+  public void setTopicmap(TopicMap tm) {
+      topicmap = tm;
   }
-  public void setTmVar(String tmVar) {
-      this.tmVar = tmVar;
-  }
+  
+  /**
+   * Sets the file for the topicmap to merge. If the file has the extensions "ltm" or "txt"
+   * than it is assumed that the topicmap is available in ltm-notation. 
+   * Otherwise it is assumed that the file uses xtm-notation.
+   * 
+   * @jelly
+   *    required="yes"
+   *  
+   * 
+   * @param file
+   */
+
     public void setFilename(String filename) {
       this.filename = filename;
     }

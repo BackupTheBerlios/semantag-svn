@@ -1,4 +1,4 @@
-// $Id: UseMemberTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: UseMemberTag.java,v 1.3 2004/12/09 21:19:58 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -11,29 +11,27 @@ import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMapObject;
 
 /**
- * Jelly tag allowing to expose a member instance 
- * to the context of its successors.
- * 
- * The member to use may either be specified by
- * the name of a variable that is lookuped in the 
- * jelly context and must be bound to an object of
- * type Member.
- * Otherwise the member may be specified by an
- * id or an adress of a sourceLocator.
- * In this case the member will be searched in 
- * the topicmap that is the current topicmap of this 
- * member.
- * 
- * The current topicmap is either specified by the
- * tmVar-property of this instance or by
- * 
- * 
- * @jelly
- *  name="useMember"
- * 
- * @author Niko Schmuck
- * @author cf
- */
+* Retrieves a Member instance and sets it as the
+* context-member for nested tags.
+* 
+* The <code>var</code>-attribute allows to store the member in
+* a variable in order to use it elsewhere in the script.
+* 
+* The nonexistant - attribute triggers what will happen
+* if the specified member could not be found. 
+* 
+* @jelly
+*  name="useMember"
+* 
+* @jelly.nested 
+*  name="addPlayer" 
+*  desc="adds a role-playing topic to this member" 
+*  required="no"
+* 
+* 
+* @author Niko Schmuck
+* @author cf
+*/
 public class UseMemberTag extends BaseUseTag implements ContextMember
         {
     
@@ -87,33 +85,12 @@ public class UseMemberTag extends BaseUseTag implements ContextMember
         if(log.isDebugEnabled())
             log.debug("Using Member (ID "+getId()+" / SL: "+getSourceLocator()+")");
         
-        // retrieve topic
+        // retrieve member
         if (member == null)
             getMember();
 
          doTag(member, output);
-         
-//        if (member== null) {
-//            // failed to retrieve association
-//            if (shallFailOnNonexistant())
-//                throw new JellyTagException("Failed to identify member");
-//
-//            else if (shallAddOnNonexistant())
-//                member= tmEngine.createMember(getAssociationFromContext(), getId(),
-//                        getSourceLocator(), role, player);
-//
-//            else {
-//                // set var, ignore body
-//                storeObject(null);
-//                return;
-//            }
-//        }
-//
-//        // set variable
-//        storeObject(member);
-//        
-//        // process body
-//        getBody().run(context, output);
+ ;
 
     }
 

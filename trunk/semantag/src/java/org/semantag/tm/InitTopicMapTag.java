@@ -1,4 +1,4 @@
-// $Id: InitTopicMapTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: InitTopicMapTag.java,v 1.3 2004/12/09 21:19:58 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -13,12 +13,14 @@ import org.tm4j.topicmap.TopicMapProviderException;
 /**
  * Creates a new topic map and stores it in the context.
  * 
- * If there is currently no default topicmap than this topicmap
- * will be stored as the default one.
+ * If there is currently no default topicmap then this topicmap
+ * will become the default one.
  * 
+ *   
  * The default topicmap is used every time a tag needs to access 
- * a topicmap and is not nested inside
- * the body of an element that provides one.
+ * a topicmap and is neither nested inside
+ * the body of an element that provides one nor does the tag itself
+ * explicitly states a topicmap.
  * 
  * @jelly
  *  name="initTopicMap"

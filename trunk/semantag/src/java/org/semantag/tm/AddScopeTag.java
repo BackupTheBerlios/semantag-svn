@@ -1,4 +1,4 @@
-// $Id: AddScopeTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: AddScopeTag.java,v 1.3 2004/12/09 21:19:58 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -10,8 +10,10 @@ import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMapObject;
 
 /**
- * Tag for adding a topic to the set of topics that constitutes
- * the scope of a BaseName, an Association or an Occurrence.
+ * Adds a topic to the set of topics that constitutes
+ * the scope of the tags parent.
+ * 
+ * The parent must be either a BaseName, an Association or an Occurrence.
  * 
  * @jelly
  *  name="addScope"

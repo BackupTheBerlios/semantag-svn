@@ -1,4 +1,4 @@
-// $Id: UseOccurrenceTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: UseOccurrenceTag.java,v 1.3 2004/12/09 21:19:58 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -10,28 +10,34 @@ import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.TopicMapObject;
 
 /**
- * Jelly tag allowing to expose an association instance 
- * to the context of its successors.
+ * Retrieves an Occurrence instance and sets it as the
+ * context-occurrence for nested tags.
  * 
- * The association to use may either be specified by
- * the name of a variable that is lookuped in the 
- * jelly context an must be bound to an object of
- * type Association.
- * Otherwise the association may be specified by an
- * id or an adress of a sourceLocator.
- * In this case the association will be searched in 
- * the topicmap that is the current topicmap of this 
- * association.
+ * The <code>var</code>-attribute allows to store the occurrence in
+ * a variable in order to use it elsewhere in the script.
  * 
- * The current topicmap is either specified by the
- * tmVar-property of this instance or by
+ * The nonexistant - attribute triggers what will happen
+ * if the specified occurrece could not be found. 
  * 
- *  * @jelly
+ * 
+ * 
+ * @jelly
  *  name="useOccurrence"
+ * 
+ * @jelly.nested 
+ *  name="addInstanceOf" 
+ *  desc="sets the type for this occurrence" 
+ *  required="no"
+ * 
+ * @jelly.nested 
+ *  name="addScope" 
+ *  desc="adds a topic to the set of scoping topics for this occurrence" 
+ *  required="no"
  * 
  * @author Niko Schmuck
  * @author cf
  */
+
 public class UseOccurrenceTag extends BaseUseTag implements ContextOccurrence
         {
     

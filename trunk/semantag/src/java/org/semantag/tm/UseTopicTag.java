@@ -1,4 +1,4 @@
-// $Id: UseTopicTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: UseTopicTag.java,v 1.3 2004/12/09 21:19:58 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -13,10 +13,13 @@ import org.tm4j.topicmap.TopicMapObject;
 
 /**
  * Retrieves a Topic instance and sets it as the
- * context-topic for subsequent tags.
+ * context-topic for nested tags.
+ * 
+ * The <code>var</code>-attribute allows to store the topic in
+ * a variable in order to use it elsewhere in the script.
  * 
  * The nonexistant - attribute triggers what will happen
- * if the specified topic could not be found.
+ * if the specified topic could not be found. 
  * 
  * @jelly
  *  name="useTopic"
@@ -128,6 +131,12 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
         return topicResolver.getTopicSubjectIndicator();
     }
 
+    /**
+     * Sets the topic
+     * 
+     * @jelly
+     *    required="no"
+     */
     public void setTopic(Topic aTopic) {
         topic = aTopic;
     }

@@ -130,8 +130,7 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceTopicMap{
     }
     
     /**
-     * sets the name of the variable, that holds
-     * the topicmap to which this tag refers to.
+     * Sets the topicmap to which this tag refers to.
      */
     public void setTopicmap(TopicMap tm) {
         this.tm = tm;

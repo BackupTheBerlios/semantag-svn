@@ -1,4 +1,4 @@
-//$Id: LabelTag.java,v 1.4 2004/12/09 16:37:31 c_froehlich Exp $
+//$Id: LabelTag.java,v 1.5 2004/12/09 21:19:58 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -79,6 +79,9 @@ public class LabelTag extends BaseTMTag {
 
      * This is usually an object of type TopicMapObject or of type Locator.
      * Nevertheless its possible to pass any object.
+     * 
+     * @jelly
+     *   required="yes"
      * 
      * @param tmo the object for which a label shall be returned.
      */

@@ -1,4 +1,4 @@
-// $Id: UseAssociationTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: UseAssociationTag.java,v 1.3 2004/12/09 21:19:58 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -10,25 +10,34 @@ import org.tm4j.topicmap.Association;
 import org.tm4j.topicmap.TopicMapObject;
 
 /**
- * Jelly tag allowing to expose an association instance 
- * to the context of its successors.
+ * Retrieves an Association instance and sets it as the
+ * context-association for nested tags.
  * 
- * The association to use may either be specified by
- * the name of a variable that is lookuped in the 
- * jelly context an must be bound to an object of
- * type Association.
- * Otherwise the association may be specified by an
- * id or an adress of a sourceLocator.
- * In this case the association will be searched in 
- * the topicmap that is the current topicmap of this 
- * association.
+ * The <code>var</code>-attribute allows to store the association in
+ * a variable in order to use it elsewhere in the script.
  * 
- * The current topicmap is either specified by the
- * tmVar-property of this instance or by
+ * The nonexistant - attribute triggers what will happen
+ * if the specified association could not be found. 
+ * 
  * 
  * 
  * @jelly
  *  name="useAssociation"
+ * 
+ * @jelly.nested 
+ *  name="addInstanceOf" 
+ *  desc="sets the type for this association" 
+ *  required="no"
+ * 
+ * @jelly.nested 
+ *  name="addMember" 
+ *  desc="adds a member to this association" 
+ *  required="no"
+ * 
+ * @jelly.nested 
+ *  name="addScope" 
+ *  desc="adds a topic to the set of scoping topics for this association" 
+ *  required="no"
  * 
  * @author Niko Schmuck
  * @author cf
@@ -77,27 +86,6 @@ public class UseAssociationTag extends BaseUseTag implements ContextAssociation,
             getAssociation();
         
         doTag(association,output);
-//
-//        if (association == null) {
-//            // failed to retrieve association
-//            if (shallFailOnNonexistant())
-//                throw new JellyTagException("Failed to identify association");
-//
-//            else if (shallAddOnNonexistant())
-//                association = tmEngine.createAssociation(getTopicMapFromContext(), getId(),
-//                        getSourceLocator());
-//            else {
-//                // set var, ignore body
-//                storeObject(null);
-//                return;
-//            }
-//       }
-//
-//        // set variable
-//        storeObject(association);
-//        
-//        // process body
-//        getBody().run(context, output);
 
     }
 
@@ -115,7 +103,11 @@ public class UseAssociationTag extends BaseUseTag implements ContextAssociation,
     
     
     /**
-     * Sets the association that this tag should use
+     * Sets the association 
+     * 
+     * @jelly
+     *    required="no"
+     * 
      * @param association
      */
     public void setAssociation(Association association) {

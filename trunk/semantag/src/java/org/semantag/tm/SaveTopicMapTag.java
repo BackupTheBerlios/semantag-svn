@@ -1,4 +1,4 @@
-// $Id: SaveTopicMapTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: SaveTopicMapTag.java,v 1.3 2004/12/09 21:19:58 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -21,8 +21,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 /**
- * Serializes the topic map in the context to the specified file. This tag does
- * not support child elements.
+ * Serializes a topic map to the specified file. 
  * 
  * @jelly
  *  name="saveTopicMap"

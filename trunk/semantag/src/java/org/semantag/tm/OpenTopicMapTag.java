@@ -1,4 +1,4 @@
-// $Id: OpenTopicMapTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: OpenTopicMapTag.java,v 1.3 2004/12/09 21:19:58 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -17,7 +17,10 @@ import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 
 /**
- * Jelly tag which opens an existing topic map and stores it in the context.
+ * Opens an existing topic map and stores it in the context.
+ * 
+ * If there is currently no default topicmap then this topicmap
+ * will become the default one.
  * 
  * @jelly
  *  name="openTopicMap"
@@ -25,6 +28,11 @@ import java.net.MalformedURLException;
  * @author cf
  */
 public class OpenTopicMapTag extends BaseTopicMapTag {
+    
+    // file to read the tm from
+    private String file;
+
+
     
     protected void validate() throws MissingAttributeException {
         if (getFile() == null) {
@@ -71,5 +79,28 @@ public class OpenTopicMapTag extends BaseTopicMapTag {
             throw new JellyTagException("Could not create a new topic map: "
                     + e.toString());
         }
+    }
+    
+    
+    /**
+     * @return Returns the file.
+     */
+    public String getFile() {
+      return file;
+    }
+
+    /**
+     * Sets the file to read the topicmap from. If the file has the extensions "ltm" or "txt"
+     * than it is assumed that the topicmap is available in ltm-notation. 
+     * Otherwise it is assumed that the file uses xtm-notation.
+     * 
+     * @jelly
+     *    required="yes"
+     *  
+     * 
+     * @param file
+     */
+    public void setFile(String file) {
+      this.file = file;
     }
 }

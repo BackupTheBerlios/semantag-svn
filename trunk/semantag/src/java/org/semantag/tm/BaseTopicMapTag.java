@@ -1,4 +1,4 @@
-// $Id: BaseTopicMapTag.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+// $Id: BaseTopicMapTag.java,v 1.2 2004/12/09 21:19:58 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -25,9 +25,6 @@ public abstract class BaseTopicMapTag extends BaseTMTag implements ContextTopicM
   //***********************************************
   // the baselocator for the provided topicmap
   private String baselocator;
-
-  // file to read the tm from
-  private String file;
 
   // the topicmap that this tag provides
   private TopicMap topicmap;
@@ -123,25 +120,25 @@ public abstract class BaseTopicMapTag extends BaseTMTag implements ContextTopicM
   }
 
   /**
+   * Sets the adress of the baselocator for the topicmap
    * @param baselocator
-   *            The baselocator to set.
    */
   public void setBaselocator(String baselocator) {
     this.baselocator = baselocator;
   }
 
-  /**
-   * @return Returns the file.
-   */
-  public String getFile() {
-    return file;
-  }
-
-  /**
-   * @param file
-   *            The file to set.
-   */
-  public void setFile(String file) {
-    this.file = file;
-  }
+//  /**
+//   * @return Returns the file.
+//   */
+//  public String getFile() {
+//    return file;
+//  }
+//
+//  /**
+//   * @param file
+//   *            The file to set.
+//   */
+//  public void setFile(String file) {
+//    this.file = file;
+//  }
 }

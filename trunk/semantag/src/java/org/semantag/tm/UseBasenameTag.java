@@ -1,4 +1,4 @@
-// $Id: UseBasenameTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: UseBasenameTag.java,v 1.3 2004/12/09 21:19:58 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -10,21 +10,24 @@ import org.tm4j.topicmap.BaseName;
 import org.tm4j.topicmap.TopicMapObject;
 
 /**
- * Jelly tag allowing to expose an basename instance to the context of its
- * successors.
+ * Retrieves a Basename instance and sets it as the
+ * context-basename for nested tags.
  * 
- * The basename to use may either be specified by the name of a variable that is
- * lookuped in the jelly context an must be bound to an object of type BaseName.
- * Otherwise the basename may be specified by an id or an adress of a
- * sourceLocator. In this case the basename will be searched in the topicmap
- * that is the current topicmap of this basename.
+ * The <code>var</code>-attribute allows to store the basename in
+ * a variable in order to use it elsewhere in the script.
  * 
- * The current topicmap is either specified by the tmVar-property of this
- * instance or by
+ * The nonexistant - attribute triggers what will happen
+ * if the specified basename could not be found. 
+ * 
+ * 
  * 
  * @jelly
  *  name="useBasename"
- * 
+ *  
+ * @jelly.nested 
+ *  name="addScope" 
+ *  desc="adds a topic to the set of scoping topics for this basename" 
+ *  required="no"
  * 
  * @author Niko Schmuck
  * @author cf
@@ -75,30 +78,6 @@ public class UseBasenameTag extends BaseUseTag implements ContextBaseName {
 
             doTag(basename, output);
             
-//        if (basename == null) {
-//            // failed to retrieve association
-//            if (shallFailOnNonexistant())
-//                throw new JellyTagException("Failed to identify occurrence");
-//
-//            else if (shallAddOnNonexistant()){
-//
-//
-//                basename = tmEngine.createBasename(
-//                        getTopicFromContext(), name, getId(), getSourceLocator());
-//            }
-//            else {
-//                // set var, ignore body
-//                storeObject(null);
-//                return;
-//            }
-//        }
-//
-//        // set variable
-//        storeObject(basename);
-//
-//        // process body
-//        getBody().run(context, output);
-
     }
 
     
@@ -120,7 +99,10 @@ public class UseBasenameTag extends BaseUseTag implements ContextBaseName {
     }
     /**
      * sets the name , that will be uses as the name data
-     * if this tag leads to the creation of a basename
+     * if this tag leads to the creation of a basename.
+     * 
+     * @jelly 
+     *  required="no, unless this tag leads to the creation of a basename"
      */
     public void setName(String name) {
         this.name = name;
