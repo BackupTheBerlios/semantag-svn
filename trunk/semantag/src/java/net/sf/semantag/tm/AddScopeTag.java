@@ -1,4 +1,4 @@
-// $Id: AddScopeTag.java,v 1.2 2004/09/20 10:13:18 c_froehlich Exp $
+// $Id: AddScopeTag.java,v 1.3 2004/09/20 12:02:51 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -65,17 +65,6 @@ public class AddScopeTag extends BaseTopicReferenceTag {
         
         return scopedObject;
         
-//        if ((scopedObject = getBasenameFromContext()) != null) {
-//            return scopedObject;
-//        }
-//        if ((scopedObject = getAssociationFromContext()) != null) {
-//            return scopedObject;
-//        }
-//        if ((scopedObject = getOccurrenceFromContext()) != null) {
-//            return scopedObject;
-//        }
-//
-//        return null;
 
     }
 
