@@ -3,6 +3,12 @@ package net.sf.semantag.tm;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.commons.jelly.JellyContext;
+import org.apache.commons.jelly.JellyException;
+import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.Script;
+import org.apache.commons.jelly.TagSupport;
+import org.apache.commons.jelly.XMLOutput;
 import org.tm4j.net.Locator;
 import org.tm4j.net.LocatorFactory;
 import org.tm4j.topicmap.TopicMap;
@@ -21,6 +27,10 @@ import junit.framework.TestCase;
  * @version 0.1, created on 06.09.2004
  */
 public class BaseTMTagTest extends TestCase {
+
+    // flag, to indicate that the body of a
+    // tag was called.
+    protected boolean scriptWasCalled = false;
 
     /**
      * 
@@ -64,6 +74,30 @@ public class BaseTMTagTest extends TestCase {
 //          tm = pr.addTopicMap(is, baseLocator, null);
         }
         return pr.addTopicMap(topicmapSource);
+    }
+    
+    
+    /**
+     * Sets the body of the given tag to a script.
+     * The script sets the <code>scriptWasCalled</code>
+     * field to true, by the time its run-method is invoked.
+     * @param tag
+     */
+    protected void setScriptForTagBody(TagSupport tag){
+        
+        scriptWasCalled = false;
+
+        tag.setBody(new Script() {
+            public Script compile() throws JellyException {
+                return null;
+            }
+
+            public void run(JellyContext arg0, XMLOutput arg1)
+                    throws JellyTagException {
+                scriptWasCalled = true;
+            }
+        });
+
     }
 
 }

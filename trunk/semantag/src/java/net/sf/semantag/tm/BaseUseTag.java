@@ -12,7 +12,7 @@ public abstract class BaseUseTag extends BaseTMTag {
     public final static String NE_ADD = "add";
     public final static String NE_FAIL = "fail";
     
-    public final static String NE_DEFAULT= NE_ADD;
+    public final static String NE_DEFAULT= NE_IGNORE_BODY;
     
     
     private String nonexistant = NE_ADD;

@@ -1,4 +1,4 @@
-// $Id: UseTopicTag.java,v 1.1 2004/09/06 12:27:38 c_froehlich Exp $
+// $Id: UseTopicTag.java,v 1.2 2004/09/06 18:34:25 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -138,4 +138,33 @@ public class UseTopicTag extends BaseUseTag implements TopicReference,
     public void setTmVar(String tmVar) {
         this.tmVar = tmVar;
     }
+    
+    /**
+     * redirected to TopicResolver.getID()
+     */
+    public String getId() {
+        return topicResolver.getTopicID();
+    }
+
+    /**
+     * redirected to TopicResolver.setID(String)
+     */
+    public void setId(String id) {
+        topicResolver.setTopicID(id);
+    }
+
+    /**
+     * redirected to TopicResolver.getSourceLocator()
+     */
+    public String getSourceLocator() {
+        return topicResolver.getTopicSourceLocator();
+    }
+
+    /**
+     * redirected to TopicResolver.setSourceLocator(String)
+     */
+    public void setSourceLocator(String sourceLocator) {
+        topicResolver.setTopicSourceLocator(sourceLocator);
+    }
+
 }
