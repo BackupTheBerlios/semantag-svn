@@ -15,7 +15,7 @@
       </section>
       <XDtClass:ifHasClassTag tagName="jelly" paramName="defNS">
         <section name="Namespace">
-          <p>To use tags from this library, add a namespace definition simmilar to the following to your script</p>
+          <p>To use tags from this library, add a namespace definition similar to the following to your script</p>
            <source>
  <XDtClass:classTagValue tagName="jelly" paramName="defNS"/></source>
         </section>   

@@ -92,6 +92,12 @@
             </tr>
             <tr>
               <td>Class</td>
+              <td>@jelly</td>
+              <td>attributes</td>
+              <td>Additional text that is put just before the listing of attributes of the tag</td>
+            </tr>
+            <tr>
+              <td>Class</td>
               <td>@jelly.nested (0...*)</td>
               <td>name</td>
               <td>The name of a nested tag</td>
@@ -119,6 +125,12 @@
               <td>@jelly</td>
               <td>default</td>
               <td>An optional default for non-required attributes</td>
+            </tr>
+            <tr>
+              <td>Method</td>
+              <td>@jelly</td>
+              <td>ignore</td>
+              <td>This attribute will not be part of the documentation</td>
             </tr>
           </tbody>
         </table>

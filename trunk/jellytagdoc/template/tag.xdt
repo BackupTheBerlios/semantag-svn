@@ -12,29 +12,34 @@
     
     
     <section name="Attributes">
-    <table border="1" cellpadding="3" cellspacing="2" width="100%">
-        <tbody>
-          <tr class="b">
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Required</th>
-            <th>Default</th>
-          </tr>
-          <XDtMethod:forAllMethods superclasses="true" sort="true">
-            <XDtMethod:ifIsSetter>
-            <tr class="a">
-              <td><XDtMethod:propertyName/></td>
-              <td><XDtParameter:forAllMethodParams>
-              <XDtParameter:methodParamType/></XDtParameter:forAllMethodParams></td>
-              <td><XDtMethod:methodComment no-comment-signs="true"/></td>
-              <td><XDtMethod:methodTagValue tagName="jelly" paramName="required"/></td>
-              <td><XDtMethod:methodTagValue tagName="jelly" paramName="default"/></td>
+      <XDtClass:ifHasClassTag tagName="jelly" paramName="attributes">
+        <p><XDtClass:classTagValue tagName="jelly" paramName="attributes"/></p>
+      </XDtClass:ifHasClassTag>
+      <table border="1" cellpadding="3" cellspacing="2" width="100%">
+          <tbody>
+            <tr class="b">
+              <th>Name</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Required</th>
+              <th>Default</th>
             </tr>
-            </XDtMethod:ifIsSetter>
-          </XDtMethod:forAllMethods>  
-        </tbody>
-      </table>
+            <XDtMethod:forAllMethods superclasses="true" sort="true">
+              <XDtMethod:ifIsSetter>
+                <XDtMethod:ifDoesntHaveMethodTag tagName="jelly" paramName="ignore">
+                  <tr class="a">
+                    <td><XDtMethod:propertyName/></td>
+                    <td><XDtParameter:forAllMethodParams>
+                    <XDtParameter:methodParamType/></XDtParameter:forAllMethodParams></td>
+                    <td><XDtMethod:methodComment no-comment-signs="true"/></td>
+                    <td><XDtMethod:methodTagValue tagName="jelly" paramName="required"/></td>
+                    <td><XDtMethod:methodTagValue tagName="jelly" paramName="default"/></td>
+                  </tr>
+                 </XDtMethod:ifDoesntHaveMethodTag> 
+              </XDtMethod:ifIsSetter>
+            </XDtMethod:forAllMethods>  
+          </tbody>
+        </table>
     </section>
       
     
