@@ -1,3 +1,9 @@
+cf (29-Nov-2004)
+
+- added new Tag tm:label
+- refactored TologResultSetWrapper. Returns now objects rather 
+  than stringified representations of the objects
+
 
 - Added libraries needed by Semantag (Niko, 28.8.)
 
