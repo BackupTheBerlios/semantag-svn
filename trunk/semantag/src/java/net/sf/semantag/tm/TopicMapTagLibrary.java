@@ -1,4 +1,4 @@
-// $Id: TopicMapTagLibrary.java,v 1.1 2004/08/24 00:12:28 niko_schmuck Exp $
+// $Id: TopicMapTagLibrary.java,v 1.2 2004/09/20 10:13:18 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import net.sf.semantag.csv.CSVTag;
@@ -24,17 +24,22 @@ public class TopicMapTagLibrary extends TagLibrary {
     registerTag("init", InitTopicMapTag.class);
     registerTag("open", OpenTopicMapTag.class);
     registerTag("merge", MergeTopicMapTag.class);
-    registerTag("addTopic", AddTopicTag.class);
-    registerTag("addBasename", AddBasenameTag.class);
-    registerTag("addOccurrence", AddOccurrenceTag.class);
     registerTag("addAssociation", AddAssociationTag.class);
-    registerTag("addSubjectIndicator", AddSubjectIndicatorTag.class);
-    registerTag("addMember", AddMemberTag.class);
+    registerTag("addBasename", AddBasenameTag.class);
     registerTag("addInstanceOf", AddInstanceOfTag.class);
+    registerTag("addMember", AddMemberTag.class);
+    registerTag("addOccurrence", AddOccurrenceTag.class);
+    registerTag("addPlayer", AddPlayerTag.class);
+    registerTag("addScope", AddScopeTag.class);
+    registerTag("addTopic", AddTopicTag.class);
+    registerTag("addSubjectIndicator", AddSubjectIndicatorTag.class);
     registerTag("save", SaveTopicMapTag.class);
-    registerTag("retrieveTopic", RetrieveTopicTag.class);
-    registerTag("csv", CSVTag.class);
-    registerTag("set", SetTag.class);
     registerTag("tolog", TologTag.class);
+    registerTag("useAssociation", UseAssociationTag.class);
+    registerTag("useBasename", UseBasenameTag.class);
+    registerTag("useMember", UseMemberTag.class);
+    registerTag("useOccurrence", UseOccurrenceTag.class);
+    registerTag("useTopic", UseTopicTag.class);
+    
   }
 }

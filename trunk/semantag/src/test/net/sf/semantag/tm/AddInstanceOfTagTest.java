@@ -130,7 +130,7 @@ public class AddInstanceOfTagTest extends TMTagTestBase {
         assertEquals(type2, occ2.getType());
     }
     
-    // tests to set the type of an Occurrence
+    // tests to set the type of a Topic
     public void testAddInstanceOfToTopic() throws Exception {
 
         Topic topic = tm.getTopicByID("topic_without_type");
@@ -142,7 +142,7 @@ public class AddInstanceOfTagTest extends TMTagTestBase {
         assertTrue(!topic.isOfType(type));
         
         // ----------------------------------
-        // specify occurrence explicitly
+        // specify topic explicitly
         doAddInstanceOf(type, topic, null,topic);
         
         // remove type for next test
@@ -154,7 +154,7 @@ public class AddInstanceOfTagTest extends TMTagTestBase {
         
         
         // ----------------------------------
-        // specify occurrence implicitly
+        // specify topic implicitly
         UseTopicTag uat = new UseTopicTag();
         uat.setTopic(topic);
         
@@ -188,6 +188,38 @@ public class AddInstanceOfTagTest extends TMTagTestBase {
         assertEquals(co, topic2.getTypes().size());
     }
     
+    
+    
+    
+    // tests to assert that the context is resolved
+    // step by step from the current tag towards the root tag
+    public void testResolveContextLinear() throws Exception {
+
+        Occurrence occ = (Occurrence)tm.getObjectByID("occ_without_type");
+
+        Topic topic = tm.getTopicByID("topic_without_type");
+        Topic type = tm.getTopicByID("test2-topictype"); 
+
+        // assert preconditions
+        assertTrue(!occ.isOfType(type));
+        assertTrue(!topic.isOfType(type));
+        
+
+        
+        
+        // ----------------------------------
+        // specify a nested topic/occ -structure implicitly
+        UseTopicTag uat = new UseTopicTag();
+        uat.setTopic(topic);
+        
+        UseOccurrenceTag uot = new UseOccurrenceTag();
+        uot.setOccurrence(occ);
+        uot.setParent(uat);
+        
+        // test
+        doAddInstanceOf(type, null, uot,occ);
+
+    }
     /**
      * Adds a type to either the explicit instance or
      * to the implicit instance.

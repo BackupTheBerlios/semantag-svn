@@ -12,6 +12,7 @@ import org.tm4j.topicmap.Member;
 import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMap;
+import org.tm4j.topicmap.TopicMapObject;
 
 /**
  * Base class for all topic map jelly tags.
@@ -205,6 +206,28 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
      */
     public Member getMemberFromContext() throws JellyTagException{
         return ContextResolver.getMember(this);
+    }
+
+    /**
+     * Asks the contextResolver to return 
+     * a TopicMapObject for which a type can be set
+     * from the context of the given tag
+     * @return 
+     * @throws JellyTagException
+     */
+    public TopicMapObject getTypeableFromContext() throws JellyTagException{
+        return ContextResolver.getTypeableObject(this);
+    }
+
+    /**
+     * Asks the contextResolver to return 
+     * a TopicMapObject that can be scoped
+     * from the context of the given tag
+     * @return 
+     * @throws JellyTagException
+     */
+    public TopicMapObject getScopeableFromContext() throws JellyTagException{
+        return ContextResolver.getTypeableObject(this);
     }
 
     /**

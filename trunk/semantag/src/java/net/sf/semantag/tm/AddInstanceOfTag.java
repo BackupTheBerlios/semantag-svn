@@ -1,4 +1,4 @@
-// $Id: AddInstanceOfTag.java,v 1.4 2004/09/17 19:47:38 c_froehlich Exp $
+// $Id: AddInstanceOfTag.java,v 1.5 2004/09/20 10:13:18 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -60,17 +60,11 @@ public class AddInstanceOfTag extends BaseTopicReferenceTag {
         if (instance != null)
             return instance;
 
-        if ((instance = getTopicFromContext(null)) != null) {
-            return instance;
-        }
-        if ((instance = getAssociationFromContext()) != null) {
-            return instance;
-        }
-        if ((instance = getOccurrenceFromContext()) != null) {
-            return instance;
-        }
+        instance = getTypeableFromContext();
+        
+        return instance;
+        
 
-        return null;
 
     }
 

@@ -38,6 +38,9 @@
 <topic id="test2-occtype"></topic>
 <topic id="test2-occtype2"></topic>
 <topic id="test2-topictype"></topic>
+<topic id="theme1"></topic>
+<topic id="theme2"></topic>
+<topic id="theme3"></topic>
 
 <topic id="topic_without_type">
 	<occurrence id="occ_without_type">

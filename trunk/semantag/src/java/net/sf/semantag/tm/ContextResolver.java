@@ -2,6 +2,7 @@ package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.Tag;
 import org.apache.commons.jelly.TagSupport;
 import org.tm4j.topicmap.Association;
 import org.tm4j.topicmap.BaseName;
@@ -9,6 +10,7 @@ import org.tm4j.topicmap.Member;
 import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMap;
+import org.tm4j.topicmap.TopicMapObject;
 
 /**
  * 
@@ -112,6 +114,8 @@ public class ContextResolver {
         return topic;
         
     }
+
+    
     
 
     public static Association getAssociation(TagSupport tag) throws JellyTagException 
@@ -166,7 +170,66 @@ public class ContextResolver {
         
     }
     
+    /**
+     * Walks the tree from tag to the root and returns
+     * the first TopicMapObject to which a type can be
+     * added to
+     * @return a TopicMapObject of type Topic, Association or Occurrence
+     * or null if no typeable object was found
+     */
+    public static TopicMapObject getTypeableObject(TagSupport tag) throws JellyTagException{
+        
+        Tag parent = tag.getParent();
+        while( parent != null) {
+            if(parent instanceof ContextTopic){
+                return ((ContextTopic)parent).getTopic();
+            }
+            else if(parent instanceof ContextAssociation){
+                return ((ContextAssociation)parent).getAssociation();
+            }
+            else if(parent instanceof ContextOccurrence){
+                return ((ContextOccurrence)parent).getOccurrence();
+            }
+            
+            parent = tag.getParent();
+            
+        }
+        
+        
+        return null;
+    }
 
+    
+    /**
+     * Walks the tree from tag to the root and returns
+     * the first TopicMapObject to which a scope can be
+     * added to
+     * @return a TopicMapObject of type Basename, Association or Occurrence
+     * or null if no scopeable object was found
+     */
+    public static TopicMapObject getScopeableObject(TagSupport tag) throws JellyTagException{
+        
+        Tag parent = tag.getParent();
+        while( parent != null) {
+            if(parent instanceof ContextBaseName){
+                return ((ContextBaseName)parent).getBaseName();
+            }
+            else if(parent instanceof ContextAssociation){
+                return ((ContextAssociation)parent).getAssociation();
+            }
+            else if(parent instanceof ContextOccurrence){
+                return ((ContextOccurrence)parent).getOccurrence();
+            }
+            
+            parent = tag.getParent();
+            
+        }
+        
+        
+        return null;
+    }
+
+    
     private static boolean isSpecified(String varname) {
         if (varname == null)
             return false;
