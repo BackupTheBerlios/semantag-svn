@@ -26,6 +26,8 @@ public class ContextResolver {
 
         JellyContext ctx = tag.getContext();
         Object o;
+        // First check for a topicmap that was 
+        // explicitly specified through a variable
         if (isSpecified(varname)) {
             o = ctx.getVariable(varname);
             // if a variable name is specified than every result
@@ -35,8 +37,17 @@ public class ContextResolver {
                         + "' is not bound to a Topicmap but to " + o);
             }
         }
-
+        
         else {
+            // secondly check for any predecessor that implements
+            // TopicMapReference
+            ContextTopicMap tmTag = (ContextTopicMap)
+                TagSupport.findAncestorWithClass(tag, ContextTopicMap.class);
+            if(tmTag != null){
+                return tmTag.getTopicMap();
+            }
+            
+            // thirdly check for a default topicmap
             o = ctx.getVariable(Dictionary.KEY_TOPICMAP);
             // if no variable is specified and no default topicmap
             // is stored, the method returns null, rather than throwing

@@ -103,8 +103,9 @@ public class InitTopicMapTagTest extends BaseTMTagTest {
         assertEquals("http://base2.loc",tm2.getBaseLocator().getAddress());
         
         // assert that tm is still the default
-        assertEquals(tm, tag2.getTopicMapFromContext(null));
+        assertEquals(tm, tag2.getContext().getVariable(Dictionary.KEY_TOPICMAP));
 
+        
         //access tm2 through variable
         assertEquals(tm2, tag2.getTopicMapFromContext("TM2"));
         
