@@ -1,4 +1,4 @@
-// $Id: AddBasenameTag.java,v 1.5 2004/09/15 14:14:52 c_froehlich Exp $
+// $Id: AddBasenameTag.java,v 1.6 2004/09/15 14:55:11 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -32,10 +32,6 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName {
      */
     private Topic parent;
 
-    /**
-     * A topic, that is the initial member of the scope for the basename created
-     */
-    private Topic scope;
 
     /**
      * The instance of BaseName, that was added by executing the doTag-Method
@@ -67,7 +63,7 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName {
 
 
         // create basename
-        basename = tmEngine.createBasename(parent, name, scope, getId(),
+        basename = tmEngine.createBasename(parent, name, getId(),
                 getSourceLocator());
 
         // set variable
@@ -122,7 +118,7 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName {
     }
 
     /**
-     * Sets the name of a variable that is bound to the topic to which this
+     * Sets the topic to which this
      * basename shall be added to
      * 
      * @param topicVar
@@ -131,13 +127,5 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName {
         this.parent = aTopic;
     }
 
-    /**
-     * sets the name of a variable that is bound to the topic that shall be used
-     * as the scoping topic for this basename
-     * 
-     * @param scopingTopicId
-     */
-    public void setScope(Topic theme) {
-        this.scope = theme;
-    }
+  
 }

@@ -130,16 +130,14 @@ public class AddBasenameTagTest extends TMTagTestBase {
         if(sl == null) sl = "http://non.existant.org/"+addCount;
         if(name == null) name ="Name for new Basename"+addCount;
 
-        Topic scope = tm.getTopicByID(personID);
         String varName = "BASENAME";
         
         // set id and sourcelocator
         abt.setId(id);
         abt.setSourceLocator(sl);
 
-        // set scope and name
+        // set name
         abt.setName(name);
-        abt.setScope(scope);
         
         // set the parent
         if(parentIsExplicit){
@@ -174,10 +172,8 @@ public class AddBasenameTagTest extends TMTagTestBase {
         assertEquals(sl, ((Locator) bn.getSourceLocators().iterator().next())
                 .getAddress());
 
-        // assert name and scope
+        // assert name 
         assertEquals(name, bn.getData());
-        assertEquals(1,bn.getScope().size());
-        assertEquals(scope,bn.getScope().iterator().next());
         
         // assert that the basename is retrievable
         // via the ContextBasename-API

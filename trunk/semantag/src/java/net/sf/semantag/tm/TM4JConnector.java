@@ -168,7 +168,7 @@ public class TM4JConnector {
      *             as a wrapper around the various exceptions that may by thrown
      *             while a basename is created
      */
-    public BaseName createBasename(final Topic t, String name, Topic theme,
+    public BaseName createBasename(final Topic t, String name, 
             String id, String sourceLocator) throws JellyTagException {
         TMOCreator c = new TMOCreator() {
             public TopicMapObject create(String id) throws Exception {
@@ -186,20 +186,21 @@ public class TM4JConnector {
                     "While setting name data of new basename to " + name, e);
         }
 
-        if (theme != null) {
-            try {
-                //set the theme
-                if (theme != null)
-                    bn.addTheme(theme);
-            } catch (PropertyVetoException e) {
-                throw new JellyTagException(
-                        "While adding a theme to new basename (" + theme + ")",
-                        e);
-            }
-        }
+//        if (theme != null) {
+//            try {
+//                //set the theme
+//                if (theme != null)
+//                    bn.addTheme(theme);
+//            } catch (PropertyVetoException e) {
+//                throw new JellyTagException(
+//                        "While adding a theme to new basename (" + theme + ")",
+//                        e);
+//            }
+//        }
         return bn;
     }
 
+    
     /**
      * Creates an BaseName for the given Topic.
      * 
