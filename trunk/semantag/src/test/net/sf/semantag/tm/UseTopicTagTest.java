@@ -95,6 +95,8 @@ public class UseTopicTagTest extends BaseTMTagTest {
         utt.setTopicVar(topicvar);
         
         assertEquals(john, utt.getTopic());
+        
+
     }
 
     // test the connection between tag.topicID 
@@ -241,6 +243,10 @@ public class UseTopicTagTest extends BaseTMTagTest {
         
         // the body script should have been called
         assertTrue(scriptWasCalled);
+        
+        // the topic created shall be returned by a call
+        // to the getTopicMethod
+        assertEquals(t, utt.getTopic());
     
     }
  
@@ -272,8 +278,51 @@ public class UseTopicTagTest extends BaseTMTagTest {
         assertEquals(co2 +1, tm2.getTopicCount());
         assertEquals(co, tm.getTopicCount());
         
-        
     }
+
+    // tests that a resolved topic is bound to 
+    // the variable specified by the var-property
+    public void testTopicIsBoundToVariable()
+        throws Exception
+    {
+        
+        // resolver shall resolve by id
+        utt.setTopicID("john");
+
+        // resolved topic shall be stored in
+        // the variable named TOPIC
+        utt.setVar("TOPIC");
+        
+        // resolve
+        setScriptForTagBody(utt);
+        utt.doTag(null);
+        
+        // the topic should be stored in the variable
+        assertEquals(john, ctx.getVariable("TOPIC"));
+    }
+    
+    // tests that a created topic is bound to 
+    // the variable specified by the var-property
+    public void testCreatedTopicIsBoundToVariable()
+        throws Exception
+    {
+        
+        // tag shall create a topic
+        utt.setNonexistant("add");
+        utt.setTopicID("nonexistant_id");
+
+        // resolved topic shall be stored in
+        // the variable named TOPIC
+        utt.setVar("TOPIC");
+        
+        // create
+        setScriptForTagBody(utt);
+        utt.doTag(null);
+        
+        // the topic should be stored in the variable
+        assertEquals("nonexistant_id", ((Topic)ctx.getVariable("TOPIC")).getID());
+    }
+        
     
     protected void setUp() throws Exception {
         tm = getTopicMapFromResource(TestData.TM_JOHN_LTM, TestData.TM_JOHN_BASELOCATOR);

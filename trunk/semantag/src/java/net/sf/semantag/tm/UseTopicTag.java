@@ -1,4 +1,4 @@
-// $Id: UseTopicTag.java,v 1.2 2004/09/06 18:34:25 c_froehlich Exp $
+// $Id: UseTopicTag.java,v 1.3 2004/09/06 19:40:55 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -57,12 +57,9 @@ public class UseTopicTag extends BaseUseTag implements TopicReference,
     public void doTag(XMLOutput output) throws MissingAttributeException,
             JellyTagException {
 
-        // aretrieve topic
+        // retrieve topic
         if (topic == null)
             getTopic();
-
-        // set or delete variable
-        storeObject(topic);
 
         if (topic == null) {
             // failed to retrieve topic
@@ -70,7 +67,7 @@ public class UseTopicTag extends BaseUseTag implements TopicReference,
                 throw new JellyTagException("Failed to identify topic");
 
             else if (shallAddOnNonexistant())
-                AddTopicTag.createTopic(getTopicMap(tmVar), getId(),
+                topic = AddTopicTag.createTopic(getTopicMap(tmVar), getId(),
                         getSourceLocator());
 
             else
@@ -78,6 +75,9 @@ public class UseTopicTag extends BaseUseTag implements TopicReference,
                 return;
         }
 
+        // set variable
+        storeObject(topic);
+        
         // process body
         getBody().run(context, output);
 
