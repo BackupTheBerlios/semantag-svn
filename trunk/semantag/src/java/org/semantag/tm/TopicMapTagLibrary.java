@@ -1,4 +1,4 @@
-// $Id: TopicMapTagLibrary.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+// $Id: TopicMapTagLibrary.java,v 1.2 2004/11/29 06:19:49 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.TagLibrary;
@@ -18,9 +18,6 @@ public class TopicMapTagLibrary extends TagLibrary {
 
   public TopicMapTagLibrary() {
     log.debug("Registering tags for topic map tag library.");
-    registerTag("init", InitTopicMapTag.class);
-    registerTag("open", OpenTopicMapTag.class);
-    registerTag("merge", MergeTopicMapTag.class);
     registerTag("addAssociation", AddAssociationTag.class);
     registerTag("addBasename", AddBasenameTag.class);
     registerTag("addInstanceOf", AddInstanceOfTag.class);
@@ -30,6 +27,10 @@ public class TopicMapTagLibrary extends TagLibrary {
     registerTag("addScope", AddScopeTag.class);
     registerTag("addTopic", AddTopicTag.class);
     registerTag("addSubjectIndicator", AddSubjectIndicatorTag.class);
+    registerTag("label", LabelTag.class);
+    registerTag("init", InitTopicMapTag.class);
+    registerTag("merge", MergeTopicMapTag.class);
+    registerTag("open", OpenTopicMapTag.class);
     registerTag("setSubject", SetSubjectTag.class);
     registerTag("save", SaveTopicMapTag.class);
     registerTag("tolog", TologTag.class);
