@@ -77,22 +77,13 @@ public class UseTopicTagTest extends TMTagTestBase {
     }
 
     
-    // test the connection between tag.topicvar 
-    // and the TopicResolver delegate
-    public void testSetTopicVar() 
+    // test setting a topic directly
+    public void testSetTopic() 
         throws Exception
     {
         
-        String topicvar="TOPIC";
-        
-        // store topic in context
-        ctx.setVariable(topicvar, john);
-
-        // assert that the resolver is uninitialized
-        assertNull(utt.getTopic());
-        
-        // resolver shall resolve by variable
-        utt.setTopicVar(topicvar);
+        // sets topic directly
+        utt.setTopic(john);
         
         assertEquals(john, utt.getTopic());
         

@@ -15,21 +15,30 @@ import org.tm4j.topicmap.TopicMapObject;
  */
 public abstract class UseTagTestBase extends TMTagTestBase {
 
-    protected TopicMap tm;
+    protected static TopicMap tm;
 
-    protected TopicMap tm2;
+    protected static TopicMap tm2;
 
     protected JellyContext ctx;
 
-    protected String baseLoc = TestData.TM_GREEKS_BASELOCATOR;
+    protected static final String baseLoc = TestData.TM_GREEKS_BASELOCATOR;
 
-    protected String baseLoc2 = "http://foo2.org";
+    protected static final String baseLoc2 = "http://foo2.org";
 
     // an id that is not a bound if in the tested topicmap
-    protected String nonexistantId = " does_not_exist";
+    protected static final String nonexistantId = " does_not_exist";
 
-    protected String nonexistantSL = "foo.org#bar";
+    protected static final String nonexistantSL = "foo.org#bar";
 
+    static{
+        try{
+            tm = getTopicMapFromResource(TestData.TM_GREEKS_XTM, baseLoc);
+            tm2 = getTopicMapFromResource(TestData.TM_TEST2_XTM, baseLoc2);
+        }
+        catch(Exception e){
+            throw new RuntimeException(e);
+        }
+    }
     /**
      *  
      */
@@ -42,8 +51,6 @@ public abstract class UseTagTestBase extends TMTagTestBase {
      */
     public UseTagTestBase(String name) throws Exception {
         super(name);
-        tm = getTopicMapFromResource(TestData.TM_GREEKS_XTM, baseLoc);
-        tm2 = getTopicMapFromResource(TestData.TM_TEST2_XTM, baseLoc2);
     }
 
     /*
@@ -54,7 +61,6 @@ public abstract class UseTagTestBase extends TMTagTestBase {
         getTag().setContext(ctx);
 
         ctx.setVariable(Dictionary.KEY_TOPICMAP, tm);
-
     }
 
     // tests the default values of a new instance

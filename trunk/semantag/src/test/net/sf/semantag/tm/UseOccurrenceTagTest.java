@@ -1,5 +1,6 @@
 package net.sf.semantag.tm;
 
+import org.tm4j.topicmap.Association;
 import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.Topic;
 
@@ -100,6 +101,21 @@ public class UseOccurrenceTagTest extends UseTagTestBase {
         assertEquals(bn, tag.getOccurrence());
     }
 
+    // test setting an occurrence directly
+    public void testSetOccurrence() 
+        throws Exception
+    {
+        
+        String id = "occ_pollux";
+        Occurrence occ = (Occurrence) tm.getObjectByID(id);
+
+        // sets association directly
+        tag.setOccurrence(occ);
+        
+        assertEquals(occ, tag.getOccurrence());
+
+    }
+
     // test the case that the resolvement fails
     // because of an unknown id
     public void testNonExistanceID() throws Exception {
@@ -143,7 +159,7 @@ public class UseOccurrenceTagTest extends UseTagTestBase {
     // with mode ADD
     public void testNonExistanceIDWithADD() throws Exception {
 
-        String id = "does_not_exist";
+        String id = "occ_does_not_exist";
         tag.setId(id);
         tag.setNonexistant(BaseUseTag.NE_ADD);
         setScriptForTagBody(tag);

@@ -1,4 +1,4 @@
-// $Id: AddInstanceOfTag.java,v 1.1 2004/08/24 00:12:29 niko_schmuck Exp $
+// $Id: AddInstanceOfTag.java,v 1.2 2004/09/15 10:56:24 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -6,67 +6,104 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.tm4j.topicmap.Association;
 import org.tm4j.topicmap.Topic;
-
-import java.beans.PropertyVetoException;
+import org.tm4j.topicmap.TopicMapObject;
 
 /**
  * Tag for typing a topic or an association.
- *
+ * 
  * @author Niko Schmuck
+ * @author cf
  */
-public class AddInstanceOfTag extends BaseTag {
-  /** The Log to which logging calls will be made. */
-  private static final Log log = LogFactory.getLog(AddInstanceOfTag.class);
-  private String typeId;
-  private String topicId;
-  private String associationId;
+public class AddInstanceOfTag extends BaseTMTag {
+    /** The Log to which logging calls will be made. */
+    private static final Log log = LogFactory.getLog(AddInstanceOfTag.class);
 
-  public void setType(String typeId) {
-    this.typeId = typeId;
-  }
+    private Topic type;
 
-  public void setTopic(String topicId) {
-    this.topicId = topicId;
-  }
+    private TopicMapObject instance;
 
-  public void setAssociation(String associationId) {
-    this.associationId = associationId;
-  }
-
-  public void doTag(XMLOutput output)
-             throws MissingAttributeException, JellyTagException {
-    try {
-      if (typeId == null) {
-        throw new MissingAttributeException("InstanceOf-Tag requires type-attriibute");
-      }
-
-      // TODO: that only topic or association has been specified
-      Topic type = getTopicById(typeId);
-
-      if (type == null) {
-        log.warn("No topic found with id " + typeId);
-
-        return;
-      }
-
-      Topic topic = getCorrespondingTopic(topicId, log);
-
-      if (topic != null) {
-        if (!topic.isOfType(type)) {
-          topic.addType(type);
+    /**
+     * validates that both <code>parent</code> and <code>type</code> are
+     * specified.
+     */
+    private void validate() throws MissingAttributeException, JellyTagException {
+        if (type == null) {
+            String msg = "AddInstanceOfTag requires attribute 'type' set to a Topic";
+            throw new MissingAttributeException(msg);
         }
-      } else {
-        Association assoc = getCorrespondingAssociation(associationId, log);
 
-        if (assoc != null) {
-          assoc.setType(type);
+        if (getInstance() == null) {
+            String msg = "AddInstanceOfTag requires attribute 'parent' set to either ";
+            msg += "a Topic, an Association or an Occurrence.";
+            throw new MissingAttributeException(msg);
+
         }
-      }
-    } catch (PropertyVetoException e) {
-      throw new JellyTagException(e);
+
     }
-  }
+
+    /**
+     * The instance is either specified explicitly by the <code>instance</code>
+     * -property of this class or implicitly by a topic, association or
+     * occurrence that forms the context of this tag.
+     * 
+     * @return the instance for which a type will be set.
+     *  
+     */
+    public TopicMapObject getInstance() throws JellyTagException {
+
+        if (instance != null)
+            return instance;
+
+        if ((instance = getTopicFromContext(null)) != null) {
+            return instance;
+        }
+        if ((instance = getAssociationFromContext(null)) != null) {
+            return instance;
+        }
+        if ((instance = getOccurrenceFromContext()) != null) {
+            return instance;
+        }
+
+        return null;
+
+    }
+
+    /**
+     * Adds a type to the parent specified
+     */
+    public void doTag(XMLOutput output) throws MissingAttributeException,
+            JellyTagException {
+
+        if(log.isDebugEnabled())
+            log.debug("Add InstanceOf (Type "+getType()+" / Instance: "+getInstance()+")");
+
+        validate();
+
+        tmEngine.addType(getInstance(), type);
+    }
+
+    /**
+     * @return the type that the instance shall be an instance of
+     */
+    public Topic getType() {
+        return type;
+    }
+
+    /**
+     * set the type that the instance shall be an instance of
+     */
+    public void setType(Topic type) {
+        this.type = type;
+    }
+    
+    
+    /**
+     * set the TopicMapObject which shall become an instance
+     * of the type specified by the <code>type</code>-property
+     * @param instance
+     */
+    public void setInstance(TopicMapObject instance) {
+        this.instance = instance;
+    }
 }

@@ -12,14 +12,14 @@ public interface ReferenceTopic {
     /**
      * @return the name of a variable to which a topic is bound
      */
-    public String getTopicVar();
+    // public String getTopicVar();
 
     /**
      * sets the name of a variable to which a topic is bound
      * 
      * @param topic
      */
-    public void setTopicVar(String topic);
+    // public void setTopicVar(String topic);
 
     /**
      * @return the id of a topic or null if no topic id was set

@@ -21,7 +21,7 @@
 
 
 <topic id="test2-t2">
-	<instanceOf><topicRef xlink:href="#t1"/></instanceOf>
+	<instanceOf><topicRef xlink:href="#test2-t1"/></instanceOf>
 	<baseName id="test2-bn3">
 		<baseNameString>basename 1 of topic 2</baseNameString>
 	</baseName>
@@ -34,11 +34,36 @@
 <topic id="test2-roletype"></topic>
 <topic id="test2-roletype2"></topic>
 <topic id="test2-assoctype"></topic>
+<topic id="test2-assoctype2"></topic>
+<topic id="test2-occtype"></topic>
+<topic id="test2-occtype2"></topic>
+<topic id="test2-topictype"></topic>
+
+<topic id="topic_without_type">
+	<occurrence id="occ_without_type">
+		<resourceRef xlink:href="http://any.where.org/foo2.html"/>
+	</occurrence>
+	<occurrence id="occ_with_type">
+		<instanceOf><topicRef xlink:href="#test2-occtype2"/></instanceOf>
+		<resourceRef xlink:href="http://any.where.org/foo3.html"/>
+	</occurrence>
+</topic>
 
 
 
 <association id="test2-as-01">
-	<instanceOf><topicRef xlink:href="#assoctype"/></instanceOf>
+	<instanceOf><topicRef xlink:href="#test2-assoctype"/></instanceOf>
+	<member id="test2-mem1">
+		<roleSpec><topicRef xlink:href="#test2-roletype1"/></roleSpec>
+		<topicRef xlink:href="#t1"/>
+	</member>
+	<member id="test2-mem2">
+		<roleSpec><topicRef xlink:href="#test2-roletype2"/></roleSpec>
+		<topicRef xlink:href="#t2"/>
+	</member>
+</association>
+
+<association id="assoc_without_type">
 	<member id="test2-mem1">
 		<roleSpec><topicRef xlink:href="#roletype1"/></roleSpec>
 		<topicRef xlink:href="#t1"/>

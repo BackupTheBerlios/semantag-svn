@@ -1,4 +1,4 @@
-// $Id: UseMemberTag.java,v 1.3 2004/09/14 15:11:01 c_froehlich Exp $
+// $Id: UseMemberTag.java,v 1.4 2004/09/15 10:56:24 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -37,7 +37,7 @@ public class UseMemberTag extends BaseUseTag implements ContextMember
     private static final Log log = LogFactory.getLog(UseMemberTag.class);
 
 
-    // occurrence to which this tag refers to
+    // member to which this tag refers to
     private Member member;
 
 

@@ -1,4 +1,4 @@
-// $Id: UseOccurrenceTag.java,v 1.4 2004/09/14 15:11:01 c_froehlich Exp $
+// $Id: UseOccurrenceTag.java,v 1.5 2004/09/15 10:56:24 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -6,6 +6,7 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.tm4j.topicmap.Association;
 import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.TopicMapObject;
 
@@ -96,5 +97,12 @@ public class UseOccurrenceTag extends BaseUseTag implements ContextOccurrence
     }
 
     
-
+    
+    /**
+     * Sets the Occurrence that this tag should use
+     * @param occurrence
+     */
+    public void setOccurrence(Occurrence occurrence) {
+        this.occurrence = occurrence;
+    }
 }

@@ -22,8 +22,7 @@ import org.tm4j.topicmap.source.SerializedTopicMapSource;
 import org.tm4j.topicmap.source.TopicMapSource;
 
 /**
- * Class that assembles methods to manage TopicMapObjects
- * in a distinct engine.
+ * Class that assembles methods to manage TopicMapObjects in a distinct engine.
  * 
  * 
  * 
@@ -60,6 +59,39 @@ public class TM4JConnector {
         return (Topic) createTMO(tm, c, id, sourceLocator);
     }
 
+    
+    /**
+     * Adds a type to tmo. <br>
+     * tmo must be an instance of either topic, association
+     * or occurrence. In all other cases, 
+     * an IllegalStateException is be thrown.
+     * 
+     * @param tmo
+     * @param type
+     * @throws JellyTagException to wrap a PropertyVetoException
+     * that might be thrown by tm4j while adding the type
+     * @throws IllegalStateException if tmo is of an unsupported type
+     */
+    public void addType(TopicMapObject tmo, Topic type)
+            throws JellyTagException {
+
+        try {
+            if (tmo instanceof Topic) {
+                ((Topic) tmo).addType(type);
+            } else if (tmo instanceof Association) {
+                ((Association) tmo).setType(type);
+            } else if (tmo instanceof Occurrence) {
+                ((Occurrence) tmo).setType(type);
+            } else {
+                throw new IllegalStateException(
+                        "Expected typeable object but got " + tmo);
+            }
+        } catch (PropertyVetoException e) {
+            throw new JellyTagException(e);
+        }
+
+    }
+
     /**
      * Creates an Association in the given TopicMap.
      * 
@@ -74,8 +106,8 @@ public class TM4JConnector {
      *             as a wrapper around the various exceptions that may by thrown
      *             while an association is created
      */
-    protected Association createAssociation(final TopicMap tm,
-            String id, String sourceLocator) throws JellyTagException {
+    protected Association createAssociation(final TopicMap tm, String id,
+            String sourceLocator) throws JellyTagException {
 
         // define a creator that creates an Association
         TMOCreator c = new TMOCreator() {
@@ -128,9 +160,8 @@ public class TM4JConnector {
      *             as a wrapper around the various exceptions that may by thrown
      *             while a basename is created
      */
-    public BaseName createBasename(final Topic t, String name,
-            Topic theme, String id, String sourceLocator)
-            throws JellyTagException {
+    public BaseName createBasename(final Topic t, String name, Topic theme,
+            String id, String sourceLocator) throws JellyTagException {
         TMOCreator c = new TMOCreator() {
             public TopicMapObject create(String id) throws Exception {
                 return t.createName(id);

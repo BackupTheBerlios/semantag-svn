@@ -1,4 +1,4 @@
-// $Id: UseAssociationTag.java,v 1.5 2004/09/14 15:11:01 c_froehlich Exp $
+// $Id: UseAssociationTag.java,v 1.6 2004/09/15 10:56:24 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -96,7 +96,14 @@ public class UseAssociationTag extends BaseUseTag implements ContextAssociation,
     }
 
     
+    
  
     
-
+    /**
+     * Sets the association that this tag should use
+     * @param association
+     */
+    public void setAssociation(Association association) {
+        this.association = association;
+    }
 }

@@ -4,6 +4,8 @@ import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.TagSupport;
 import org.tm4j.topicmap.Association;
+import org.tm4j.topicmap.Member;
+import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMap;
 
@@ -136,7 +138,34 @@ public class ContextResolver {
         
     }
     
-    
+    public static Occurrence getOccurrence(TagSupport tag) throws JellyTagException{
+        
+        Occurrence occ = null;
+
+            ContextOccurrence ct;
+            ct = (ContextOccurrence)TagSupport.findAncestorWithClass(tag, ContextOccurrence.class);
+        
+            if(ct != null){
+                occ= ct.getOccurrence();
+            }
+        return occ;
+        
+    }
+
+    public static Member getMember(TagSupport tag) throws JellyTagException{
+        
+        Member mem = null;
+
+            ContextMember ct;
+            ct = (ContextMember)TagSupport.findAncestorWithClass(tag, ContextMember.class);
+        
+            if(ct != null){
+                mem= ct.getMember();
+            }
+        return mem;
+        
+    }
+
     private static boolean isSpecified(String varname) {
         if (varname == null)
             return false;

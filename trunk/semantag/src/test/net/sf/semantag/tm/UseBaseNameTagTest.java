@@ -145,7 +145,7 @@ public class UseBaseNameTagTest extends UseTagTestBase {
     //TODO test for name and scope
     public void testNonExistanceIDWithADD() throws Exception {
 
-        String id = "does_not_exist";
+        String id = "basename_does_not_exist";
         tag.setId(id);
         tag.setNonexistant(BaseUseTag.NE_ADD);
         setScriptForTagBody(tag);

@@ -46,7 +46,7 @@ public class TMTagTestBase extends TestCase {
         super(name);
     }
 
-    protected TopicMap getTopicMapFromResource(String resource,
+    protected static TopicMap getTopicMapFromResource(String resource,
             String baseLocatorAdress) throws Exception {
 
         
@@ -63,7 +63,7 @@ public class TMTagTestBase extends TestCase {
         Locator baseLocator = locatorFactory.createLocator("URI",
                 baseLocatorAdress);
 
-        InputStream is = getClass().getResourceAsStream(resource);
+        InputStream is = TMTagTestBase.class.getResourceAsStream(resource);
 
         int l = resource.length();
         if (l > 4 && resource.lastIndexOf(".ltm") == l - 4) {

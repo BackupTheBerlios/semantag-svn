@@ -100,6 +100,21 @@ public class UseAssociationTagTest extends UseTagTestBase {
         assertEquals(bn, tag.getAssociation());
     }
 
+    // test setting an association directly
+    public void testSetAssociation() 
+        throws Exception
+    {
+        
+        String id = "as00003";
+        Association assoc = (Association) tm.getObjectByID(id);
+
+        // sets association directly
+        tag.setAssociation(assoc);
+        
+        assertEquals(assoc, tag.getAssociation());
+
+    }
+
     // test the case that the resolvement fails
     // because of an unknown id
     public void testNonExistanceID() throws Exception {

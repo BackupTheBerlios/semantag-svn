@@ -145,7 +145,7 @@ public class UseMemberTagTest extends UseTagTestBase {
     // with mode ADD
     public void testNonExistanceIDWithADD() throws Exception {
 
-        String id = "does_not_exist";
+        String id = "member_does_not_exist";
         tag.setId(id);
         tag.setNonexistant(BaseUseTag.NE_ADD);
         setScriptForTagBody(tag);
@@ -155,7 +155,7 @@ public class UseMemberTagTest extends UseTagTestBase {
         utt.setId("as00001");
         utt.setContext(ctx);
 
-        // set the UseTopicTag as parent of the
+        // set the UseAssociationTag as parent of the
         // UseMemberTag
         tag.setParent(utt);
 

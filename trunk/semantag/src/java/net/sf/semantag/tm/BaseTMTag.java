@@ -7,6 +7,8 @@ import org.tm4j.net.Locator;
 import org.tm4j.net.LocatorFactory;
 import org.tm4j.net.LocatorFactoryException;
 import org.tm4j.topicmap.Association;
+import org.tm4j.topicmap.Member;
+import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMap;
 
@@ -159,6 +161,26 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
         return ContextResolver.getAssociation(this, varname);
     }
     
+    /**
+     * Asks the contextResolver to return 
+     * an Occurrence from the context for this tag
+     * @return 
+     * @throws JellyTagException
+     */
+    public Occurrence getOccurrenceFromContext() throws JellyTagException{
+        return ContextResolver.getOccurrence(this);
+    }
+    
+    /**
+     * Asks the contextResolver to return 
+     * a Member from the context for this tag
+     * @return 
+     * @throws JellyTagException
+     */
+    public Member getMemberFromContext() throws JellyTagException{
+        return ContextResolver.getMember(this);
+    }
+
     /**
      * Helper that creates a Locator for the given address.
      * The Locator is created with the "URI" notation scheme.
