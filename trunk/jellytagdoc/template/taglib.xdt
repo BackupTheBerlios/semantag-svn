@@ -1,0 +1,43 @@
+
+<document>
+  
+  <properties>
+    <title>Taglib</title>
+  </properties>
+
+  <body>
+
+    <XDtClass:pushClass value="<XDtConfig:configParameterValue paramName='taglib.class'/>">
+      <section name="<XDtConfig:configParameterValue paramName='taglib.title'/>">">
+      <p>
+          <XDtClass:classCommentText no-comment-signs="true"/>
+      </p>  
+      </section>
+      <XDtClass:ifHasClassTag tagName="jelly" paramName="defNS">
+        <section name="Namespace">
+          <p>To use tags from this library, add a namespace definition simmilar to the following to your script</p>
+           <source>
+ <XDtClass:classTagValue tagName="jelly" paramName="defNS"/></source>
+        </section>   
+      </XDtClass:ifHasClassTag>
+    </XDtClass:pushClass>
+    <section name="Tags">
+    <table class="bodyTable">
+      <tbody>
+        <tr class="b"><th>Tag Name</th><th>Description</th></tr>
+          <XDtClass:forAllClasses>
+          <tr class="a">
+            <td>
+              <a href="<XDtConfig:configParameterValue paramName='tags.path'/>/<XDtClass:className/>.html">
+                <XDtClass:classTagValue tagName="jelly" paramName="name"/>
+              </a>  
+            </td>
+            <td><XDtClass:firstSentenceDescription/></td>
+          </tr>
+        </XDtClass:forAllClasses>  
+      </tbody>
+    </table>
+    
+    </section>
+    
+    </body></document>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<document>
+
+  <properties>
+    <title>XDoclet-Integration in jellytagdoc</title>
+  </properties>
+
+  <body>
+    <section name="XDoclet-Integration">
+      <p>The following contains a short summary of the templates, javadoc-elements, special tags and external example files that the jellytagdoc plugin uses</p>
+    </section>
+
+    <section name="TagLibraries">
+
+      <section name="Template">
+        <p>taglib.dxt</p>
+      </section>
+
+      <section name="Javadoc">
+        <p>The template uses the following areas from the javadocs
+    
+     <table border="1" cellpadding="3" cellspacing="2" width="100%">
+        <tbody>
+          <tr class="b">
+            <td>Class comment</td>
+                <td>Written to the first section of the resulting xdoc.</td>
+              </tr>
+            </tbody>
+          </table>
+        </p>
+      </section>
+      <section name="Special tags">
+        <table border="1" cellpadding="3" cellspacing="2" width="100%">
+          <tbody>
+            <tr class="b">
+              <th>Level</th>
+              <th>Tag</th>
+              <th>Param</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>Class</td>
+              <td>@jelly</td>
+              <td>defNS</td>
+              <td>Example for an namespace definition</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </section>
+      
+
+    <section name="Tags">
+
+      <section name="Template">
+        <p>tag.dxt</p>
+      </section>
+
+      <section name="Javadoc">
+        <p>The template uses the following areas from the javadocs
+    
+     <table border="1" cellpadding="3" cellspacing="2" width="100%">
+        <tbody>
+          <tr class="b">
+            <td>Class comment</td>
+                <td>Used to describe the tag int the first section of the resulting xdoc.</td>
+              </tr>
+              <tr class="a">
+                <td>Method comments on 'setter' methods:</td>
+                <td>Used to describe an attribute.</td>
+              </tr>
+            </tbody>
+          </table>
+        </p>
+      </section>
+      <section name="Special tags">
+        <table border="1" cellpadding="3" cellspacing="2" width="100%">
+          <tbody>
+            <tr class="b">
+              <th>Level</th>
+              <th>Tag</th>
+              <th>Param</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>Class</td>
+              <td>@jelly</td>
+              <td>name</td>
+              <td>The name for the tag as it is registered with the tag library</td>
+            </tr>
+            <tr>
+              <td>Class</td>
+              <td>@jelly.nested (0...*)</td>
+              <td>name</td>
+              <td>The name of a nested tag</td>
+            </tr>
+            <tr>
+              <td>Class</td>
+              <td>@jelly.nested (0...*)</td>
+              <td>desc</td>
+              <td>A short description of the nested tag</td>
+            </tr>
+            <tr>
+              <td>Class</td>
+              <td>@jelly.nested (0...*)</td>
+              <td>required</td>
+              <td>Whether the nested tag is required</td>
+            </tr>
+            <tr>
+              <td>Method</td>
+              <td>@jelly</td>
+              <td>required</td>
+              <td>Whether the attribute is required</td>
+            </tr>
+            <tr>
+              <td>Method</td>
+              <td>@jelly</td>
+              <td>default</td>
+              <td>An optional default for non-required attributes</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </section>
+
+  </body>
+</document>
+      
+

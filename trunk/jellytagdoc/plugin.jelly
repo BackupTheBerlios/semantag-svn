@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+
+<project
+    xmlns:j="jelly:core"
+    xmlns:ant="jelly:ant"  xmlns:maven="jelly:maven">
+    
+  <goal name="jellytagdoc:dummy-init">
+      <ant:echo message="JellyTagDoc-Plugin initialised"/>
+  </goal>
+  
+  
+  <goal name="jellytagdoc" description="Generate documentation for jelly tags">
+    <ant:echo message="Basedir: ${basedir}"/>
+    <ant:echo message="Builddir: ${maven.build.dir}"/>
+    <ant:echo message="maven.plugin.dir: ${maven.plugin.dir}"/>
+    <ant:echo message="maven.plugin.user.dir: ${maven.plugin.user.dir}"/>
+    <ant:echo message="maven.plugin.unpacked.dir: ${maven.plugin.unpacked.dir}"/>
+    <ant:echo message="plugin.artifact.directory: ${plugin.getArtifactDirectory()}"/>
+    <ant:echo message="plugin.artifact.id: ${plugin.getArtifactId()}"/>
+    <ant:echo message="plugin-cp: ${maven.plugin.unpacked.dir}/${plugin.getArtifactDirectory()}-${plugin.getCurrentVersion()}"/>
+    <ant:echo message="template.taglib: ${template.taglib}"/>
+    <ant:echo message="template.tag: ${template.tag}"/>
+
+    <ant:echo message="tagsrc.includepattern: ${tagsrc.includepattern}"/>
+    <ant:echo message="tags.path: ${tags.path}"/>
+    <ant:echo message="taglib.title: ${taglib.title}"/>
+
+    <maven:get plugin="jellytagdoc-plugin" property="tags.path" var="tagspath"/>
+    <ant:echo message="tags.path as variable: ${tagspath}"/>
+    
+    
+    <!-- Make a classpath that combines  
+         - the classes of the plugin
+         - the classes of the project
+         - the dependencies of the plugin
+         - the dependencies of the project
+     -->
+    <path id="combined.classpath">
+    
+      <pathelement path="${maven.plugin.unpacked.dir}/${plugin.getArtifactDirectory()}-${plugin.getCurrentVersion()}"/>
+
+      <path path="${maven.build.dest}"/>
+
+      <pathelement path="${plugin.getDependencyPath('commons-jelly:commons-jelly')}"/>
+      <pathelement path="${plugin.getDependencyPath('xdoclet:xdoclet')}"/>
+      <pathelement path="${plugin.getDependencyPath('xjavadoc:xjavadoc')}"/>
+      <pathelement path="${plugin.getDependencyPath('ant:ant')}"/>
+      <pathelement path="${plugin.getDependencyPath('commons-collections:commons-collections')}"/>
+      <pathelement path="${plugin.getDependencyPath('commons-beanutils:commons-beanutils')}"/>
+
+      <path refid="maven.dependency.classpath"/>
+      
+    </path>
+
+    
+    
+    <!-- 
+      Define the task for the xdoclet template filling
+    -->
+    <taskdef name="templatedoclet" classname="xdoclet.DocletTask">
+      <classpath refid="combined.classpath"/>
+    </taskdef>
+    
+    
+    
+    <!-- 
+      assert the destination directory
+    -->
+    <ant:mkdir dir="${destination.dir}"/>
+    
+    <!-- 
+        Create Xdoc for each Tag
+        
+        The following task runs over all files in
+        ${tagsrc.dir} that 
+        - conform to the pattern ${tagsrc.includepattern}
+        - get through IsJellyTagSelector 
+          (which means that the class is a non abstract subclass of org.apache.commons.jelly.Tag) 
+       
+       The task generates a xdoc-file for each of theese classes in
+       ${destination.dir}
+       
+    -->
+    <ant:templatedoclet
+        destdir="${destination.dir}"
+        excludedtags="@version,@author"
+        mergeDir="src/tagdoc"
+        >
+
+        <ant:fileset dir="${tagsrc.dir}">
+          <ant:include name="${tagsrc.includepattern}"/>
+          <!-- Custom Selector that let only JellyTags pass through -->
+          <ant:custom classname="org.semantag.tagdoc.IsJellyTagSelector" classpathref="combined.classpath"/>
+        </ant:fileset>
+
+        <ant:template
+            templateFile="${template.tag}"
+            destinationfile="${destination.file}"/>
+    </ant:templatedoclet>
+
+    
+    
+    <ant:templatedoclet
+        destdir="${destination.dir}"
+        excludedtags="@version,@author">
+
+        <ant:fileset dir="${tagsrc.dir}">
+          <ant:include name="${tagsrc.includepattern}"/>
+          <ant:custom classname="org.semantag.tagdoc.IsJellyTagSelector" classpathref="combined.classpath"/> 
+        </ant:fileset>
+
+        <ant:configParam name="taglib.title" value="${taglib.title}"/>
+        <ant:configParam name="taglib.class" value="${taglib.class}"/>
+        <ant:configParam name="tags.path" value="${tags.path}"/>
+        
+        <ant:template
+            templateFile="${template.taglib}"
+            destinationfile="${taglib.filename}.xml"/>
+    </ant:templatedoclet>
+
+  </goal>
+</project>
