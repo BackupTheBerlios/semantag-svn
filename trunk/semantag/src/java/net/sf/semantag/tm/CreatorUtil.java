@@ -8,6 +8,7 @@ import org.apache.commons.jelly.JellyTagException;
 import org.tm4j.net.Locator;
 import org.tm4j.net.LocatorFactory;
 import org.tm4j.net.LocatorFactoryException;
+import org.tm4j.topicmap.Association;
 import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMap;
 import org.tm4j.topicmap.TopicMapObject;
@@ -46,19 +47,7 @@ public class CreatorUtil {
         // Otherwise the topic would have been already
         // created, before we realize a potential
         // duplication of sourceLocators
-        Locator sl = null;
-        if (sourceLocator != null) {
-            sl = createLocator(sourceLocator, tm.getLocatorFactory());
-
-            if (tm.getObjectBySourceLocator(sl) != null) {
-                // SourceLocator already points to an object
-                // in the topicmaps
-                String msg = "Illegal attempt to add a topic with an ";
-                msg += "already existing sourceLocator (" + sourceLocator
-                        + ").";
-                throw new JellyTagException(msg);
-            }
-        }
+        Locator sl = makeSourceLocator(tm, sourceLocator);
 
         try {
             Topic t = tm.createTopic(id);
@@ -72,6 +61,42 @@ public class CreatorUtil {
         }
     }
 
+    /**
+     * Creates an Association in the given TopicMap.
+     * 
+     * If specified, the association is created with the 
+     * given id and the given sourceLocator
+     * 
+     * @param tm
+     * @param id
+     * @param sourceLocator
+     * @return a newly created association
+     * @throws
+     *         JellyTagException as a wrapper around the various exceptions that
+     *         may by thrown while an association is created
+     */
+    protected static Association createAssociation(TopicMap tm, String id,
+            String sourceLocator) throws JellyTagException {
+
+        // Check the sourceLocator first.
+        // Otherwise the association would have been already
+        // created, before we realize a potential
+        // duplication of sourceLocators
+        Locator sl = makeSourceLocator(tm, sourceLocator);
+
+        try {
+            Association a = tm.createAssociation(id);
+            if (sl != null) {
+                a.addSourceLocator(sl);
+            }
+            return a;
+        } catch (Exception e) {
+            throw new JellyTagException("While creating Association (ID: " + id
+                    + "/SourceLocator: " + sourceLocator, e);
+        }
+    }
+
+    
     /**
      * Helper that creates a Locator for the given address. The Locator is
      * created with the "URI" notation scheme.
@@ -147,5 +172,37 @@ public class CreatorUtil {
         }
       }
 
-    
+    /**
+     * Creates a Locator from the given adress and
+     * asserts that the Locator is not already used
+     * as a SourceLocator in the given TopicMap.
+     * 
+     * @param tm
+     * @param adress
+     * @return the newly created Locaotr or null if adress was null.
+     * @throws JellyTagException
+     *  if either no Locator could be created from the given adress
+     * or if the given TopicMap already contains an Object with a 
+     * SourceLocator-Adress that is equal to the given adress. 
+     */
+    public static Locator makeSourceLocator(TopicMap tm, String adress)
+    throws JellyTagException{
+        
+        Locator sl = null;
+        if (adress != null) {
+            sl = createLocator(adress, tm.getLocatorFactory());
+
+            if (tm.getObjectBySourceLocator(sl) != null) {
+                // SourceLocator already points to an object
+                // in the topicmap
+                String msg = "The topicmap already contains a sourceLocator " +
+                        "with the adress " + adress;
+                throw new JellyTagException(msg);
+            }
+        }
+        
+        return sl;
+
+        
+    }
 }
