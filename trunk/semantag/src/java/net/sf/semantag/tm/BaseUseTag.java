@@ -2,6 +2,7 @@ package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
 import org.tm4j.topicmap.TopicMap;
+import org.tm4j.topicmap.TopicMapObject;
 
 
 
@@ -34,6 +35,24 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar, 
      */
     public BaseUseTag() {
         super();
+    }
+    
+    /**
+     * resolves the TopicMapObject to which the
+     * current UseTag refers.
+     * 
+     * @return a TopicMapObject or null, if the 
+     * current tag does not refer to an object.
+     * @throws JellyTagException if an attempt to
+     * refer to an object was made in an apparently 
+     * erroneous manner.
+     */
+    public TopicMapObject resolve()
+        throws JellyTagException
+    {
+        TopicMap tm = getTopicMapFromContext(tmVar);
+        TopicMapObject o = tmoResolver.getTopicMapObject(tm, context);
+        return o;
     }
 
     public boolean shallFailOnNonexistant(){

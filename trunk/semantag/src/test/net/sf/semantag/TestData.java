@@ -18,10 +18,11 @@ public class TestData {
   public final static String ADVANCEDCSVTEST = RB + "csvTest2.csv";
   public final static String TM_JOHN_LTM = RB + "about_john.ltm";
   public final static String TM_GREEKS_XTM = RB + "greek.xtm.xml";
+  public final static String TM_TEST2_XTM = RB + "test2.xtm.xml";
   public final static String RDF_HAMAIRPORT = RB + "rfkrlutf.rdf";
 
   public final static String TM_JOHN_BASELOCATOR = "about_john";
-public static final String TM_GREEKS_BASELOCATOR = "http://greeksxtm.org";
+  public static final String TM_GREEKS_BASELOCATOR = "http://greeksxtm.org";
   
   public static File getFileFromResource(String resource)
                                   throws URISyntaxException {

@@ -1,4 +1,4 @@
-// $Id: UseBasenameTag.java,v 1.1 2004/09/09 19:32:22 c_froehlich Exp $
+// $Id: UseBasenameTag.java,v 1.2 2004/09/11 19:36:23 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -46,8 +46,7 @@ public class UseBasenameTag extends BaseUseTag implements ContextBaseName {
         if (basename != null)
             return basename;
 
-        TopicMap tm = getTopicMapFromContext(null);
-        TopicMapObject o = tmoResolver.getTopicMapObject(tm, context);
+        TopicMapObject o = super.resolve();
         if (o != null && !(o instanceof BaseName)) {
             throw new JellyTagException("Failed to identify BaseName. Found "
                     + o);

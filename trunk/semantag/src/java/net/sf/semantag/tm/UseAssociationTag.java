@@ -1,4 +1,4 @@
-// $Id: UseAssociationTag.java,v 1.2 2004/09/09 19:32:22 c_froehlich Exp $
+// $Id: UseAssociationTag.java,v 1.3 2004/09/11 19:36:23 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -54,8 +54,7 @@ public class UseAssociationTag extends BaseUseTag implements ContextAssociation,
         if (association != null)
             return association;
 
-        TopicMap tm = getTopicMapFromContext();
-        TopicMapObject a = tmoResolver.getTopicMapObject(tm, context);
+        TopicMapObject a = super.resolve();
         if (a != null && !(a instanceof Association)) {
             throw new JellyTagException("Failed to identify association. Found "+a);
         }

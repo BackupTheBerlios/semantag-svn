@@ -36,7 +36,7 @@
 .........................................-->
 <!-- Klasse Figur-->
 <topic id="class_figur">
-	<instanceOf><topicRef xlink:href="#class"/></instanceOf>
+	<instanceOf><topicRef xlink:href="#class" id="idforatopicref"/></instanceOf>
 	<baseName>
 		<baseNameString>Figur</baseNameString>
 	</baseName>
@@ -306,7 +306,7 @@
 		<topicRef xlink:href="#Pollux"/>
 	</member>
 	<member id="mem3">
-		<roleSpec><topicRef xlink:href="#role_Schwester"/></roleSpec>
+		<roleSpec id="idforarolespec"><topicRef xlink:href="#role_Schwester"/></roleSpec>
 		<topicRef xlink:href="#Helena"/>
 	</member>
 </association>
@@ -329,7 +329,7 @@
 </association>
 
 <association id="as00002a">
-	<instanceOf><topicRef xlink:href="#at_eltern"/></instanceOf>
+	<instanceOf id="idforatype"><topicRef xlink:href="#at_eltern"/></instanceOf>
 	<member>
 		<roleSpec><topicRef xlink:href="#role_Vater"/></roleSpec>
 		<topicRef xlink:href="#Tyndareus"/>
