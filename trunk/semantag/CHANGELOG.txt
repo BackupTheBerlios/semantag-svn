@@ -1,3 +1,6 @@
+cf December 2004
+- documentation for 0.1
+
 cf (29-Nov-2004)
 
 - added new Tag tm:label

@@ -1,21 +1,53 @@
 
 
-<project default="jar" xmlns:j="jelly:core" xmlns:maven="jelly:maven" xmlns:util="jelly:util">
+<project default="jar" xmlns:ant="jelly:ant" xmlns:maven="jelly:maven">
 
- 
+
   <!-- ===================================================================== -->
   <!-- GENERATE THE TAG-LIBRARY LIST                       -->
   <!-- ===================================================================== -->
+  <goal name="generate-tagdoc">
+    <!-- use ants xdoclet integration to 
+         automatically pull the tags-documentation 
+         from the class-files
+     -->
+     
+     <!-- 
+        necessary since maven:set currently (1.0.1) fails, 
+        if the plugin is not initialised 
+     -->
+     <attainGoal name="jellytagdoc:dummy-init"/>
+     
+     
+     <maven:set plugin="jellytagdoc-plugin" property="tagsrc.includepattern" value="org/semantag/tm/**/*.java"/>
+     <maven:set plugin="jellytagdoc-plugin" property="taglib.title" value="Topicmap"/>
+     <maven:set plugin="jellytagdoc-plugin" property="taglib.filename" value="tl-topicmap"/>
+     <maven:set plugin="jellytagdoc-plugin" property="tags.path" value="org/semantag/tm"/>
+     <attainGoal name="jellytagdoc"/>
+
+     <maven:set plugin="jellytagdoc-plugin" property="tagsrc.includepattern" value="org/semantag/rdf/**/*.java"/>
+     <maven:set plugin="jellytagdoc-plugin" property="taglib.title" value="RDF"/>
+     <maven:set plugin="jellytagdoc-plugin" property="taglib.filename" value="tl-rdf"/>
+     <maven:set plugin="jellytagdoc-plugin" property="tags.path" value="org/semantag/rdf"/>
+     <attainGoal name="jellytagdoc"/>
+     
+     <maven:set plugin="jellytagdoc-plugin" property="tagsrc.includepattern" value="org/semantag/csv/**/*.java"/>
+     <maven:set plugin="jellytagdoc-plugin" property="taglib.title" value="CSV"/>
+     <maven:set plugin="jellytagdoc-plugin" property="taglib.filename" value="tl-csv"/>
+     <maven:set plugin="jellytagdoc-plugin" property="tags.path" value="org/semantag/csv"/>
+     <attainGoal name="jellytagdoc"/>
+  
+  </goal>
+  
+
+ 
+  <!-- ===================================================================== -->
+  <!-- Generate tagdocs as part of the xdoc goal                             -->
+  <!-- ===================================================================== -->
   <preGoal name="xdoc:transform">
-      
-    <!-- can't pass anything into the jellydoc doclet so its hard coded to target -->      
-    <mkdir dir="target"/>
+    <attainGoal name="generate-tagdoc"/>
+  </preGoal> 
 
-    <!-- now lets implement the jellydoc for the core package -->    
-    <j:set var="maven.jellydoc.packages" value="org.semantag.*"/>
-    <attainGoal name="jellydoc"/>
-  </preGoal>
-
-
+  
 
 </project>

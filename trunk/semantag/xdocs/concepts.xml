@@ -1,0 +1,9 @@
+<document>
+
+  <section name="Accessing a topicmap">
+    <p>If a tag needs to access a topicmap it first checks its <code>topicmap</code> attribute. If this attribute specifies a topicmap, this topicmap will be used by this tag.</p>
+    <p>In the case that no topicmap is specified explicitly, the tag searches its ancestors down to the root element to see if any of them exports a topicmap to their child-context. If so the tag uses this topicmap.</p>
+    <p>The last chance for the tag is then to check if a default topicmap exists in the context. Every time a new topicmap is initialised (via <a href="org/semantag/tm/InitTopicMapTag.html">initTopicMap</a>) or an existing one is opened (via <a href="org/semantag/tm/OpenTopicMapTag.html">openTopicMap</a>), the context is checked whether it already contains a default topicmap. If it does not, the previously initialised or opened topicmap is used as the default one.</p>
+  </section>
+</document>
+
