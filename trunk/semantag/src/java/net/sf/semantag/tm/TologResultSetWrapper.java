@@ -57,4 +57,13 @@ public class TologResultSetWrapper {
       return data;
     }
   }
+  
+  public int getRowCount(){
+      if(data == null) return 0;
+      else return data.length;
+  }
+  
+  public boolean hasRows(){
+      return getRowCount() > 0;
+  }
 }
