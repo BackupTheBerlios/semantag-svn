@@ -7,7 +7,7 @@ package net.sf.semantag.tm;
  * @author cf
  * @version 0.1, created on 03.09.2004
  */
-public interface TopicMapReference {
+public interface ReferenceTopicMap {
 
     /**
      * @return the name of a variable to which a topicmap is bound

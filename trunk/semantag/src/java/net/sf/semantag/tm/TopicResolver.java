@@ -18,7 +18,7 @@ import org.tm4j.topicmap.TopicMapObject;
  * 
  */
 //TODO add topic resolving by name
-public class TopicResolver implements TopicReference{
+public class TopicResolver implements ReferenceTopic{
 
     /**
      * The topic that is referenced by this class

@@ -1,4 +1,4 @@
-// $Id: InitTopicMapTag.java,v 1.1 2004/08/24 00:12:29 niko_schmuck Exp $
+// $Id: InitTopicMapTag.java,v 1.2 2004/09/07 05:04:53 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -15,7 +15,7 @@ import org.tm4j.topicmap.TopicMapProviderException;
  *
  * @author Niko Schmuck
  */
-public class InitTopicMapTag extends TopicMapBaseTag {
+public class InitTopicMapTag extends BaseTopicMapTag {
   protected void validate() throws MissingAttributeException {
     if (getBaselocator() == null) {
       throw new MissingAttributeException("Attribute baselocator must be specified");
@@ -28,9 +28,9 @@ public class InitTopicMapTag extends TopicMapBaseTag {
     log.debug("Creating new topicmap");
     initialise(org.tm4j.topicmap.memory.TopicMapProviderFactoryImpl.class);
 
-    TopicMap tm = createTopicMap(createBaseLocator());
+    TopicMap tm = createTopicMap(createLocator(getBaselocator()));
 
-    putTopicMap(tm);
+    storeTopicMap(tm);
 
     // Since we expect empty body, no further execution necessary
   }

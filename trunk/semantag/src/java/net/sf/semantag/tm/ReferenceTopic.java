@@ -7,7 +7,7 @@ package net.sf.semantag.tm;
  * @author cf
  * @version 0.1, created on 03.09.2004
  */
-public interface TopicReference {
+public interface ReferenceTopic {
 
     /**
      * @return the name of a variable to which a topic is bound

@@ -2,6 +2,11 @@ package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.TagSupport;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.tm4j.net.Locator;
+import org.tm4j.net.LocatorFactory;
+import org.tm4j.net.LocatorFactoryException;
 import org.tm4j.topicmap.TopicMap;
 
 /**
@@ -13,6 +18,7 @@ import org.tm4j.topicmap.TopicMap;
  */
 public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapObject {
 
+    
     private String id;
 
     private String sourceLocator;
@@ -112,7 +118,50 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
      * @return
      * @throws JellyTagException
      */
-    public TopicMap getTopicMap(String varname) throws JellyTagException{
+    public TopicMap getTopicMapFromContext(String varname) throws JellyTagException{
         return ContextResolver.getTopicMap(this, varname);
+    }
+    
+    
+    /**
+     * Helper that creates a Locator for the given address.
+     * The Locator is created with the "URI" notation scheme.
+     * 
+     * If no factory is passed in, the method tries to get 
+     * the topicmap from the current context and uses the 
+     * LocatorFactory supplied by this topicmap. 
+     * 
+     * If no topicmap for the current context could be found
+     * a JellyTagException is thrown
+     * 
+     * @param adress the adress of the Locator to be created
+     * @param factory a LocatorFactory that will be used to create
+     * the Locator. May be null, if currently a topicmap is available
+     * in the context of this tag
+     * @param log instance of Log where debug-logs get written too. May be null.
+     * @return the Locator created
+     * @throws JellyTagException
+     */
+    protected Locator createLocator(String adress, LocatorFactory factory, Log log ) throws JellyTagException {
+      if (log != null && log.isDebugEnabled()) {
+        log.debug("Create baseLocator for String: " + adress);
+      }
+
+      try {
+        if(factory == null){
+            // if a topicmap is currently in context,
+            // we use the factory that it supplies.
+            TopicMap tm = getTopicMapFromContext(null);
+            if(tm == null){
+                String msg = "Unable to get a LocatorFactory to create ";
+                msg = "locator with adress "+adress;
+                throw new JellyTagException(msg);
+            }
+            factory = tm.getLocatorFactory();
+        }
+        return factory.createLocator("URI", adress);
+      } catch (LocatorFactoryException e) {
+        throw new JellyTagException(e);
+      }
     }
 }

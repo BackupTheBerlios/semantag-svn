@@ -1,4 +1,4 @@
-// $Id: UseTopicTag.java,v 1.3 2004/09/06 19:40:55 c_froehlich Exp $
+// $Id: UseTopicTag.java,v 1.4 2004/09/07 05:04:53 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -17,8 +17,8 @@ import org.tm4j.topicmap.TopicMap;
  * @author Niko Schmuck
  * @author cf
  */
-public class UseTopicTag extends BaseUseTag implements TopicReference,
-        TopicMapReference {
+public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
+        ReferenceTopicMap {
     /** The Log to which logging calls will be made. */
     private static final Log log = LogFactory.getLog(UseTopicTag.class);
 
@@ -42,7 +42,7 @@ public class UseTopicTag extends BaseUseTag implements TopicReference,
         if (topic != null)
             return topic;
 
-        TopicMap tm = getTopicMap(tmVar);
+        TopicMap tm = getTopicMapFromContext(tmVar);
         try {
             topic = topicResolver.getTopic(tm, context);
         } catch (LocatorFactoryException e) {
@@ -67,7 +67,7 @@ public class UseTopicTag extends BaseUseTag implements TopicReference,
                 throw new JellyTagException("Failed to identify topic");
 
             else if (shallAddOnNonexistant())
-                topic = AddTopicTag.createTopic(getTopicMap(tmVar), getId(),
+                topic = CreatorUtil.createTopic(getTopicMapFromContext(tmVar), getId(),
                         getSourceLocator());
 
             else
