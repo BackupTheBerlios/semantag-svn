@@ -89,7 +89,7 @@ private CSVFile csvfile;
 
       row = null;
     } catch (IOException e) {
-      throw new JellyTagException(e);
+      throw new JellyTagException("While processing file "+file,e);
     } finally {
       try {
         csvfile.close();
