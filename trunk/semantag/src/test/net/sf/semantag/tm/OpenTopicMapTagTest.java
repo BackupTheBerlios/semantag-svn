@@ -30,7 +30,7 @@ public class OpenTopicMapTagTest extends BaseTMTagTest {
     // opens a ltm notated topic map
     public void testOpenLTMTopicMap() throws Exception {
         File f = TestData.getFileFromResource(TestData.TM_JOHN_LTM);
-        TopicMap tm = openTMFromPath(f.getAbsolutePath());
+        TopicMap tm = openTMFromPath(f.getAbsolutePath(), new OpenTopicMapTag());
 
         // check that it contains a topic john
         assertNotNull(tm.getTopicByID("john"));
@@ -39,18 +39,36 @@ public class OpenTopicMapTagTest extends BaseTMTagTest {
     //  opens a topicmap in xtm notation
     public void testOpenXTMTopicMap() throws Exception {
         File f = TestData.getFileFromResource(TestData.TM_GREEKS_XTM);
-        TopicMap tm = openTMFromPath(f.getAbsolutePath());
+        TopicMap tm = openTMFromPath(f.getAbsolutePath(), new OpenTopicMapTag());
 
         // check that it contains a topic john
         assertNotNull(tm.getTopicByID("Helena"));
     }
 
     
-    // Helper that performs the test for opening a topicmap
-    private TopicMap openTMFromPath(String path) throws Exception {
-        // open a ltm-tm from the test resources
-        OpenTopicMapTag tag = new OpenTopicMapTag();
+    // tests that specifying a variable leads to
+    // the topicmap being accessible through this
+    // variable
+    public void testTMStoredInVariable()
+        throws Exception
+    {
+        File f = TestData.getFileFromResource(TestData.TM_GREEKS_XTM);
+        
+        OpenTopicMapTag otmt = new OpenTopicMapTag();
+        otmt.setVar("TOPICMAP");
+        
+        TopicMap tm = openTMFromPath(f.getAbsolutePath(), otmt);
 
+        // assert that context contains the
+        // topicmap under the name expected
+        assertEquals(tm, otmt.getContext().getVariable("TOPICMAP"));
+        
+    }
+
+    
+    // Helper that performs the test for opening a topicmap
+    private TopicMap openTMFromPath(String path, OpenTopicMapTag tag) throws Exception {
+        
         tag.setContext(new JellyContext());
         setScriptForTagBody(tag);
         
