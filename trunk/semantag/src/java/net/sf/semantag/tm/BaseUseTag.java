@@ -1,7 +1,10 @@
 package net.sf.semantag.tm;
 
 
+
 /**
+ * BaseTags for all Tags that are able to resolve
+ * an existing TopicMapObject.
  * 
  * @author cf
  * @version 0.1, created on 06.09.2004
@@ -17,6 +20,8 @@ public abstract class BaseUseTag extends BaseTMTag {
     
     private String nonexistant = NE_ADD;
     
+    protected TMOResolver tmoResolver = new TMOResolver();
+
     
     /**
      * 
@@ -60,4 +65,17 @@ public abstract class BaseUseTag extends BaseTMTag {
         }
     }
         
+    
+    public String getId() {
+        return tmoResolver.getId();
+    }
+    public String getSourceLocator() {
+        return tmoResolver.getSourceLocator();
+    }
+    public void setId(String id) {
+        tmoResolver.setId(id);
+    }
+    public void setSourceLocator(String sourceLocator) {
+        tmoResolver.setSourceLocator(sourceLocator);
+    }
 }
