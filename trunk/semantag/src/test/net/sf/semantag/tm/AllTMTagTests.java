@@ -14,6 +14,7 @@ public class AllTMTagTests {
 
     //$JUnit-BEGIN$
     suite.addTestSuite(OpenTopicMapTagTest.class);
+    suite.addTestSuite(TopicResolverTest.class);
 
     //$JUnit-END$
     return suite;

@@ -1,7 +1,7 @@
 package net.sf.semantag.tm;
 
 /**
- * This interface contains various semantics
+ * This interface contains common semantics
  * to reference a topic.
  * 
  * @author cf
@@ -12,14 +12,14 @@ public interface TopicReference {
     /**
      * @return the name of a variable to which a topic is bound
      */
-    public String getTopic();
+    public String getTopicVar();
 
     /**
      * sets the name of a variable to which a topic is bound
      * 
      * @param topic
      */
-    public void setTopic(String topic);
+    public void setTopicVar(String topic);
 
     /**
      * @return the id of a topic or null if no topic id was set

@@ -1,0 +1,141 @@
+// $Id: UseTopicTag.java,v 1.1 2004/09/06 12:27:38 c_froehlich Exp $
+package net.sf.semantag.tm;
+
+import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.MissingAttributeException;
+import org.apache.commons.jelly.XMLOutput;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.tm4j.net.LocatorFactoryException;
+import org.tm4j.topicmap.Topic;
+import org.tm4j.topicmap.TopicMap;
+
+/**
+ * Jelly tag allowing to retrieve a topic instance and sets it as the
+ * context-topic for subsequent tags
+ * 
+ * @author Niko Schmuck
+ * @author cf
+ */
+public class UseTopicTag extends BaseUseTag implements TopicReference,
+        TopicMapReference {
+    /** The Log to which logging calls will be made. */
+    private static final Log log = LogFactory.getLog(UseTopicTag.class);
+
+    // the topicResolver-delegate
+    private TopicResolver topicResolver = new TopicResolver();
+
+    // private reference to the topic that this tag refers to
+    private Topic topic;
+
+    // the name of a variable that holds a topicmap
+    private String tmVar;
+
+    /**
+     * Returns the topic that this Tag refers to.
+     * 
+     * @return
+     * @throws JellyTagException
+     */
+    public Topic getTopic() throws JellyTagException {
+
+        if (topic != null)
+            return topic;
+
+        TopicMap tm = getTopicMap(tmVar);
+        try {
+            topic = topicResolver.getTopic(tm, context);
+        } catch (LocatorFactoryException e) {
+            throw new JellyTagException("While resolving topic in TopicMap "
+                    + tm, e);
+        }
+        return topic;
+
+    }
+
+    
+    public void doTag(XMLOutput output) throws MissingAttributeException,
+            JellyTagException {
+
+        // aretrieve topic
+        if (topic == null)
+            getTopic();
+
+        // set or delete variable
+        storeObject(topic);
+
+        if (topic == null) {
+            // failed to retrieve topic
+            if (shallFailOnNonexistant())
+                throw new JellyTagException("Failed to identify topic");
+
+            else if (shallAddOnNonexistant())
+                AddTopicTag.createTopic(getTopicMap(tmVar), getId(),
+                        getSourceLocator());
+
+            else
+                // ignore body
+                return;
+        }
+
+        // process body
+        getBody().run(context, output);
+
+    }
+
+    public String getTopicVar() {
+        return topicResolver.getTopicVar();
+    }
+
+    public String getTopicID() {
+        return topicResolver.getTopicID();
+    }
+
+    public String getTopicName() {
+        return topicResolver.getTopicName();
+    }
+
+    public String getTopicSourceLocator() {
+        return topicResolver.getTopicSourceLocator();
+    }
+
+    public String getTopicSubject() {
+        return topicResolver.getTopicSubject();
+    }
+
+    public String getTopicSubjectIndicator() {
+        return topicResolver.getTopicSubjectIndicator();
+    }
+
+    public void setTopicVar(String topic) {
+        topicResolver.setTopicVar(topic);
+    }
+
+    public void setTopicID(String topicID) {
+        topicResolver.setTopicID(topicID);
+    }
+
+    public void setTopicName(String topicName) {
+        topicResolver.setTopicName(topicName);
+    }
+
+    public void setTopicSourceLocator(String topicSL) {
+        topicResolver.setTopicSourceLocator(topicSL);
+    }
+
+    public void setTopicSubject(String topicSubject) {
+        topicResolver.setTopicSubject(topicSubject);
+    }
+
+    public void setTopicSubjectIndicator(String topicSI) {
+        topicResolver.setTopicSubjectIndicator(topicSI);
+    }
+
+    public String getTmVar() {
+        return tmVar;
+    }
+
+    public void setTmVar(String tmVar) {
+        this.tmVar = tmVar;
+    }
+}

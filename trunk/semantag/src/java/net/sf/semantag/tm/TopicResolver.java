@@ -28,7 +28,7 @@ public class TopicResolver implements TopicReference{
     /**
      * Name of a variable that hold a topic
      */
-    private String topic;
+    private String topicVariable;
 
     /**
      * Id of a topic
@@ -127,12 +127,12 @@ public class TopicResolver implements TopicReference{
             throws JellyTagException {
 
         // name of variable supplied?
-        if (topic == null)
+        if (topicVariable == null)
             return false;
 
 
-        Object o = ctx.getVariable(topic);
-        String identifier = "Variable "+topic;
+        Object o = ctx.getVariable(topicVariable);
+        String identifier = "Variable "+topicVariable;
         return setReference(o, identifier);
 
     }
@@ -358,8 +358,8 @@ public class TopicResolver implements TopicReference{
         return tm.getLocatorFactory().createLocator(LOCATOR_NOTATION, address);
     }
     
-    public String getTopic() {
-        return topic;
+    public String getTopicVar() {
+        return topicVariable;
     }
     
     public String getTopicID() {
@@ -378,8 +378,8 @@ public class TopicResolver implements TopicReference{
         return topicSubject;
     }
 
-    public void setTopic(String topic) {
-        this.topic = topic;
+    public void setTopicVar(String topic) {
+        this.topicVariable = topic;
     }
     public void setTopicID(String topicID) {
         this.topicId = topicID;

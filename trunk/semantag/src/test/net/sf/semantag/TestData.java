@@ -20,6 +20,8 @@ public class TestData {
   public final static String TM_GREEKS_XTM = RB + "greek.xtm.xml";
   public final static String RDF_HAMAIRPORT = RB + "rfkrlutf.rdf";
 
+  public final static String TM_JOHN_BASELOCATOR = "about_john";
+  
   public static File getFileFromResource(String resource)
                                   throws URISyntaxException {
     return new File(new URI(TestData.class.getResource(resource).toExternalForm()));

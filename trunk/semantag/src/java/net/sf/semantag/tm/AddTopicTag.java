@@ -1,4 +1,4 @@
-// $Id: AddTopicTag.java,v 1.1 2004/08/24 00:12:29 niko_schmuck Exp $
+// $Id: AddTopicTag.java,v 1.2 2004/09/06 12:27:38 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -7,7 +7,10 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.tm4j.net.Locator;
+import org.tm4j.net.LocatorFactoryException;
 import org.tm4j.topicmap.DuplicateObjectIDException;
+import org.tm4j.topicmap.DuplicateResourceLocatorException;
 import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMap;
 
@@ -15,96 +18,66 @@ import java.beans.PropertyVetoException;
 
 /**
  * Tag class for creating a new topic instance.
- *
+ * 
  * @author Niko Schmuck
- * @version 0.1, cf
- *  - can be used to savely retrieve a topic
- *    logging of the fact that a topic with the
- *    given id exists is now optional
- *
- *  - added var-property.
- *    if specified the topic with the given id
- *    is stored under that name in the jelly context
+ * @version 0.1, cf - can be used to savely retrieve a topic logging of the fact
+ *          that a topic with the given id exists is now optional
+ *  - added var-property. if specified the topic with the given id is
+ * stored under that name in the jelly context
  */
-public class AddTopicTag extends BaseTagWithId {
-  /** The Log to which logging calls will be made. */
-  private static final Log log = LogFactory.getLog(AddTopicTag.class);
-  private Topic topic;
+public class AddTopicTag extends BaseTMTag implements ContextTopic,
+        TopicMapReference {
 
-  // Variable to save the retrieved or created topic in
-  private String var;
+    /** The Log to which logging calls will be made. */
+    private static final Log log = LogFactory.getLog(AddTopicTag.class);
 
-  // if a true, the tag prints a warning
-  // if a topic with the given id already exists
-  private boolean warnIfExists = false;
+    private Topic topic = null;
 
-  /**
-   * @return Returns the var.
-   */
-  public String getVar() {
-    return var;
-  }
+    private String tmVar = null;
 
-  /**
-   * @param var
-   *            The var to set.
-   */
-  public void setVar(String var) {
-    this.var = var;
-  }
-
-  /**
-   * @return Returns the warnIfExists.
-   */
-  public boolean isWarnIfExists() {
-    return warnIfExists;
-  }
-
-  /**
-   * @param warnIfExists
-   *            The warnIfExists to set.
-   */
-  public void setWarnIfExists(boolean warnIfExists) {
-    this.warnIfExists = warnIfExists;
-  }
-
-  public Topic getTopic() {
-    return topic;
-  }
-
-  public void doTag(XMLOutput output)
-             throws MissingAttributeException, JellyTagException {
-    TopicMap tm = getTopicMap();
-
-    // verify that topic does not already exist
-    String topicId = getId();
-
-    try {
-      topic = tm.getTopicByID(topicId);
-
-      if (topic == null) {
-        topic = tm.createTopic(getId());
-
-        if (var != null) {
-          context.setVariable(var, topic);
-        }
-
-        getBody().run(context, output);
-      } else {
-        if (warnIfExists) {
-          log.info("Topic with id '" + topicId + "' already exists.");
-        }
-
-        if (var != null) {
-          context.setVariable(var, topic);
-        }
-
-        // do not process child elements
-      }
-    } catch (DuplicateObjectIDException e) {
-      throw new JellyTagException(e);
-    } catch (PropertyVetoException e) {
-      throw new JellyTagException(e);
+    public Topic getTopic() {
+        return topic;
     }
-  }
+
+    public void doTag(XMLOutput output) throws MissingAttributeException,
+            JellyTagException {
+        TopicMap tm = getTopicMap(tmVar);
+        topic = AddTopicTag.createTopic(tm, getId(), getSourceLocator());
+        storeObject(topic);
+    }
+
+    /**
+     * Creates a Topic in the given TopicMap. Optionally the topic is created
+     * with the given id and the given sourceLocator
+     * 
+     * @param tm
+     * @param id
+     * @param sourceLocator
+     * @return @throws
+     *         JellyTagException as a wrapper around the various exception that
+     *         may by thrown while creating a topic
+     */
+    protected static Topic createTopic(TopicMap tm, String id,
+            String sourceLocator) throws JellyTagException {
+        try {
+            Topic t = tm.createTopic(id);
+            if (sourceLocator != null) {
+                Locator loc = tm.getLocatorFactory().createLocator("URI",
+                        sourceLocator);
+                t.addSourceLocator(loc);
+            }
+            return t;
+        } catch (Exception e) {
+            throw new JellyTagException("While creating Topic (ID: " + id
+                    + "/SourceLocator: " + sourceLocator, e);
+        }
+    }
+
+    public String getTmVar() {
+        return tmVar;
+    }
+
+    public void setTmVar(String tmVar) {
+        this.tmVar = tmVar;
+    }
 }
