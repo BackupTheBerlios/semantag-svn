@@ -1,4 +1,4 @@
-// $Id: AddTopicTag.java,v 1.5 2004/09/07 15:07:06 c_froehlich Exp $
+// $Id: AddTopicTag.java,v 1.6 2004/09/14 15:11:01 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -50,7 +50,7 @@ public class AddTopicTag extends BaseTMTag implements ContextTopic,
         TopicMap tm = getTopicMapFromContext(tmVar);
         
         // create topic
-        topic = CreatorUtil.createTopic(tm, getId(), getSourceLocator());
+        topic = tmEngine.createTopic(tm, getId(), getSourceLocator());
         
         // set variable
         storeObject(topic);

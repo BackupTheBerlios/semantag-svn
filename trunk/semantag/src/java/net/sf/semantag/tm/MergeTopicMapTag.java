@@ -1,4 +1,4 @@
-// $Id: MergeTopicMapTag.java,v 1.2 2004/09/07 15:09:07 c_froehlich Exp $
+// $Id: MergeTopicMapTag.java,v 1.3 2004/09/14 15:11:01 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import java.io.File;
@@ -42,7 +42,7 @@ public class MergeTopicMapTag extends BaseTMTag {
 
       log.debug("Merging in topic map from file " + f.getAbsolutePath());
     
-      CreatorUtil.mergeTopicMap(tm, f);
+      tmEngine.mergeTopicMap(tm, f);
   }
 
  

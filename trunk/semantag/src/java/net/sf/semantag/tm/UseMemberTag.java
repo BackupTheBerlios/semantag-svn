@@ -1,4 +1,4 @@
-// $Id: UseMemberTag.java,v 1.2 2004/09/12 16:57:34 c_froehlich Exp $
+// $Id: UseMemberTag.java,v 1.3 2004/09/14 15:11:01 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -79,7 +79,7 @@ public class UseMemberTag extends BaseUseTag implements ContextMember
                 throw new JellyTagException("Failed to identify member");
 
             else if (shallAddOnNonexistant())
-                member= CreatorUtil.createMember(getAssociationFromContext(null), getId(),
+                member= tmEngine.createMember(getAssociationFromContext(null), getId(),
                         getSourceLocator());
 
             else

@@ -25,12 +25,15 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
     private String sourceLocator;
 
     private String var;
+    
+    protected TM4JConnector tmEngine;
 
     /**
      *  
      */
     public BaseTMTag() {
         super();
+        tmEngine = new TM4JConnector();
     }
 
     

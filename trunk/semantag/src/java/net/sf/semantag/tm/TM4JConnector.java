@@ -22,13 +22,17 @@ import org.tm4j.topicmap.source.SerializedTopicMapSource;
 import org.tm4j.topicmap.source.TopicMapSource;
 
 /**
- * Utility class that assembles methods to manage TopicMapObjects
+ * Class that assembles methods to manage TopicMapObjects
+ * in a distinct engine.
+ * 
+ * 
+ * 
  * 
  * 
  * @author cf
  * @version 0.1, created on 07.09.2004
  */
-public class CreatorUtil {
+public class TM4JConnector {
 
     /**
      * Creates a Topic in the given TopicMap.
@@ -43,7 +47,7 @@ public class CreatorUtil {
      *         JellyTagException as a wrapper around the various exceptions that
      *         may by thrown while creating a topic
      */
-    protected static Topic createTopic(final TopicMap tm, String id,
+    protected Topic createTopic(final TopicMap tm, String id,
             String sourceLocator) throws JellyTagException {
 
         // define a creator that creates a Topic
@@ -70,7 +74,7 @@ public class CreatorUtil {
      *             as a wrapper around the various exceptions that may by thrown
      *             while an association is created
      */
-    protected static Association createAssociation(final TopicMap tm,
+    protected Association createAssociation(final TopicMap tm,
             String id, String sourceLocator) throws JellyTagException {
 
         // define a creator that creates an Association
@@ -97,7 +101,7 @@ public class CreatorUtil {
      *             as a wrapper around the various exceptions that may by thrown
      *             while an occurrence is created
      */
-    protected static Occurrence createOccurrence(final Topic t, String id,
+    protected Occurrence createOccurrence(final Topic t, String id,
             String sourceLocator) throws JellyTagException {
 
         // define a creator that creates an Occurrence
@@ -124,7 +128,7 @@ public class CreatorUtil {
      *             as a wrapper around the various exceptions that may by thrown
      *             while a basename is created
      */
-    public static BaseName createBasename(final Topic t, String name,
+    public BaseName createBasename(final Topic t, String name,
             Topic theme, String id, String sourceLocator)
             throws JellyTagException {
         TMOCreator c = new TMOCreator() {
@@ -171,7 +175,7 @@ public class CreatorUtil {
      *             as a wrapper around the various exceptions that may by thrown
      *             while a basename is created
      */
-    public static Member createMember(final Association a, String id,
+    public Member createMember(final Association a, String id,
             String sourceLocator) throws JellyTagException {
 
         TMOCreator c = new TMOCreator() {
@@ -197,7 +201,7 @@ public class CreatorUtil {
      *             as a wrapper around the various exceptions that may by thrown
      *             while a basename is created
      */
-    public static TopicMapObject createTMO(TopicMap tm, TMOCreator tmoCreator,
+    public TopicMapObject createTMO(TopicMap tm, TMOCreator tmoCreator,
             String id, String sourceLocator) throws JellyTagException {
 
         // Check the sourceLocator first.
@@ -229,7 +233,7 @@ public class CreatorUtil {
      * @return the Locator created
      * @throws JellyTagException
      */
-    public static Locator createLocator(String adress, LocatorFactory factory)
+    public Locator createLocator(String adress, LocatorFactory factory)
             throws JellyTagException {
 
         try {
@@ -250,7 +254,7 @@ public class CreatorUtil {
      * @return the Locator created
      * @throws JellyTagException
      */
-    public static Locator createLocator(String adress, TopicMapObject tmo)
+    public Locator createLocator(String adress, TopicMapObject tmo)
             throws JellyTagException {
 
         TopicMap tm;
@@ -273,7 +277,7 @@ public class CreatorUtil {
      * @param basetm
      * @param file
      */
-    public static void mergeTopicMap(TopicMap basetm, File file)
+    public void mergeTopicMap(TopicMap basetm, File file)
             throws JellyTagException {
         TopicMapProvider provider = basetm.getProvider();
 
@@ -303,7 +307,7 @@ public class CreatorUtil {
      *             or if the given TopicMap already contains an Object with a
      *             SourceLocator-Adress that is equal to the given adress.
      */
-    public static Locator makeSourceLocator(TopicMap tm, String adress)
+    public Locator makeSourceLocator(TopicMap tm, String adress)
             throws JellyTagException {
 
         Locator sl = null;

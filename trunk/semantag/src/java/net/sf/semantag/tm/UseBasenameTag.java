@@ -1,4 +1,4 @@
-// $Id: UseBasenameTag.java,v 1.4 2004/09/12 18:22:19 c_froehlich Exp $
+// $Id: UseBasenameTag.java,v 1.5 2004/09/14 15:11:01 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -86,7 +86,7 @@ public class UseBasenameTag extends BaseUseTag implements ContextBaseName {
                 // set scope if specified
                 Topic theme = getTopicFromVariable(scopingTopicVar);
 
-                basename = CreatorUtil.createBasename(
+                basename = tmEngine.createBasename(
                         getTopicFromContext(null), name, theme, getId(), getSourceLocator());
             }
             else

@@ -24,7 +24,7 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar, 
     
     private String nonexistant = NE_DEFAULT;
     
-    protected TMOResolver tmoResolver = new TMOResolver();
+    protected TMOResolver tmoResolver;
 
     // the name of a variable that holds a topicmap
     private String tmVar;
@@ -35,6 +35,7 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar, 
      */
     public BaseUseTag() {
         super();
+        tmoResolver = new TMOResolver(tmEngine);
     }
     
     /**

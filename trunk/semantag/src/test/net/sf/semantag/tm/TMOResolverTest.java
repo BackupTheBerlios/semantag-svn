@@ -68,7 +68,7 @@ public class TMOResolverTest extends TMTagTestBase {
 
     protected void setUp() throws Exception {
         tm = getTopicMapFromResource(TestData.TM_GREEKS_XTM, baseLoc);
-        resolver = new TMOResolver();
+        resolver = new TMOResolver(new TM4JConnector());
 
     }
 }

@@ -1,4 +1,4 @@
-// $Id: UseTopicTag.java,v 1.7 2004/09/12 16:57:34 c_froehlich Exp $
+// $Id: UseTopicTag.java,v 1.8 2004/09/14 15:11:01 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -71,7 +71,7 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
                 throw new JellyTagException("Failed to identify topic");
 
             else if (shallAddOnNonexistant())
-                topic = CreatorUtil.createTopic(getTopicMapFromContext(getTmVar()), getId(),
+                topic = tmEngine.createTopic(getTopicMapFromContext(getTmVar()), getId(),
                         getSourceLocator());
 
             else

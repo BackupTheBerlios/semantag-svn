@@ -1,4 +1,4 @@
-// $Id: AddBasenameTag.java,v 1.2 2004/09/12 18:22:19 c_froehlich Exp $
+// $Id: AddBasenameTag.java,v 1.3 2004/09/14 15:11:01 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -28,32 +28,7 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName{
 
   private BaseName basename;
 
-  public void setName(String name) {
-    this.name = name;
-  }
 
-  public String getName() throws Exception {
-    return ((name != null) ? name : getBodyText());
-  }
-
-  /**
-   * Sets the name of a variable that is bound to
-   * the topic to which this basename shall be added to
-   * @param topicVar
-   */
-  public void setTopic(String topicVar) {
-    this.topicVar = topicVar;
-  }
-
-  /**
-   * sets the name of a variable that is bound to 
-   * the topic that shall be used as the scoping
-   * topic for this basename
-   * @param scopingTopicId
-   */
-  public void setScope(String scopingTopicVar) {
-    this.scopingTopicVar = scopingTopicVar;
-  }
 
   /**
    * @return the basename that was added by this tag
@@ -67,7 +42,7 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName{
       Topic t = getTopicFromContext(topicVar);
 
       if( t == null){
-          String msg = "AddBasename must be either the children on an object ";
+          String msg = "AddBasename must be either the children of an object ";
           msg += "that exports a topic to the context for its successors ";
           msg += "or a variable containig a topic must be specified via the topic-Attribute.";
           throw new JellyTagException(msg);
@@ -77,7 +52,7 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName{
       Topic theme = getTopicFromVariable(scopingTopicVar);
 
       // create basename
-      basename = CreatorUtil.createBasename(t, name, theme, getId(), getSourceLocator());
+      basename = tmEngine.createBasename(t, name, theme, getId(), getSourceLocator());
 
       // set variable
       storeObject(basename);
@@ -85,4 +60,36 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName{
       // process body
       getBody().run(context, output);
   }
+  
+  /**
+   * sets the name that will be the name of 
+   * the new basename if this tag generates one 
+   * @param name
+   */
+  public void setName(String name) {
+      this.name = name;
+    }
+
+    public String getName() throws Exception {
+      return ((name != null) ? name : getBodyText());
+    }
+
+    /**
+     * Sets the name of a variable that is bound to
+     * the topic to which this basename shall be added to
+     * @param topicVar
+     */
+    public void setTopic(String topicVar) {
+      this.topicVar = topicVar;
+    }
+
+    /**
+     * sets the name of a variable that is bound to 
+     * the topic that shall be used as the scoping
+     * topic for this basename
+     * @param scopingTopicId
+     */
+    public void setScope(String scopingTopicVar) {
+      this.scopingTopicVar = scopingTopicVar;
+    }
 }

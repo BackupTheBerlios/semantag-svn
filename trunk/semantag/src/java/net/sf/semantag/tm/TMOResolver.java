@@ -33,11 +33,15 @@ public class TMOResolver {
      */
     private String sourceLocator;
 
+    private TM4JConnector tmEngine;
    
     /**
      *  
      */
-    public TMOResolver() {
+    public TMOResolver(TM4JConnector tmEngine) {
+        
+        this.tmEngine = tmEngine;
+        
     }
 
     /**
@@ -158,7 +162,7 @@ public class TMOResolver {
         // no adress specified
         if(sourceLocator == null) return null;
         
-        Locator sl = CreatorUtil.createLocator(sourceLocator, tm);
+        Locator sl = tmEngine.createLocator(sourceLocator, tm);
 
         // sourceLocator of a topic supplied?
         if (sl == null)
