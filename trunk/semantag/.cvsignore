@@ -1,4 +1,6 @@
-target
-generated
 .classpath
 .project
+target
+generated
+velocity.log
+maven.log
