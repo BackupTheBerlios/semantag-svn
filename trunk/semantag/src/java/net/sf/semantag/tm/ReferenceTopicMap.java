@@ -19,7 +19,7 @@ public interface ReferenceTopicMap {
      * 
      * @param topic
      */
-    public void setTmVar(String topic);
+    public void setTmVar(String varname);
 
 
 }
