@@ -1,4 +1,4 @@
-// $Id: UseTopicTag.java,v 1.6 2004/09/09 19:32:22 c_froehlich Exp $
+// $Id: UseTopicTag.java,v 1.7 2004/09/12 16:57:34 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -30,7 +30,7 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
     private Topic topic;
 
     // the name of a variable that holds a topicmap
-    private String tmVar;
+    //private String tmVar;
 
     /**
      * Returns the topic that this Tag refers to.
@@ -43,7 +43,7 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
         if (topic != null)
             return topic;
 
-        TopicMap tm = getTopicMapFromContext(tmVar);
+        TopicMap tm = getTopicMapFromContext(getTmVar());
         try {
             topic = topicResolver.getTopic(tm, context);
         } catch (LocatorFactoryException e) {
@@ -71,7 +71,7 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
                 throw new JellyTagException("Failed to identify topic");
 
             else if (shallAddOnNonexistant())
-                topic = CreatorUtil.createTopic(getTopicMapFromContext(tmVar), getId(),
+                topic = CreatorUtil.createTopic(getTopicMapFromContext(getTmVar()), getId(),
                         getSourceLocator());
 
             else
@@ -135,13 +135,7 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
         topicResolver.setTopicSubjectIndicator(topicSI);
     }
 
-    public String getTmVar() {
-        return tmVar;
-    }
-
-    public void setTmVar(String tmVar) {
-        this.tmVar = tmVar;
-    }
+   
     
     /**
      * redirected to TopicResolver.getID()
@@ -171,4 +165,18 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
         topicResolver.setTopicSourceLocator(sourceLocator);
     }
 
+    
+    /**
+     * redirected to TopicResolver.getTopicVar()
+     */
+    public String getFromVar() {
+        return topicResolver.getTopicVar();
+    }
+
+    /**
+     * redirected to TopicResolver.setTopicVar(String)
+     */
+    public void setFromVar(String varname) {
+        topicResolver.setTopicVar(varname);
+    }
 }

@@ -61,7 +61,7 @@ public class UseOccurrenceTagTest extends UseTagTestBase {
     // test resolving the occurrence by id
     public void testResolveByIDInExplicitMap() throws Exception {
 
-        String id2 = "occ_2";
+        String id2 = "test2-occ_2";
         super.checkResolveByIDInMap(id2,tm2);
         // assert that the object returned is 
         // a occurrence and that it is the one expected

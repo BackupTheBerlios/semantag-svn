@@ -1,4 +1,4 @@
-// $Id: UseMemberTag.java,v 1.1 2004/09/09 19:32:22 c_froehlich Exp $
+// $Id: UseMemberTag.java,v 1.2 2004/09/12 16:57:34 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -7,7 +7,6 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.tm4j.topicmap.Member;
-import org.tm4j.topicmap.TopicMap;
 import org.tm4j.topicmap.TopicMapObject;
 
 /**
@@ -54,8 +53,7 @@ public class UseMemberTag extends BaseUseTag implements ContextMember
         if (member != null)
             return member;
 
-        TopicMap tm = getTopicMapFromContext(null);
-        TopicMapObject m = tmoResolver.getTopicMapObject(tm, context);
+        TopicMapObject m = super.resolve();
         if (m != null && !(m instanceof Member)) {
             throw new JellyTagException("Failed to identify member. Found "+m);
         }

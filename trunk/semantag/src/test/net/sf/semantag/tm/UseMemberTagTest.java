@@ -63,7 +63,7 @@ public class UseMemberTagTest extends UseTagTestBase {
     // test resolving the member by id
     public void testResolveByIDInExplicitMap() throws Exception {
 
-        String id2 = "mem2";
+        String id2 = "test2-mem2";
         super.checkResolveByIDInMap(id2,tm2);
         // assert that the object returned is 
         // a member and that it is the one expected

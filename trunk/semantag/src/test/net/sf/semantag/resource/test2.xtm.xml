@@ -3,47 +3,47 @@
 <topicMap id="greekie" xmlns="http://www.topicmaps.org/xtm/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink">
 
 <!-- Klasse aller Topics, die eine Klasse ausdruecken. Gibt es wahrscheinlich ein PSI -->
-<topic id="t1">
-	<baseName id="bn1">
+<topic id="test2-t1">
+	<baseName id="test2-bn1">
 		<baseNameString>Basename1 of topic 1</baseNameString>
 	</baseName>
-	<baseName id="bn2">
+	<baseName id="test2-bn2">
 		<baseNameString>Basename2 of topic 1</baseNameString>
 	</baseName>
-	<occurrence id="occ_1">
+	<occurrence id="test2-occ_1">
 		<resourceRef xlink:href="http://any.where.org/foo.html"/>
 	</occurrence>
-	<occurrence id="occ_2">
+	<occurrence id="test2-occ_2">
 		<resourceRef xlink:href="http://any.where.org/foo2.html"/>
 	</occurrence>
 	
 </topic>
 
 
-<topic id="t2">
+<topic id="test2-t2">
 	<instanceOf><topicRef xlink:href="#t1"/></instanceOf>
-	<baseName id="bn3">
+	<baseName id="test2-bn3">
 		<baseNameString>basename 1 of topic 2</baseNameString>
 	</baseName>
-	<occurrence id="occ_3">
+	<occurrence id="test2-occ_3">
 		<resourceRef xlink:href="http://any.where.org/foo3.html"/>
 	</occurrence>
 </topic>
 
 
-<topic id="roletype"></topic>
-<topic id="roletype2"></topic>
-<topic id="assoctype"></topic>
+<topic id="test2-roletype"></topic>
+<topic id="test2-roletype2"></topic>
+<topic id="test2-assoctype"></topic>
 
 
 
-<association id="as-01">
+<association id="test2-as-01">
 	<instanceOf><topicRef xlink:href="#assoctype"/></instanceOf>
-	<member id="mem1">
+	<member id="test2-mem1">
 		<roleSpec><topicRef xlink:href="#roletype1"/></roleSpec>
 		<topicRef xlink:href="#t1"/>
 	</member>
-	<member id="mem2">
+	<member id="test2-mem2">
 		<roleSpec><topicRef xlink:href="#roletype2"/></roleSpec>
 		<topicRef xlink:href="#t2"/>
 	</member>

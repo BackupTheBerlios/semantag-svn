@@ -139,7 +139,7 @@ public abstract class UseTagTestBase extends TMTagTestBase {
         // resolvement should fail silently
         tag.setNonexistant(BaseUseTag.NE_IGNORE_BODY);
 
-        // try to resolve basename
+        // try to resolve object
         tag.doTag(null);
 
         // basename should not have been called

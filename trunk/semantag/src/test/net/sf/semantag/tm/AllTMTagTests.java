@@ -10,7 +10,7 @@ import junit.framework.TestSuite;
  */
 public class AllTMTagTests {
   public static Test suite() {
-    TestSuite suite = new TestSuite("Test for org.tm4j.jelly.test.tag.rdf");
+    TestSuite suite = new TestSuite("Test for net.sf.semantag.tm");
 
     //$JUnit-BEGIN$
     suite.addTestSuite(AddAssociationTagTest.class);

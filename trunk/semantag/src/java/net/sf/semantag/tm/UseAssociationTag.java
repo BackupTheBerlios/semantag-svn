@@ -1,4 +1,4 @@
-// $Id: UseAssociationTag.java,v 1.3 2004/09/11 19:36:23 c_froehlich Exp $
+// $Id: UseAssociationTag.java,v 1.4 2004/09/12 16:57:34 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -7,7 +7,6 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.tm4j.topicmap.Association;
-import org.tm4j.topicmap.TopicMap;
 import org.tm4j.topicmap.TopicMapObject;
 
 /**

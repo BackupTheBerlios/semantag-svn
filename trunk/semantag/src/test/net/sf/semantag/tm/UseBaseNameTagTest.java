@@ -62,7 +62,7 @@ public class UseBaseNameTagTest extends UseTagTestBase {
     // test resolving the basename by id
     public void testResolveByIDInExplicitMap() throws Exception {
 
-        String id2 = "bn2";
+        String id2 = "test2-bn2";
         super.checkResolveByIDInMap(id2,tm2);
         // assert that the object returned is 
         // a basename and that it is the one expected

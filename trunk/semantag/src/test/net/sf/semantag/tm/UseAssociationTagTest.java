@@ -61,7 +61,7 @@ public class UseAssociationTagTest extends UseTagTestBase {
     // test resolving the association by id
     public void testResolveByIDInExplicitMap() throws Exception {
 
-        String id2 = "as-01";
+        String id2 = "test2-as-01";
         super.checkResolveByIDInMap(id2,tm2);
         // assert that the object returned is 
         // a association and that it is the one expected
