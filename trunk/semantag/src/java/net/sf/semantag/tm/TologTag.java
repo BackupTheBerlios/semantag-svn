@@ -1,4 +1,4 @@
-// $Id: TologTag.java,v 1.2 2004/09/06 12:27:38 c_froehlich Exp $
+// $Id: TologTag.java,v 1.3 2004/09/21 13:54:17 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -20,7 +20,7 @@ import org.tm4j.topicmap.TopicMap;
  *
  * @author cf
  */
-public class TologTag extends BaseTag {
+public class TologTag extends BaseTMTag {
   /** The Log to which logging calls will be made. */
   protected static final Log log = LogFactory.getLog(TologTag.class);
   private String var = null;
@@ -45,11 +45,13 @@ public class TologTag extends BaseTag {
   }
 
   protected void doQuery() throws JellyTagException {
-    TopicMap tm = getTopicMap();
+    TopicMap tm = getTopicMapFromContext(null);
     
-    log.info("Querying topicmap " + tm.getBaseLocator().getAddress() + ": \n" +
-             query);
-
+    if(log.isDebugEnabled()){
+        log.debug("Querying topicmap " + tm.getBaseLocator().getAddress() + ": \n" +
+            query);
+    }
+    
     QueryEvaluator qE = QueryEvaluatorFactory.newQueryEvaluator(tm);
 
     if (qE == null) {
