@@ -1,4 +1,4 @@
-// $Id: AddOccurrenceTag.java,v 1.2 2004/11/29 16:11:04 c_froehlich Exp $
+// $Id: AddOccurrenceTag.java,v 1.3 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -26,6 +26,9 @@ import org.tm4j.topicmap.Topic;
  * <code>resource</code> attribute is used. For an occurrence with internal data, the 
  * <code>data</code> attribute is used. If both attributes are specified, <code>data</code> 
  * will have precedence.
+ * 
+ * @jelly
+ *  name="addOccurrence"
  * 
  * @author Niko Schmuck
  * @author cf

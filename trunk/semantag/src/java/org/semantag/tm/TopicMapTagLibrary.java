@@ -1,9 +1,10 @@
-// $Id: TopicMapTagLibrary.java,v 1.2 2004/11/29 06:19:49 c_froehlich Exp $
+// $Id: TopicMapTagLibrary.java,v 1.3 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.TagLibrary;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.semantag.csv.CSVTagLibrary;
 
 /**
  * The topic map tag library basically registers all jelly tags,
@@ -41,4 +42,5 @@ public class TopicMapTagLibrary extends TagLibrary {
     registerTag("useTopic", UseTopicTag.class);
     
   }
+  
 }

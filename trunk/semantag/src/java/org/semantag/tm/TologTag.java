@@ -1,4 +1,4 @@
-// $Id: TologTag.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+// $Id: TologTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -16,8 +16,13 @@ import org.tm4j.tologx.TologResultsSet;
 import org.tm4j.topicmap.TopicMap;
 
 /**
- * Jelly tag which opens an existing topic map and stores it in the context.
- *
+ * Executes its body as a tolog query and stores the result
+ * in the variable named by the <code>var</code>attribute.
+ * 
+ * 
+ * @jelly
+ *  name="tolog"
+ * 
  * @author cf
  */
 public class TologTag extends BaseTMTag {

@@ -1,4 +1,4 @@
-// $Id: AddMemberTag.java,v 1.2 2004/11/29 16:11:04 c_froehlich Exp $
+// $Id: AddMemberTag.java,v 1.3 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -27,6 +27,9 @@ import org.tm4j.topicmap.Topic;
  * Additional player may be specified by enclosed <code>addPlayer</code>-tags.
  * 
  * The role type of the new member is specified via the <code>role</code> attribute.
+ * 
+ * @jelly
+ *  name="addMember"
  * 
  * @author Niko Schmuck
  * @author cf

@@ -1,4 +1,4 @@
-// $Id: AddScopeTag.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+// $Id: AddScopeTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -12,6 +12,9 @@ import org.tm4j.topicmap.TopicMapObject;
 /**
  * Tag for adding a topic to the set of topics that constitutes
  * the scope of a BaseName, an Association or an Occurrence.
+ * 
+ * @jelly
+ *  name="addScope"
  * 
  * @author Niko Schmuck
  * @author cf

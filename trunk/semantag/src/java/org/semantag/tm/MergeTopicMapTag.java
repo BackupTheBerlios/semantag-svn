@@ -1,4 +1,4 @@
-// $Id: MergeTopicMapTag.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+// $Id: MergeTopicMapTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import java.io.File;
@@ -15,6 +15,9 @@ import org.tm4j.topicmap.TopicMap;
  * Requires that a topic map has been initialised already. This tag does not
  * support child elements.
  *
+ * @jelly
+ *  name="mergeTopicMap"
+ * 
  * @author Niko Schmuck
  */
 public class MergeTopicMapTag extends BaseTMTag {

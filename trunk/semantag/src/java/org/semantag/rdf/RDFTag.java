@@ -10,12 +10,16 @@ import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.jelly.XMLOutput;
 
 /**
- *
+ * Makes a new jena rdf model and fills it from the given url
+ * 
+ *@jelly
+ *  name="rdf"
+ * 
  * @author cf
  * @version 0.1, created on 11.08.2004
  */
 public class RDFTag extends TagSupport {
-  private String modelroot = "/tmp";
+  private String modelroot = System.getProperty("java.io.tmpdir");
   private String modelname = "defaultModel";
   private String url = null;
   private Model model = null;
@@ -36,7 +40,7 @@ public class RDFTag extends TagSupport {
     invokeBody(output);
   }
 
-  public Model makeAndFillModel() {
+  protected Model makeAndFillModel() {
     ModelMaker mm = ModelFactory.createFileModelMaker(modelroot);
     Model model = mm.createModel(modelname);
 
@@ -59,6 +63,11 @@ public class RDFTag extends TagSupport {
   }
 
   /**
+   * Sets the name of the model.
+   * @jelly
+   *    required="no"
+   *    default="defaultModel"
+   * 
    * @param modelname The modelname to set.
    */
   public void setModelname(String modelname) {
@@ -73,6 +82,11 @@ public class RDFTag extends TagSupport {
   }
 
   /**
+   * Sets the path where the model will be stored.
+   * 
+   * @jelly
+   *    required="no"
+   *    default="value of the system property \"java.io.tmpdir\""
    * @param modelroot The modelroot to set.
    */
   public void setModelroot(String modelroot) {
@@ -87,6 +101,10 @@ public class RDFTag extends TagSupport {
   }
 
   /**
+   * Sets the url from which the rdf model will be filled.
+   * @jelly
+   *    required="yes"
+   * 
    * @param url The url to set.
    */
   public void setUrl(String url) {

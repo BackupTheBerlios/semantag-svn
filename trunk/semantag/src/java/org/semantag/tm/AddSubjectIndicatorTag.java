@@ -1,4 +1,4 @@
-//$Id: AddSubjectIndicatorTag.java,v 1.2 2004/11/29 16:11:04 c_froehlich Exp $
+//$Id: AddSubjectIndicatorTag.java,v 1.3 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -20,6 +20,9 @@ import org.tm4j.topicmap.Topic;
  * 
  * To specify the locator that indicates the subject, you use the <code>locator</code>
  * attribute.
+ * 
+ * @jelly
+ *  name="addSubjectIndicator"
  * 
  * @author Niko Schmuck
  * @author cf

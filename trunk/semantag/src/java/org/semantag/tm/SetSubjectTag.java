@@ -1,4 +1,4 @@
-//$Id: SetSubjectTag.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+//$Id: SetSubjectTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -11,6 +11,9 @@ import org.tm4j.topicmap.Topic;
 /**
  * Sets the subject of the current context topic.
  *
+ * @jelly
+ *  name="setSubject"
+ * 
  * @author cf
  */
 public class SetSubjectTag extends BaseTMTag {

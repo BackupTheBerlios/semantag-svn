@@ -1,4 +1,4 @@
-// $Id: AddAssociationTag.java,v 1.2 2004/11/29 16:11:03 c_froehlich Exp $
+// $Id: AddAssociationTag.java,v 1.3 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -19,6 +19,9 @@ import org.tm4j.topicmap.TopicMap;
  * id / a sourceLocator
  * for the new association. If the underlying tm-engine detects a conflict (i.e. duplicate id /
  * sourceLocator) the execution of the tag will fail.
+ * 
+ * @jelly
+ *  name="addAssociation"
  * 
  * @author Niko Schmuck
  * @author cf

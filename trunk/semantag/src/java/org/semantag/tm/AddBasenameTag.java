@@ -1,4 +1,4 @@
-// $Id: AddBasenameTag.java,v 1.2 2004/11/29 16:11:04 c_froehlich Exp $
+// $Id: AddBasenameTag.java,v 1.3 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -21,6 +21,8 @@ import org.tm4j.topicmap.Topic;
  * (i.e. duplicate id/ * sourceLocator) the execution of the tag will fail.
  * 
  * The name of the basename is specified via the <code>name</code> attribute.
+ * @jelly
+ *  name="addBasename"
  * 
  * @author Niko Schmuck
  * @author cf

@@ -1,4 +1,4 @@
-// $Id: AddTopicTag.java,v 1.2 2004/11/29 16:11:04 c_froehlich Exp $
+// $Id: AddTopicTag.java,v 1.3 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -9,15 +9,6 @@ import org.apache.commons.logging.LogFactory;
 import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMap;
 
-/**
- * Tag class for creating a new topic instance.
- * 
- * @author Niko Schmuck
- * @version 0.1, cf - can be used to savely retrieve a topic logging of the fact
- *          that a topic with the given id exists is now optional - added
- *          var-property. if specified the topic with the given id is stored
- *          under that name in the jelly context
- */
 /**
  * Creates a topic.
  * 
@@ -30,6 +21,9 @@ import org.tm4j.topicmap.TopicMap;
  * id / a sourceLocator 
  * for the new topic. If the underlying tm-engine detects a conflict 
  * (i.e. duplicate id/ * sourceLocator) the execution of the tag will fail.
+ * 
+ * @jelly
+ *  name="addTopic"
  * 
  * @author Niko Schmuck
  * @author cf

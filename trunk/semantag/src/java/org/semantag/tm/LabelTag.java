@@ -1,4 +1,4 @@
-//$Id: LabelTag.java,v 1.3 2004/11/29 08:58:33 c_froehlich Exp $
+//$Id: LabelTag.java,v 1.4 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -9,9 +9,13 @@ import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
 
 /**
- * A tag that returns a label for an object.
+ * Prints a label for an object.
+ * 
  * This tag is usually used to get a label for a topic map object
- * or a locator
+ * or for a locator
+ * 
+ * @jelly
+ *  name="label"
  * 
  * @author cf
  */
@@ -71,9 +75,12 @@ public class LabelTag extends BaseTMTag {
 
     
     /**
-     * @param tmo the object for which a label shall be returned.
+     * Sets the object for which a label will be printed.
+
      * This is usually an object of type TopicMapObject or of type Locator.
      * Nevertheless its possible to pass any object.
+     * 
+     * @param tmo the object for which a label shall be returned.
      */
     public void setObject(Object tmo) {
         this.object = tmo;

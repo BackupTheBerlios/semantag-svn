@@ -8,7 +8,11 @@
     <menu name="SemanTag">
       <item name="Home"                    href="/index.html"/>
       <item name="Overview"                href="/about.html"/>
-      <item name="Tag Reference"           href="/tags.html"/>
+      <item name="Tag Reference"           >
+        <item name="CSV"                   href="/tl-csv.html"/>
+        <item name="RDF"                   href="/tl-rdf.html"/>
+        <item name="Topicmap"              href="/tl-topicmap.html"/>
+      </item>  
     </menu>
   </body>
 </project>

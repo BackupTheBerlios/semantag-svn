@@ -1,4 +1,4 @@
-// $Id: SaveTopicMapTag.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+// $Id: SaveTopicMapTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -21,51 +21,77 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 /**
- * Serializes the topic map in the context to the specified file.
- * This tag does not support child elements.
- *
+ * Serializes the topic map in the context to the specified file. This tag does
+ * not support child elements.
+ * 
+ * @jelly
+ *  name="saveTopicMap"
+ * 
  * @author Niko Schmuck
+ * @author cf
  */
-public class SaveTopicMapTag extends BaseTag {
-  /** The Log to which logging calls will be made. */
-  private static final Log log = LogFactory.getLog(SaveTopicMapTag.class);
-  private String filename;
+public class SaveTopicMapTag extends BaseTMTag {
+    /** The Log to which logging calls will be made. */
+    private static final Log log = LogFactory.getLog(SaveTopicMapTag.class);
 
-  public void setFilename(String filename) {
-    this.filename = filename;
-  }
+    private String filename;
 
-  public void doTag(XMLOutput output)
-             throws MissingAttributeException, JellyTagException {
-    try {
-      TopicMap tm = getTopicMap();
-      File f = new File(filename);
+    private TopicMap topicmap;
 
-      log.debug("Writing topic map to file " + f.getAbsolutePath());
-      writeTopicMap(tm, new FileOutputStream(f));
-    } catch (FileNotFoundException e) {
-      throw new JellyTagException(e);
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
-  }
 
-  private void writeTopicMap(TopicMap tm, OutputStream os) {
-    TopicMapWalker walker = new TopicMapWalker();
-    XTMWriter writer = new XTMWriter();
-    OutputFormat of = new OutputFormat();
-
-    of.setEncoding("UTF-8");
-    of.setIndenting(true);
-    of.setIndent(2);
-
-    XMLSerializer serializer = new XMLSerializer(os, of);
-
-    walker.setHandler(writer);
-    writer.setContentHandler(serializer);
-
-    try {
-      walker.walk(tm);
-    } catch (TopicMapProcessingException e) {
-      throw new RuntimeException("Unable to write topic map: " + e.toString());
+    private TopicMap getTopicMap() throws JellyTagException {
+        if (topicmap == null)
+            topicmap = getTopicMapFromContext(null);
+        return topicmap;
     }
-  }
+
+    public void doTag(XMLOutput output) throws MissingAttributeException,
+            JellyTagException {
+        try {
+            TopicMap tm = getTopicMap();
+            File f = new File(filename);
+
+            log.debug("Writing topic map to file " + f.getAbsolutePath());
+            writeTopicMap(tm, new FileOutputStream(f));
+        } catch (FileNotFoundException e) {
+            throw new JellyTagException(e);
+        }
+    }
+
+    private void writeTopicMap(TopicMap tm, OutputStream os) {
+        TopicMapWalker walker = new TopicMapWalker();
+        XTMWriter writer = new XTMWriter();
+        OutputFormat of = new OutputFormat();
+
+        of.setEncoding("UTF-8");
+        of.setIndenting(true);
+        of.setIndent(2);
+
+        XMLSerializer serializer = new XMLSerializer(os, of);
+
+        walker.setHandler(writer);
+        writer.setContentHandler(serializer);
+
+        try {
+            walker.walk(tm);
+        } catch (TopicMapProcessingException e) {
+            throw new RuntimeException("Unable to write topic map: "
+                    + e.toString());
+        }
+    }
+    public TopicMap getTopicmap() {
+        return topicmap;
+    }
+    /**
+     * Sets the topicmap that shall be saved
+     * @jelly
+     *  required="no"
+     * @param topicmap
+     */
+    public void setTopicmap(TopicMap topicmap) {
+        this.topicmap = topicmap;
+    }
 }

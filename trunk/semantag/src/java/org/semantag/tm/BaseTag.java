@@ -1,4 +1,4 @@
-// $Id: BaseTag.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+// $Id: BaseTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.TagSupport;
@@ -30,106 +30,106 @@ public abstract class BaseTag extends TagSupport implements Dictionary {
    *
    * @param tm
    */
-  protected void putTopicMap(TopicMap tm) {
-    context.setVariable(KEY_TOPICMAP, tm);
+//  protected void putTopicMap(TopicMap tm) {
+//    context.setVariable(KEY_TOPICMAP, tm);
+//
+//    // Put also ID generator to jelly context
+//    IDGenerator idGenerator = IDGeneratorFactory.newIDGenerator();
+//
+//    context.setVariable(KEY_IDGENERATOR, idGenerator);
+//  }
 
-    // Put also ID generator to jelly context
-    IDGenerator idGenerator = IDGeneratorFactory.newIDGenerator();
+//  protected Topic getTopicById(final String topId) {
+//    TopicMap tm = getTopicMap();
+//    Topic topic = null;
+//
+//    if (topId != null) {
+//      topic = tm.getTopicByID(normalize(topId));
+//    }
+//
+//    return topic;
+//  }
 
-    context.setVariable(KEY_IDGENERATOR, idGenerator);
-  }
+//  protected Topic getCorrespondingTopic(final String topicId, final Log log) {
+//    Topic t = null;
+//
+//    if ((topicId != null) && (topicId.length() > 0)) {
+//      String normId = normalize(topicId);
+//
+//      log.debug("Trying to retrieve topic with id '" + normId + "'.");
+//      t = getTopicMap().getTopicByID(normId);
+//    }
+//
+//    if (t == null) {
+//      log.debug("Trying to retrieve topic from parent tag.");
+//
+//      AddTopicTag topicTag = (AddTopicTag) findAncestorWithClass(AddTopicTag.class);
+//
+//      if (topicTag == null) {
+//        // log.info("Neither topic specified nor embedded inside
+//        // addTopic tag. Parent is "+getParent());
+//        // log message commented out by cf since it is perfectly valid
+//        // for an instanceOf-Tag
+//        // to be nested in association or occurrence rather than in
+//        // topic
+//      } else {
+//        t = topicTag.getTopic();
+//      }
+//    }
+//
+//    return t;
+//  }
 
-  protected Topic getTopicById(final String topId) {
-    TopicMap tm = getTopicMap();
-    Topic topic = null;
+//  protected Topic getScopingTopic(final String scopingTopicId, final Log log) {
+//    Topic t = null;
+//
+//    if ((scopingTopicId != null) && (scopingTopicId.length() > 0)) {
+//      String normId = normalize(scopingTopicId);
+//
+//      log.debug("Trying to retrieve scoping topic with id '" + normId + "'.");
+//      t = getTopicMap().getTopicByID(normId);
+//    }
+//
+//    return t;
+//  }
 
-    if (topId != null) {
-      topic = tm.getTopicByID(normalize(topId));
-    }
-
-    return topic;
-  }
-
-  protected Topic getCorrespondingTopic(final String topicId, final Log log) {
-    Topic t = null;
-
-    if ((topicId != null) && (topicId.length() > 0)) {
-      String normId = normalize(topicId);
-
-      log.debug("Trying to retrieve topic with id '" + normId + "'.");
-      t = getTopicMap().getTopicByID(normId);
-    }
-
-    if (t == null) {
-      log.debug("Trying to retrieve topic from parent tag.");
-
-      AddTopicTag topicTag = (AddTopicTag) findAncestorWithClass(AddTopicTag.class);
-
-      if (topicTag == null) {
-        // log.info("Neither topic specified nor embedded inside
-        // addTopic tag. Parent is "+getParent());
-        // log message commented out by cf since it is perfectly valid
-        // for an instanceOf-Tag
-        // to be nested in association or occurrence rather than in
-        // topic
-      } else {
-        t = topicTag.getTopic();
-      }
-    }
-
-    return t;
-  }
-
-  protected Topic getScopingTopic(final String scopingTopicId, final Log log) {
-    Topic t = null;
-
-    if ((scopingTopicId != null) && (scopingTopicId.length() > 0)) {
-      String normId = normalize(scopingTopicId);
-
-      log.debug("Trying to retrieve scoping topic with id '" + normId + "'.");
-      t = getTopicMap().getTopicByID(normId);
-    }
-
-    return t;
-  }
-
-  protected Association getCorrespondingAssociation(final String associationId,
-                                                    final Log log) {
-    Association assoc = null;
-
-    if ((associationId != null) && (associationId.length() > 0)) {
-      String normId = normalize(associationId);
-
-      log.debug("Trying to retrieve association with id '" + normId + "'.");
-
-      // TODO: improve performance, better use index for lookup
-      Iterator itA = getTopicMap().getAssociationsIterator();
-
-      while (itA.hasNext()) {
-        Association currentAssoc = (Association) itA.next();
-
-        if (currentAssoc.getID().equals(normId)) {
-          assoc = currentAssoc;
-
-          break;
-        }
-      }
-    }
-
-    if (assoc == null) {
-      log.debug("Trying to retrieve association from parent tag.");
-
-      AddAssociationTag associationTag = (AddAssociationTag) findAncestorWithClass(AddAssociationTag.class);
-
-      if (associationTag == null) {
-        log.info("Neither association specified nor embedded inside addassociation tag.");
-      } else {
-        assoc = associationTag.getAssociation();
-      }
-    }
-
-    return assoc;
-  }
+//  protected Association getCorrespondingAssociation(final String associationId,
+//                                                    final Log log) {
+//    Association assoc = null;
+//
+//    if ((associationId != null) && (associationId.length() > 0)) {
+//      String normId = normalize(associationId);
+//
+//      log.debug("Trying to retrieve association with id '" + normId + "'.");
+//
+//      // TODO: improve performance, better use index for lookup
+//      Iterator itA = getTopicMap().getAssociationsIterator();
+//
+//      while (itA.hasNext()) {
+//        Association currentAssoc = (Association) itA.next();
+//
+//        if (currentAssoc.getID().equals(normId)) {
+//          assoc = currentAssoc;
+//
+//          break;
+//        }
+//      }
+//    }
+//
+//    if (assoc == null) {
+//      log.debug("Trying to retrieve association from parent tag.");
+//
+//      AddAssociationTag associationTag = (AddAssociationTag) findAncestorWithClass(AddAssociationTag.class);
+//
+//      if (associationTag == null) {
+//        log.info("Neither association specified nor embedded inside addassociation tag.");
+//      } else {
+//        assoc = associationTag.getAssociation();
+//      }
+//    }
+//
+//    return assoc;
+//  }
 
   /**
    * Turning a given string into a normalized one, with most special
@@ -181,13 +181,13 @@ public abstract class BaseTag extends TagSupport implements Dictionary {
    * contains at least one character that
    * is not whitespace, false otherwise
    */
-  protected boolean isSpecified(String data) {
-    if ((data == null) || (data.length() == 0) || (data.trim().length() == 0)) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+//  protected boolean isSpecified(String data) {
+//    if ((data == null) || (data.length() == 0) || (data.trim().length() == 0)) {
+//      return false;
+//    } else {
+//      return true;
+//    }
+//  }
   
   
 }

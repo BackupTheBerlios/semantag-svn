@@ -1,4 +1,4 @@
-// $Id: UseAssociationTag.java,v 1.1 2004/10/26 19:49:49 niko_schmuck Exp $
+// $Id: UseAssociationTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -26,6 +26,9 @@ import org.tm4j.topicmap.TopicMapObject;
  * The current topicmap is either specified by the
  * tmVar-property of this instance or by
  * 
+ * 
+ * @jelly
+ *  name="useAssociation"
  * 
  * @author Niko Schmuck
  * @author cf

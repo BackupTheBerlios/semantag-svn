@@ -1,4 +1,4 @@
-// $Id: UseTopicTag.java,v 1.1 2004/10/26 19:49:46 niko_schmuck Exp $
+// $Id: UseTopicTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -12,8 +12,39 @@ import org.tm4j.topicmap.TopicMap;
 import org.tm4j.topicmap.TopicMapObject;
 
 /**
- * Jelly tag allowing to retrieve a topic instance and sets it as the
- * context-topic for subsequent tags
+ * Retrieves a Topic instance and sets it as the
+ * context-topic for subsequent tags.
+ * 
+ * The nonexistant - attribute triggers what will happen
+ * if the specified topic could not be found.
+ * 
+ * @jelly
+ *  name="useTopic"
+ * 
+ * @jelly.nested 
+ *  name="setSubject" 
+ *  desc="sets the subject for this topic" 
+ *  required="no"
+ * 
+ * @jelly.nested 
+ *  name="addSubjectIndicator" 
+ *  desc="adds a subject indicator for this topic" 
+ *  required="no"
+ * 
+ * @jelly.nested
+ *  name="addBasename"
+ *  desc="adds a basename to this topic"
+ *  required="no"
+ * 
+ * @jelly.nested
+ *  name="addOccurrence"
+ *  desc="adds an occurrence to this topic"
+ *  required="no"
+ * 
+ * @jelly.nested 
+ *  name="addInstanceOf" 
+ *  desc="sets a type for this topic" 
+ *  required="no"
  * 
  * @author Niko Schmuck
  * @author cf
@@ -65,46 +96,6 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
             getTopic();
 
         doTag(topic, output);
-//        if (topic == null) {
-//            // failed to retrieve topic
-//            if (shallFailOnNonexistant())
-//                throw new JellyTagException("Failed to identify topic");
-//
-//            else if (shallAddOnNonexistant()){
-//                // topic will be added
-//                topic = tmEngine.createTopic(getTopicMapFromContext(), getId(),
-//                        getSourceLocator());
-//
-//                // set variable
-//                storeObject(topic);
-//                
-//                // process body
-//                getBody().run(context, output);
-//            }
-//            else {
-//                // reset var, ignore body
-//                storeObject(null);
-//                return;
-//            }
-//        }
-//        else {
-//            // Topic did exist
-//            // set variable
-//            storeObject(topic);
-//
-//            // process body only, if the body was not meant to create a topic
-//            if(shallIgnoreOnNonexistant()){
-//                // process body
-//                getBody().run(context, output);
-//                
-//            }
-//        }
-//
-//        // set variable
-//        storeObject(topic);
-//        
-//        // process body
-//        getBody().run(context, output);
 
     }
     
@@ -117,11 +108,6 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
         return topic;
     }
    
-
-//    public String getTopicVar() {
-//        return topicResolver.getTopicVar();
-//    }
-
     public String getTopicID() {
         return topicResolver.getTopicID();
     }
@@ -142,30 +128,61 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
         return topicResolver.getTopicSubjectIndicator();
     }
 
-//    public void setTopicVar(String topic) {
-//        topicResolver.setTopicVar(topic);
-//    }
-
     public void setTopic(Topic aTopic) {
         topic = aTopic;
     }
 
+    /**
+     * Sets the id 
+     * that identifies the topic
+     * @jelly
+     *    required="no"
+     */
     public void setTopicID(String topicID) {
         topicResolver.setTopicID(topicID);
     }
 
+    /**
+     * Sets the name 
+     * that identifies the topic
+     * (not implemented in Semantag 0.1)
+     * 
+     * @jelly
+     *    required="no"
+     */
     public void setTopicName(String topicName) {
         topicResolver.setTopicName(topicName);
     }
 
+    /**
+     * Sets the address of a sourceLocator 
+     * that identifies the topic
+     * 
+     * @jelly
+     *    required="no"
+     */
     public void setTopicSourceLocator(String topicSL) {
         topicResolver.setTopicSourceLocator(topicSL);
     }
 
+    /**
+     * Sets the address of the subject 
+     * that identifies the topic
+     * 
+     * @jelly
+     *    required="no"
+     */
     public void setTopicSubject(String topicSubject) {
         topicResolver.setTopicSubject(topicSubject);
     }
 
+    /**
+     * Sets the address of a subjectIndicator 
+     * that identifies the topic
+     * 
+     * @jelly
+     *    required="no"
+     */
     public void setTopicSubjectIndicator(String topicSI) {
         topicResolver.setTopicSubjectIndicator(topicSI);
     }
@@ -201,17 +218,4 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
     }
 
     
-    /**
-     * redirected to TopicResolver.getTopicVar()
-     */
-//    public String getFromVar() {
-//        return topicResolver.getTopicVar();
-//    }
-//
-//    /**
-//     * redirected to TopicResolver.setTopicVar(String)
-//     */
-//    public void setFromVar(String varname) {
-//        topicResolver.setTopicVar(varname);
-//    }
 }

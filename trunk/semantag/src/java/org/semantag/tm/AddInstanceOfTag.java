@@ -1,4 +1,4 @@
-// $Id: AddInstanceOfTag.java,v 1.2 2004/11/29 16:11:04 c_froehlich Exp $
+// $Id: AddInstanceOfTag.java,v 1.3 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -29,6 +29,9 @@ import org.tm4j.topicmap.TopicMapObject;
  * 
  * To specify the topic that will act as the type, you use either the <code>type</code>
  * attribute or one of the various topic resolving attributes.
+ * 
+ * @jelly
+ *  name="addInstanceOf"
  * 
  * @author Niko Schmuck
  * @author cf

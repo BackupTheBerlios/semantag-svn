@@ -1,4 +1,4 @@
-// $Id: BaseTopicReferenceTag.java,v 1.1 2004/10/26 19:49:47 niko_schmuck Exp $
+// $Id: BaseTopicReferenceTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -64,27 +64,64 @@ public abstract class BaseTopicReferenceTag extends BaseTMTag implements Referen
         return topicResolver.getTopicSubjectIndicator();
     }
 
-
+    /**
+     * Sets the topic
+     * @jelly
+     *    required="no"
+     */
     public void setTopic(Topic aTopic) {
         topic = aTopic;
     }
 
+    /**
+     * same as attribute <code>id</code>
+     * @jelly
+     *    required="no"
+     */
     public void setTopicID(String topicID) {
         topicResolver.setTopicID(topicID);
     }
 
+    /**
+     * Sets the name 
+     * that identifies the topic
+     * (not implemented in Semantag 0.1)
+     * 
+     * @jelly
+     *    required="no"
+     */
     public void setTopicName(String topicName) {
         topicResolver.setTopicName(topicName);
     }
 
+    /**
+     * same as attribute <code>sourceLocator</code>
+     * 
+     * @jelly
+     *    required="no"
+     */
     public void setTopicSourceLocator(String topicSL) {
         topicResolver.setTopicSourceLocator(topicSL);
     }
 
+    /**
+     * Sets the address of the subject 
+     * that identifies the topic
+     * 
+     * @jelly
+     *    required="no"
+     */
     public void setTopicSubject(String topicSubject) {
         topicResolver.setTopicSubject(topicSubject);
     }
 
+    /**
+     * Sets the address of a subjectIndicator 
+     * that identifies the topic
+     * 
+     * @jelly
+     *    required="no"
+     */
     public void setTopicSubjectIndicator(String topicSI) {
         topicResolver.setTopicSubjectIndicator(topicSI);
     }
@@ -92,14 +129,18 @@ public abstract class BaseTopicReferenceTag extends BaseTMTag implements Referen
    
     
     /**
-     * redirected to TopicResolver.getID()
-     */
+      * Sets the id 
+     * that identifies the topic
+    */
     public String getId() {
         return topicResolver.getTopicID();
     }
 
     /**
-     * redirected to TopicResolver.setID(String)
+     * Sets the id 
+     * that identifies the topic
+     * @jelly
+     *    required="no"
      */
     public void setId(String id) {
         topicResolver.setTopicID(id);
@@ -113,7 +154,11 @@ public abstract class BaseTopicReferenceTag extends BaseTMTag implements Referen
     }
 
     /**
-     * redirected to TopicResolver.setSourceLocator(String)
+     * Sets the address of a sourceLocator 
+     * that identifies the topic
+     * 
+     * @jelly
+     *    required="no"
      */
     public void setSourceLocator(String sourceLocator) {
         topicResolver.setTopicSourceLocator(sourceLocator);

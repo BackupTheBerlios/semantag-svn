@@ -13,9 +13,10 @@
        <p>Semantag is based on <a href ="http://jakarta.apache.org/commons/jelly">jakarta-jelly</a>, a library that "turns xml into executable code". Using SemanTag means to write xml-scripts (just as with ant) that mix tags from the SemanTag-library as well as tags from the existing Jelly-tag libraries.</p>
   </section>
   <section name="How it works">
+    <index term="SemanticWeb"/>
     <p>SemanTag is based on Jelly and therefor SemanTag scripts are in fact Jelly scripts.</p>
     <p>Jelly-Scripts are written in plain xml. The core Jelly tag lib defines tags for loops, branches and variables. Dependant on your needs you use additional tag libs that provide features like accessing databases, start the velocity template engine, query webservices etc.</p>
-    <p>The SemanTag-project as well defines tag libs. Theese tag libs concentrate on technologies that are more tight or more loose coupled to the SemanticWeb. Therefor SemanTag allows you to process semantically enriched data with Jelly scripts.</p>
+    <p>The SemanTag-project as well defines tag libs. Theese tag libs concentrate on technologies that are more or less related to the SemanticWeb. Therefor SemanTag allows you to process semantically enriched data with Jelly scripts.</p>
   </section>
   
   <section name="Supported Standards"> 
