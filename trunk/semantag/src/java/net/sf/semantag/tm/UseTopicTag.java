@@ -1,4 +1,4 @@
-// $Id: UseTopicTag.java,v 1.4 2004/09/07 05:04:53 c_froehlich Exp $
+// $Id: UseTopicTag.java,v 1.5 2004/09/09 11:41:12 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -19,7 +19,8 @@ import org.tm4j.topicmap.TopicMap;
  */
 public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
         ReferenceTopicMap {
-    /** The Log to which logging calls will be made. */
+    
+    // The Log to which logging calls will be made. 
     private static final Log log = LogFactory.getLog(UseTopicTag.class);
 
     // the topicResolver-delegate
@@ -57,6 +58,9 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
     public void doTag(XMLOutput output) throws MissingAttributeException,
             JellyTagException {
 
+        if(log.isDebugEnabled())
+            log.debug("Using topic (ID "+getId()+" / SL: "+getSourceLocator()+")");
+        
         // retrieve topic
         if (topic == null)
             getTopic();
