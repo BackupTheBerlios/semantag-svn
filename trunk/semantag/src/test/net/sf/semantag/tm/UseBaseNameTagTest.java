@@ -142,6 +142,7 @@ public class UseBaseNameTagTest extends UseTagTestBase {
 
     // test resolvement failure
     // with mode ADD
+    //TODO test for name and scope
     public void testNonExistanceIDWithADD() throws Exception {
 
         String id = "does_not_exist";

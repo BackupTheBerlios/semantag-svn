@@ -1,5 +1,6 @@
 package net.sf.semantag.tm;
 
+import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
@@ -69,8 +70,8 @@ public class CreatorUtil {
      *             as a wrapper around the various exceptions that may by thrown
      *             while an association is created
      */
-    protected static Association createAssociation(final TopicMap tm, String id,
-            String sourceLocator) throws JellyTagException {
+    protected static Association createAssociation(final TopicMap tm,
+            String id, String sourceLocator) throws JellyTagException {
 
         // define a creator that creates an Association
         TMOCreator c = new TMOCreator() {
@@ -123,15 +124,37 @@ public class CreatorUtil {
      *             as a wrapper around the various exceptions that may by thrown
      *             while a basename is created
      */
-    public static BaseName createBasename(final Topic t, String id,
-            String sourceLocator) throws JellyTagException {
+    public static BaseName createBasename(final Topic t, String name,
+            Topic theme, String id, String sourceLocator)
+            throws JellyTagException {
         TMOCreator c = new TMOCreator() {
             public TopicMapObject create(String id) throws Exception {
                 return t.createName(id);
             }
         };
 
-        return (BaseName) createTMO(t.getTopicMap(), c, id, sourceLocator);
+        BaseName bn = (BaseName) createTMO(t.getTopicMap(), c, id,
+                sourceLocator);
+        try {
+            //set the name
+            bn.setData(name);
+        } catch (PropertyVetoException e) {
+            throw new JellyTagException(
+                    "While setting name data of new basename to " + name, e);
+        }
+
+        if (theme != null) {
+            try {
+                //set the theme
+                if (theme != null)
+                    bn.addTheme(theme);
+            } catch (PropertyVetoException e) {
+                throw new JellyTagException(
+                        "While adding a theme to new basename (" + theme + ")",
+                        e);
+            }
+        }
+        return bn;
     }
 
     /**
@@ -191,7 +214,7 @@ public class CreatorUtil {
             return tmo;
         } catch (Exception e) {
             throw new JellyTagException("While creating TopicMapObject (ID: "
-                    + id + "/SourceLocator: " + sourceLocator+")", e);
+                    + id + "/SourceLocator: " + sourceLocator + ")", e);
         }
     }
 

@@ -1,4 +1,4 @@
-// $Id: UseBasenameTag.java,v 1.3 2004/09/12 16:57:34 c_froehlich Exp $
+// $Id: UseBasenameTag.java,v 1.4 2004/09/12 18:22:19 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -7,6 +7,7 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.tm4j.topicmap.BaseName;
+import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMapObject;
 
 /**
@@ -30,6 +31,15 @@ public class UseBasenameTag extends BaseUseTag implements ContextBaseName {
 
     // The Log to which logging calls will be made.
     private static final Log log = LogFactory.getLog(UseBasenameTag.class);
+
+    // name data that is used, if this tag leads to the creation
+    // of a basename. ignored otherwise
+    private String name;
+
+    // the name of a variable that is bound to a topic that
+    // shall be used as a scoping theme.
+    // Ignored, if this tag does not lead to the creation of a basename
+    private String scopingTopicVar;
 
     // basename to which this tag refers to
     private BaseName basename;
@@ -71,10 +81,14 @@ public class UseBasenameTag extends BaseUseTag implements ContextBaseName {
             if (shallFailOnNonexistant())
                 throw new JellyTagException("Failed to identify occurrence");
 
-            else if (shallAddOnNonexistant())
-                basename = CreatorUtil.createBasename(
-                        getTopicFromContext(null), getId(), getSourceLocator());
+            else if (shallAddOnNonexistant()){
 
+                // set scope if specified
+                Topic theme = getTopicFromVariable(scopingTopicVar);
+
+                basename = CreatorUtil.createBasename(
+                        getTopicFromContext(null), name, theme, getId(), getSourceLocator());
+            }
             else
                 // ignore body
                 return;
@@ -86,6 +100,32 @@ public class UseBasenameTag extends BaseUseTag implements ContextBaseName {
         // process body
         getBody().run(context, output);
 
+    }
+
+    
+    /**
+     * @return the name , that will be uses as the name data
+     * if this tag leads to the creation of a basename
+     */
+    public String getName() {
+        return name;
+    }
+    /**
+     * sets the name , that will be uses as the name data
+     * if this tag leads to the creation of a basename
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    /**
+     * sets the name of a variable that is bound to 
+     * the topic that shall be used as the scoping
+     * topic for this basename
+     * @param scopingTopicId
+     */
+    public void setScope(String scopingTopicVar) {
+      this.scopingTopicVar = scopingTopicVar;
     }
 
 }

@@ -1,4 +1,4 @@
-// $Id: AddAssociationTag.java,v 1.2 2004/09/08 14:55:00 c_froehlich Exp $
+// $Id: AddAssociationTag.java,v 1.3 2004/09/12 18:22:19 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -48,7 +48,7 @@ public class AddAssociationTag extends BaseTMTag implements ContextAssociation, 
       // get map from context
       TopicMap tm = getTopicMapFromContext(tmVar);
       
-      // create topic
+      // create association
       association = CreatorUtil.createAssociation(tm, getId(), getSourceLocator());
       
       // set variable

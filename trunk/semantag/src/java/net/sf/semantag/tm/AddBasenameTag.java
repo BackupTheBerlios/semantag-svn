@@ -1,4 +1,4 @@
-// $Id: AddBasenameTag.java,v 1.1 2004/08/24 00:12:28 niko_schmuck Exp $
+// $Id: AddBasenameTag.java,v 1.2 2004/09/12 18:22:19 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -17,12 +17,16 @@ import org.tm4j.topicmap.Topic;
  *
  * @author Niko Schmuck
  */
-public class AddBasenameTag extends BaseTagWithId {
+public class AddBasenameTag extends BaseTMTag implements ContextBaseName{
+    
   /** The Log to which logging calls will be made. */
   private static final Log log = LogFactory.getLog(AddBasenameTag.class);
+  
   private String name;
-  private String topicId;
-  private String scopingTopicId;
+  private String topicVar;
+  private String scopingTopicVar;
+
+  private BaseName basename;
 
   public void setName(String name) {
     this.name = name;
@@ -32,34 +36,53 @@ public class AddBasenameTag extends BaseTagWithId {
     return ((name != null) ? name : getBodyText());
   }
 
-  public void setTopic(String topicId) {
-    this.topicId = topicId;
+  /**
+   * Sets the name of a variable that is bound to
+   * the topic to which this basename shall be added to
+   * @param topicVar
+   */
+  public void setTopic(String topicVar) {
+    this.topicVar = topicVar;
   }
 
-  public void setScope(String scopingTopicId) {
-    this.scopingTopicId = scopingTopicId;
+  /**
+   * sets the name of a variable that is bound to 
+   * the topic that shall be used as the scoping
+   * topic for this basename
+   * @param scopingTopicId
+   */
+  public void setScope(String scopingTopicVar) {
+    this.scopingTopicVar = scopingTopicVar;
+  }
+
+  /**
+   * @return the basename that was added by this tag
+   */
+  public BaseName getBaseName() throws JellyTagException {
+      return basename;
   }
 
   public void doTag(XMLOutput output)
              throws MissingAttributeException, JellyTagException {
-    try {
-      Topic t = getCorrespondingTopic(topicId, log);
+      Topic t = getTopicFromContext(topicVar);
 
-      if (t != null) {
-        BaseName bn = t.createName(getId());
-
-        bn.setData(getName());
-
-        Topic scopingTopic = getScopingTopic(scopingTopicId, log);
-
-        if (scopingTopic != null) {
-          bn.addTheme(scopingTopic);
-        }
-      } else {
-        log.warn("No topic object found to add basename '" + name + "' to.");
+      if( t == null){
+          String msg = "AddBasename must be either the children on an object ";
+          msg += "that exports a topic to the context for its successors ";
+          msg += "or a variable containig a topic must be specified via the topic-Attribute.";
+          throw new JellyTagException(msg);
       }
-    } catch (Exception e) {
-      throw new JellyTagException(e);
-    }
+
+      // set scope if specified
+      Topic theme = getTopicFromVariable(scopingTopicVar);
+
+      // create basename
+      basename = CreatorUtil.createBasename(t, name, theme, getId(), getSourceLocator());
+
+      // set variable
+      storeObject(basename);
+
+      // process body
+      getBody().run(context, output);
   }
 }

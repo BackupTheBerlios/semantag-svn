@@ -67,10 +67,17 @@ public class ContextResolver {
 
     }
 
-    
-    public static Topic getTopic(TagSupport tag, String varname) throws JellyTagException{
-        JellyContext ctx = tag.getContext();
-        Topic topic = null;
+    /**
+     * returns a topic that is bound to the variable with the
+     * given name.
+     * 
+     * @param ctx
+     * @param varname the name of a variable to which a topic is bound
+     * @return a topic or null, if the varname was not given or was not bound to an object
+     * @throws JellyTagException if the variable was bound to an object that is not of type topic
+     */
+    public static Topic getTopicFromVariable(JellyContext ctx, String varname) 
+        throws JellyTagException{
 
         if (isSpecified(varname)) {
             Object o = ctx.getVariable(varname);
@@ -80,9 +87,20 @@ public class ContextResolver {
                 throw new JellyTagException("Variable '" + varname
                         + "' is not bound to a Topic but to " + o);
             }
-            topic = (Topic)o;
+            return (Topic)o;
         }
         else {
+            return null;
+        }
+        
+    }
+    
+    public static Topic getTopic(TagSupport tag, String varname) throws JellyTagException{
+        
+        Topic topic = getTopicFromVariable(tag.getContext(), varname);
+
+        if (topic == null && !(isSpecified(varname))) {
+            // if varname was not specified, check the context
             ContextTopic ct = (ContextTopic)TagSupport.findAncestorWithClass(tag, ContextTopic.class);
             if(ct != null){
                 topic = ct.getTopic();

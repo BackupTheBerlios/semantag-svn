@@ -126,6 +126,7 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
     /**
      * Asks the contextResolver to return 
      * a topic from the context for this tag
+     * 
      * @return 
      * @throws JellyTagException
      */
@@ -133,6 +134,17 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
         return ContextResolver.getTopic(this, varname);
     }
     
+    /**
+     * Asks the contextResolver to return 
+     * a topic from the variable with the given name
+     * @param varname the name of the variable
+     * @return topic that is bound to the given variable in
+     * the context of this tag
+     * @throws JellyTagException
+     */
+    public Topic getTopicFromVariable(String varname) throws JellyTagException{
+        return ContextResolver.getTopic(this, varname);
+    }
     
     /**
      * Asks the contextResolver to return 
