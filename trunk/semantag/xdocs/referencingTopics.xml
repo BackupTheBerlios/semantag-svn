@@ -1,0 +1,81 @@
+
+<document>
+  <properties>
+    <title>Referencing topics</title>
+  </properties>
+
+  <body>
+    <section name="Referencing topics">
+    <p>Several semantag-tags needs to identify a topic. Since topicmaps supports various ways to identify topics, we decided to make a generic set of attributes that allow you to specify what topic you mean.</p>
+    </section>
+    <section name="Attributes">
+    <p>The following common attributes allow you to identify a topic unambigously</p>
+    <table border="1" cellpadding="3" cellspacing="2" width="100%">
+        <tbody>
+          <tr class="b">
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Default</th>
+          </tr>
+            <tr class="a">
+              <td>topic</td>
+              <td>org.tm4j.topicmap.Topic</td>
+              <td>a topic</td>
+              <td>no</td>
+              <td></td>
+            </tr>
+            <tr class="a">
+              <td>topicID</td>
+              <td>java.lang.String</td>
+              <td>the <code>id</code> of a topic. If and how ids are assigned to topics depends on the topicmap engine.</td>
+              <td>no</td>
+              <td></td>
+            </tr>
+            <tr class="a">
+              <td>topicName</td>
+              <td>
+              java.lang.String</td>
+              <td>the name of a topic. Keep in mind, that names in topicmaps are unique just for a distinct scope. This attribute is not implemented in Semantag 0.1</td>
+              <td>no</td>
+              <td></td>
+            </tr>
+            <tr class="a">
+              <td>topicSourceLocator</td>
+              <td>
+              java.lang.String</td>
+              <td>identifies a topic by the address of one of its <code>sourceLocator</code></td>
+              <td>no</td>
+              <td></td>
+            </tr>
+            <tr class="a">
+              <td>topicSubject</td>
+              <td>
+              java.lang.String</td>
+              <td>identifies a topic by the address of its <code>subject</code></td>
+              <td>no</td>
+              <td></td>
+            </tr>
+            <tr class="a">
+              <td>topicSubjectIndicator</td>
+              <td>
+              java.lang.String</td>
+              <td>identifies a topic by the address of one of its <code>subjectIndicators</code></td>
+              <td>no</td>
+              <td></td>
+            </tr>
+        </tbody>
+      </table>
+    </section>
+     <section name="Tags">
+     <p>The following topics allow the usage of the topic referencing attributes</p>
+      <ul>
+        <li><a href="org/semantag/tm/AddInstanceOfTag.html">&lt;addInstanceOf&gt;</a> - the topic referencing attributes are used to identify the type</li>
+        <li><a href="org/semantag/tm/AddPlayerTag.html">&lt;addPlayer&gt;</a> - the topic referencing attributes are used to identify the player</li>
+        <li><a href="org/semantag/tm/AddScopeTag.html">&lt;addScope&gt;</a> - the topic referencing attributes are used to identify the theme</li>
+        <li><a href="org/semantag/tm/UseTopicTag.html">&lt;useTopic&gt;</a> the topic referencing attributes are used to identify the topic</li>
+      </ul>
+      </section>
+</body>
+</document>
