@@ -2,36 +2,40 @@
 <classpath>
 	<classpathentry kind="src" path="src/java"/>
 	<classpathentry kind="src" path="src/test"/>
-	<classpathentry kind="lib" path="lib/antlr.jar"/>
-	<classpathentry kind="lib" path="lib/commons-beanutils-1.6.jar"/>
-	<classpathentry kind="lib" path="lib/commons-digester-1.5.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.0.3.jar"/>
-	<classpathentry kind="lib" path="lib/mango.jar"/>
-	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
-	<classpathentry kind="lib" path="lib/xerces-serialize.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry sourcepath="ECLIPSE_HOME/plugins/org.eclipse.jdt.source_3.0.0/src/org.junit_3.8.1/junitsrc.zip" kind="var" path="JUNIT_HOME/junit.jar"/>
-	<classpathentry kind="lib" path="lib/commons-cli-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/commons-collections-2.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-discovery-SNAPSHOT.jar"/>
-	<classpathentry sourcepath="/mnt/shared/software/java/jakarta/jelly-cvs/jakarta-commons/jelly/src/java" kind="lib" path="lib/commons-jelly-1.0-beta-4-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="lib/commons-jexl-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="lib/commons-lang-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/dom4j-1.5-beta-2.jar"/>
-	<classpathentry kind="lib" path="lib/forehead-1.0-beta-2.jar"/>
-	<classpathentry kind="lib" path="lib/jaxen-1.1-beta-2.jar"/>
-	<classpathentry kind="lib" path="lib/junit-3.7.jar"/>
-	<classpathentry kind="lib" path="lib/servletapi-2.3.jar"/>
-	<classpathentry kind="lib" path="lib/xerces-2.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/xml-apis-1.0.b2.jar"/>
-	<classpathentry kind="lib" path="lib/jena/concurrent.jar"/>
-	<classpathentry kind="lib" path="lib/jena/icu4j.jar"/>
-	<classpathentry kind="lib" path="lib/jena/jakarta-oro-2.0.5.jar"/>
-	<classpathentry sourcepath="/opt/java/Jena-2.1/src" kind="lib" path="lib/jena/jena.jar"/>
-	<classpathentry kind="lib" path="lib/jena/log4j-1.2.7.jar"/>
-	<classpathentry kind="lib" path="lib/jena/rdf-api-2001-01-19.jar"/>
 	<classpathentry sourcepath="/opt/java/tm4j/tm4j-0.9.6/src" kind="lib" path="lib/tm4j/tm4j-0.9.6.jar"/>
-	<classpathentry kind="lib" path="lib/tm4j/resolver.jar"/>
 	<classpathentry kind="lib" path="lib/tm4j/tm4j-tologx-0.9.6.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate/c3p0.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate/cglib2.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate/ehcache.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate/hibernate2.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate/jcs-1.0-dev.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate/odmg.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate/proxool-0.7.2.jar"/>
+	<classpathentry kind="lib" path="lib/antlr/antlr-2.7.2.jar"/>
+	<classpathentry kind="lib" path="lib/dom4j/dom4j-1.5-rc1.jar"/>
+	<classpathentry kind="lib" path="lib/j2ee/connector.jar"/>
+	<classpathentry kind="lib" path="lib/j2ee/jaas.jar"/>
+	<classpathentry kind="lib" path="lib/j2ee/jdbc2_0-stdext.jar"/>
+	<classpathentry kind="lib" path="lib/j2ee/jta.jar"/>
+	<classpathentry kind="lib" path="lib/jakarta-commons/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/jakarta-commons/commons-cli-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jakarta-commons/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/jakarta-commons/commons-dbcp-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/jakarta-commons/commons-jelly-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/jakarta-commons/commons-jexl-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/jakarta-commons/commons-lang-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/jakarta-commons/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/jakarta-commons/commons-pool-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/jena/icu4j-2.6.jar"/>
+	<classpathentry kind="lib" path="lib/jena/jena-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/junit/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="lib/tm4j/mango.jar"/>
+	<classpathentry kind="lib" path="lib/tm4j/resolver.jar"/>
+	<classpathentry kind="lib" path="lib/tm4j/tm4jdbc-0.9.6.jar"/>
+	<classpathentry kind="lib" path="lib/tm4j/tm4j-tmapi-0.9.6.jar"/>
+	<classpathentry kind="lib" path="lib/xerces/xercesImpl-2.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/tm4j/tmapi-1_0rc1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
