@@ -30,6 +30,7 @@ public class AllTMTagTests {
     suite.addTestSuite(UseMemberTagTest.class);
     suite.addTestSuite(UseOccurrenceTagTest.class);
     suite.addTestSuite(UseTopicTagTest.class);
+    suite.addTestSuite(LabelTagTest.class);
     
     //$JUnit-END$
     return suite;
