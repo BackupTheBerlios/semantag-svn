@@ -10,6 +10,7 @@ import org.tm4j.topicmap.TopicMap;
 import junit.framework.TestCase;
 
 /**
+ * Tests for class BaseUseTag
  * 
  * @author cf
  * @version 0.1, created on 09.09.2004
@@ -34,23 +35,19 @@ public class BaseUseTagTest extends TMTagTestBase {
     public void testStoreProperties() 
     throws Exception{
        
-        String varValue = "aVarname";
         String idValue = "v";
         String slValue = "sl";
         TopicMap tm = getTopicMapFromResource(TestData.TM_JOHN_LTM,
                 TestData.TM_JOHN_BASELOCATOR);
         
-        assertNull(but.getFromVar());
         assertNull(but.getId());
         assertNull(but.getSourceLocator());
         assertNull(but.getTopicmap());
         
-        but.setFromVar(varValue);
         but.setId(idValue);
         but.setSourceLocator(slValue);
         but.setTopicmap(tm);
         
-        assertEquals(varValue, but.getFromVar());
         assertEquals(idValue, but.getId());
         assertEquals(slValue, but.getSourceLocator());
         assertEquals(tm, but.getTopicmap());

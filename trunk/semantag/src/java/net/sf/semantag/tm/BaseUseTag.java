@@ -13,7 +13,7 @@ import org.tm4j.topicmap.TopicMapObject;
  * @author cf
  * @version 0.1, created on 06.09.2004
  */
-public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar, ReferenceTopicMap{
+public abstract class BaseUseTag extends BaseTMTag implements ReferenceTopicMap{
 
     public final static String NE_IGNORE_BODY = "ignore";
     public final static String NE_ADD = "add";
@@ -112,9 +112,6 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar, 
     public String getSourceLocator() {
         return tmoResolver.getSourceLocator();
     }
-    public String getFromVar() {
-        return tmoResolver.getVariable();
-    }
     /**
      * @return the name of the variable that hold
      * the topicmap to which this tag refers to
@@ -129,9 +126,6 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar, 
     }
     public void setSourceLocator(String sourceLocator) {
         tmoResolver.setSourceLocator(sourceLocator);
-    }
-    public void setFromVar(String varname) {
-        tmoResolver.setVariable(varname);
     }
     
     /**

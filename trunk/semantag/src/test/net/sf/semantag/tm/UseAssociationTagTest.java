@@ -87,18 +87,7 @@ public class UseAssociationTagTest extends UseTagTestBase {
 
     }
 
-    // test that a association that is stored in
-    // the context can be retrieved by variablename
-    public void testResolveByVariable() throws Exception {
 
-        String id = "as00003";
-        Association bn = (Association) tm.getObjectByID(id);
-
-        // call common UseTag-test-code
-        super.checkResolveByVariable(id, bn);
-
-        assertEquals(bn, tag.getAssociation());
-    }
 
     // test setting an association directly
     public void testSetAssociation() 
@@ -143,16 +132,16 @@ public class UseAssociationTagTest extends UseTagTestBase {
     
     // test the case that the resolvement fails
     // because of an unknown variable
-    public void testNonExistantVariable() throws Exception {
-
-        // check resolvement for a variable
-        // that was not set in the context
-        super.checkNonExistantVariable();
-
-        // association should be null
-        assertNull(tag.getAssociation());
-
-    }
+//    public void testNonExistantVariable() throws Exception {
+//
+//        // check resolvement for a variable
+//        // that was not set in the context
+//        super.checkNonExistantVariable();
+//
+//        // association should be null
+//        assertNull(tag.getAssociation());
+//
+//    }
 
     // test resolvement failure
     // with mode ADD

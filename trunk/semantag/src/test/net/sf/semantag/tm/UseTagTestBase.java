@@ -93,28 +93,28 @@ public abstract class UseTagTestBase extends TMTagTestBase {
 
     // tests the case that a variable points to
     // an object that is not of expected type
-    public void testVariableWithFalseObject() throws Exception {
-
-        BaseUseTag tag = getTag();
-
-        // setup a variable that points to an
-        // Object of a type that does not fit
-        // with the current tag
-        String var = "aVariable";
-        Object t = tm.getObjectByID(getIDForWrongType());
-        assertNotNull(t);
-        ctx.setVariable(var, t);
-        tag.setFromVar(var);
-
-        // resolving
-        try {
-            resolveNonExistantObject(tag);
-            fail("Expected Exception since the variable is bound to another object");
-        } catch (JellyTagException e) {
-            // expected
-        }
-
-    }
+//    public void testVariableWithFalseObject() throws Exception {
+//
+//        BaseUseTag tag = getTag();
+//
+//        // setup a variable that points to an
+//        // Object of a type that does not fit
+//        // with the current tag
+//        String var = "aVariable";
+//        Object t = tm.getObjectByID(getIDForWrongType());
+//        assertNotNull(t);
+//        ctx.setVariable(var, t);
+//        tag.setFromVar(var);
+//
+//        // resolving
+//        try {
+//            resolveNonExistantObject(tag);
+//            fail("Expected Exception since the variable is bound to another object");
+//        } catch (JellyTagException e) {
+//            // expected
+//        }
+//
+//    }
 
     // checks resolving by id for the case that
     // no topic map object for the given id does exist
@@ -195,27 +195,27 @@ public abstract class UseTagTestBase extends TMTagTestBase {
 
     // test that a topicmapobject that is stored in
     // the context can be retrieved by variablename
-    public void checkResolveByVariable(String id, TopicMapObject expected)
-            throws Exception {
-
-        String varname = "BASENAME";
-
-        setScriptForTagBody(getTag());
-
-        // store the expected object as value of the
-        // variable in the context
-        assertNotNull(expected);
-        ctx.setVariable(varname, expected);
-
-        // set the variable that shall be lookuped
-        getTag().setFromVar(varname);
-
-        // try to resolve the object
-        getTag().doTag(null);
-
-        // assert that the body was called
-        assertTrue(scriptWasCalled);
-    }
+//    public void checkResolveByVariable(String id, TopicMapObject expected)
+//            throws Exception {
+//
+//        String varname = "BASENAME";
+//
+//        setScriptForTagBody(getTag());
+//
+//        // store the expected object as value of the
+//        // variable in the context
+//        assertNotNull(expected);
+//        ctx.setVariable(varname, expected);
+//
+//        // set the variable that shall be lookuped
+//        getTag().setFromVar(varname);
+//
+//        // try to resolve the object
+//        getTag().doTag(null);
+//
+//        // assert that the body was called
+//        assertTrue(scriptWasCalled);
+//    }
 
     // test the case that the resolvement fails
     // because of an unknown id
@@ -242,15 +242,15 @@ public abstract class UseTagTestBase extends TMTagTestBase {
     // test the case that the resolvement fails
     // because the tag refers to a variable
     // that is not set in the context
-    public void checkNonExistantVariable() throws Exception {
-
-        String var = "not bound";
-        getTag().setFromVar(var);
-
-        // resolving
-        resolveNonExistantObject(getTag());
-
-    }
+//    public void checkNonExistantVariable() throws Exception {
+//
+//        String var = "not bound";
+//        getTag().setFromVar(var);
+//
+//        // resolving
+//        resolveNonExistantObject(getTag());
+//
+//    }
 
     // executes the doTag()-Method of the tag
     // and asserts that the body of the tag was called

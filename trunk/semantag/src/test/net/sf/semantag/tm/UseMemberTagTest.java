@@ -90,18 +90,7 @@ public class UseMemberTagTest extends UseTagTestBase {
 
     }
 
-    // test that a member that is stored in
-    // the context can be retrieved by variablename
-    public void testResolveByVariable() throws Exception {
 
-        String id = "mem1";
-        Member bn = (Member) tm.getObjectByID(id);
-
-        // call common UseTag-test-code
-        super.checkResolveByVariable(id, bn);
-
-        assertEquals(bn, tag.getMember());
-    }
 
     // test the case that the resolvement fails
     // because of an unknown id
@@ -129,16 +118,20 @@ public class UseMemberTagTest extends UseTagTestBase {
     }
 
     
-    // test the case that the resolvement fails
-    // because of an unknown variable
-    public void testNonExistantVariable() throws Exception {
 
-        // check resolvement for a variable
-        // that was not set in the context
-        super.checkNonExistantVariable();
 
-        // member should be null
-        assertNull(tag.getMember());
+    // test setting a member directly
+    public void testSetMember() 
+        throws Exception
+    {
+        
+        String id = "mem1";
+        Member member = (Member) tm.getObjectByID(id);
+
+        // sets member directly
+        tag.setMember(member);
+        
+        assertEquals(member, tag.getMember());
 
     }
 

@@ -1,4 +1,4 @@
-// $Id: UseBasenameTag.java,v 1.6 2004/09/15 14:55:11 c_froehlich Exp $
+// $Id: UseBasenameTag.java,v 1.7 2004/09/16 14:02:59 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -128,4 +128,11 @@ public class UseBasenameTag extends BaseUseTag implements ContextBaseName {
       this.scopingTopicVar = scopingTopicVar;
     }
 
+    /**
+     * sets the basename that this tag shall use
+     * @param bn
+     */
+    public void setBaseName(BaseName bn){
+        basename = bn;
+    }
 }

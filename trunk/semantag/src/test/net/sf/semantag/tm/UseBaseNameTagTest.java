@@ -88,18 +88,7 @@ public class UseBaseNameTagTest extends UseTagTestBase {
 
     }
 
-    // test that a basename that is stored in
-    // the context can be retrieved by variablename
-    public void testResolveByVariable() throws Exception {
 
-        String id = "name_of_orest";
-        BaseName bn = (BaseName) tm.getObjectByID(id);
-
-        // call common UseTag-test-code
-        super.checkResolveByVariable(id, bn);
-
-        assertEquals(bn, tag.getBaseName());
-    }
 
     // test the case that the resolvement fails
     // because of an unknown id
@@ -126,17 +115,20 @@ public class UseBaseNameTagTest extends UseTagTestBase {
 
     }
 
-    
-    // test the case that the resolvement fails
-    // because of an unknown variable
-    public void testNonExistantVariable() throws Exception {
 
-        // check resolvement for a variable
-        // that was not set in the context
-        super.checkNonExistantVariable();
 
-        // basename should be null
-        assertNull(tag.getBaseName());
+    // test setting a basename directly
+    public void testSetBasename() 
+        throws Exception
+    {
+        
+        String id = "name_of_maia";
+        BaseName basename = (BaseName) tm.getObjectByID(id);
+
+        // sets association directly
+        tag.setBaseName(basename);
+        
+        assertEquals(basename, tag.getBaseName());
 
     }
 

@@ -1,4 +1,4 @@
-// $Id: AddOccurrenceTag.java,v 1.3 2004/09/15 14:14:52 c_froehlich Exp $
+// $Id: AddOccurrenceTag.java,v 1.4 2004/09/16 14:02:59 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -13,6 +13,7 @@ import org.tm4j.topicmap.Topic;
  * Jelly tag creating a new occurrence for the given topic.
  * 
  * @author Niko Schmuck
+ * @author cf
  */
 public class AddOccurrenceTag extends BaseTMTag implements ContextOccurrence{
 

@@ -89,18 +89,7 @@ public class UseOccurrenceTagTest extends UseTagTestBase {
 
     }
 
-    // test that a occurrence that is stored in
-    // the context can be retrieved by variablename
-    public void testResolveByVariable() throws Exception {
 
-        String id = "occ_hermes2";
-        Occurrence bn = (Occurrence) tm.getObjectByID(id);
-
-        // call common UseTag-test-code
-        super.checkResolveByVariable(id, bn);
-
-        assertEquals(bn, tag.getOccurrence());
-    }
 
     // test setting an occurrence directly
     public void testSetOccurrence() 
@@ -143,18 +132,6 @@ public class UseOccurrenceTagTest extends UseTagTestBase {
     }
 
     
-    // test the case that the resolvement fails
-    // because of an unknown variable
-    public void testNonExistantVariable() throws Exception {
-
-        // check resolvement for a variable
-        // that was not set in the context
-        super.checkNonExistantVariable();
-
-        // occurrence should be null
-        assertNull(tag.getOccurrence());
-
-    }
 
     // test resolvement failure
     // with mode ADD

@@ -1,4 +1,4 @@
-// $Id: UseMemberTag.java,v 1.5 2004/09/15 14:14:52 c_froehlich Exp $
+// $Id: UseMemberTag.java,v 1.6 2004/09/16 14:02:59 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -147,5 +147,12 @@ public class UseMemberTag extends BaseUseTag implements ContextMember
         this.role = role;
     }
 
+    /**
+     * sets the mamber that this tag shall use
+     * @param m
+     */
+    public void setMember(Member m){
+        member= m;
+    }
 
 }
