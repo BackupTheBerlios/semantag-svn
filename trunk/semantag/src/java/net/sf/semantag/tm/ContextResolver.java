@@ -113,29 +113,14 @@ public class ContextResolver {
     }
     
 
-    public static Association getAssociation(TagSupport tag, String varname) throws JellyTagException{
-        JellyContext ctx = tag.getContext();
-        Association assoc = null;
+    public static Association getAssociation(TagSupport tag) throws JellyTagException 
+    {
 
-        if (isSpecified(varname)) {
-            Object o = ctx.getVariable(varname);
-            // if a variable name is specified than every result
-            // different from a topic counts as an error
-            if (o == null || !(o instanceof Association)) {
-                throw new JellyTagException("Variable '" + varname
-                        + "' is not bound to a Topic but to " + o);
-            }
-            assoc = (Association)o;
-        }
-        else {
-        
             ContextAssociation ct = (ContextAssociation)TagSupport.findAncestorWithClass(tag, ContextAssociation.class);
             if(ct != null){
-                assoc = ct.getAssociation();
+                return ct.getAssociation();
             }
-        }
-        return assoc;
-        
+            return null;
     }
     
     public static Occurrence getOccurrence(TagSupport tag) throws JellyTagException{

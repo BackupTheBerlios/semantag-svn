@@ -1,4 +1,4 @@
-// $Id: UseMemberTag.java,v 1.4 2004/09/15 10:56:24 c_froehlich Exp $
+// $Id: UseMemberTag.java,v 1.5 2004/09/15 14:14:52 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -7,6 +7,7 @@ import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.tm4j.topicmap.Member;
+import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMapObject;
 
 /**
@@ -40,7 +41,21 @@ public class UseMemberTag extends BaseUseTag implements ContextMember
     // member to which this tag refers to
     private Member member;
 
+    /**
+     * The topic used as the roleSpec of the new member
+     * Ignored, if this tag does not lead to the creation
+     * of a new member
+     */
+    private Topic role;
+    
+    /**
+     * A topic used as the initial player of the new member
+     * Ignored, if this tag does not lead to the creation
+     * of a new member
+     */
+    private Topic player;
 
+    
     
     /**
      * Resolves the member that this Tag refers to.
@@ -79,8 +94,8 @@ public class UseMemberTag extends BaseUseTag implements ContextMember
                 throw new JellyTagException("Failed to identify member");
 
             else if (shallAddOnNonexistant())
-                member= tmEngine.createMember(getAssociationFromContext(null), getId(),
-                        getSourceLocator());
+                member= tmEngine.createMember(getAssociationFromContext(), getId(),
+                        getSourceLocator(), role, player);
 
             else
                 // ignore body
@@ -96,5 +111,41 @@ public class UseMemberTag extends BaseUseTag implements ContextMember
     }
 
     
+    /**
+     * @return the initial player of the new member.
+     * Ignored, if this tag does not lead to the creation
+     * of a new member
+     */
+    public Topic getPlayer() {
+        return player;
+    }
+    
+    /**
+     * sets the initial player of the new member
+     * Ignored, if this tag does not lead to the creation
+     * of a new member
+     */
+    public void setPlayer(Topic player) {
+        this.player = player;
+    }
+    
+    /**
+     * @return the roleSpec of the new member
+     * Ignored, if this tag does not lead to the creation
+     * of a new member
+     */
+    public Topic getRole() {
+        return role;
+    }
+
+    /**
+     * sets the roleSpec of the new member
+     * Ignored, if this tag does not lead to the creation
+     * of a new member
+     */
+    public void setRole(Topic role) {
+        this.role = role;
+    }
+
 
 }

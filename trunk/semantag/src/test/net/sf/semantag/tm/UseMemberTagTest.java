@@ -3,6 +3,7 @@ package net.sf.semantag.tm;
 
 import org.tm4j.topicmap.Association;
 import org.tm4j.topicmap.Member;
+import org.tm4j.topicmap.Topic;
 
 /**
  * 
@@ -159,9 +160,17 @@ public class UseMemberTagTest extends UseTagTestBase {
         // UseMemberTag
         tag.setParent(utt);
 
+        // store member count of parent
         Association assoc = utt.getAssociation();
         int co = assoc.getMembers().size();
 
+        // set role and a player
+        Topic father = tm.getTopicByID("role_Vater");
+        Topic leda = tm.getTopicByID("Leda");
+        tag.setRole(father);
+        tag.setPlayer(leda);
+        
+        
         // resolving
         // this should lead to the creation
         // of a new member in topic Helena
@@ -170,6 +179,10 @@ public class UseMemberTagTest extends UseTagTestBase {
 
         Member bn = tag.getMember();
         assertEquals(bn.getParent(), assoc);
+        
+        // assert role and player
+        assertEquals(father, bn.getRoleSpec());
+        assertEquals(leda, bn.getPlayers().iterator().next());
 
     }
 }

@@ -1,4 +1,4 @@
-// $Id: AddInstanceOfTag.java,v 1.2 2004/09/15 10:56:24 c_froehlich Exp $
+// $Id: AddInstanceOfTag.java,v 1.3 2004/09/15 14:14:52 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -19,8 +19,15 @@ public class AddInstanceOfTag extends BaseTMTag {
     /** The Log to which logging calls will be made. */
     private static final Log log = LogFactory.getLog(AddInstanceOfTag.class);
 
+    /**
+     * The type of the instance
+     */
     private Topic type;
 
+    /**
+     * The TopicMapObject that shall be marked as being an 
+     * instance of the given type.
+     */
     private TopicMapObject instance;
 
     /**
@@ -58,7 +65,7 @@ public class AddInstanceOfTag extends BaseTMTag {
         if ((instance = getTopicFromContext(null)) != null) {
             return instance;
         }
-        if ((instance = getAssociationFromContext(null)) != null) {
+        if ((instance = getAssociationFromContext()) != null) {
             return instance;
         }
         if ((instance = getOccurrenceFromContext()) != null) {

@@ -1,4 +1,4 @@
-// $Id: AddOccurrenceTag.java,v 1.2 2004/09/15 13:07:54 c_froehlich Exp $
+// $Id: AddOccurrenceTag.java,v 1.3 2004/09/15 14:14:52 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -6,23 +6,15 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.tm4j.net.Locator;
-import org.tm4j.net.LocatorFactory;
-import org.tm4j.net.LocatorFactoryException;
-
-import org.tm4j.topicmap.DuplicateObjectIDException;
 import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.Topic;
-
-import java.beans.PropertyVetoException;
 
 /**
  * Jelly tag creating a new occurrence for the given topic.
  * 
  * @author Niko Schmuck
  */
-public class AddOccurrenceTag extends BaseTMTag {
+public class AddOccurrenceTag extends BaseTMTag implements ContextOccurrence{
 
     /** The Log to which logging calls will be made. */
     private static final Log log = LogFactory.getLog(AddOccurrenceTag.class);

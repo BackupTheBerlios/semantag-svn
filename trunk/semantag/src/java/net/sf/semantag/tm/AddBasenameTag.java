@@ -1,4 +1,4 @@
-// $Id: AddBasenameTag.java,v 1.4 2004/09/15 10:56:24 c_froehlich Exp $
+// $Id: AddBasenameTag.java,v 1.5 2004/09/15 14:14:52 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -55,19 +55,19 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName {
     public void doTag(XMLOutput output) throws MissingAttributeException,
             JellyTagException {
 
-        Topic t = parent;
-        if (t == null)
-            t = getTopicFromContext(null);
+        if(log.isDebugEnabled())
+            log.debug("Add BaseName (Name: "+getName()+")");
 
-        if (t == null) {
-            String msg = "AddBasename must be either the children of an object ";
-            msg += "that exports a topic to the context for its successors ";
-            msg += "or a variable containig a topic must be specified via the topic-Attribute.";
-            throw new JellyTagException(msg);
-        }
+
+        // get Parent
+        assertTopic();
+        
+        // validation
+        validate();
+
 
         // create basename
-        basename = tmEngine.createBasename(t, name, scope, getId(),
+        basename = tmEngine.createBasename(parent, name, scope, getId(),
                 getSourceLocator());
 
         // set variable
@@ -75,6 +75,36 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName {
 
         // process body
         getBody().run(context, output);
+    }
+
+    /**
+     * sets the Topic to which the new basename will be added
+     */
+    private void assertTopic() throws JellyTagException{
+        Topic t = parent;
+        if (t == null)
+            t = getTopicFromContext(null);
+
+        if(parent == null){
+            parent = getTopicFromContext(null);
+            if (parent == null) {
+                String msg = "AddBasename must be either the children of an object ";
+                msg += "that exports a topic to the context for its successors ";
+                msg += "or a variable containig a topic must be specified via the topic-Attribute.";
+                throw new JellyTagException(msg);
+            }
+        }
+    }
+    
+    protected void validate(){
+        /*
+         * There is nothing to do here.
+         * Player and role are allowed to be 
+         * null and the existance of the target association
+         * is handled by assertAssociation(), 
+         *
+         */
+        
     }
 
     /**
@@ -87,8 +117,8 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName {
         this.name = name;
     }
 
-    public String getName() throws Exception {
-        return ((name != null) ? name : getBodyText());
+    public String getName() {
+        return name;
     }
 
     /**

@@ -47,7 +47,7 @@ public class AddOccurrenceTagTest extends TMTagTestBase {
     // the topic attribute works
     public void testAddOccurenceToExplicitTopic() throws Exception {
 
-        doAddOccurrence(null, null, "some data", null,john, false);
+        doAddOccurrence(null, null, "some data", null,john, true);
     }
 
     

@@ -215,11 +215,14 @@ public class TM4JConnector {
      *             while a basename is created
      */
     public Member createMember(final Association a, String id,
-            String sourceLocator) throws JellyTagException {
+            String sourceLocator, final Topic role, final Topic player) throws JellyTagException {
 
         TMOCreator c = new TMOCreator() {
             public TopicMapObject create(String id) throws Exception {
-                return a.createMember(id);
+                Member mem =  a.createMember(id);
+                if(role != null) mem.setRoleSpec(role);
+                if(player != null) mem.addPlayer(player);
+                return mem;
             }
         };
 

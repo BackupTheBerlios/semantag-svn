@@ -157,8 +157,8 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
      * @return 
      * @throws JellyTagException
      */
-    public Association getAssociationFromContext(String varname) throws JellyTagException{
-        return ContextResolver.getAssociation(this, varname);
+    public Association getAssociationFromContext() throws JellyTagException{
+        return ContextResolver.getAssociation(this);
     }
     
     /**
