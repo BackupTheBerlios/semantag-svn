@@ -138,7 +138,7 @@ public class AddTopicTagTest extends BaseTMTagTest {
 
     // tests that the new topic is accessible
     // under the variable specified
-    public void testStoreNewTopicInVariabel() throws Exception {
+    public void testStoreNewTopicInVariable() throws Exception {
 
         String newid = "nonexistant_id";
         
