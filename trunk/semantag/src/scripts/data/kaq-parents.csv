@@ -1,0 +1,12 @@
+PERSON	Father	Mother
+t-henry-ii	t-geoffrey-of-anjou-and-maine	t-matilda-daughter-of-henry-i
+t-john	t-henry-ii	t-eleanor-of-aquitane
+t-matilda-daughter-of-henry-i	t-henry-i	t-matilda-2
+t-henry-i	t-william-i	t-matilda-1
+t-william-son-of-henry-i	t-henry-i	t-matilda-2
+t-richard-i	t-henry-ii	t-eleanor-of-aquitane
+t-stephen	t-stephen-count-of-blois	t-adela-1
+t-adela-1	t-william-i	t-matilda-1
+t-william-ii	t-william-i	t-matilda-1
+t-henry-iii	t-john	t-isabella-daughter-of-count-of-angouleme
+t-robert-curthose	t-william-i	t-matilda-1

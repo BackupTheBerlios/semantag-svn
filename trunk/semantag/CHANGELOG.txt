@@ -1,5 +1,11 @@
 
+- Added libraries needed by Semantag (Niko, 28.8.)
+
 Niko (24-Aug-2004):
+
+- CVS Import to sourceforge
+
+- the base package is now: net.sf.semantag
 
 - Refactored package structure to separate tests into own substructure
   under src/test, this allows easily to distinguish between production

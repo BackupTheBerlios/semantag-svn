@@ -1,0 +1,89 @@
+<kaq>
+  <persons>
+    <person id='t-henry-ii'>
+      <name>Henry II</name>
+      <gender>man</gender>
+    </person>
+    <person id='t-william-i'>
+      <name>William The Conquerer</name>
+      <gender>man</gender>
+    </person>
+    <person id='t-john'>
+      <name>John</name>
+      <gender>man</gender>
+    </person>
+    <person id='t-stephen-count-of-blois'>
+      <name>Stephen, Count Of Blois</name>
+      <gender>man</gender>
+    </person>
+    <person id='t-matilda-1'>
+      <name>Matilda, Daughter of Baldwin V. Count of Flanders</name>
+      <gender>woman</gender>
+    </person>
+    <person id='t-matilda-daughter-of-henry-i'>
+      <name>Matilda, Daugher Of Henry </name>
+      <gender>woman</gender>
+    </person>
+    <person id='t-eleanor-of-aquitane'>
+      <name>Eleanor of Aquitane</name>
+      <gender>woman</gender>
+    </person>
+    <person id='t-henry-i'>
+      <name>Henry I</name>
+      <gender>man</gender>
+    </person>
+    <person id='t-william-son-of-henry-i'>
+      <name>William, Son of Henry I</name>
+      <gender>man</gender>
+    </person>
+    <person id='t-richard-i'>
+      <name>Richard I</name>
+      <gender>man</gender>
+    </person>
+    <person id='t-isabella-daughter-of-count-of-angouleme'>
+      <name>Isabella, daughet of Count of Angouleme</name>
+      <gender>woman</gender>
+    </person>
+    <person id='t-stephen'>
+      <name>Stephen</name>
+      <gender>man</gender>
+    </person>
+    <person id='t-adela-1'>
+      <name>Adela</name>
+      <gender>woman</gender>
+    </person>
+    <person id='t-matilda-2'>
+      <name>Matilda, Daughter of Malcom III King of Scots</name>
+      <gender>woman</gender>
+    </person>
+    <person id='t-william-ii'>
+      <name>William II</name>
+      <gender>man</gender>
+    </person>
+    <person id='t-henry-iii'>
+      <name>Henry III</name>
+      <gender>man</gender>
+    </person>
+    <person id='t-geoffrey-of-anjou-and-maine'>
+      <name>Geoffery, Count of Anjou and Maine</name>
+      <gender>man</gender>
+    </person>
+    <person id='t-robert-curthose'>
+      <name>Robert Curthose, Duke Of Normandy</name>
+      <gender>man</gender>
+    </person>
+  </persons>
+  <parents>
+    <person id='t-henry-ii' mother='t-matilda-daughter-of-henry-i' father='t-geoffrey-of-anjou-and-maine'/>
+    <person id='t-john' mother='t-eleanor-of-aquitane' father='t-henry-ii'/>
+    <person id='t-matilda-daughter-of-henry-i' mother='t-matilda-2' father='t-henry-i'/>
+    <person id='t-henry-i' mother='t-matilda-1' father='t-william-i'/>
+    <person id='t-william-son-of-henry-i' mother='t-matilda-2' father='t-henry-i'/>
+    <person id='t-richard-i' mother='t-eleanor-of-aquitane' father='t-henry-ii'/>
+    <person id='t-stephen' mother='t-adela-1' father='t-stephen-count-of-blois'/>
+    <person id='t-adela-1' mother='t-matilda-1' father='t-william-i'/>
+    <person id='t-william-ii' mother='t-matilda-1' father='t-william-i'/>
+    <person id='t-henry-iii' mother='t-isabella-daughter-of-count-of-angouleme' father='t-john'/>
+    <person id='t-robert-curthose' mother='t-matilda-1' father='t-william-i'/>
+  </parents>
+</kaq>

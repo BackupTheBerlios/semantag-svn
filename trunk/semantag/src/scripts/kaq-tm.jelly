@@ -4,20 +4,20 @@
      Jelly script for generating a topic map 
      out of the kings-and-queens sample XML file.
      
-     $Id: kaq-tm.jelly,v 1.1 2004/08/24 00:12:29 niko_schmuck Exp $ 
+     $Id: kaq-tm.jelly,v 1.2 2004/08/28 23:13:30 niko_schmuck Exp $ 
  -->
 
 <j:jelly trim="true" xmlns:j="jelly:core" xmlns:x="jelly:xml"
-         xmlns:tm="jelly:net.sf.semantag.tag.tm.TopicMapTagLibrary">
+         xmlns:tm="jelly:net.sf.semantag.tm.TopicMapTagLibrary">
 
   <!-- Generate new topicmap with given base locator -->
   <tm:init baselocator="http://www.nava.de/topicmaps/kaq"/>
   
   <!-- Merge in this topicmap a basic ontology -->
-  <tm:merge filename="ontologies/kaq-ontology.ltm"/>
+  <tm:merge filename="src/ontologies/kaq-ontology.ltm"/>
 
   <!-- Parse in document -->  
-  <x:parse var="doc" xml="../data/kaq.xml" />
+  <x:parse var="doc" xml="data/kaq.xml" />
     
   <!-- Loop over all persons -->
   <x:forEach var="person" select="$doc/kaq/persons/person">

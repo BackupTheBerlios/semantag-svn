@@ -3,7 +3,7 @@
 # Run a jelly script
 #
 # Author:   Niko Schmuck
-# Version:  $Id: jelly.sh,v 1.1 2004/08/24 00:12:26 niko_schmuck Exp $
+# Version:  $Id: jelly.sh,v 1.2 2004/08/28 23:13:29 niko_schmuck Exp $
 #
 
 CP=./target/classes
@@ -22,14 +22,14 @@ collectCP(){
 }
 
 
-LIB=lib
+LIB=target/lib
 collectCP $LIB 
-collectCP $LIB/tm4j 
-collectCP $LIB/jena 
+#collectCP $LIB/tm4j 
+#collectCP $LIB/jena 
 
 # ===============================
 VM_ARGS=
 JAVA=$JAVA_HOME/bin/java
 # run jelly
 # echo $CP
-$JAVA -Djava.util.logging.config.file=logging.properties -classpath $CP $VM_ARGS org.apache.commons.jelly.Jelly $*
+$JAVA -Djava.util.logging.config.file=src/conf/logging.properties -classpath $CP $VM_ARGS org.apache.commons.jelly.Jelly $*
