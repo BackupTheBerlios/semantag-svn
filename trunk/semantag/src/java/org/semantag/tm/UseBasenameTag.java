@@ -1,4 +1,4 @@
-// $Id: UseBasenameTag.java,v 1.3 2004/12/09 21:19:58 c_froehlich Exp $
+// $Id: UseBasenameTag.java,v 1.4 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -12,10 +12,10 @@ import org.tm4j.topicmap.TopicMapObject;
 /**
  * Retrieves a Basename instance and sets it as the
  * context-basename for nested tags.
- * 
+ * <br/><br/>
  * The <code>var</code>-attribute allows to store the basename in
  * a variable in order to use it elsewhere in the script.
- * 
+ * <br/><br/>
  * The nonexistant - attribute triggers what will happen
  * if the specified basename could not be found. 
  * 
@@ -111,7 +111,7 @@ public class UseBasenameTag extends BaseUseTag implements ContextBaseName {
    
 
     /**
-     * sets the basename that this tag shall use
+     * sets the BaseName-Object that this tag shall use
      * @param bn
      */
     public void setBaseName(BaseName bn){

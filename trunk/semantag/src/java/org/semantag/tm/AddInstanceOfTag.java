@@ -1,4 +1,4 @@
-// $Id: AddInstanceOfTag.java,v 1.4 2004/12/20 20:49:58 c_froehlich Exp $
+// $Id: AddInstanceOfTag.java,v 1.5 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -11,21 +11,21 @@ import org.tm4j.topicmap.TopicMapObject;
 
 /**
  * Sets the type of an instance. 
- * 
- * The instance may be topic, an association or an occurrence.
+ * <br/><br/>
+ * The instance may be a topic, an association or an occurrence.<br/>
  * If the instance is a topic, the type will be added to the set of types of this topic. 
  * If the instance is either an association or an occurrence the type will be set as
- * the single type of this instance.
+ * the single type of this instance.<br/><br/>
  * 
  * 
  * The instance that will be typed is either set
- * explicitly with the <code>instance</code> attribute.
+ * explicitly with the <code>instance</code> attribute.<br/>
  * If no instance is explicitly specified, the closest typeable object
  * will be fetched from the context. This is done by descending the xml-tree down to
  * the root until a tag is encountered that specify either a topic, an association
- * or an occurrence.
+ * or an occurrence.<br/><br/>
  * 
- * The <code>id-</code> and/or the <code>sourceLocator-</code> attributes are ignored
+ * The <code>id-</code> and/or the <code>sourceLocator-</code> attributes are ignored.<br/><br/>
  * 
  * To specify the topic that will act as the type, you use either the <code>type</code>
  * attribute or one of the various topic resolving attributes.
@@ -33,7 +33,8 @@ import org.tm4j.topicmap.TopicMapObject;
  * @jelly
  *  name="addInstanceOf"
  *  attributes="Additionally this tag supports the 
- *   <a href='/referencingTopics.html'>common set of topic-referencing attributes</a>"
+ *   <a href='/referencingTopics.html'>common set of 
+ *   topic-referencing attributes</a> to specify the topic that will be used as the type."
  * 
  * @author Niko Schmuck
  * @author cf
@@ -116,7 +117,7 @@ public class AddInstanceOfTag extends BaseTopicReferenceTag {
     }
 
     /**
-     * The type of the instance
+     * The topic that shall become the type of the instance
      */
     public void setType(Topic type) {
         // calls the BaseClass. This method only exists for

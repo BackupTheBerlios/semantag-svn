@@ -1,4 +1,4 @@
-//$Id: LabelTag.java,v 1.5 2004/12/09 21:19:58 c_froehlich Exp $
+//$Id: LabelTag.java,v 1.6 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -10,8 +10,8 @@ import org.xml.sax.SAXException;
 
 /**
  * Prints a label for an object.
- * 
- * This tag is usually used to get a label for a topic map object
+ * <br/><br/>
+ * This tag is usually used to print a label for a TopicMapObject
  * or for a locator
  * 
  * @jelly
@@ -75,8 +75,8 @@ public class LabelTag extends BaseTMTag {
 
     
     /**
-     * Sets the object for which a label will be printed.
-
+     * The object for which a label will be printed.
+     * <br/>
      * This is usually an object of type TopicMapObject or of type Locator.
      * Nevertheless its possible to pass any object.
      * 
@@ -96,4 +96,27 @@ public class LabelTag extends BaseTMTag {
     public Object getObject() {
         return object;
     }
+    
+    /**
+     * Overrides the method from the superclass and blocks
+     * the setting of a source locator since labels 
+     * have no sourceLocators.
+     * 
+     * @jelly
+     *    ignore="true"
+     */
+      public void setSourceLocator(String sourceLocator) {
+      }
+
+      /**
+       * Overrides the method from the superclass and blocks
+       * the setting of an id since labels have no id
+       * 
+       * @jelly
+       *    ignore="true"
+       */
+
+      public void setId(String id) {
+      }
+
 }

@@ -1,4 +1,4 @@
-//$Id: SetSubjectTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
+//$Id: SetSubjectTag.java,v 1.3 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -9,7 +9,11 @@ import org.apache.commons.logging.LogFactory;
 import org.tm4j.topicmap.Topic;
 
 /**
- * Sets the subject of the current context topic.
+ * Sets the subject of a topic.
+ * <br/><br/>
+ * 
+ * The topic is either specified explicitly by the topic-attribute
+ * or the current context topic is used.
  *
  * @jelly
  *  name="setSubject"
@@ -32,6 +36,11 @@ public class SetSubjectTag extends BaseTMTag {
   private Topic topic;
   
   /**
+   * The adress of the locator of the subject
+   * 
+   * @jelly
+   *    required="yes"
+   * 
    * @param locator the adress of the locator of the subject
    */
   public void setLocator(String locator) {
@@ -39,6 +48,10 @@ public class SetSubjectTag extends BaseTMTag {
   }
   
   /**
+   * The topic of which the subject will be set
+   * 
+   * @jelly
+   *    required="no, as long as a context topic is available"
    * 
    * @param topic the topic of which the subject will be set
    */

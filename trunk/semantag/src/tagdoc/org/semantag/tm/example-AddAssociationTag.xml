@@ -1,0 +1,10 @@
+    &lt;!-- 
+      Creates the association between city and airport
+     --&gt;
+    &lt;tm:addAssociation&gt;
+      &lt;tm:addInstanceOf type="${AT_NEAREST}"/&gt;
+      &lt;tm:addMember player="${airportTopic}" role="${RT_AIRPORT}"/&gt;
+      &lt;tm:addMember player="${cityTopic}" role="${RT_CITY}"/&gt;
+    &lt;/tm:addAssociation&gt;
+
+

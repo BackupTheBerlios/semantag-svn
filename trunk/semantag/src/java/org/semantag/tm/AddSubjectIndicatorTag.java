@@ -1,4 +1,4 @@
-//$Id: AddSubjectIndicatorTag.java,v 1.3 2004/12/09 16:37:31 c_froehlich Exp $
+//$Id: AddSubjectIndicatorTag.java,v 1.4 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -9,15 +9,13 @@ import org.apache.commons.logging.LogFactory;
 import org.tm4j.topicmap.Topic;
 
 /**
- * Creates a subject indicator.
- * 
+ * Creates a new subject indicator.
+ * <br/><br/>
  * The subject indicator is either created for the topic that is 
  * explicitly specified by the <code>topic</code> 
  * attribute. If no topic is explicitly specified, the 
  * subject indicator is created for the current context topic.
- * 
- * The <code>id-</code> and/or the <code>sourceLocator-</code> attributes are ignored
- * 
+ * <br/><br/>
  * To specify the locator that indicates the subject, you use the <code>locator</code>
  * attribute.
  * 
@@ -44,6 +42,10 @@ public class AddSubjectIndicatorTag extends BaseTMTag {
   
   /**
    * The address of the locator that indicates the subject
+   * 
+   * @jelly
+   *    required="yes"
+   * 
    * @param locator the adress of the locator of this subjectIndicator
    */
   public void setLocator(String locator) {
@@ -51,6 +53,10 @@ public class AddSubjectIndicatorTag extends BaseTMTag {
   }
   
   /**
+   * The topic to which the subject indicator will be added
+   * @jelly 
+   *    required="no"
+   *    default="the current context topic"
    * 
    * @param topic the topic to which the subject indicator will be added
    */
@@ -106,6 +112,29 @@ public class AddSubjectIndicatorTag extends BaseTMTag {
 
       }
   }
+
+  
+  /**
+   * Overrides the method from the superclass and blocks
+   * the setting of a source locator since subjectIndicators
+   * have no sourceLocators.
+   * 
+   * @jelly
+   *    ignore="true"
+   */
+    public void setSourceLocator(String sourceLocator) {
+    }
+
+    /**
+     * Overrides the method from the superclass and blocks
+     * the setting of an id since subjectIndicators have no id
+     * 
+     * @jelly
+     *    ignore="true"
+     */
+
+    public void setId(String id) {
+    }
 
   
 }

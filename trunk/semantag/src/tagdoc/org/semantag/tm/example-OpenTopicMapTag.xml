@@ -1,0 +1,3 @@
+  &lt;!-- opens an existing topicmap --&gt;
+  &lt;tm:open file="${CITIES_ROOT}/maps/germancities.xtm"&gt;
+

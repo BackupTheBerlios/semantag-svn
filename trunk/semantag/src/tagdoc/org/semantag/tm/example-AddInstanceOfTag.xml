@@ -1,0 +1,14 @@
+  &lt;!-- creates a new occurrence and adds it to the set
+          of instances of the topic ${TYPING_TOPIC}
+       --&gt;
+    &lt;tm:addOccurrence data="${src_file}"&gt;
+      &lt;tm:addInstanceOf type="${TYPING_TOPIC}"/&gt;
+    &lt;/tm:addOccurrence&gt;
+
+    
+    
+  &lt;!-- add topic ${JOHN_SMITH} to the set of instances 
+          of topic ${PERSON}  
+        --&gt;  
+    &lt;tm:addInstanceOf instance="${JOHN_SMITH}" topic="${PERSON}"/&gt;
+    

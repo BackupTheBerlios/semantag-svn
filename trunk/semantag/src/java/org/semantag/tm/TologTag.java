@@ -1,4 +1,4 @@
-// $Id: TologTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: TologTag.java,v 1.3 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -16,8 +16,11 @@ import org.tm4j.tologx.TologResultsSet;
 import org.tm4j.topicmap.TopicMap;
 
 /**
- * Executes its body as a tolog query and stores the result
- * in the variable named by the <code>var</code>attribute.
+ * Executes its body as a tolog query.
+ * <br/><br/>
+ * The resultset is stored as an object of type
+ * org.semantag.tm.TologResultSetWrapper
+ * in the variable named by the <code>var</code>-attribute.
  * 
  * 
  * @jelly
@@ -96,9 +99,33 @@ public class TologTag extends BaseTMTag {
   }
 
   /**
+   * The name of the variable that holds the resulting resultset.
    * @param var The var to set.
    */
   public void setVar(String var) {
     this.var = var;
   }
+  
+
+  /**
+   * Overrides the method from the superclass and blocks
+   * the setting of a source locator since tolog queries 
+   * have no sourceLocators.
+   * 
+   * @jelly
+   *    ignore="true"
+   */
+    public void setSourceLocator(String sourceLocator) {
+    }
+
+    /**
+     * Overrides the method from the superclass and blocks
+     * the setting of an id since tolog queries have no id
+     * 
+     * @jelly
+     *    ignore="true"
+     */
+
+    public void setId(String id) {
+    }
 }

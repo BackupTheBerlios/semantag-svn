@@ -1,4 +1,4 @@
-// $Id: UseOccurrenceTag.java,v 1.3 2004/12/09 21:19:58 c_froehlich Exp $
+// $Id: UseOccurrenceTag.java,v 1.4 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -12,10 +12,10 @@ import org.tm4j.topicmap.TopicMapObject;
 /**
  * Retrieves an Occurrence instance and sets it as the
  * context-occurrence for nested tags.
- * 
+ * <br/><br/>
  * The <code>var</code>-attribute allows to store the occurrence in
  * a variable in order to use it elsewhere in the script.
- * 
+ * <br/><br/>
  * The nonexistant - attribute triggers what will happen
  * if the specified occurrece could not be found. 
  * 
@@ -165,8 +165,11 @@ public class UseOccurrenceTag extends BaseUseTag implements ContextOccurrence
 
     
     /**
-     * sets the data that is used for 
-     * a new occurrence
+     * Sets the inline data for a new created occurrence.<br/>
+     * If this tag does not lead to the creation of a new occurrence,
+     * this attribute will be ignored.
+     * @jelly
+     *  required="no"
      * 
      * @param data
      */
@@ -182,16 +185,20 @@ public class UseOccurrenceTag extends BaseUseTag implements ContextOccurrence
     }
 
     /**
-     * sets the address of the resource for the new occurrence
-     * 
-     * @param data
+     * @return the address of the resource for the new occurrence
      */
     public String getResource() {
         return resource;
     }
 
     /**
-     * @return the address of the resource for the new occurrence
+     * Sets the address of the resource for a new created occurrence.<br/>
+     * If this tag does not lead to the creation of a new occurrence,
+     * this attribute will be ignored.
+     * @jelly
+     *  required="no"
+     * 
+     * @param resource the adress of the external resource for this occurrence
      */
     public void setResource(String resource) {
         this.resource = resource;

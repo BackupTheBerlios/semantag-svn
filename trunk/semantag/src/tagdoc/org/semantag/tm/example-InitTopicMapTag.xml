@@ -1,0 +1,3 @@
+  &lt;!-- Generate new topicmap --&gt;
+  &lt;tm:init baselocator="${TM_BASELOC_STUB}${MAP_NAME}" var="TM"/&gt;
+

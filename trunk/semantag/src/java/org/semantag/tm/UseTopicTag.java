@@ -1,4 +1,4 @@
-// $Id: UseTopicTag.java,v 1.4 2004/12/20 20:49:58 c_froehlich Exp $
+// $Id: UseTopicTag.java,v 1.5 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -214,7 +214,13 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
     }
 
     /**
-     * redirected to TopicResolver.setID(String)
+     * Sets the id that is used to lookup the topic.<br/>
+     * If no topic could be found and the "nonexistant"-attribute
+     * is set to "add" the given id will become the id of
+     * the new topic.
+     * 
+     * @jelly
+     *  required ="no"
      */
     public void setId(String id) {
         topicResolver.setTopicID(id);
@@ -228,7 +234,14 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
     }
 
     /**
-     * redirected to TopicResolver.setSourceLocator(String)
+     * Sets the adress of the source locator that is 
+     * used to lookup the topic (if no id-attribute is specified).<br/>
+     * If no topic could be found and the "nonexistant"-attribute
+     * is set to "add" the given source locator will become the 
+     * source locator of the new topic.
+     * 
+     * @jelly
+     *  required ="no"
      */
     public void setSourceLocator(String sourceLocator) {
         topicResolver.setTopicSourceLocator(sourceLocator);

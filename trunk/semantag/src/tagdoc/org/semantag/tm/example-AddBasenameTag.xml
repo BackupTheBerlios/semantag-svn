@@ -1,0 +1,5 @@
+  &lt;!-- creates a topic and adds a basename to it
+       --&gt;
+   &lt;tm:addTopic id="${src_id}"&gt;
+      &lt;tm:addBasename name="${src_name}"/&gt;
+   &lt;/tm:addTopic&gt;   

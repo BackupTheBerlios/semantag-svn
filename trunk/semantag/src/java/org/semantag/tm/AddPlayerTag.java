@@ -1,4 +1,4 @@
-// $Id: AddPlayerTag.java,v 1.4 2004/12/20 20:49:58 c_froehlich Exp $
+// $Id: AddPlayerTag.java,v 1.5 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -10,25 +10,26 @@ import org.tm4j.topicmap.Member;
 import org.tm4j.topicmap.Topic;
 
 /**
- * Creates a player.
- * 
+ * Creates a new player.
+ * <br/><br/>
  * The player is either created for the member that is 
  * explicitly specified by the <code>member</code> 
  * attribute. If no member is explicitly specified, the 
  * new player is created for the current context member.
- * 
+ * <br/><br/>
  * The <code>id-</code> and/or the <code>sourceLocator-</code> attributes allow you to specify an 
  * id / a sourceLocator 
  * for the new player. If the underlying tm-engine detects a conflict 
- * (i.e. duplicate id/ * sourceLocator) the execution of the tag will fail.
- * 
- * To specify the topic that will act as the playing topic, you use one of the 
+ * (i.e. duplicate id/ sourceLocator) the execution of the tag will fail.
+ * <br/><br/>
+ * To specify the topic that will act as the playing topic, you may use one of the 
  * various topic resolving attributes.
- * 
+ * <br/><br/>
  * @jelly
  *  name="addPlayer"
  *  attributes="Additionally this tag supports the 
- *   <a href='/referencingTopics.html'>common set of topic-referencing attributes</a>"
+ *   <a href='/referencingTopics.html'>common set of topic-referencing attributes</a> to let you specify 
+ *   the topic used as the player"
  * 
  * @author Niko Schmuck
  * @author cf
@@ -118,8 +119,8 @@ public class AddPlayerTag extends BaseTopicReferenceTag {
 
     /**
      * The topic that will be used as the playing topic. 
-     * Specifying this property is exactly the same 
-     * as specifying the <code>topic</code> property.
+     * Using this attribute is exactly the same 
+     * as using the <code>topic</code> attribute.
      */
     public void setPlayer(Topic topic) {
         // calls the BaseClass. This method only exists for

@@ -75,6 +75,28 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceTopicMap{
         return nonexistant;
     }
     
+    /**
+     * Specifies what will happen, if the referenced TopicMapObject
+     * does not exist.<br/>
+     * Valid values are "ignore", "add" or "fail".<br/>
+     * "ignore": If the TopicMapObject that this tag refers to
+     * does exist, than the body of the tag will be executed.
+     * Otherwise the body of the tag will be ignored silently<br/>
+     * <br/>
+     * "add": If the TopicMapObject that this tag refers to
+     * does not exist, than a new Object will be created and 
+     * the body of the tag will be executed.<br/>
+     * If the TopicMapObject already exists, the body of the tag will be ignored silently.<br/>
+     * <br/>
+     * "fail": If the TopicMapObject that this tag refers to
+     * does not exist the execution of the current script will be stopped.
+     * 
+     * @param nonexistant
+     * @jelly
+     *    required="no"
+     *    default="ignore"
+     * 
+     */
     public void setNonexistant(String nonexistant) {
         if(nonexistant == null) {
             this.nonexistant = NE_DEFAULT;
@@ -121,10 +143,28 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceTopicMap{
         return tm;
     }
 
-
+    /**
+     * Sets the id that is used to lookup the TopicMapObject.<br/>
+     * If no TopicMapObject can be found and a new one will be created
+     * it will use the given id.
+     * 
+     * @jelly
+     *  required ="no"
+     */
     public void setId(String id) {
         tmoResolver.setId(id);
     }
+    
+    
+    /**
+     * Sets the address of the sourceLocator that is used to 
+     * lookup the TopicMapObject.<br/>
+     * If no TopicMapObject can be found and a new one will be created
+     * it will use the given sourceLocator.
+     * 
+     * @jelly
+     *  required ="no"
+     */
     public void setSourceLocator(String sourceLocator) {
         tmoResolver.setSourceLocator(sourceLocator);
     }

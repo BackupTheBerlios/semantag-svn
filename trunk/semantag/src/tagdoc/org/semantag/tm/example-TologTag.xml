@@ -1,0 +1,19 @@
+  &lt;!-- Performs a tolog query and stores the resultset
+          in the variable 'rs'.
+          Note that the $-sign is escaped by two $$-signs.
+          This is only necessary, if the query-text contains
+          variable references in the form of ${xy}.
+       --&gt;
+     &lt;tm:tolog var="rs"&gt;
+      select $$occ
+        from  
+          occurrence(i"${subjIndicator}",$$occ), 
+          type($$occ,s"${OT_LAT_SL}")?
+      &lt;/tm:tolog&gt;
+
+      
+  &lt;!-- Iterate over the resultset
+       --&gt;
+      &lt;j:forEach items="${rs.rows}" var="row" indexVar="ix"&gt;
+      ....
+      &lt;/j:forEach&gt;

@@ -1,4 +1,4 @@
-// $Id: AddMemberTag.java,v 1.3 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: AddMemberTag.java,v 1.4 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -11,25 +11,30 @@ import org.tm4j.topicmap.Member;
 import org.tm4j.topicmap.Topic;
 
 /**
- * Creates a member.
- * 
+ * Creates a new member.
+ * <br/><br/>
  * The member is either created for the association that is 
  * explicitly specified by the <code>association</code> 
  * attribute. If no association is explicitly specified, the 
  * member is  created for the current context association.
- * 
+ * <br/><br/>
  * The <code>id-</code> and/or the <code>sourceLocator-</code> attributes allow you to specify an 
  * id / a sourceLocator 
  * for the new member. If the underlying tm-engine detects a conflict 
- * (i.e. duplicate id/ * sourceLocator) the execution of the tag will fail.
- * 
+ * (i.e. duplicate id/ sourceLocator) the execution of the tag will fail.
+ * <br/><br/>
  * The first player of the member is specified via the <code>player</code> attribute. 
  * Additional player may be specified by enclosed <code>addPlayer</code>-tags.
- * 
+ * <br/><br/>
  * The role type of the new member is specified via the <code>role</code> attribute.
  * 
  * @jelly
  *  name="addMember"
+ * 
+ * @jelly.nested 
+ *  name="addPlayer" 
+ *  desc="adds a player to this member" 
+ *  required="no"
  * 
  * @author Niko Schmuck
  * @author cf
@@ -126,6 +131,10 @@ public class AddMemberTag extends BaseTMTag implements ContextMember {
   
   /**
    * The Association to which the new member will be added
+   * 
+   * @jelly
+   *    required="no"
+   *    default="the current context association"
    */
   public void setAssociation(Association association) {
       this.association = association;
@@ -140,6 +149,9 @@ public class AddMemberTag extends BaseTMTag implements ContextMember {
   
   /**
    * The initial player of the new member
+   * 
+   * @jelly
+   *    required="no"
    */
   public void setPlayer(Topic player) {
       this.player = player;
@@ -154,6 +166,9 @@ public class AddMemberTag extends BaseTMTag implements ContextMember {
 
   /**
    * The roleSpec of the new member
+   * 
+   * @jelly
+   *    required="no"
    */
   public void setRole(Topic role) {
       this.role = role;

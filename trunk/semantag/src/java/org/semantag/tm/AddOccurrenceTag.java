@@ -1,4 +1,4 @@
-// $Id: AddOccurrenceTag.java,v 1.3 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: AddOccurrenceTag.java,v 1.4 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -10,18 +10,18 @@ import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.Topic;
 
 /**
- * Creates an occurrence.
- * 
+ * Creates a new occurrence.
+ * <br/><br/>
  * The occurrence is either created for the topic that is 
  * explicitly specified by the <code>topic</code> 
  * attribute. If no topic is explicitly specified, the 
  * occurrence is  created for the current context topic.
- * 
+ * <br/><br/>
  * The <code>id-</code> and/or the <code>sourceLocator-</code> attributes allow you to specify an 
  * id / a sourceLocator 
  * for the new occurrence. If the underlying tm-engine detects a conflict 
- * (i.e. duplicate id/ * sourceLocator) the execution of the tag will fail.
- * 
+ * (i.e. duplicate id/ sourceLocator) the execution of the tag will fail.
+ * <br/><br/>
  * To specify an external resource to which this occurrence shall point, the 
  * <code>resource</code> attribute is used. For an occurrence with internal data, the 
  * <code>data</code> attribute is used. If both attributes are specified, <code>data</code> 
@@ -29,6 +29,16 @@ import org.tm4j.topicmap.Topic;
  * 
  * @jelly
  *  name="addOccurrence"
+ * 
+ * @jelly.nested 
+ *  name="addInstanceOf" 
+ *  desc="sets the type of the new occurrence" 
+ *  required="no"
+ * 
+ * @jelly.nested 
+ *  name="addScope" 
+ *  desc="adds a topic to the set of scoping topics for this occurrence" 
+ *  required="no"
  * 
  * @author Niko Schmuck
  * @author cf
@@ -131,7 +141,10 @@ public class AddOccurrenceTag extends BaseTMTag implements ContextOccurrence{
     }
 
     /**
-     * The inline data for the new occurrence
+     * Sets the inline data for a new created occurrence.<br/>
+     * 
+     * @jelly
+     *  required="no"
      * 
      * @param data
      */
@@ -147,16 +160,18 @@ public class AddOccurrenceTag extends BaseTMTag implements ContextOccurrence{
     }
 
     /**
-     * The address of the external resource for the new occurrence
-     * 
-     * @param data
+     * @return the address of the resource for the new occurrence
      */
     public String getResource() {
         return resource;
     }
 
     /**
-     * @return the address of the resource for the new occurrence
+     * Sets the address of the resource for a new created occurrence.<br/>
+     * @jelly
+     *  required="no"
+     * 
+     * @param resource the adress of the external resource for this occurrence
      */
     public void setResource(String resource) {
         this.resource = resource;
@@ -165,6 +180,9 @@ public class AddOccurrenceTag extends BaseTMTag implements ContextOccurrence{
     /**
      * The topic to which the new occurrence will be added
      * 
+     * @jelly
+     *   required="no, unless a topic is available from the context"
+     *   default="the current context topic"
      * @param aTopic
      */
     public void setTopic(Topic aTopic) {

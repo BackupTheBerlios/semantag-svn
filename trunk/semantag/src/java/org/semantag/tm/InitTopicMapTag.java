@@ -1,4 +1,4 @@
-// $Id: InitTopicMapTag.java,v 1.3 2004/12/09 21:19:58 c_froehlich Exp $
+// $Id: InitTopicMapTag.java,v 1.4 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -23,7 +23,7 @@ import org.tm4j.topicmap.TopicMapProviderException;
  * explicitly states a topicmap.
  * 
  * @jelly
- *  name="initTopicMap"
+ *  name="init"
  * 
  * @author Niko Schmuck
  * @author cf
@@ -62,4 +62,6 @@ public class InitTopicMapTag extends BaseTopicMapTag {
                     + e.toString());
         }
     }
+    
+
 }

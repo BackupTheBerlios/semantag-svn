@@ -1,0 +1,3 @@
+    &lt;tm:addTopic var="script"&gt;
+      &lt;tm:setSubject locator="${SCRIPTS_STABLE_LOC_DIR}${sc_file}"/&gt;
+    &lt;/tm:addTopic&gt;

@@ -1,0 +1,7 @@
+     &lt;!-- Use a topics label as a title --&gt;
+     ...
+      &lt;title&gt;
+        &lt;tm:label object="${map}"/&gt;
+      &lt;/title&gt;
+     ...
+

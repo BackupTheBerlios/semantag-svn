@@ -1,4 +1,4 @@
-// $Id: AddBasenameTag.java,v 1.3 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: AddBasenameTag.java,v 1.4 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -10,17 +10,17 @@ import org.tm4j.topicmap.BaseName;
 import org.tm4j.topicmap.Topic;
 
 /**
- * Creates a basename.
- * 
+ * Creates a new basename.
+ * <br/><br/>
  * The basename is either created for the topic that is specified by the <code>topic</code>
- * attribute or for the current context topic.
+ * attribute or for the current context topic.<br/><br/>
  * 
  * The <code>id-</code> and/or the <code>sourceLocator-</code> attributes allow you to specify an 
  * id / a sourceLocator 
  * for the new basename. If the underlying tm-engine detects a conflict 
- * (i.e. duplicate id/ * sourceLocator) the execution of the tag will fail.
+ * (i.e. duplicate id/ sourceLocator) the execution of the tag will fail.<br/><br/>
  * 
- * The name of the basename is specified via the <code>name</code> attribute.
+ * The name of the basename is specified via the <code>name</code> attribute.<br/>
  * @jelly
  *  name="addBasename"
  * 
@@ -113,6 +113,9 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName {
 
     /**
      * The namedata of the new basename
+     * 
+     * @jelly
+     *  required="true"
      * 
      * @param name
      */

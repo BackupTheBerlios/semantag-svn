@@ -1,0 +1,4 @@
+      &lt;tm:addOccurrence data="${src_file}"&gt;
+        &lt;tm:addInstanceOf type="${OT_LOCATION_IN_PROJECT}"/&gt;
+      &lt;/tm:addOccurrence&gt;
+

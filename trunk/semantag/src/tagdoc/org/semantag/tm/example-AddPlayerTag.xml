@@ -1,0 +1,10 @@
+      &lt;!-- add a player to the context member --&gt;
+      &lt;tm:addMember player="${cityA}" role="${RT_CITY}"&gt;
+        &lt;tm:addPlayer player="${cityB}"/&gt;
+      &lt;/tm:addMember&gt;  
+
+     &lt;!-- specify the member explicitly --&gt;
+      &lt;tm:addPlayer player="${aPlayer}" member="${aMember}"/&gt;
+ 
+      
+

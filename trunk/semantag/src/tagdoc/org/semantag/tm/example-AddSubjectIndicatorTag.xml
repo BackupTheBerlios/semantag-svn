@@ -1,0 +1,6 @@
+    &lt;tm:addTopic&gt;
+    
+      &lt;!-- add a subject indicator --&gt;
+      &lt;tm:addSubjectIndicator locator="${PSI_STUB_ZIP}${zip}"/&gt;
+  
+    &lt;/tm:addTopic&gt;

@@ -1,4 +1,4 @@
-// $Id: OpenTopicMapTag.java,v 1.3 2004/12/09 21:19:58 c_froehlich Exp $
+// $Id: OpenTopicMapTag.java,v 1.4 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -23,7 +23,7 @@ import java.net.MalformedURLException;
  * will become the default one.
  * 
  * @jelly
- *  name="openTopicMap"
+ *  name="open"
  * 
  * @author cf
  */

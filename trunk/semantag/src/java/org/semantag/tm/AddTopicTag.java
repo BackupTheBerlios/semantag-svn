@@ -1,4 +1,4 @@
-// $Id: AddTopicTag.java,v 1.3 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: AddTopicTag.java,v 1.4 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -10,20 +10,45 @@ import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMap;
 
 /**
- * Creates a topic.
- * 
+ * Creates a new topic.
+ * <br/><br/>
  * The topic is either created in the topicmap that is 
  * explicitly specified by the <code>topicmap</code> 
  * attribute. If no topicmap is explicitly specified, the 
  * new topic is created in the current context topicmap.
- * 
+ * <br/><br/>
  * The <code>id-</code> and/or the <code>sourceLocator-</code> attributes allow you to specify an 
  * id / a sourceLocator 
  * for the new topic. If the underlying tm-engine detects a conflict 
- * (i.e. duplicate id/ * sourceLocator) the execution of the tag will fail.
+ * (i.e. duplicate id/ sourceLocator) the execution of the tag will fail.
  * 
  * @jelly
  *  name="addTopic"
+ * 
+ * @jelly.nested 
+ *  name="setSubject" 
+ *  desc="sets the subject for this topic" 
+ *  required="no"
+ * 
+ * @jelly.nested 
+ *  name="addSubjectIndicator" 
+ *  desc="adds a subject indicator for this topic" 
+ *  required="no"
+ * 
+ * @jelly.nested
+ *  name="addBasename"
+ *  desc="adds a basename to this topic"
+ *  required="no"
+ * 
+ * @jelly.nested
+ *  name="addOccurrence"
+ *  desc="adds an occurrence to this topic"
+ *  required="no"
+ * 
+ * @jelly.nested 
+ *  name="addInstanceOf" 
+ *  desc="sets a type for this topic" 
+ *  required="no"
  * 
  * @author Niko Schmuck
  * @author cf
@@ -109,7 +134,11 @@ public class AddTopicTag extends BaseTMTag implements ContextTopic,
     }
 
     /**
-     * The topicmap, to which the new association will be added
+     * The topicmap, to which the new topic will be added
+     * 
+     * @jelly
+     *  required="no"
+     *  default="the context topic map"
      */
     public void setTopicmap(TopicMap tm) {
         this.tm = tm;

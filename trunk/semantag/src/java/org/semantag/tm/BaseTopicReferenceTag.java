@@ -1,4 +1,4 @@
-// $Id: BaseTopicReferenceTag.java,v 1.3 2004/12/20 20:49:58 c_froehlich Exp $
+// $Id: BaseTopicReferenceTag.java,v 1.4 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -68,6 +68,7 @@ public abstract class BaseTopicReferenceTag extends BaseTMTag implements Referen
      * Sets the topic
      * @jelly
      *    required="no"
+     *    ignore="true"
      */
     public void setTopic(Topic aTopic) {
         topic = aTopic;

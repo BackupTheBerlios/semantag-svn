@@ -1,7 +1,9 @@
-// $Id: BaseTopicMapTag.java,v 1.2 2004/12/09 21:19:58 c_froehlich Exp $
+// $Id: BaseTopicMapTag.java,v 1.3 2004/12/29 21:30:26 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.MissingAttributeException;
+import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.tm4j.net.Locator;
@@ -127,18 +129,27 @@ public abstract class BaseTopicMapTag extends BaseTMTag implements ContextTopicM
     this.baselocator = baselocator;
   }
 
-//  /**
-//   * @return Returns the file.
-//   */
-//  public String getFile() {
-//    return file;
-//  }
-//
-//  /**
-//   * @param file
-//   *            The file to set.
-//   */
-//  public void setFile(String file) {
-//    this.file = file;
-//  }
+
+  /**
+   * Overrides the method from the superclass and blocks
+   * the setting of a source locator since topicmaps are not
+   * referenced by source locators.
+   * 
+   * @jelly
+   *    ignore="true"
+   */
+    public void setSourceLocator(String sourceLocator) {
+    }
+
+    /**
+     * Overrides the method from the superclass and blocks
+     * the setting of an id since topicmaps are not
+     * referenced by ids.
+     * 
+     * @jelly
+     *    ignore="true"
+     */
+
+    public void setId(String id) {
+    }
 }
