@@ -10,11 +10,16 @@ import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.jelly.XMLOutput;
 
 /**
- * Makes a new jena rdf model and fills it from the given url
+ * Makes a new jena RDF model and fills it from the given url
  * 
- *@jelly
+ * @jelly
  *  name="rdf"
  * 
+ * @jelly.nested 
+ *  name="object" 
+ *  desc="retrieves a list of objects contained in this model" 
+ *  required="no"
+ *
  * @author cf
  * @version 0.1, created on 11.08.2004
  */

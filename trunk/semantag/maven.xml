@@ -7,11 +7,7 @@
   <!-- GENERATE THE TAG-LIBRARY LIST                       -->
   <!-- ===================================================================== -->
   <goal name="generate-tagdoc">
-    <!-- use ants xdoclet integration to 
-         automatically pull the tags-documentation 
-         from the class-files
-     -->
-     
+    
      <!-- 
         necessary since maven:set currently (1.0.1) fails, 
         if the plugin is not initialised 
@@ -21,19 +17,22 @@
      
      <maven:set plugin="jellytagdoc-plugin" property="tagsrc.includepattern" value="org/semantag/tm/**/*.java"/>
      <maven:set plugin="jellytagdoc-plugin" property="taglib.title" value="Topicmap"/>
-     <maven:set plugin="jellytagdoc-plugin" property="taglib.filename" value="tl-topicmap"/>
+     <maven:set plugin="jellytagdoc-plugin" property="destination.taglib.file" value="tl-topicmap"/>
+     <maven:set plugin="jellytagdoc-plugin" property="taglib.class" value="org.semantag.tm.TopicMapTagLibrary"/>
      <maven:set plugin="jellytagdoc-plugin" property="tags.path" value="org/semantag/tm"/>
      <attainGoal name="jellytagdoc"/>
 
      <maven:set plugin="jellytagdoc-plugin" property="tagsrc.includepattern" value="org/semantag/rdf/**/*.java"/>
      <maven:set plugin="jellytagdoc-plugin" property="taglib.title" value="RDF"/>
-     <maven:set plugin="jellytagdoc-plugin" property="taglib.filename" value="tl-rdf"/>
+     <maven:set plugin="jellytagdoc-plugin" property="destination.taglib.file" value="tl-rdf"/>
+     <maven:set plugin="jellytagdoc-plugin" property="taglib.class" value="org.semantag.rdf.RDFTagLibrary"/>
      <maven:set plugin="jellytagdoc-plugin" property="tags.path" value="org/semantag/rdf"/>
      <attainGoal name="jellytagdoc"/>
      
      <maven:set plugin="jellytagdoc-plugin" property="tagsrc.includepattern" value="org/semantag/csv/**/*.java"/>
      <maven:set plugin="jellytagdoc-plugin" property="taglib.title" value="CSV"/>
-     <maven:set plugin="jellytagdoc-plugin" property="taglib.filename" value="tl-csv"/>
+     <maven:set plugin="jellytagdoc-plugin" property="destination.taglib.file" value="tl-csv"/>
+     <maven:set plugin="jellytagdoc-plugin" property="taglib.class" value="org.semantag.tm.CSVTagLibrary"/>
      <maven:set plugin="jellytagdoc-plugin" property="tags.path" value="org/semantag/csv"/>
      <attainGoal name="jellytagdoc"/>
   

@@ -1,0 +1,16 @@
+    &lt;!-- Add a topic for the city --&gt;
+    &lt;tm:addTopic xmlns:tm="jelly:org.semantag.tm.TopicMapTagLibrary"&gt;
+    
+      &lt;tm:addInstanceOf topicID="tt-city"/&gt;
+  
+      &lt;tm:addBasename name="${name}"/&gt;
+  
+      &lt;!-- add population --&gt;
+      &lt;tm:addOccurrence data="${population}"&gt;
+        &lt;tm:addInstanceOf type="${OT_POP}"/&gt;
+      &lt;/tm:addOccurrence&gt;
+  
+      &lt;!-- zip as subject indicator --&gt;
+      &lt;tm:addSubjectIndicator locator="${PSI_STUB_ZIP}${zip}"/&gt;
+  
+    &lt;/tm:addTopic&gt;

@@ -1,0 +1,12 @@
+  &lt;!-- Add latitude and longitude to the city --&gt;
+  &lt;tm:useTopic topic="${cityTopic}"&gt;
+          
+    &lt;!-- latitude and longitude --&gt;
+    &lt;tm:addOccurrence data="${latitude}"&gt;
+      &lt;tm:addInstanceOf type="${OT_LAT}"/&gt;
+    &lt;/tm:addOccurrence&gt;
+    &lt;tm:addOccurrence data="${longitude}"&gt;
+      &lt;tm:addInstanceOf type="${OT_LONG}"/&gt;
+    &lt;/tm:addOccurrence&gt;
+
+  &lt;/tm:useTopic&gt;

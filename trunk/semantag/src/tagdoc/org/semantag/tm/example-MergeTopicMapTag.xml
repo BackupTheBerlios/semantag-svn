@@ -1,0 +1,6 @@
+  &lt;!-- Generate a new topicmap with given base locator --&gt;
+  &lt;tm:init baselocator="http://www.semantag.org/topicmaps/cities/airports"/&gt;
+
+  &lt;!-- Merge in a basic ontology for the airports--&gt;
+  &lt;tm:merge filename="${CITIES_ROOT}/ontologies/airports-ontology.ltm"/&gt;
+

@@ -1,4 +1,4 @@
-// $Id: TopicMapTagLibrary.java,v 1.3 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: TopicMapTagLibrary.java,v 1.4 2004/12/19 20:45:29 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.TagLibrary;
@@ -7,11 +7,17 @@ import org.apache.commons.logging.LogFactory;
 import org.semantag.csv.CSVTagLibrary;
 
 /**
- * The topic map tag library basically registers all jelly tags,
- * so that they can be accessed from a jelly script under a specific
- * namespace.
+ * The topic map tag library contains tags that support the creation as well as the querying of topicmaps.
+ * 
+ * It supports all element of the topicmap standards, except the variantname element.
+ *
+ * Currently all theeses tags rely on <a href="http://tm4j.org">tm4j</a> as its underlying topicmap engine.
+ *
+ * @jelly
+ *   defNS="xmlns:tm=\"jelly:org.semantag.tm.TopicMapTagLibrary\""
  *
  * @author Niko Schmuck
+ * @author cf
  */
 public class TopicMapTagLibrary extends TagLibrary {
   /** The Log to which logging calls will be made. */

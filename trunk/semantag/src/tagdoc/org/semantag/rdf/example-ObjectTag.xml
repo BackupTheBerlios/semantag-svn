@@ -1,0 +1,6 @@
+    &lt;rdf:rdf url="file://${TMP}airport.xml"&gt;
+      &lt;rdf:object var="lat" propertyNS="http://www.w3.org/2003/01/geo/wgs84_pos#" property="lat"/&gt;
+      &lt;rdf:object var="long" propertyNS="http://www.w3.org/2003/01/geo/wgs84_pos#" property="long"/&gt;
+      &lt;rdf:object var="iata" propertyNS="http://www.daml.org/2001/10/html/airport-ont#" property="iataCode"/&gt;
+    &lt;/rdf:rdf&gt;
+

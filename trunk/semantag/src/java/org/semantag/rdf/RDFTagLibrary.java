@@ -1,4 +1,4 @@
-// $Id: RDFTagLibrary.java,v 1.1 2004/10/26 19:50:37 niko_schmuck Exp $
+// $Id: RDFTagLibrary.java,v 1.2 2004/12/19 20:45:28 c_froehlich Exp $
 package org.semantag.rdf;
 
 import org.apache.commons.jelly.TagLibrary;
@@ -6,10 +6,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * The tag library basically registers all jelly tags,
- * so that they can be accessed from a jelly script under a specific
- * namespace.
- *
+ * The RDF tag library contains tags that support the querying of RDF triples.
+ * @jelly
+ *   defNS="xmlns:rdf=\"jelly:org.semantag.rdf.RDFTagLibrary\""
  * @author cf
  */
 public class RDFTagLibrary extends TagLibrary {

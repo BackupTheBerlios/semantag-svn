@@ -9,7 +9,7 @@
  </properties>
  <body>
    <section name="SemanTag">
-      <p>The SemanTag project develops a set of xml-tags that allow you to create and process semantically enriched data. <a href="about.html">Learn more...</a></p>
+      <p>The SemanTag project develops a set of XML tags that allow you to create and process semantically enriched data. SemanTag currently supports almost the full Topicmap standard and has some early support for processing RDF triples. <a href="about.html">Learn more...</a></p>
    </section>
   
    <section name="Status">

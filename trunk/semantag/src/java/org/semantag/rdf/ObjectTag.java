@@ -11,7 +11,15 @@ import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.jelly.XMLOutput;
 
 /**
+ * Retrieves a list of objects from the current context model 
+ * and calls its body for each member of the list.
  *
+ * Optional the list of objects can be restricted to those
+ * of a certain property.
+ *
+ * @jelly
+ *  name="object"
+ *  
  * @author cf
  * @version 0.1, created on 01.08.2004
  */
@@ -21,16 +29,31 @@ public class ObjectTag extends TagSupport {
   //private static final Log log = LogFactory.getLog(TagSupport.class);
 
   /**
-   * Name of the variable to hold the value
-   * Required
+   * Name of the variable that holds the current object
+   * in each step of the iteration 
+   * @jelly 
+   *   required ="yes"
    */
   private String var;
 
+
   /**
-   * property to filter the list of objects
-   *
+   * A property to filter the list of objects.
+   * This attribute must always be combined with
+   * the propertyNS - attribute
+   * @jelly 
+   *   required ="no"
    */
   private String property;
+
+
+  /**
+   * The namespace of the property to filter the list of objects.
+   * This attribute must always be combined with
+   * the property - attribute
+   * @jelly 
+   *   required ="no"
+   */
   private String propertyNS;
 
   /**
@@ -83,7 +106,7 @@ public class ObjectTag extends TagSupport {
       RDFNode n = it.nextNode();
 
       context.setVariable(var, n.toString());
-
+      invokeBody(output);
       if (limitToFirst) {
         break; //stop after first iteration
       }
@@ -111,7 +134,11 @@ public class ObjectTag extends TagSupport {
   }
 
   /**
-   * @param var The var to set.
+   * Name of the variable that holds the current object
+   * in each step of the iteration 
+   * @param var the name of the variable to set.
+   * @jelly 
+   *   required ="yes"
    */
   public void setVar(String var) {
     this.var = var;
@@ -125,7 +152,13 @@ public class ObjectTag extends TagSupport {
   }
 
   /**
+   * A property to filter the list of objects.
+   * This attribute must always be combined with
+   * the propertyNS - attribute
    * @param property The property to set.
+   * 
+   * @jelly 
+   *   required ="no, unless propertyNS is set"
    */
   public void setProperty(String property) {
     this.property = property;
@@ -139,9 +172,31 @@ public class ObjectTag extends TagSupport {
   }
 
   /**
+   * The namespace of the property to filter the list of objects.
+   * This attribute must always be combined with
+   * the property - attribute
    * @param propertyNS The propertyNS to set.
+   * 
+   * @jelly 
+   *   required ="no, unless property is set"
    */
   public void setPropertyNS(String propertyNS) {
     this.propertyNS = propertyNS;
   }
+  
+  public boolean isLimitToFirst() {
+      return limitToFirst;
+  }
+
+  /**
+   * Whether the execution of nested tags should be
+   * limited to the first member of the list of objects.
+     * @jelly 
+     *   required ="no"
+     *   default="true"
+   */
+  public void setLimitToFirst(boolean limitToFirst) {
+      this.limitToFirst = limitToFirst;
+  }
+
 }
