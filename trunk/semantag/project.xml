@@ -94,7 +94,7 @@
     <dependency>
       <groupId>commons-jexl</groupId>
       <artifactId>commons-jexl</artifactId>
-      <version>SNAPSHOT</version>
+      <version>1.0</version>
       <url>http://jakarta.apache.org/commons/jexl/</url>
     </dependency>
     <dependency>
