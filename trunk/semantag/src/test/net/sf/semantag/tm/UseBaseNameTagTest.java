@@ -134,7 +134,6 @@ public class UseBaseNameTagTest extends UseTagTestBase {
 
     // test resolvement failure
     // with mode ADD
-    //TODO test for name and scope
     public void testNonExistanceIDWithADD() throws Exception {
 
         String id = "basename_does_not_exist";
@@ -151,6 +150,10 @@ public class UseBaseNameTagTest extends UseTagTestBase {
         // UseBaseNameTag
         tag.setParent(utt);
 
+        // set a name
+        String name = "Helen of Troy";
+        tag.setName(name);
+        
         Topic helena = utt.getTopic();
         int co = helena.getNames().size();
 
@@ -163,5 +166,7 @@ public class UseBaseNameTagTest extends UseTagTestBase {
         BaseName bn = tag.getBaseName();
         assertEquals(bn.getParent(), helena);
 
+        // assert the name
+        assertEquals(name, bn.getData());
     }
 }
