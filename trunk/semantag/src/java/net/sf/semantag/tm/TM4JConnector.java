@@ -93,6 +93,25 @@ public class TM4JConnector {
     }
 
     /**
+     * Adds the given topic as a player to the given member. <br>
+     * 
+     * @param member
+     * @param player
+     * @throws JellyTagException to wrap a PropertyVetoException
+     * that might be thrown by tm4j while adding the theme
+     */
+    public void addPlayer(Member member, Topic player)
+            throws JellyTagException {
+
+        try {
+            member.addPlayer(player);
+        } catch (PropertyVetoException e) {
+            throw new JellyTagException(e);
+        }
+
+    }
+    
+    /**
      * Adds a topic to the array of topics that form the scope of the given tmo. <br>
      * 
      * tmo must be an instance of either basename, association
