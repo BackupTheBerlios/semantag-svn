@@ -37,13 +37,13 @@ public class LabelTagTest extends TMTagTestBase {
     public void testSetTmo() {
 
         // initially no tmo should be set
-        assertNull(labelTag.getTmo());
+        assertNull(labelTag.getObject());
 
         // set a topic map object and assert that it
         // can be retrieved
         Topic john = tm.getTopicByID("john");
-        labelTag.setTmo(john);
-        assertEquals(john, labelTag.getTmo());
+        labelTag.setObject(john);
+        assertEquals(john, labelTag.getObject());
     }
 
     /*
@@ -52,17 +52,17 @@ public class LabelTagTest extends TMTagTestBase {
     public void testDoTagXMLOutput() throws Exception{
         
         Topic john = tm.getTopicByID("john");
-        labelTag.setTmo(john);
+        labelTag.setObject(john);
         labelTag.doTag(getOutputMock());
         assertEquals("John", writtenToOutputMock);
         
         String sand =" Sand";
-        labelTag.setTmo(sand);
+        labelTag.setObject(sand);
         labelTag.doTag(getOutputMock());
         assertEquals(sand, writtenToOutputMock);
 
         Locator l = (Locator)john.getSourceLocators().iterator().next();
-        labelTag.setTmo(l);
+        labelTag.setObject(l);
         labelTag.doTag(getOutputMock());
         assertEquals(l.getAddress(), writtenToOutputMock);
 
@@ -76,7 +76,7 @@ public class LabelTagTest extends TMTagTestBase {
 
         // validating an instance that has
         // no topic map object set shall lead to an exception
-        assertNull(labelTag.getTmo());
+        assertNull(labelTag.getObject());
         try {
             labelTag.validate();
             
@@ -89,7 +89,7 @@ public class LabelTagTest extends TMTagTestBase {
 
         // validate that an instance that has
         // a topic map object set should pass
-        labelTag.setTmo(tm.getTopicByID("john"));
+        labelTag.setObject(tm.getTopicByID("john"));
         labelTag.validate();
         
         
@@ -97,12 +97,12 @@ public class LabelTagTest extends TMTagTestBase {
         // for a locator succeeds
         Topic john = tm.getTopicByID("john");
         Locator l = (Locator)john.getSourceLocators().iterator().next();
-        labelTag.setTmo(l);
+        labelTag.setObject(l);
         labelTag.validate();
         
         // validate that getting a label for an
         // arbitrary object succeeds
-        labelTag.setTmo("hi");
+        labelTag.setObject("hi");
         labelTag.validate();
         
         

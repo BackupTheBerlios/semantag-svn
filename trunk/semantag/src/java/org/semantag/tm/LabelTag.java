@@ -1,4 +1,4 @@
-//$Id: LabelTag.java,v 1.2 2004/11/29 06:38:13 c_froehlich Exp $
+//$Id: LabelTag.java,v 1.3 2004/11/29 08:58:33 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -23,7 +23,7 @@ public class LabelTag extends BaseTMTag {
     /**
      * The object for which the label will be returned.
      */
-    private Object tmo;
+    private Object object;
 
 
     /**
@@ -33,13 +33,13 @@ public class LabelTag extends BaseTMTag {
             JellyTagException {
 
         if (log.isDebugEnabled())
-            log.debug("Print label for " + tmo);
+            log.debug("Print label for " + object);
 
         // assert that an object is provided
         validate();
 
         // get the label
-        String label = NameUtil.labelFor(tmo);
+        String label = NameUtil.labelFor(object);
         
         // print it
         try {
@@ -61,9 +61,9 @@ public class LabelTag extends BaseTMTag {
      * ensures that an object is set
      */
     protected void validate() throws JellyTagException {
-        if (tmo == null) {
-            String msg = "The label-tag requires that a topic map object is set via";
-            msg += "the 'tmo'-attribute.";
+        if (object == null) {
+            String msg = "The label-tag requires that an object is set via";
+            msg += "the 'object'-attribute.";
             throw new JellyTagException(msg);
 
         }
@@ -75,15 +75,15 @@ public class LabelTag extends BaseTMTag {
      * This is usually an object of type TopicMapObject or of type Locator.
      * Nevertheless its possible to pass any object.
      */
-    public void setTmo(Object tmo) {
-        this.tmo = tmo;
+    public void setObject(Object tmo) {
+        this.object = tmo;
     }
 
     
     /**
      * @return the object for which a label shall be returned
      */
-    public Object getTmo() {
-        return tmo;
+    public Object getObject() {
+        return object;
     }
 }
