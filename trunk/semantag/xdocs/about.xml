@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<document>
+
+ <properties>
+  <title>Semantag</title>
+  <author email="c_froehlich@users.sourceforge.net">Christoph Fröhlich</author>
+ </properties>
+ <body>
+   <section name="Semantag and Jelly">
+       <p>SemanTag defines a set of xml-tags that support the creation and processing of semantical data.</p>
+       <p>Semantag is based on <a href ="http://jakarta.apache.org/commons/jelly">jakarta-jelly</a>, a library that "turns xml into executable code". Using SemanTag means to write xml-scripts (just as with ant) that mix tags from the SemanTag-library as well as tags from the existing Jelly-tag libraries.</p>
+  </section>
+  <section name="How it works">
+    <p>SemanTag is based on Jelly and therefor SemanTag scripts are in fact Jelly scripts.</p>
+    <p>Jelly-Scripts are written in plain xml. The core Jelly tag lib defines tags for loops, branches and variables. Dependant on your needs you use additional tag libs that provide features like accessing databases, start the velocity template engine, query webservices etc.</p>
+    <p>The SemanTag-project as well defines tag libs. Theese tag libs concentrate on technologies that are more tight or more loose coupled to the SemanticWeb. Therefor SemanTag allows you to process semantically enriched data with Jelly scripts.</p>
+  </section>
+  
+  <section name="Supported Standards"> 
+      <p>SemanTag comes with tag libraries for topicmaps as well as for rdf.</p>  
+      <p>Currently Semantag is really topicmap-centric with a bit of support for processing rdf. In the future we hope to add full support for rdf creation as well.</p>
+  </section>
+      
+  <section name="Datasources">
+      <p>Since SemanTag is based on Jelly, you can use all the existing Jelly tag-libs. This give you the possibility to query a wide range of datasources, like databases, xml-repositories, csv-files and so on. Additionally the tag-libs defined by SemanTag allows you to process data from publicy available rdf- and topicmap stores (but there are not to much)</p>
+  </section>
+  <section name="Results">
+        <p>There are no restrictions on what you can do with the results that your scripts produce. In particular, you are not restricted to create topicmaps with SemanTag, but in fact you can produce websites, rdf-files, update databases etc.   </p>
+  </section>  
+  
+  <section name="Automation">
+    <index term="Automation, dynamic content"/>
+    <p>A SemanTag script that creates a topicmap queries the datasources and (re)build the topicmap each time the script is executed. Therefor Semantag allows you to provide and maintain topicmaps that are periodically updated to reflect dynamic content.</p>
+  </section>  
+
+ </body>
+ </document>

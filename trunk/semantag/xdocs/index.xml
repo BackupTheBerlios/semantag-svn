@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<document>
+
+ <properties>
+  <title>Semantag</title>
+  <author email="c_froehlich@users.sourceforge.net">Christoph Fröhlich</author>
+ </properties>
+ <body>
+   <section name="SemanTag">
+      <p>The SemanTag project develops a set of xml-tags that allow you to create and process semantically enriched data. <a href="about.html">Learn more...</a></p>
+   </section>
+  
+   <section name="Status">
+      <p>SemanTag is in a very early state. It is alpha-Software, the current release is <strong>0.1</strong></p>
+    </section>
+    
+    <section name="Download">
+      <p>SemanTag is released as either binary- or source-distribution. Both distributions are available on  Semantag's <a href="http://sourceforge.net/project/showfiles.php?group_id=117130">sourceforge download site</a>.</p>
+    </section>
+  </body>
+</document>
