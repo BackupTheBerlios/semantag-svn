@@ -13,7 +13,7 @@ import org.tm4j.topicmap.TopicMap;
  * @author cf
  * @version 0.1, created on 12.08.2004
  */
-public class OpenTopicMapTagTest extends BaseTMTagTest {
+public class OpenTopicMapTagTest extends TMTagTestBase {
    
     // doTag(XMLOutput) should fail, if no file was set
     public void testValidateFails() throws Exception {

@@ -1,7 +1,7 @@
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
-import org.tm4j.topicmap.Association;
+import org.tm4j.topicmap.Occurrence;
 
 /**
  * To be implemented by classes that provide an
@@ -9,7 +9,7 @@ import org.tm4j.topicmap.Association;
  * @author cf
  * @version 0.1, created on 08.09.2004
  */
-public interface ContextAssociation {
+public interface ContextOccurrence {
 
-    public Association getAssociation() throws JellyTagException;
+    public Occurrence getOccurrence() throws JellyTagException;
 }

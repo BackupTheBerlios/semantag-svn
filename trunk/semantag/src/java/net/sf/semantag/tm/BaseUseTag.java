@@ -1,5 +1,8 @@
 package net.sf.semantag.tm;
 
+import org.apache.commons.jelly.JellyTagException;
+import org.tm4j.topicmap.TopicMap;
+
 
 
 /**
@@ -9,7 +12,7 @@ package net.sf.semantag.tm;
  * @author cf
  * @version 0.1, created on 06.09.2004
  */
-public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar{
+public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar, ReferenceTopicMap{
 
     public final static String NE_IGNORE_BODY = "ignore";
     public final static String NE_ADD = "add";
@@ -21,6 +24,9 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar{
     private String nonexistant = NE_DEFAULT;
     
     protected TMOResolver tmoResolver = new TMOResolver();
+
+    // the name of a variable that holds a topicmap
+    private String tmVar;
 
     
     /**
@@ -66,6 +72,12 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar{
     }
         
     
+    protected TopicMap getTopicMapFromContext()
+        throws JellyTagException
+    {
+        return getTopicMapFromContext(tmVar);
+    }
+    
     public String getId() {
         return tmoResolver.getId();
     }
@@ -75,6 +87,14 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar{
     public String getFromVar() {
         return tmoResolver.getVariable();
     }
+    /**
+     * @return the name of the variable that hold
+     * the topicmap to which this tag refers to
+     */
+    public String getTmVar() {
+        return tmVar;
+    }
+
 
     public void setId(String id) {
         tmoResolver.setId(id);
@@ -85,4 +105,13 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar{
     public void setFromVar(String varname) {
         tmoResolver.setVariable(varname);
     }
+    
+    /**
+     * sets the name of the variable, that holds
+     * the topicmap to which this tag refers to.
+     */
+    public void setTmVar(String tmVar) {
+        this.tmVar = tmVar;
+    }
+
 }

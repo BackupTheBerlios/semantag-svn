@@ -13,12 +13,18 @@ public class AllTMTagTests {
     TestSuite suite = new TestSuite("Test for org.tm4j.jelly.test.tag.rdf");
 
     //$JUnit-BEGIN$
-    suite.addTestSuite(OpenTopicMapTagTest.class);
-    suite.addTestSuite(TopicResolverTest.class);
-    suite.addTestSuite(UseTopicTagTest.class);
-    suite.addTestSuite(AddTopicTagTest.class);
-    suite.addTestSuite(InitTopicMapTagTest.class);
     suite.addTestSuite(AddAssociationTagTest.class);
+    suite.addTestSuite(AddTopicTagTest.class);
+    suite.addTestSuite(BaseUseTagTest.class);
+    suite.addTestSuite(InitTopicMapTagTest.class);
+    suite.addTestSuite(OpenTopicMapTagTest.class);
+    suite.addTestSuite(TMOResolverTest.class);
+    suite.addTestSuite(TopicResolverTest.class);
+    suite.addTestSuite(UseAssociationTagTest.class);
+    suite.addTestSuite(UseBaseNameTagTest.class);
+    suite.addTestSuite(UseMemberTagTest.class);
+    suite.addTestSuite(UseOccurrenceTagTest.class);
+    suite.addTestSuite(UseTopicTagTest.class);
     
     //$JUnit-END$
     return suite;

@@ -1,5 +1,6 @@
 package net.sf.semantag.tm;
 
+import org.apache.commons.jelly.JellyTagException;
 import org.tm4j.topicmap.Topic;
 
 /**
@@ -10,5 +11,5 @@ import org.tm4j.topicmap.Topic;
  */
 public interface ContextTopic {
 
-    public Topic getTopic();
+    public Topic getTopic() throws JellyTagException;
 }

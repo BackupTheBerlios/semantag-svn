@@ -186,7 +186,7 @@
 	<baseName>
 		<baseNameString>Pollux</baseNameString>
 	</baseName>
-	<occurrence><resourceRef xlink:href="http://www.encyclopedia.com/articles/02406.html"/></occurrence>
+	<occurrence id="occ_pollux"><resourceRef xlink:href="http://www.encyclopedia.com/articles/02406.html"/></occurrence>
 </topic>
 
 <topic id="Leda">
@@ -211,15 +211,15 @@
 		<variantName><resourceData>Bote der Goetter</resourceData></variantName>
 		</variant>
 	</baseName>
-	<occurrence>
+	<occurrence id="occ_hermes1">
 		<instanceOf><topicRef xlink:href="#class_kurztext"/></instanceOf>
 	 	<resourceRef xlink:href="http://www.knol.de/inhalt/inhalt_id=1557/kategorie_id=846/inhalt_typ=artikel"/>
 	</occurrence>
-	<occurrence><resourceRef xlink:href="http://www.technosophie.de/WWTechno/Techsoph/Lex/hermes.htm"/></occurrence>
+	<occurrence id="occ_hermes2"><resourceRef xlink:href="http://www.technosophie.de/WWTechno/Techsoph/Lex/hermes.htm"/></occurrence>
 </topic>
 <topic id="Maia">
 	<instanceOf><topicRef xlink:href="#class_gott"/></instanceOf>
-	<baseName>
+	<baseName id="name_of_maia">
 		<baseNameString>Maia</baseNameString>
 	</baseName>
 </topic>
@@ -256,14 +256,14 @@
 
 <topic id="elektra">
 	<instanceOf><topicRef xlink:href="#class_mensch"/></instanceOf>
-	<baseName>
+	<baseName id="name_of_elektra">
 		<baseNameString>Elektra</baseNameString>
 	</baseName>
 </topic>
 
 <topic id="orest">
 	<instanceOf><topicRef xlink:href="#class_mensch"/></instanceOf>
-	<baseName>
+	<baseName id="name_of_orest">
 		<baseNameString>Orest</baseNameString>
 	</baseName>
 </topic>
@@ -297,15 +297,15 @@
 
 <association id="as00001">
 	<instanceOf><topicRef xlink:href="#at_geschwister"/></instanceOf>
-	<member>
+	<member id="mem1">
 		<roleSpec><topicRef xlink:href="#role_Bruder"/></roleSpec>
 		<topicRef xlink:href="#Kastor"/>
 	</member>
-	<member>
+	<member id="mem2">
 		<roleSpec><topicRef xlink:href="#role_Bruder"/></roleSpec>
 		<topicRef xlink:href="#Pollux"/>
 	</member>
-	<member>
+	<member id="mem3">
 		<roleSpec><topicRef xlink:href="#role_Schwester"/></roleSpec>
 		<topicRef xlink:href="#Helena"/>
 	</member>

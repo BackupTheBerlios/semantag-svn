@@ -13,10 +13,10 @@ import net.sf.semantag.tm.TopicResolver;
  * @author cf
  * @version 0.1, created on 06.09.2004
  */
-public class TopicResolverTest extends BaseTMTagTest {
+public class TopicResolverTest extends TMTagTestBase {
 
     TopicMap tm;
-    TopicResolver tr;
+    TopicResolver resolver;
 
    
 
@@ -32,8 +32,8 @@ public class TopicResolverTest extends BaseTMTagTest {
         JellyContext ctx = new JellyContext();
         ctx.setVariable(varName, t);
         
-        tr.setTopicVar(varName);
-        assertEquals(t, tr.getTopic(tm, ctx));
+        resolver.setTopicVar(varName);
+        assertEquals(t, resolver.getTopic(tm, ctx));
         
     }
 
@@ -42,8 +42,8 @@ public class TopicResolverTest extends BaseTMTagTest {
     public void testIdentifyTopicByID() 
         throws Exception
     {
-        tr.setTopicID("john");
-        Topic t = tr.getTopic(tm, new JellyContext());
+        resolver.setTopicID("john");
+        Topic t = resolver.getTopic(tm, new JellyContext());
         String adress = ((Locator)t.getSourceLocators().iterator().next()).getAddress();
         assertEquals(TestData.TM_JOHN_BASELOCATOR+"#john",adress);
     }
@@ -53,9 +53,9 @@ public class TopicResolverTest extends BaseTMTagTest {
     public void testIdentifyTopicBySourceLocator() 
         throws Exception
     {
-        tr.setTopicSourceLocator(TestData.TM_JOHN_BASELOCATOR+"#john");
+        resolver.setTopicSourceLocator(TestData.TM_JOHN_BASELOCATOR+"#john");
 
-        Topic t = tr.getTopic(tm, new JellyContext());
+        Topic t = resolver.getTopic(tm, new JellyContext());
         assertEquals("john",t.getID());
     }
 
@@ -64,9 +64,9 @@ public class TopicResolverTest extends BaseTMTagTest {
     public void testIdentifyTopicBySubject() 
         throws Exception
     {
-        tr.setTopicSubject("http://www.about_john.org");
+        resolver.setTopicSubject("http://www.about_john.org");
 
-        Topic t = tr.getTopic(tm, new JellyContext());
+        Topic t = resolver.getTopic(tm, new JellyContext());
         assertEquals("johns_site",t.getID());
     }
 
@@ -76,15 +76,15 @@ public class TopicResolverTest extends BaseTMTagTest {
     public void testIdentifyTopicBySubjectIndicator() 
         throws Exception
     {
-        tr.setTopicSubjectIndicator("http://www.fiatpanda.it/");
+        resolver.setTopicSubjectIndicator("http://www.fiatpanda.it/");
 
-        Topic t = tr.getTopic(tm, new JellyContext());
+        Topic t = resolver.getTopic(tm, new JellyContext());
         assertEquals("fiat-panda",t.getID());
     }
 
     protected void setUp() throws Exception {
         tm = getTopicMapFromResource(TestData.TM_JOHN_LTM, TestData.TM_JOHN_BASELOCATOR);
-        tr = new TopicResolver();
+        resolver = new TopicResolver();
 
     }
 }

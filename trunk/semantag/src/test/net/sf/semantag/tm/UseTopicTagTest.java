@@ -13,7 +13,7 @@ import org.tm4j.topicmap.TopicMap;
  * @author cf
  * @version 0.1, created on 06.09.2004
  */
-public class UseTopicTagTest extends BaseTMTagTest {
+public class UseTopicTagTest extends TMTagTestBase {
     
     private TopicMap tm;
     private UseTopicTag utt;

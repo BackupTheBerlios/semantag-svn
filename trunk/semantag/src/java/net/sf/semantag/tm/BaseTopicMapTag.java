@@ -1,14 +1,10 @@
-// $Id: BaseTopicMapTag.java,v 1.1 2004/09/07 05:04:53 c_froehlich Exp $
+// $Id: BaseTopicMapTag.java,v 1.2 2004/09/09 19:32:22 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
-import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.tm4j.net.Locator;
-import org.tm4j.net.LocatorFactoryException;
-
 import org.tm4j.topicmap.TopicMap;
 import org.tm4j.topicmap.TopicMapProvider;
 import org.tm4j.topicmap.TopicMapProviderFactory;

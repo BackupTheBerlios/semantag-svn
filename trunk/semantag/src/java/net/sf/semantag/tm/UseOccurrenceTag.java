@@ -1,4 +1,4 @@
-// $Id: UseAssociationTag.java,v 1.2 2004/09/09 19:32:22 c_froehlich Exp $
+// $Id: UseOccurrenceTag.java,v 1.1 2004/09/09 19:32:22 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -6,7 +6,7 @@ import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.tm4j.topicmap.Association;
+import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.TopicMap;
 import org.tm4j.topicmap.TopicMapObject;
 
@@ -31,36 +31,36 @@ import org.tm4j.topicmap.TopicMapObject;
  * @author Niko Schmuck
  * @author cf
  */
-public class UseAssociationTag extends BaseUseTag implements ContextAssociation,
-        ReferenceTopicMap{
+public class UseOccurrenceTag extends BaseUseTag implements ContextOccurrence
+        {
     
     // The Log to which logging calls will be made. 
-    private static final Log log = LogFactory.getLog(UseAssociationTag.class);
+    private static final Log log = LogFactory.getLog(UseOccurrenceTag.class);
 
 
-    // private reference to the association that this tag refers to
-    private Association association;
+    // occurrence to which this tag refers to
+    private Occurrence occurrence;
 
 
     
     /**
-     * Resolves the association that this Tag refers to.
+     * Resolves the occurrence that this Tag refers to.
      * 
      * @return
      * @throws JellyTagException
      */
-    public Association getAssociation() throws JellyTagException {
+    public Occurrence getOccurrence() throws JellyTagException {
 
-        if (association != null)
-            return association;
+        if (occurrence != null)
+            return occurrence;
 
-        TopicMap tm = getTopicMapFromContext();
-        TopicMapObject a = tmoResolver.getTopicMapObject(tm, context);
-        if (a != null && !(a instanceof Association)) {
-            throw new JellyTagException("Failed to identify association. Found "+a);
+        TopicMap tm = getTopicMapFromContext(null);
+        TopicMapObject o = tmoResolver.getTopicMapObject(tm, context);
+        if (o != null && !(o instanceof Occurrence)) {
+            throw new JellyTagException("Failed to identify occurrence. Found "+o);
         }
-        association = (Association)a;
-        return association;
+        occurrence = (Occurrence)o;
+        return occurrence;
 
     }
 
@@ -69,19 +69,19 @@ public class UseAssociationTag extends BaseUseTag implements ContextAssociation,
             JellyTagException {
 
         if(log.isDebugEnabled())
-            log.debug("Using Association (ID "+getId()+" / SL: "+getSourceLocator()+")");
+            log.debug("Using Ocurrence (ID "+getId()+" / SL: "+getSourceLocator()+")");
         
         // retrieve topic
-        if (association == null)
-            getAssociation();
+        if (occurrence == null)
+            getOccurrence();
 
-        if (association == null) {
+        if (occurrence== null) {
             // failed to retrieve association
             if (shallFailOnNonexistant())
-                throw new JellyTagException("Failed to identify association");
+                throw new JellyTagException("Failed to identify occurrence");
 
             else if (shallAddOnNonexistant())
-                association = CreatorUtil.createAssociation(getTopicMapFromContext(), getId(),
+                occurrence = CreatorUtil.createOccurrence(getTopicFromContext(null), getId(),
                         getSourceLocator());
 
             else
@@ -90,15 +90,13 @@ public class UseAssociationTag extends BaseUseTag implements ContextAssociation,
         }
 
         // set variable
-        storeObject(association);
+        storeObject(occurrence);
         
         // process body
         getBody().run(context, output);
 
     }
 
-    
- 
     
 
 }

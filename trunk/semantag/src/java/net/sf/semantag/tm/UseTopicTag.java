@@ -1,4 +1,4 @@
-// $Id: UseTopicTag.java,v 1.5 2004/09/09 11:41:12 c_froehlich Exp $
+// $Id: UseTopicTag.java,v 1.6 2004/09/09 19:32:22 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -18,7 +18,7 @@ import org.tm4j.topicmap.TopicMap;
  * @author cf
  */
 public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
-        ReferenceTopicMap {
+        ReferenceTopicMap, ContextTopic {
     
     // The Log to which logging calls will be made. 
     private static final Log log = LogFactory.getLog(UseTopicTag.class);

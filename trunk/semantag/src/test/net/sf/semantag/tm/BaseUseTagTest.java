@@ -31,18 +31,22 @@ public class BaseUseTagTest extends TestCase {
         String varValue = "aVarname";
         String idValue = "v";
         String slValue = "sl";
+        String tmVar = "aVarForTheTM";
         
         assertNull(but.getFromVar());
         assertNull(but.getId());
         assertNull(but.getSourceLocator());
+        assertNull(but.getTmVar());
         
         but.setFromVar(varValue);
         but.setId(idValue);
         but.setSourceLocator(slValue);
+        but.setTmVar(tmVar);
         
         assertEquals(varValue, but.getFromVar());
         assertEquals(idValue, but.getId());
         assertEquals(slValue, but.getSourceLocator());
+        assertEquals(tmVar, but.getTmVar());
     }
 
 

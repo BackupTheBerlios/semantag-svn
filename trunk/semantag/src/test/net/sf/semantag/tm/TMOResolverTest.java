@@ -12,7 +12,7 @@ import org.tm4j.topicmap.TopicMapObject;
  * @author cf
  * @version 0.1, created on 06.09.2004
  */
-public class TMOResolverTest extends BaseTMTagTest {
+public class TMOResolverTest extends TMTagTestBase {
 
     private final static String baseLoc = TestData.TM_GREEKS_BASELOCATOR;
 

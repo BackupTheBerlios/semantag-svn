@@ -3,10 +3,11 @@ package net.sf.semantag.tm;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.TagSupport;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.tm4j.net.Locator;
 import org.tm4j.net.LocatorFactory;
 import org.tm4j.net.LocatorFactoryException;
+import org.tm4j.topicmap.Association;
+import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMap;
 
 /**
@@ -122,6 +123,26 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
         return ContextResolver.getTopicMap(this, varname);
     }
     
+    /**
+     * Asks the contextResolver to return 
+     * a topic from the context for this tag
+     * @return 
+     * @throws JellyTagException
+     */
+    public Topic getTopicFromContext(String varname) throws JellyTagException{
+        return ContextResolver.getTopic(this, varname);
+    }
+    
+    
+    /**
+     * Asks the contextResolver to return 
+     * an association from the context for this tag
+     * @return 
+     * @throws JellyTagException
+     */
+    public Association getAssociationFromContext(String varname) throws JellyTagException{
+        return ContextResolver.getAssociation(this, varname);
+    }
     
     /**
      * Helper that creates a Locator for the given address.

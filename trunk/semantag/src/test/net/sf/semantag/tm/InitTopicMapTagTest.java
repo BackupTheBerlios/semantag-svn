@@ -9,7 +9,7 @@ import org.tm4j.topicmap.TopicMap;
  * @author cf
  * @version 0.1, created on 07.09.2004
  */
-public class InitTopicMapTagTest extends BaseTMTagTest {
+public class InitTopicMapTagTest extends TMTagTestBase {
    
     // doTag(XMLOutput) should fail, if no baseLocator was set
     public void testValidateFails() throws Exception {

@@ -134,7 +134,7 @@ public class TMOResolver {
      * Tries to identify the refered topic map object by the value of the
      * <code>sourceLocator</code> -property. <br>
      * 
-     * If no sourceLocator is specified, this method simply returns false.
+     * If no sourceLocator is specified, this method simply returns null.
      * 
      * If something was specified as the adress of a sourceLocator, that could
      * not be parsed as a valid locator reference the method throws a
@@ -147,7 +147,7 @@ public class TMOResolver {
      * 
      * @param tm
      *            the TopicMap to lookup the topic in.
-     * @return true, if a TopicMapObject could be identified, false otherwise
+     * @return the TopicMapObject identified, null if no TopicMapObject could be found
      * @throws LocatorFactoryException
      *             if an attempt to identify a topic map object was undertaken
      *             but in an apparently erroneous manner.
@@ -155,6 +155,9 @@ public class TMOResolver {
     protected TopicMapObject identifyBySourceLocator(TopicMap tm)
             throws JellyTagException {
 
+        // no adress specified
+        if(sourceLocator == null) return null;
+        
         Locator sl = CreatorUtil.createLocator(sourceLocator, tm);
 
         // sourceLocator of a topic supplied?

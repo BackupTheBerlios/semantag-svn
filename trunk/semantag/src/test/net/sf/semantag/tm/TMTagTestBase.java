@@ -26,7 +26,7 @@ import junit.framework.TestCase;
  * @author cf
  * @version 0.1, created on 06.09.2004
  */
-public class BaseTMTagTest extends TestCase {
+public class TMTagTestBase extends TestCase {
 
     // flag, to indicate that the body of a
     // tag was called.
@@ -35,14 +35,14 @@ public class BaseTMTagTest extends TestCase {
     /**
      * 
      */
-    public BaseTMTagTest() {
+    public TMTagTestBase() {
         super();
     }
 
     /**
      * @param name
      */
-    public BaseTMTagTest(String name) {
+    public TMTagTestBase(String name) {
         super(name);
     }
 

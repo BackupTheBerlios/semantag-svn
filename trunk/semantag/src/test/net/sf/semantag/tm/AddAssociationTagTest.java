@@ -14,7 +14,7 @@ import org.tm4j.topicmap.TopicMap;
  * @author cf
  * @version 0.1, created on 06.09.2004
  */
-public class AddAssociationTagTest extends BaseTMTagTest {
+public class AddAssociationTagTest extends TMTagTestBase {
 
     private TopicMap tm;
 
@@ -137,8 +137,8 @@ public class AddAssociationTagTest extends BaseTMTagTest {
 
     }
 
-    // tests that the new topic is accessible
-    // under the variable specified
+    // tests that the new association is accessible
+    // through the variable specified
     public void testStoreNewAssociationInVariable() throws Exception {
 
         String newid = "nonexistant_id";

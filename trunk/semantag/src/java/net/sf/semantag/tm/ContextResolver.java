@@ -3,6 +3,7 @@ package net.sf.semantag.tm;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.TagSupport;
+import org.tm4j.topicmap.Association;
 import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMap;
 
@@ -81,12 +82,39 @@ public class ContextResolver {
             }
             topic = (Topic)o;
         }
-        
-        ContextTopic ct = (ContextTopic)TagSupport.findAncestorWithClass(tag, ContextTopic.class);
-        if(ct != null){
-            topic = ct.getTopic();
+        else {
+            ContextTopic ct = (ContextTopic)TagSupport.findAncestorWithClass(tag, ContextTopic.class);
+            if(ct != null){
+                topic = ct.getTopic();
+            }
         }
         return topic;
+        
+    }
+    
+
+    public static Association getAssociation(TagSupport tag, String varname) throws JellyTagException{
+        JellyContext ctx = tag.getContext();
+        Association assoc = null;
+
+        if (isSpecified(varname)) {
+            Object o = ctx.getVariable(varname);
+            // if a variable name is specified than every result
+            // different from a topic counts as an error
+            if (o == null || !(o instanceof Association)) {
+                throw new JellyTagException("Variable '" + varname
+                        + "' is not bound to a Topic but to " + o);
+            }
+            assoc = (Association)o;
+        }
+        else {
+        
+            ContextAssociation ct = (ContextAssociation)TagSupport.findAncestorWithClass(tag, ContextAssociation.class);
+            if(ct != null){
+                assoc = ct.getAssociation();
+            }
+        }
+        return assoc;
         
     }
     
