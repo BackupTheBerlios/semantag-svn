@@ -1,8 +1,5 @@
-// $Id: TopicMapTagLibrary.java,v 1.2 2004/09/20 10:13:18 c_froehlich Exp $
+// $Id: TopicMapTagLibrary.java,v 1.3 2004/09/29 12:06:34 c_froehlich Exp $
 package net.sf.semantag.tm;
-
-import net.sf.semantag.csv.CSVTag;
-import net.sf.semantag.csv.SetTag;
 
 import org.apache.commons.jelly.TagLibrary;
 import org.apache.commons.logging.Log;
@@ -33,6 +30,7 @@ public class TopicMapTagLibrary extends TagLibrary {
     registerTag("addScope", AddScopeTag.class);
     registerTag("addTopic", AddTopicTag.class);
     registerTag("addSubjectIndicator", AddSubjectIndicatorTag.class);
+    registerTag("setSubject", SetSubjectTag.class);
     registerTag("save", SaveTopicMapTag.class);
     registerTag("tolog", TologTag.class);
     registerTag("useAssociation", UseAssociationTag.class);

@@ -146,7 +146,7 @@ public class TM4JConnector {
     }
     
     /**
-     * 
+     * Adds a subject indicator to a topic
      * @param t
      * @param adress
      * @throws PropertyVetoException
@@ -160,6 +160,25 @@ public class TM4JConnector {
         } catch (PropertyVetoException e) {
             String msg = "While adding a SubjectIndicator with address "+adress;
             msg += " to topic "+t;
+            throw new JellyTagException(msg, e);
+        }
+    }
+
+    /**
+     * Sets the subject of a topic
+     * @param t
+     * @param adress
+     * @throws PropertyVetoException
+     * @throws JellyTagException
+     */
+    public void setSubject(Topic t, String adress) 
+        throws JellyTagException{
+        
+        try {
+            t.setSubject(createLocator(adress, t));
+        } catch (PropertyVetoException e) {
+            String msg = "While seting the subject with address "+adress;
+            msg += " of topic "+t;
             throw new JellyTagException(msg, e);
         }
     }
