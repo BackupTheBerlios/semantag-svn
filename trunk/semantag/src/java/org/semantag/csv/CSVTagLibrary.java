@@ -1,4 +1,4 @@
-// $Id: CSVTagLibrary.java,v 1.1 2004/10/26 19:50:01 niko_schmuck Exp $
+// $Id: CSVTagLibrary.java,v 1.2 2004/11/22 09:45:31 c_froehlich Exp $
 package org.semantag.csv;
 
 
@@ -23,5 +23,6 @@ public class CSVTagLibrary extends TagLibrary {
     log.debug("Registering tags for csv tag library.");
     registerTag("csv", CSVTag.class);
     registerTag("set", SetTag.class);
+    registerTag("header", HeaderTag.class);
   }
 }

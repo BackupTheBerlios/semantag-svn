@@ -1,5 +1,7 @@
 package org.semantag.csv;
 
+import org.semantag.csv.CSVFile;
+
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.TagSupport;
@@ -27,6 +29,7 @@ public class CSVTag extends TagSupport {
   private boolean firstLineContainsHeaders = false;
   private boolean lazyArrayAccess = true;
   private String encoding = null;
+private CSVFile csvfile;
 
   /**
    *
@@ -40,14 +43,13 @@ public class CSVTag extends TagSupport {
    */
   public void doTag(XMLOutput output)
              throws MissingAttributeException, JellyTagException {
-    CSVFile csvfile;
-
     try {
       csvfile = new CSVFile(file);
     } catch (IOException e) {
       throw new JellyTagException(e);
     }
 
+    try {
     csvfile.setFirstLineContainsHeaders(firstLineContainsHeaders);
 
     if (cellDelimiter != null) {
@@ -60,7 +62,6 @@ public class CSVTag extends TagSupport {
 
     csvfile.setEncoding(encoding);
 
-    try {
       csvfile.open();
 
       String[] header = csvfile.getColumnLabels();
@@ -97,9 +98,18 @@ public class CSVTag extends TagSupport {
         // so log it and proceed
         log.error(e1);
       }
+      csvfile = null;
     }
   }
 
+  /**
+   * Return the csvfile currently processed 
+   * 
+   * @return
+   */
+  CSVFile getCSVFile() {
+      return csvfile;
+  }
   /**
    * @return Returns the file.
    */
