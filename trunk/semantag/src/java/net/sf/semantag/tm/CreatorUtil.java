@@ -1,29 +1,30 @@
 package net.sf.semantag.tm;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+
 import org.apache.commons.jelly.JellyTagException;
-import org.apache.commons.logging.Log;
 import org.tm4j.net.Locator;
 import org.tm4j.net.LocatorFactory;
 import org.tm4j.net.LocatorFactoryException;
 import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMap;
 import org.tm4j.topicmap.TopicMapObject;
+import org.tm4j.topicmap.TopicMapProvider;
+import org.tm4j.topicmap.TopicMapProviderException;
+import org.tm4j.topicmap.source.SerializedTopicMapSource;
+import org.tm4j.topicmap.source.TopicMapSource;
 
 /**
- * Utility class that assembles methods to create Objects in a topicmap
+ * Utility class that assembles methods to manage TopicMapObjects 
+ * 
  * 
  * @author cf
  * @version 0.1, created on 07.09.2004
  */
 public class CreatorUtil {
 
-    /**
-     *  
-     */
-    public CreatorUtil() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
     /**
      * Creates a Topic in the given TopicMap.
@@ -119,4 +120,31 @@ public class CreatorUtil {
         }
         return createLocator(adress, tm.getLocatorFactory());
     }
+    
+    
+    /**
+     * Merges the Topicmap from the given file into
+     * the basetm
+     * @param basetm
+     * @param file
+     */
+    public static void mergeTopicMap(TopicMap basetm, File file) 
+        throws JellyTagException
+    {
+        TopicMapProvider provider = basetm.getProvider();
+
+        try {
+          TopicMapSource source = new SerializedTopicMapSource(file);
+          provider.addTopicMap(source, basetm); // TODO
+        } catch (TopicMapProviderException e) {
+          throw new JellyTagException("Could not merge topic map from '" +
+                                     file.getAbsolutePath() + "': " + e);
+        } catch (FileNotFoundException e) {
+          throw new JellyTagException("Could not locate file to merge: " +
+                                     file.getAbsolutePath());
+        } catch (MalformedURLException e) {
+          throw new JellyTagException("Could not create URL from file: " + e);
+        }
+      }
+
 }

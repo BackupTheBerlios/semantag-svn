@@ -1,22 +1,14 @@
-// $Id: MergeTopicMapTag.java,v 1.1 2004/08/24 00:12:29 niko_schmuck Exp $
+// $Id: MergeTopicMapTag.java,v 1.2 2004/09/07 15:09:07 c_froehlich Exp $
 package net.sf.semantag.tm;
+
+import java.io.File;
 
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.tm4j.topicmap.TopicMap;
-import org.tm4j.topicmap.TopicMapProvider;
-import org.tm4j.topicmap.TopicMapProviderException;
-import org.tm4j.topicmap.source.SerializedTopicMapSource;
-import org.tm4j.topicmap.source.TopicMapSource;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-
-import java.net.MalformedURLException;
 
 /**
  * Class providing a merge-in tag to the existing topic map in context.
@@ -25,38 +17,43 @@ import java.net.MalformedURLException;
  *
  * @author Niko Schmuck
  */
-public class MergeTopicMapTag extends BaseTag {
+public class MergeTopicMapTag extends BaseTMTag {
   /** The Log to which logging calls will be made. */
   private static final Log log = LogFactory.getLog(MergeTopicMapTag.class);
+  
+  // the filename of the topicmap that will be merged 
+  // in the current context topic map
   private String filename;
 
-  public void setFilename(String filename) {
-    this.filename = filename;
-  }
+  // The name of a variable that holds the
+  // topicmap into which the other topicmap 
+  // shall be merged in
+  private String tmVar;
+  
+  
 
   public void doTag(XMLOutput output)
              throws MissingAttributeException, JellyTagException {
-    TopicMap tm = getTopicMap();
-    File f = new File(filename);
 
-    log.info("Merging in topic map from file " + f.getAbsolutePath());
-    mergeTopicMap(tm, f);
+      TopicMap tm = getTopicMapFromContext(tmVar);
+      if(tm == null) throw new JellyTagException("There is no topicmap in context to merge with");
+      
+      File f = new File(filename);
+
+      log.debug("Merging in topic map from file " + f.getAbsolutePath());
+    
+      CreatorUtil.mergeTopicMap(tm, f);
   }
 
-  public void mergeTopicMap(TopicMap basetm, File file) {
-    TopicMapProvider provider = basetm.getProvider();
-
-    try {
-      TopicMapSource source = new SerializedTopicMapSource(file);
-      TopicMap map = provider.addTopicMap(source, basetm); // TODO
-    } catch (TopicMapProviderException e) {
-      throw new RuntimeException("Could not merge topic map from '" +
-                                 file.getAbsolutePath() + "': " + e);
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException("Could not locate file to merge: " +
-                                 file.getAbsolutePath());
-    } catch (MalformedURLException e) {
-      throw new RuntimeException("Could not create URL from file: " + e);
+ 
+  public String getTmVar() {
+      return tmVar;
+  }
+  public void setTmVar(String tmVar) {
+      this.tmVar = tmVar;
+  }
+    public void setFilename(String filename) {
+      this.filename = filename;
     }
-  }
+
 }

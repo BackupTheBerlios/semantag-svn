@@ -1,4 +1,4 @@
-// $Id: OpenTopicMapTag.java,v 1.2 2004/09/07 05:04:53 c_froehlich Exp $
+// $Id: OpenTopicMapTag.java,v 1.3 2004/09/07 15:09:07 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -22,6 +22,7 @@ import java.net.MalformedURLException;
  * @author cf
  */
 public class OpenTopicMapTag extends BaseTopicMapTag {
+    
     protected void validate() throws MissingAttributeException {
         if (getFile() == null) {
             throw new MissingAttributeException(
@@ -39,7 +40,10 @@ public class OpenTopicMapTag extends BaseTopicMapTag {
 
         storeTopicMap(tm);
 
-        // Since we expect empty body, no further execution necessary
+        // process body
+        getBody().run(context, output);
+
+
     }
 
     protected TopicMap openTopicMap() throws JellyTagException {
