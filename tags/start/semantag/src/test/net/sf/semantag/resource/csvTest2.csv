@@ -1,0 +1,8 @@
+# some advanced options:
+# lines with comments shall be ignored
+ # (this one too)
+# CellDelimiter is ;
+# No headers
+# Empty cells at the end of rows are discarded
+13350; DE; BW
+13351; DE; RP; Jaguar
