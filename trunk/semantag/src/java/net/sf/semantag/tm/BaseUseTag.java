@@ -9,16 +9,16 @@ package net.sf.semantag.tm;
  * @author cf
  * @version 0.1, created on 06.09.2004
  */
-public abstract class BaseUseTag extends BaseTMTag {
+public abstract class BaseUseTag extends BaseTMTag implements ReferenceFromVar{
 
     public final static String NE_IGNORE_BODY = "ignore";
     public final static String NE_ADD = "add";
     public final static String NE_FAIL = "fail";
     
+    // defaults to ignore
     public final static String NE_DEFAULT= NE_IGNORE_BODY;
     
-    
-    private String nonexistant = NE_ADD;
+    private String nonexistant = NE_DEFAULT;
     
     protected TMOResolver tmoResolver = new TMOResolver();
 
@@ -72,10 +72,17 @@ public abstract class BaseUseTag extends BaseTMTag {
     public String getSourceLocator() {
         return tmoResolver.getSourceLocator();
     }
+    public String getFromVar() {
+        return tmoResolver.getVariable();
+    }
+
     public void setId(String id) {
         tmoResolver.setId(id);
     }
     public void setSourceLocator(String sourceLocator) {
         tmoResolver.setSourceLocator(sourceLocator);
+    }
+    public void setFromVar(String varname) {
+        tmoResolver.setVariable(varname);
     }
 }

@@ -28,15 +28,19 @@ public class BaseUseTagTest extends TestCase {
     
     // checks proper storage of id and sourceLocator-Attributes
     public void testStoreProperties() {
+        String varValue = "aVarname";
         String idValue = "v";
         String slValue = "sl";
         
+        assertNull(but.getFromVar());
         assertNull(but.getId());
         assertNull(but.getSourceLocator());
         
+        but.setFromVar(varValue);
         but.setId(idValue);
         but.setSourceLocator(slValue);
         
+        assertEquals(varValue, but.getFromVar());
         assertEquals(idValue, but.getId());
         assertEquals(slValue, but.getSourceLocator());
     }
