@@ -1,20 +1,17 @@
 package org.semantag.tm;
 
-import org.tm4j.net.Locator;
+import java.util.List;
 
 import org.tm4j.tologx.TologResultsSet;
 
-import org.tm4j.topicmap.TopicMapObject;
-
-import java.util.List;
-
 /**
- *
+ * Helper that copies a tolog result set into an
+ * array of objects
  * @author cf
  * @version 0.1, created on 13.08.2004
  */
 public class TologResultSetWrapper {
-  private String[][] data;
+  private Object[][] data;
 
   public TologResultSetWrapper(TologResultsSet rs) {
     if (rs == null) {
@@ -29,23 +26,14 @@ public class TologResultSetWrapper {
     }
 
     // copy data
-    data = new String[rows][cols];
+    data = new Object[rows][cols];
 
     for (int r = 0; r < rows; r++) {
       List rowData = rs.getRow(r);
 
       for (int c = 0; c < cols; c++) {
         Object value = rowData.get(c);
-
-        if (value == null) {
-          data[r][c] = null;
-        } else if (value instanceof Locator) {
-          data[r][c] = ((Locator) value).getAddress();
-        } else if (value instanceof TopicMapObject) {
-          data[r][c] = ((TopicMapObject) value).getID();
-        } else {
-          data[r][c] = value.toString();
-        }
+        data[r][c] = value;
       }
     }
   }
