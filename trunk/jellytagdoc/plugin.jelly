@@ -84,7 +84,7 @@
     <ant:templatedoclet
         destdir="${destination.dir}"
         excludedtags="@version,@author"
-        mergeDir="src/tagdoc"
+        mergeDir="${example.dir}"
         >
 
         <ant:fileset dir="${tagsrc.dir}">
@@ -95,7 +95,7 @@
 
         <ant:template
             templateFile="${template.tag}"
-            destinationfile="${destination.file}"/>
+            destinationfile="${destination.tag.file}"/>
     </ant:templatedoclet>
 
     
@@ -115,7 +115,7 @@
         
         <ant:template
             templateFile="${template.taglib}"
-            destinationfile="${taglib.filename}.xml"/>
+            destinationfile="${destination.taglib.file}.xml"/>
     </ant:templatedoclet>
 
   </goal>

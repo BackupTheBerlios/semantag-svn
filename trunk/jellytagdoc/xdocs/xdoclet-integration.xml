@@ -123,7 +123,21 @@
           </tbody>
         </table>
       </section>
-
+      <section name="Examples">
+      <p>Examples for the tags are for several reasons not included in the java sources
+      but maintained as external files.</p>
+      <p>To add examples for a tag, you would define a base dir for your examples, add subdirectories that reflect the package of the tag classes and place an xml-file with the exampled for each tag. The name of the example files is currently not configurable. It is always concatenated from the prefix 'example-', the name
+      of the tag class and the extension '.xml'.</p>
+      <p>Adding a file with examples for the class 'foo.bar.CircleTag.java' would lead to the following structure
+      <source>
+ + [basedir]
+  + foo
+    + bar
+      example-CircleTag.xml
+      </source>
+      </p>
+      <p>To tell the plugin where it should look for examples, you would pass the basedir with the property <pre>example.dir</pre></p>
+      </section>
     </section>
 
   </body>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<document>
+
+  <properties>
+    <title>Jellytagdoc</title>
+  </properties>
+
+  <body>
+    <section name="Jellytagdoc">
+      <p>A Maven plugin to generate documentation for jelly tags with the help of xdoclet</p>  
+    </section>
+    <section name="Installation">
+      <p>This is a maven plugin. In order to use it, you need to have maven installed.
+  Please refer for further information to <a href="http://maven.apache.org">the maven website</a></p>
+       <p>To install the jellytagdoc plugin simply execute 'maven plugin:install' in the projects home directory.</p>
+     </section>
+     <section name="Prepare the sources">
+       <p> This plugin documents Jelly taglibs and its registered tags. It uses some specially defined xdoclet tags that must be placed at the appropriate locations in the jelly tags source code. Please refer to the <a href="xdoclet-integration.html">xdoclet integration page</a> for a reference of the custom tags to be used.</p>
+     </section>
+     <section name="Usage">
+      <p> The plugin defines one goal: 'jellytagdoc'.</p>
+      <p>This goal relies on several properties. It is not possible to define meaningful defaults for all theese properties. Therefore you cannot simply execute 'maven jellytagdocs' but need to make a intermediate goal in your maven.xml</p>
+      <p> An example maven.xml (called maven.example.xml) is contained in this project. It shows how to autmatically create the documentation for three taglibs every time the 'xdoc'-goal is executed.</p>
+    </section>
+     <section name="Restrictions">
+      <p>This is a first version. It contains several restrictions that need to be kept in mind:
+        <ul>
+          <li>The plugin has no access to the tags that are actually 
+              registered with the taglib. Therefore it uses the workaround
+              to document all non abstract classes that are contained in 
+              a given directory and that extend 'org.apache.commons.jelly.Tag'
+          </li>
+          <li>
+            The name of an example file is currently not configurable and is always concatenated from the prefix 'example-', the name of the class and the extension '.xml'. A file that contains examples for the class "AddTopicTag.java" would have the name: "example-AddTopicTag.xml"
+          </li>
+        </ul>
+       </p>   
+     </section>
+  </body>
+</document>  
+  

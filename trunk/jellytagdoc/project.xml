@@ -7,6 +7,15 @@
   <groupId>jellytagdoc-plugin</groupId>
   <currentVersion>0.1</currentVersion>
   <organization/>    
+    <developers>
+    <developer>
+      <name>Christoph Fröhlich</name>
+      <id>c_froehlich</id>
+      <email>c_froehlich at users.sourceforge.net</email>
+      <url>www.folge2.de</url>
+      <timzeone>+1</timzeone>
+    </developer>
+  </developers>  
   <inceptionYear>2004</inceptionYear>
   
   <dependencies>
