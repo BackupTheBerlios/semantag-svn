@@ -1,4 +1,4 @@
-// $Id: BaseTopicReferenceTag.java,v 1.2 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: BaseTopicReferenceTag.java,v 1.3 2004/12/20 20:49:58 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -77,6 +77,7 @@ public abstract class BaseTopicReferenceTag extends BaseTMTag implements Referen
      * same as attribute <code>id</code>
      * @jelly
      *    required="no"
+     *    ignore="true"
      */
     public void setTopicID(String topicID) {
         topicResolver.setTopicID(topicID);
@@ -89,6 +90,7 @@ public abstract class BaseTopicReferenceTag extends BaseTMTag implements Referen
      * 
      * @jelly
      *    required="no"
+     *    ignore="true"
      */
     public void setTopicName(String topicName) {
         topicResolver.setTopicName(topicName);
@@ -99,6 +101,7 @@ public abstract class BaseTopicReferenceTag extends BaseTMTag implements Referen
      * 
      * @jelly
      *    required="no"
+     *    ignore="true"
      */
     public void setTopicSourceLocator(String topicSL) {
         topicResolver.setTopicSourceLocator(topicSL);
@@ -110,6 +113,7 @@ public abstract class BaseTopicReferenceTag extends BaseTMTag implements Referen
      * 
      * @jelly
      *    required="no"
+     *    ignore="true"
      */
     public void setTopicSubject(String topicSubject) {
         topicResolver.setTopicSubject(topicSubject);
@@ -121,6 +125,7 @@ public abstract class BaseTopicReferenceTag extends BaseTMTag implements Referen
      * 
      * @jelly
      *    required="no"
+     *    ignore="true"
      */
     public void setTopicSubjectIndicator(String topicSI) {
         topicResolver.setTopicSubjectIndicator(topicSI);
@@ -141,6 +146,7 @@ public abstract class BaseTopicReferenceTag extends BaseTMTag implements Referen
      * that identifies the topic
      * @jelly
      *    required="no"
+     *    ignore="true"
      */
     public void setId(String id) {
         topicResolver.setTopicID(id);
@@ -159,6 +165,7 @@ public abstract class BaseTopicReferenceTag extends BaseTMTag implements Referen
      * 
      * @jelly
      *    required="no"
+     *    ignore="true"
      */
     public void setSourceLocator(String sourceLocator) {
         topicResolver.setTopicSourceLocator(sourceLocator);

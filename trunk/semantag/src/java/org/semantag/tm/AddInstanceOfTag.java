@@ -1,4 +1,4 @@
-// $Id: AddInstanceOfTag.java,v 1.3 2004/12/09 16:37:31 c_froehlich Exp $
+// $Id: AddInstanceOfTag.java,v 1.4 2004/12/20 20:49:58 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -32,6 +32,8 @@ import org.tm4j.topicmap.TopicMapObject;
  * 
  * @jelly
  *  name="addInstanceOf"
+ *  attributes="Additionally this tag supports the 
+ *   <a href='/referencingTopics.html'>common set of topic-referencing attributes</a>"
  * 
  * @author Niko Schmuck
  * @author cf

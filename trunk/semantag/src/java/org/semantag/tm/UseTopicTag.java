@@ -1,4 +1,4 @@
-// $Id: UseTopicTag.java,v 1.3 2004/12/09 21:19:58 c_froehlich Exp $
+// $Id: UseTopicTag.java,v 1.4 2004/12/20 20:49:58 c_froehlich Exp $
 package org.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -23,6 +23,8 @@ import org.tm4j.topicmap.TopicMapObject;
  * 
  * @jelly
  *  name="useTopic"
+ *  attributes="Additionally this tag supports the 
+ *   <a href='/referencingTopics.html'>common set of topic-referencing attributes</a>"
  * 
  * @jelly.nested 
  *  name="setSubject" 
@@ -136,6 +138,7 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
      * 
      * @jelly
      *    required="no"
+     *    ignore="true"
      */
     public void setTopic(Topic aTopic) {
         topic = aTopic;
@@ -146,6 +149,7 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
      * that identifies the topic
      * @jelly
      *    required="no"
+     *    ignore="true"
      */
     public void setTopicID(String topicID) {
         topicResolver.setTopicID(topicID);
@@ -158,6 +162,7 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
      * 
      * @jelly
      *    required="no"
+     *    ignore="true"
      */
     public void setTopicName(String topicName) {
         topicResolver.setTopicName(topicName);
@@ -169,6 +174,7 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
      * 
      * @jelly
      *    required="no"
+     *    ignore="true"
      */
     public void setTopicSourceLocator(String topicSL) {
         topicResolver.setTopicSourceLocator(topicSL);
@@ -180,6 +186,7 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
      * 
      * @jelly
      *    required="no"
+     *    ignore="true"
      */
     public void setTopicSubject(String topicSubject) {
         topicResolver.setTopicSubject(topicSubject);
@@ -191,6 +198,7 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
      * 
      * @jelly
      *    required="no"
+     *    ignore="true"
      */
     public void setTopicSubjectIndicator(String topicSI) {
         topicResolver.setTopicSubjectIndicator(topicSI);
