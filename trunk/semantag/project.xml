@@ -6,9 +6,29 @@
   <name>SemanTag</name>
   <currentVersion>0.1</currentVersion>
   <inceptionYear>2004</inceptionYear>
-  <package>sf.net.semantag</package>
-  <shortDescription>Topic Map and RDF generation with jelly, jena and tm4j.</shortDescription>
-
+  <package>org.semantag</package>
+  
+  <shortDescription>Topic Map and RDF processing  with Jelly, Jena and TM4J.</shortDescription>
+  
+  <organization>
+    <name>The SemanTag Project Team</name>
+  </organization>
+  <developers>
+    <developer>
+      <name>Niko Schmuck</name>
+      <id>niko_schmuck</id>
+      <email>niko_schmuck at users.sourceforge.net</email>
+      <url>www.nava.de</url>
+      <timzeone>+1</timzeone>
+    </developer>
+    <developer>
+      <name>Christoph Fröhlich</name>
+      <id>c_froehlich</id>
+      <email>c_froehlich at users.sourceforge.net</email>
+      <url>www.folge2.de</url>
+      <timzeone>+1</timzeone>
+    </developer>
+  </developers>  
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <!-- Define dependencies to other projects/libraries             -->
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -20,13 +40,14 @@
       <artifactId>tm4j</artifactId>
       <!-- we have no project.xml for tm4j, so no further dependencies 
            can be resolved at this point -->
-      <version>0.9.6</version>
+      <version>0.9.7</version>
       <url>http://tm4j.org/</url>
     </dependency>
     <dependency>
       <groupId>tm4j</groupId>
       <artifactId>tm4j-tologx</artifactId>
-      <version>0.9.6</version>
+      <version>0.9.7</version>
+      <url>http://tm4j.org/</url>
     </dependency>
     <dependency>
       <groupId>tm4j</groupId>
@@ -61,7 +82,7 @@
     <dependency>
       <groupId>commons-jelly</groupId>
       <artifactId>commons-jelly</artifactId>
-      <version>SNAPSHOT</version>
+      <version>1.0-RC1</version>
       <url>http://jakarta.apache.org/commons/jelly/</url>
     </dependency>
     <dependency>
@@ -125,15 +146,15 @@
     <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
     <unitTest>
       <includes>
-	<include>**/*Test.java</include>
+        <include>**/*Test.java</include>
       </includes>
       <resources>
         <resource>
-	  <directory>src/test</directory>
-	  <includes>
-	    <include>net/sf/semantag/resource/**/*</include>
-	  </includes>
-	</resource>
+          <directory>src/test</directory>
+          <includes>
+            <include>org/semantag/resource/**/*</include>
+          </includes>
+        </resource>
       </resources>
     </unitTest>
   </build>
