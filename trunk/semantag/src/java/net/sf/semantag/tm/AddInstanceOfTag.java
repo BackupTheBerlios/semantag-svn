@@ -1,4 +1,4 @@
-// $Id: AddInstanceOfTag.java,v 1.3 2004/09/15 14:14:52 c_froehlich Exp $
+// $Id: AddInstanceOfTag.java,v 1.4 2004/09/17 19:47:38 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -15,14 +15,10 @@ import org.tm4j.topicmap.TopicMapObject;
  * @author Niko Schmuck
  * @author cf
  */
-public class AddInstanceOfTag extends BaseTMTag {
+public class AddInstanceOfTag extends BaseTopicReferenceTag {
     /** The Log to which logging calls will be made. */
     private static final Log log = LogFactory.getLog(AddInstanceOfTag.class);
 
-    /**
-     * The type of the instance
-     */
-    private Topic type;
 
     /**
      * The TopicMapObject that shall be marked as being an 
@@ -35,13 +31,15 @@ public class AddInstanceOfTag extends BaseTMTag {
      * specified.
      */
     private void validate() throws MissingAttributeException, JellyTagException {
-        if (type == null) {
-            String msg = "AddInstanceOfTag requires attribute 'type' set to a Topic";
+        if (getTopic() == null) {
+            String msg = "AddInstanceOfTag requires that a Topic is referenced as the 'type'. ";
+            msg +=" This is done either by setting the attribute 'type' to a topic or by using ";
+            msg +="one of the various attributes of the TopicReference.";
             throw new MissingAttributeException(msg);
         }
 
         if (getInstance() == null) {
-            String msg = "AddInstanceOfTag requires attribute 'parent' set to either ";
+            String msg = "AddInstanceOfTag requires attribute 'instance' set to either ";
             msg += "a Topic, an Association or an Occurrence.";
             throw new MissingAttributeException(msg);
 
@@ -77,7 +75,7 @@ public class AddInstanceOfTag extends BaseTMTag {
     }
 
     /**
-     * Adds a type to the parent specified
+     * Adds a type to an instance 
      */
     public void doTag(XMLOutput output) throws MissingAttributeException,
             JellyTagException {
@@ -87,21 +85,25 @@ public class AddInstanceOfTag extends BaseTMTag {
 
         validate();
 
-        tmEngine.addType(getInstance(), type);
+        tmEngine.addType(getInstance(), getTopic());
     }
 
     /**
      * @return the type that the instance shall be an instance of
      */
-    public Topic getType() {
-        return type;
+    public Topic getType() throws JellyTagException{
+        // calls the BaseClass. This method only exists for
+        // the purpose of a more expressive attributename
+        return getTopic();
     }
 
     /**
      * set the type that the instance shall be an instance of
      */
     public void setType(Topic type) {
-        this.type = type;
+        // calls the BaseClass. This method only exists for
+        // the purpose of a more expressive attributename
+        super.setTopic(type);
     }
     
     

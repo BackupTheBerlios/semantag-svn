@@ -18,6 +18,7 @@ public class AllTMTagTests {
     suite.addTestSuite(AddInstanceOfTagTest.class);
     suite.addTestSuite(AddMemberTagTest.class);
     suite.addTestSuite(AddOccurrenceTagTest.class);
+    suite.addTestSuite(AddSubjectIndicatorTagTest.class);
     suite.addTestSuite(AddTopicTagTest.class);
     suite.addTestSuite(BaseUseTagTest.class);
     suite.addTestSuite(InitTopicMapTagTest.class);

@@ -1,4 +1,4 @@
-// $Id: AddBasenameTag.java,v 1.6 2004/09/15 14:55:11 c_froehlich Exp $
+// $Id: AddBasenameTag.java,v 1.7 2004/09/17 19:47:39 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -56,7 +56,7 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName {
 
 
         // get Parent
-        assertTopic();
+        assertContext();
         
         // validation
         validate();
@@ -76,13 +76,10 @@ public class AddBasenameTag extends BaseTMTag implements ContextBaseName {
     /**
      * sets the Topic to which the new basename will be added
      */
-    private void assertTopic() throws JellyTagException{
-        Topic t = parent;
-        if (t == null)
-            t = getTopicFromContext(null);
-
+    private void assertContext() throws JellyTagException{
+        
         if(parent == null){
-            parent = getTopicFromContext(null);
+            parent = getTopicFromContext();
             if (parent == null) {
                 String msg = "AddBasename must be either the children of an object ";
                 msg += "that exports a topic to the context for its successors ";

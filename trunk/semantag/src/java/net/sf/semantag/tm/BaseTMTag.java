@@ -7,6 +7,7 @@ import org.tm4j.net.Locator;
 import org.tm4j.net.LocatorFactory;
 import org.tm4j.net.LocatorFactoryException;
 import org.tm4j.topicmap.Association;
+import org.tm4j.topicmap.BaseName;
 import org.tm4j.topicmap.Member;
 import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.Topic;
@@ -134,10 +135,35 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
      * 
      * @return 
      * @throws JellyTagException
+     * @deprecated use getTopicFromContext() instead
      */
     public Topic getTopicFromContext(String varname) throws JellyTagException{
         return ContextResolver.getTopic(this, varname);
     }
+    
+    /**
+     * Asks the contextResolver to return 
+     * a topic from the context for this tag
+     * 
+     * @return 
+     * @throws JellyTagException
+     */
+    public Topic getTopicFromContext() throws JellyTagException{
+        return ContextResolver.getTopic(this, null);
+    }
+    
+
+    /**
+     * Asks the contextResolver to return 
+     * a topic from the context for this tag
+     * 
+     * @return 
+     * @throws JellyTagException
+     */
+    public BaseName getBasenameFromContext() throws JellyTagException{
+        return ContextResolver.getBasename(this);
+    }
+    
     
     /**
      * Asks the contextResolver to return 

@@ -6,7 +6,6 @@ import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
 import org.tm4j.net.Locator;
-import org.tm4j.topicmap.BaseName;
 import org.tm4j.topicmap.DuplicateObjectIDException;
 import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.Topic;

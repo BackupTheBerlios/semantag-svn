@@ -1,4 +1,4 @@
-// $Id: AddOccurrenceTag.java,v 1.4 2004/09/16 14:02:59 c_froehlich Exp $
+// $Id: AddOccurrenceTag.java,v 1.5 2004/09/17 19:47:39 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -86,7 +86,7 @@ public class AddOccurrenceTag extends BaseTMTag implements ContextOccurrence{
         // get Parent
         Topic t = parent;
         if (t == null)
-            t = getTopicFromContext(null);
+            t = getTopicFromContext();
 
         // validation
         validate(t);

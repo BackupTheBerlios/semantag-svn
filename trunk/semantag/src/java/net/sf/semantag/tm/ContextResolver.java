@@ -4,6 +4,7 @@ import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.TagSupport;
 import org.tm4j.topicmap.Association;
+import org.tm4j.topicmap.BaseName;
 import org.tm4j.topicmap.Member;
 import org.tm4j.topicmap.Occurrence;
 import org.tm4j.topicmap.Topic;
@@ -150,6 +151,21 @@ public class ContextResolver {
         return mem;
         
     }
+    
+    public static BaseName getBasename(TagSupport tag) throws JellyTagException{
+        
+        BaseName bn = null;
+
+            ContextBaseName ct;
+            ct = (ContextBaseName)TagSupport.findAncestorWithClass(tag, ContextBaseName.class);
+        
+            if(ct != null){
+                bn= ct.getBaseName();
+            }
+        return bn;
+        
+    }
+    
 
     private static boolean isSpecified(String varname) {
         if (varname == null)

@@ -64,7 +64,7 @@ public class TM4JConnector {
      * Adds a type to tmo. <br>
      * tmo must be an instance of either topic, association
      * or occurrence. In all other cases, 
-     * an IllegalStateException is be thrown.
+     * an IllegalStateException is thrown.
      * 
      * @param tmo
      * @param type
@@ -90,6 +90,59 @@ public class TM4JConnector {
             throw new JellyTagException(e);
         }
 
+    }
+
+    /**
+     * Adds a topic to the array of topics that form the scope of the given tmo. <br>
+     * 
+     * tmo must be an instance of either basename, association
+     * or occurrence. <br>
+     * In all other cases, 
+     * an IllegalStateException is thrown.
+     * 
+     * @param tmo
+     * @param theme
+     * @throws JellyTagException to wrap a PropertyVetoException
+     * that might be thrown by tm4j while adding the theme
+     * @throws IllegalStateException if tmo is of an unsupported type
+     */
+    public void addTheme(TopicMapObject tmo, Topic theme)
+            throws JellyTagException {
+
+        try {
+            if (tmo instanceof BaseName) {
+                ((BaseName) tmo).addTheme(theme);
+            } else if (tmo instanceof Association) {
+                ((Association) tmo).addTheme(theme);
+            } else if (tmo instanceof Occurrence) {
+                ((Occurrence) tmo).addTheme(theme);
+            } else {
+                throw new IllegalStateException(
+                        "Expected typeable object but got " + tmo);
+            }
+        } catch (PropertyVetoException e) {
+            throw new JellyTagException(e);
+        }
+
+    }
+    
+    /**
+     * 
+     * @param t
+     * @param adress
+     * @throws PropertyVetoException
+     * @throws JellyTagException
+     */
+    public void addSubjectIndicator(Topic t, String adress) 
+        throws JellyTagException{
+        
+        try {
+            t.addSubjectIndicator(createLocator(adress, t));
+        } catch (PropertyVetoException e) {
+            String msg = "While adding a SubjectIndicator with address "+adress;
+            msg += " to topic "+t;
+            throw new JellyTagException(msg, e);
+        }
     }
 
     /**
@@ -186,17 +239,6 @@ public class TM4JConnector {
                     "While setting name data of new basename to " + name, e);
         }
 
-//        if (theme != null) {
-//            try {
-//                //set the theme
-//                if (theme != null)
-//                    bn.addTheme(theme);
-//            } catch (PropertyVetoException e) {
-//                throw new JellyTagException(
-//                        "While adding a theme to new basename (" + theme + ")",
-//                        e);
-//            }
-//        }
         return bn;
     }
 
