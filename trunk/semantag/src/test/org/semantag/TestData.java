@@ -13,7 +13,7 @@ import java.net.URL;
  */
 public class TestData {
   // RESOURCE_BASE
-  private final static String RB = "/net/sf/semantag/resource/";
+  private final static String RB = "/org/semantag/resource/"; // TODO: make more robust!
   public final static String CSVTEST = RB + "csvTest.csv";
   public final static String ADVANCEDCSVTEST = RB + "csvTest2.csv";
   public final static String TM_JOHN_LTM = RB + "about_john.ltm";
@@ -26,7 +26,10 @@ public class TestData {
   
   public static File getFileFromResource(String resource)
                                   throws URISyntaxException {
-    return new File(new URI(TestData.class.getResource(resource).toExternalForm()));
+    System.out.println("resource: '" + resource + "'");
+    URI resUri = new URI(TestData.class.getResource(resource).toExternalForm());
+    System.out.println("Try to resolve: " + resUri);
+    return new File(resUri);
   }
 
   public static URL getURLFromResource(String resource)
