@@ -191,7 +191,7 @@ public class ContextResolver {
                 return ((ContextOccurrence)parent).getOccurrence();
             }
             
-            parent = tag.getParent();
+            parent = parent.getParent();
             
         }
         
