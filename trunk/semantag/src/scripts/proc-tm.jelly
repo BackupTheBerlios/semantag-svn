@@ -5,7 +5,7 @@
      describing the pipelets used in ecommerce processes
      from an aggregated pipelet descriptor XML file.
      
-     $Id: proc-tm.jelly,v 1.2 2004/08/28 23:13:30 niko_schmuck Exp $ 
+     $Id: proc-tm.jelly,v 1.3 2004/10/26 19:50:31 niko_schmuck Exp $ 
 
 	 TODO:
 	 - create hyperlinks from fqcn to corresponding API page 
@@ -13,7 +13,7 @@
  -->
 
 <j:jelly trim="true" xmlns:j="jelly:core" xmlns:x="jelly:xml"
-         xmlns:tm="jelly:net.sf.semantag.tm.TopicMapTagLibrary">
+         xmlns:tm="jelly:org.semantag.tm.TopicMapTagLibrary">
 
   <tm:init baselocator="http://www.nava.de/topicmaps/pipelets"/>
   
