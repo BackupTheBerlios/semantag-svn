@@ -6,8 +6,7 @@ import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.MissingAttributeException;
 import org.apache.commons.jelly.XMLOutput;
 import org.tm4j.topicmap.TopicMap;
-
-import junit.framework.TestCase;
+import org.tm4j.topicmap.TopicMapObject;
 
 /**
  * Tests for class BaseUseTag
@@ -25,7 +24,12 @@ public class BaseUseTagTest extends TMTagTestBase {
         but = new BaseUseTag(){
             public void doTag(XMLOutput output) throws MissingAttributeException,
             JellyTagException {
+            }
+
+            protected TopicMapObject createTMO() throws JellyTagException {
+                return null;
             }    
+            
                
         };
     }

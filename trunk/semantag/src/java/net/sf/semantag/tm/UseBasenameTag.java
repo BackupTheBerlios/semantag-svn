@@ -1,4 +1,4 @@
-// $Id: UseBasenameTag.java,v 1.8 2004/09/22 10:17:01 c_froehlich Exp $
+// $Id: UseBasenameTag.java,v 1.9 2004/09/23 10:38:49 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -70,33 +70,44 @@ public class UseBasenameTag extends BaseUseTag implements ContextBaseName {
         if (basename == null)
             getBaseName();
 
-        if (basename == null) {
-            // failed to retrieve association
-            if (shallFailOnNonexistant())
-                throw new JellyTagException("Failed to identify occurrence");
-
-            else if (shallAddOnNonexistant()){
-
-
-                basename = tmEngine.createBasename(
-                        getTopicFromContext(), name, getId(), getSourceLocator());
-            }
-            else {
-                // set var, ignore body
-                storeObject(null);
-                return;
-            }
-        }
-
-        // set variable
-        storeObject(basename);
-
-        // process body
-        getBody().run(context, output);
+            doTag(basename, output);
+            
+//        if (basename == null) {
+//            // failed to retrieve association
+//            if (shallFailOnNonexistant())
+//                throw new JellyTagException("Failed to identify occurrence");
+//
+//            else if (shallAddOnNonexistant()){
+//
+//
+//                basename = tmEngine.createBasename(
+//                        getTopicFromContext(), name, getId(), getSourceLocator());
+//            }
+//            else {
+//                // set var, ignore body
+//                storeObject(null);
+//                return;
+//            }
+//        }
+//
+//        // set variable
+//        storeObject(basename);
+//
+//        // process body
+//        getBody().run(context, output);
 
     }
 
     
+    /**
+     * Called from the superclass, when this tag must add a new object to the topicmap
+     */
+    protected TopicMapObject createTMO() throws JellyTagException {
+        basename = tmEngine.createBasename(
+                getTopicFromContext(), name, getId(), getSourceLocator());
+        return basename;
+    }
+
     /**
      * @return the name , that will be uses as the name data
      * if this tag leads to the creation of a basename

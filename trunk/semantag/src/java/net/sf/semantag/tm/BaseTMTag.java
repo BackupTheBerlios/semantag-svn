@@ -45,7 +45,7 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
      * Turning a given string into a normalized one, with most special
      * characters removed.
      */
-    protected static String normalize(final String source) {
+    protected static String normalizeID(final String source) {
         if(source == null) return null;
       char[] string = source.toCharArray();
       char[] target = new char[string.length];
@@ -105,7 +105,7 @@ public abstract class BaseTMTag extends TagSupport implements ReferenceTopicMapO
     }
 
     public void setId(String id) {
-        this.id = normalize(id);
+        this.id = normalizeID(id);
     }
 
     public String getSourceLocator() {

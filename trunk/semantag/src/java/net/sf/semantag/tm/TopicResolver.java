@@ -382,7 +382,7 @@ public class TopicResolver implements ReferenceTopic{
         this.topicVariable = topic;
     }
     public void setTopicID(String topicID) {
-        this.topicId = BaseTMTag.normalize(topicID);
+        this.topicId = BaseTMTag.normalizeID(topicID);
     }
     public void setTopicName(String topicName) {
         this.topicName = topicName;

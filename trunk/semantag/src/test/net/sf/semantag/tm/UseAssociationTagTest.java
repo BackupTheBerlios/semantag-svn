@@ -152,16 +152,6 @@ public class UseAssociationTagTest extends UseTagTestBase {
         tag.setNonexistant(BaseUseTag.NE_ADD);
         setScriptForTagBody(tag);
 
-        // make the parent to which the association will be added
-//        UseTopicTag utt = new UseTopicTag();
-//        utt.setId("Helena");
-//        utt.setContext(ctx);
-//
-//        // set the UseTopicTag as parent of the
-//        // UseAssociationTag
-//        tag.setParent(utt);
-
-//        Topic helena = utt.getTopic();
         int co = tm.getAssociations().size();
 
         // resolving
@@ -214,4 +204,31 @@ public class UseAssociationTagTest extends UseTagTestBase {
         assertNull(ctx.getVariable(varname));
         
     }
+    
+    // test that the body of the tag is skipped
+    // when tag is in non-existant-mode "add"
+    // and the topicmap object exists already
+    public void testADDForExistant() 
+        throws Exception
+    {
+        String id = "as00003";
+        Association assoc = (Association) tm.getObjectByID(id);
+
+        tag.setNonexistant("add");
+        tag.setAssociation(assoc);
+        
+        // set a script for the body of the tag
+        scriptWasCalled = false;
+        setScriptForTagBody(tag);
+        
+        int co = tm.getAssociations().size();
+        tag.doTag(null);
+        // there should be the same count
+        assertEquals(co, tm.getAssociations().size());
+        
+        // the body script must not have been called
+        assertFalse(scriptWasCalled);
+    }
+
+
 }

@@ -54,6 +54,28 @@ public class UseTopicTagTest extends TMTagTestBase {
         // the body script should have been called
         assertTrue(scriptWasCalled);
     }
+    
+    // test that the body of the tag is skipped
+    // when tag is in non-existant-mode "add"
+    // and the topicmap object exists already
+    public void testADDForExistant() 
+        throws Exception
+    {
+        utt.setNonexistant("add");
+        utt.setTopic(john);
+        
+        // set a script for the body of the tag
+        scriptWasCalled = false;
+        setScriptForTagBody(utt);
+        
+        int co = tm.getTopicCount();
+        utt.doTag(null);
+        // there should be the same topic count
+        assertEquals(co, tm.getTopicCount());
+        
+        // the body script must not have been called
+        assertFalse(scriptWasCalled);
+    }
 
     // test that looking for a nonexistant
     // topic ignores the body of the tag (if specified)

@@ -1,4 +1,4 @@
-// $Id: UseMemberTag.java,v 1.7 2004/09/22 10:17:01 c_froehlich Exp $
+// $Id: UseMemberTag.java,v 1.8 2004/09/23 10:38:49 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -88,28 +88,39 @@ public class UseMemberTag extends BaseUseTag implements ContextMember
         if (member == null)
             getMember();
 
-        if (member== null) {
-            // failed to retrieve association
-            if (shallFailOnNonexistant())
-                throw new JellyTagException("Failed to identify member");
+         doTag(member, output);
+         
+//        if (member== null) {
+//            // failed to retrieve association
+//            if (shallFailOnNonexistant())
+//                throw new JellyTagException("Failed to identify member");
+//
+//            else if (shallAddOnNonexistant())
+//                member= tmEngine.createMember(getAssociationFromContext(), getId(),
+//                        getSourceLocator(), role, player);
+//
+//            else {
+//                // set var, ignore body
+//                storeObject(null);
+//                return;
+//            }
+//        }
+//
+//        // set variable
+//        storeObject(member);
+//        
+//        // process body
+//        getBody().run(context, output);
 
-            else if (shallAddOnNonexistant())
-                member= tmEngine.createMember(getAssociationFromContext(), getId(),
-                        getSourceLocator(), role, player);
+    }
 
-            else {
-                // set var, ignore body
-                storeObject(null);
-                return;
-            }
-        }
-
-        // set variable
-        storeObject(member);
-        
-        // process body
-        getBody().run(context, output);
-
+    /**
+     * Called from the superclass, when this tag must add a new object to the topicmap
+     */
+    protected TopicMapObject createTMO() throws JellyTagException {
+        member= tmEngine.createMember(getAssociationFromContext(), getId(),
+                getSourceLocator(), role, player);
+        return member;
     }
 
     

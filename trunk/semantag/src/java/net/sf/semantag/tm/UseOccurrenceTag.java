@@ -1,4 +1,4 @@
-// $Id: UseOccurrenceTag.java,v 1.7 2004/09/22 10:17:01 c_froehlich Exp $
+// $Id: UseOccurrenceTag.java,v 1.8 2004/09/23 10:38:49 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -110,33 +110,43 @@ public class UseOccurrenceTag extends BaseUseTag implements ContextOccurrence
         if (occurrence == null)
             getOccurrence();
 
-        if (occurrence== null) {
-            // failed to retrieve occurrence
-            if (shallFailOnNonexistant())
-                throw new JellyTagException("Failed to identify occurrence");
-
-            else if (shallAddOnNonexistant()){
-                validateForCreation();
-                occurrence = tmEngine.createOccurrence(getTopicFromContext(), data, resource, getId(),
-                        getSourceLocator());
-            }
-            else {
-                // set var, ignore body
-                storeObject(null);
-                return;
-            }
-        }
-
-        // set variable
-        storeObject(occurrence);
-        
-        // process body
-        getBody().run(context, output);
+        doTag(occurrence, output);
+//        if (occurrence== null) {
+//            // failed to retrieve occurrence
+//            if (shallFailOnNonexistant())
+//                throw new JellyTagException("Failed to identify occurrence");
+//
+//            else if (shallAddOnNonexistant()){
+//                validateForCreation();
+//                occurrence = tmEngine.createOccurrence(getTopicFromContext(), data, resource, getId(),
+//                        getSourceLocator());
+//            }
+//            else {
+//                // set var, ignore body
+//                storeObject(null);
+//                return;
+//            }
+//        }
+//
+//        // set variable
+//        storeObject(occurrence);
+//        
+//        // process body
+//        getBody().run(context, output);
 
     }
 
     
-    
+    /**
+     * Called from the superclass, when this tag must add a new object to the topicmap
+     */
+    protected TopicMapObject createTMO() throws JellyTagException {
+        validateForCreation();
+        occurrence = tmEngine.createOccurrence(getTopicFromContext(), data, resource, getId(),
+                getSourceLocator());
+        return occurrence;
+    }
+
     /**
      * Sets the Occurrence that this tag should use
      * @param occurrence

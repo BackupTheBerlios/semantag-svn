@@ -1,4 +1,4 @@
-// $Id: UseAssociationTag.java,v 1.7 2004/09/22 10:17:01 c_froehlich Exp $
+// $Id: UseAssociationTag.java,v 1.8 2004/09/23 10:38:49 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -72,33 +72,44 @@ public class UseAssociationTag extends BaseUseTag implements ContextAssociation,
         // retrieve topic
         if (association == null)
             getAssociation();
-
-        if (association == null) {
-            // failed to retrieve association
-            if (shallFailOnNonexistant())
-                throw new JellyTagException("Failed to identify association");
-
-            else if (shallAddOnNonexistant())
-                association = tmEngine.createAssociation(getTopicMapFromContext(), getId(),
-                        getSourceLocator());
-            else {
-                // set var, ignore body
-                storeObject(null);
-                return;
-            }
-       }
-
-        // set variable
-        storeObject(association);
         
-        // process body
-        getBody().run(context, output);
+        doTag(association,output);
+//
+//        if (association == null) {
+//            // failed to retrieve association
+//            if (shallFailOnNonexistant())
+//                throw new JellyTagException("Failed to identify association");
+//
+//            else if (shallAddOnNonexistant())
+//                association = tmEngine.createAssociation(getTopicMapFromContext(), getId(),
+//                        getSourceLocator());
+//            else {
+//                // set var, ignore body
+//                storeObject(null);
+//                return;
+//            }
+//       }
+//
+//        // set variable
+//        storeObject(association);
+//        
+//        // process body
+//        getBody().run(context, output);
 
     }
 
     
     
- 
+    /**
+     * Called from the superclass, when this tag must add a new object to the topicmap
+     */
+    protected TopicMapObject createTMO() throws JellyTagException {
+        association = tmEngine.createAssociation(getTopicMapFromContext(), getId(),
+              getSourceLocator());    
+    
+        return association;
+    }
+    
     
     /**
      * Sets the association that this tag should use

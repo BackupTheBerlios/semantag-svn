@@ -1,4 +1,4 @@
-// $Id: UseTopicTag.java,v 1.11 2004/09/22 10:17:01 c_froehlich Exp $
+// $Id: UseTopicTag.java,v 1.12 2004/09/23 10:38:49 c_froehlich Exp $
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.tm4j.net.LocatorFactoryException;
 import org.tm4j.topicmap.Topic;
 import org.tm4j.topicmap.TopicMap;
+import org.tm4j.topicmap.TopicMapObject;
 
 /**
  * Jelly tag allowing to retrieve a topic instance and sets it as the
@@ -63,29 +64,59 @@ public class UseTopicTag extends BaseUseTag implements ReferenceTopic,
         if (topic == null)
             getTopic();
 
-        if (topic == null) {
-            // failed to retrieve topic
-            if (shallFailOnNonexistant())
-                throw new JellyTagException("Failed to identify topic");
-
-            else if (shallAddOnNonexistant())
-                topic = tmEngine.createTopic(getTopicMapFromContext(), getId(),
-                        getSourceLocator());
-
-            else {
-                // set var, ignore body
-                storeObject(null);
-                return;
-            }
-        }
-
-        // set variable
-        storeObject(topic);
-        
-        // process body
-        getBody().run(context, output);
+        doTag(topic, output);
+//        if (topic == null) {
+//            // failed to retrieve topic
+//            if (shallFailOnNonexistant())
+//                throw new JellyTagException("Failed to identify topic");
+//
+//            else if (shallAddOnNonexistant()){
+//                // topic will be added
+//                topic = tmEngine.createTopic(getTopicMapFromContext(), getId(),
+//                        getSourceLocator());
+//
+//                // set variable
+//                storeObject(topic);
+//                
+//                // process body
+//                getBody().run(context, output);
+//            }
+//            else {
+//                // reset var, ignore body
+//                storeObject(null);
+//                return;
+//            }
+//        }
+//        else {
+//            // Topic did exist
+//            // set variable
+//            storeObject(topic);
+//
+//            // process body only, if the body was not meant to create a topic
+//            if(shallIgnoreOnNonexistant()){
+//                // process body
+//                getBody().run(context, output);
+//                
+//            }
+//        }
+//
+//        // set variable
+//        storeObject(topic);
+//        
+//        // process body
+//        getBody().run(context, output);
 
     }
+    
+    /**
+     * Called from the superclass, when this tag must add a new object to the topicmap
+     */
+    protected TopicMapObject createTMO() throws JellyTagException {
+        topic = tmEngine.createTopic(getTopicMapFromContext(), getId(),
+                getSourceLocator());
+        return topic;
+    }
+   
 
 //    public String getTopicVar() {
 //        return topicResolver.getTopicVar();

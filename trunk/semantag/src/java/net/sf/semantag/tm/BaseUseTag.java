@@ -1,6 +1,7 @@
 package net.sf.semantag.tm;
 
 import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.XMLOutput;
 import org.tm4j.topicmap.TopicMap;
 import org.tm4j.topicmap.TopicMapObject;
 
@@ -136,4 +137,62 @@ public abstract class BaseUseTag extends BaseTMTag implements ReferenceTopicMap{
         this.tm = tm;
     }
 
+    
+    /**
+     * Implements the standard behavior of use tag.
+     * Chooses a strategy dependant on whether the topicmapobject
+     * exists and dependant on the non-existant mode
+     * @param tmo
+     * @param output
+     * @throws JellyTagException
+     */
+    protected void doTag(TopicMapObject tmo, XMLOutput output) throws JellyTagException
+    
+    {
+        
+    if (tmo == null) {
+        // failed to retrieve topic
+        if (shallFailOnNonexistant())
+            throw new JellyTagException("Failed to identify topicmap object");
+
+        else if (shallAddOnNonexistant()){
+            // topic will be added
+            tmo = createTMO();
+
+            // set variable
+            storeObject(tmo);
+            
+            // process body
+            getBody().run(context, output);
+        }
+        else {
+            // reset var, ignore body
+            storeObject(null);
+            return;
+        }
+    }
+    else {
+        // Topic did exist
+        // set variable
+        storeObject(tmo);
+
+        // process body only, if the body was not meant to create a topic
+        if(shallIgnoreOnNonexistant()){
+            // process body
+            getBody().run(context, output);
+            
+        }
+    }
+    }
+    
+    /**
+     * Hook to trigger the creation of a topicmap object through
+     * an extending class.
+     * 
+     * This hook is called, if the doTag-Strategy decides that a new
+     * topicmap object must be added.
+     * @return
+     * @throws JellyTagException
+     */
+    protected abstract TopicMapObject createTMO() throws JellyTagException;
 }

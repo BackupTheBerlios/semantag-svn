@@ -246,4 +246,27 @@ public class UseOccurrenceTagTest extends UseTagTestBase {
         assertNull(ctx.getVariable(varname));
         
     }
+    
+    
+    // test that the body of the tag is skipped
+    // when tag is in non-existant-mode "add"
+    // and the topicmap object exists already
+    public void testADDForExistant() 
+        throws Exception
+    {
+        String id = "occ_hermes1";
+        Occurrence occ = (Occurrence) tm.getObjectByID(id);
+ 
+        tag.setNonexistant("add");
+        tag.setOccurrence(occ);
+        
+        // set a script for the body of the tag
+        scriptWasCalled = false;
+        setScriptForTagBody(tag);
+        
+        tag.doTag(null);
+        
+        // the body script must not have been called
+        assertFalse(scriptWasCalled);
+    }
 }
